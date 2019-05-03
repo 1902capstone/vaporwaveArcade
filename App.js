@@ -33,12 +33,16 @@ var sharedProps = {
 // Sets the default scene you want for AR and VR
 var InitialARScene = require('./js/HelloWorldSceneAR');
 var InitialVRScene = require('./js/HelloWorldScene');
+const Game3Scene = require('./js/JoshScene');
 const Game4Scene = require('./js/TestGameScene');
 
 var UNSET = "UNSET";
 var VR_NAVIGATOR_TYPE = "VR";
 var AR_NAVIGATOR_TYPE = "AR";
+const GAME_3 = "GAME_3"
 const GAME_4 = "GAME_4"
+
+
 
 // This determines which type of experience to launch in, or UNSET, if the user should
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
@@ -68,7 +72,10 @@ export default class ViroSample extends Component {
       return this._getVRNavigator();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
       return this._getARNavigator();
-    } else if (this.state.navigatorType == GAME_4) {
+    } 
+    else if (this.state.navigatorType == GAME_3) {
+      return this._getGame3();
+    }else if (this.state.navigatorType == GAME_4) {
       return this._getGame4();
     }
   }
@@ -103,9 +110,9 @@ export default class ViroSample extends Component {
 
           {/* SCENE 3 BUTTON */}
           <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+            onPress={this._getExperienceButtonOnPress(GAME_3)}
             underlayColor={'#68a0ff'} >
-            <Text style={localStyles.buttonText}>Game 3</Text>
+            <Text style={localStyles.buttonText}>Josh</Text>
           </TouchableHighlight>
 
           {/* SCENE 4 BUTTON */}
@@ -128,6 +135,12 @@ export default class ViroSample extends Component {
     );
   }
   
+  _getGame3() {
+    return (
+      <ViroARSceneNavigator {...this.state.sharedProps}
+      initialScene={{scene: Game3Scene}} />
+    );
+  }
   _getGame4() {
     return (
       <ViroARSceneNavigator {...this.state.sharedProps}
