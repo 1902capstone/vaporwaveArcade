@@ -33,10 +33,12 @@ var sharedProps = {
 // Sets the default scene you want for AR and VR
 var InitialARScene = require('./js/HelloWorldSceneAR');
 var InitialVRScene = require('./js/HelloWorldScene');
+const Game4Scene = require('./js/TestGameScene');
 
 var UNSET = "UNSET";
 var VR_NAVIGATOR_TYPE = "VR";
 var AR_NAVIGATOR_TYPE = "AR";
+const GAME_4 = "GAME_4"
 
 // This determines which type of experience to launch in, or UNSET, if the user should
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
@@ -66,6 +68,8 @@ export default class ViroSample extends Component {
       return this._getVRNavigator();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
       return this._getARNavigator();
+    } else if (this.state.navigatorType == GAME_4) {
+      return this._getGame4();
     }
   }
 
@@ -75,40 +79,41 @@ export default class ViroSample extends Component {
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
 
+          {/* BANNER IMAGE */}
           <Text style={localStyles.titleText}>
             Welcome to
           </Text>
-          <Image source={require('/Users/loren/Desktop/AR_capstone/ARCapstone/assets/images/image.png')}
+          <Image source={require('./assets/images/image.png')}
           style={localStyles.logo} />
-
-
+          
+          {/* SCENE 1 BUTTON */}
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
-
+            
             <Text style={localStyles.buttonText}>Game 1</Text>
           </TouchableHighlight>
-
+          
+          {/* SCENE 2 BUTTON */}
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
-
             <Text style={localStyles.buttonText}>Game 2</Text>
           </TouchableHighlight>
 
+          {/* SCENE 3 BUTTON */}
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
-
             <Text style={localStyles.buttonText}>Game 3</Text>
           </TouchableHighlight>
 
-          
+          {/* SCENE 4 BUTTON */}
           <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+            onPress={this._getExperienceButtonOnPress(GAME_4)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>Game 4</Text>
+            <Text style={localStyles.buttonText}>Armon's Test Scene</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -120,6 +125,13 @@ export default class ViroSample extends Component {
     return (
       <ViroARSceneNavigator {...this.state.sharedProps}
         initialScene={{scene: InitialARScene}} />
+    );
+  }
+  
+  _getGame4() {
+    return (
+      <ViroARSceneNavigator {...this.state.sharedProps}
+      initialScene={{scene: Game4Scene}} />
     );
   }
   
