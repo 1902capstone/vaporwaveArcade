@@ -78,7 +78,7 @@ export default class ViroSample extends Component {
           <Text style={localStyles.titleText}>
             Welcome to
           </Text>
-          <Image source={require('/Users/loren/Desktop/AR_capstone/ARCapstone/assets/images/image.png')}
+          <Image source={require('./assets/images/image.png')}
           style={localStyles.logo} />
 
 
