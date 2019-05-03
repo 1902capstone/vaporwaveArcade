@@ -14,6 +14,7 @@ import {
   View,
   StyleSheet,
   PixelRatio,
+  Image,
   TouchableHighlight,
 } from 'react-native';
 
@@ -75,21 +76,39 @@ export default class ViroSample extends Component {
         <View style={localStyles.inner} >
 
           <Text style={localStyles.titleText}>
-            Choose your desired experience:
+            Welcome to
           </Text>
+          <Image source={require('/Users/loren/Desktop/AR_capstone/ARCapstone/assets/images/image.png')}
+          style={localStyles.logo} />
+
 
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>AR</Text>
+            <Text style={localStyles.buttonText}>Game 1</Text>
           </TouchableHighlight>
 
           <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(VR_NAVIGATOR_TYPE)}
+            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>VR</Text>
+            <Text style={localStyles.buttonText}>Game 2</Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+            underlayColor={'#68a0ff'} >
+
+            <Text style={localStyles.buttonText}>Game 3</Text>
+          </TouchableHighlight>
+
+          
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+            underlayColor={'#68a0ff'} >
+
+            <Text style={localStyles.buttonText}>Game 4</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -131,6 +150,10 @@ export default class ViroSample extends Component {
 }
 
 var localStyles = StyleSheet.create({
+  logo: {
+    width: 200,
+    height: 50,
+  },
   viroContainer :{
     flex : 1,
     backgroundColor: "black",
