@@ -4,6 +4,7 @@
 
 
 AR examples:
+
 https://blog.viromedia.com/building-casual-ar-games-with-react-native-70797c80c20d
 
 https://docs.viromedia.com/docs/quick-start
@@ -38,9 +39,7 @@ https://www.blender.org/
 
 AR:
 
-https://developer.apple.com/documentation/arkit/
-
-swiftshot_creating_a_game_for_augmented_reality
+https://developer.apple.com/documentation/arkit/swiftshot_creating_a_game_for_augmented_reality
 
 https://docs.viromedia.com/
 
