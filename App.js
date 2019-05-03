@@ -15,6 +15,7 @@ import {
   StyleSheet,
   PixelRatio,
   Image,
+  ImageBackground,
   TouchableHighlight,
 } from 'react-native';
 
@@ -85,12 +86,12 @@ export default class ViroSample extends Component {
     return (
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
-
+        <ImageBackground source={require('./assets/images/background.png')} style={{width: '100%', height: '100%', alignItems: 'center'}}>
           {/* BANNER IMAGE */}
           <Text style={localStyles.titleText}>
             Welcome to
           </Text>
-          <Image source={require('./assets/images/image.png')}
+          <Image source={require('./assets/images/LOGO.png')}
           style={localStyles.logo} />
           
           {/* SCENE 1 BUTTON */}
@@ -122,6 +123,7 @@ export default class ViroSample extends Component {
 
             <Text style={localStyles.buttonText}>Armon's Test Scene</Text>
           </TouchableHighlight>
+          </ImageBackground>
         </View>
       </View>
     );
