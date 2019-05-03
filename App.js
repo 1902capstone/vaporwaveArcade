@@ -26,7 +26,7 @@ import {
  TODO: Insert your API key below
  */
 var sharedProps = {
-  apiKey:"API_KEY_HERE",
+  apiKey:"4B132E39-801E-47A0-8F11-E44215B1CE84",
 }
 
 // Sets the default scene you want for AR and VR
