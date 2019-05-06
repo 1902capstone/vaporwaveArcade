@@ -10,7 +10,6 @@ import {
   ViroConstants,
   ViroBox,
   ViroMaterials,
-  ViroARImageMarker,
   Viro3DObject,
   ViroAmbientLight,
   ViroFlexView,
@@ -18,10 +17,8 @@ import {
   ViroImage,
   ViroQuad,
   ViroButton,
-  ViroARPlane,
   ViroARPlaneSelector,
   ViroAnimations,
-  ViroARTrackingTargets,
   ViroNode,
 } from 'react-viro';
 
@@ -42,87 +39,142 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        <ViroARPlaneSelector
-          minHeight={0.1}
-          minWidth={0.1}
-          onPlaneSelected={() => {
-            this.setState({ pauseUpdates: true });
-          }}
-          pauseUpdates={this.state.pauseUpdates}
+        {/* <ViroFlexView
+          style={{ flexDirection: 'row', padding: 0.1 }}
+          width={10.0}
+          height={5.0}
+          position={[-2.0, 0.0, -10.0]}
+          rotation={[0, 45, 0]}
         >
-          <ViroBox
-            position={[0, -0.5, -1]}
-            scale={[0.3, 0.3, 0.1]}
-            materials={['grid']}
-            animation={{ name: 'rotate', run: true, loop: true }}
-          />
-          <ViroBox
-            position={[0, 5, -3]}
-            height={1}
-            width={1}
-            length={1}
-            physicsBody={{
-              type: 'dynamic',
-              mass: 1,
-            }}
-          />
-          <ViroBox
-            position={[0, 5, -3]}
-            height={1}
-            width={1}
-            length={1}
-            physicsBody={{
-              type: 'dynamic',
-              mass: 2,
-            }}
-          />
-          <ViroBox
-            position={[0, 5, -3]}
-            height={1}
-            width={1}
-            length={1}
-            physicsBody={{
-              type: 'dynamic',
-              mass: 5,
-            }}
-          />
-          <ViroBox
-            position={[0, 5, -3]}
-            height={1}
-            width={1}
-            length={1}
-            physicsBody={{
-              type: 'dynamic',
-              mass: 8,
-            }}
-          />
-          
-          <ViroButton
+          <ViroImage
             source={require('./res/smile1.jpg')}
-            gazeSource={require('./res/smile2.jpg')}
-            tapSource={require('./res/explode.jpg')}
-            width={5.0}
-            height={5.0}
-            position={[-2.0, 0.0, -10.0]}
-            rotation={[0, 45, 0]}
-            opacity={1}
-            onTap={this._onButtonTap}
-            onGaze={this._onButtonGaze}
+            style={{ flex: 0.5 }}
+          />
+          <ViroImage
+            source={require('./res/smile2.jpg')}
+            style={{ flex: 0.5 }}
+            opacity={0.5}
+            onClick={this._onButtonTap}
           />
           <ViroQuad
-            position={[0, -1, -1]}
-            height={10}
-            width={10}
-            rotation={[-90, 0, 0]}
-            opacity={.7}
-            physicsBody={{type: 'Static', restitution: 0.8}}
-            materials={['test']}
+            // source={require('./res/press.jpg')}
+            source={require('./res/smile2.jpg')}
+            // tapSource={require('./res/explode.jpg')}
+            position={[1, 3, -5]}
+            height={2}
+            width={3}
+            opacity={0.5}
+            onClick={this._onButtonTap}
+            onGaze={this._onButtonGaze}
           />
-        </ViroARPlaneSelector>
+        </ViroFlexView> */}
+        {/* <ViroFlexView
+          style={{ flexDirection: 'row', padding: 0.1 }}
+          width={10.0}
+          height={5.0}
+          position={[5.0, 0.0, -10.0]}
+          rotation={[0, -45, 0]}
+        >
+          <ViroImage
+            source={require('./res/smile1.jpg')}
+            style={{ flex: 0.5 }}
+          />
+          <ViroImage
+            source={require('./res/smile2.jpg')}
+            style={{ flex: 0.5 }}
+            opacity={0.5}
+            onClick={this._onButtonTap}
+          />
+        </ViroFlexView> */}
+        <ViroButton
+          source={require('./res/smile1.jpg')}
+          gazeSource={require('./res/smile2.jpg')}
+          tapSource={require('./res/explode.jpg')}
+          width={5.0}
+          height={5.0}
+          position={[-2.0, 0.0, -10.0]}
+          rotation={[0, 45, 0]}
+          opacity={1}
+          onTap={this._onButtonTap}
+          onGaze={this._onButtonGaze}
+        />
+         <ViroButton
+          source={require('./res/smile1.jpg')}
+          gazeSource={require('./res/smile2.jpg')}
+          tapSource={require('./res/explode.jpg')}
+          width={5.0}
+          height={5.0}
+          position={[-5.5, 0.0, -5.0]}
+          rotation={[0, 45, 0]}
+          onTap={this._onButtonTap}
+          onGaze={this._onButtonGaze}
+        />
+        <ViroButton
+          source={require('./res/smile1.jpg')}
+          gazeSource={require('./res/smile2.jpg')}
+          tapSource={require('./res/explode.jpg')}
+          width={5.0}
+          height={5.0}
+          position={[2.0, 0.0, -10.0]}
+          rotation={[0, -45, 0]}
+          opacity={1}
+          onTap={this._onButtonTap}
+          onGaze={this._onButtonGaze}
+        />
+         <ViroButton
+          source={require('./res/smile1.jpg')}
+          gazeSource={require('./res/smile2.jpg')}
+          tapSource={require('./res/explode.jpg')}
+          width={5.0}
+          height={5.0}
+          position={[5.5, 0.0, -5.0]}
+          rotation={[0, -45, 0]}
+          onTap={this._onButtonTap}
+          onGaze={this._onButtonGaze}
+        />
+        <ViroText
+          text={this.state.text}
+          scale={[0.5, 0.5, 0.5]}
+          position={[0, 0, -1]}
+          style={localStyles.helloWorldTextStyle}
+        />
+        <ViroBox
+          position={[0, -0.5, -1]}
+          scale={[0.3, 0.3, 0.1]}
+          materials={['grid']}
+          animation={{ name: 'rotate', run: true, loop: true }}
+        />
+        <ViroAmbientLight color={'#aaaaaa'} />
+        <ViroSpotLight
+          innerAngle={5}
+          outerAngle={90}
+          direction={[0, -1, -0.2]}
+          position={[0, 3, 1]}
+          color="#ffffff"
+          castsShadow={true}
+        />
+        <ViroNode
+          position={[0, 0, -1]}
+          dragType="FixedToWorld"
+          onDrag={() => {}}
+        >
+          <Viro3DObject
+            animation={{ name: 'rotate', run: true, loop: true }}
+            source={require('./res/Skull.obj')}
+            opacity={0.9}
+            // resources={[
+            //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
+            //   require('./res/emoji_smile/emoji_smile_normal.png'),
+            //   require('./res/emoji_smile/emoji_smile_specular.png'),
+            // ]}
+            position={[-2, -2, -20]}
+            scale={[0.008, 0.008, 0.008]}
+            type="OBJ"
+          />
+        </ViroNode>
       </ViroARScene>
     );
   }
-
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
@@ -175,18 +227,6 @@ ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('./res/grid_bg.jpg'),
   },
-  test: {
-    diffuseColor: 'red',
-  },
-});
-
-ViroARTrackingTargets.createTargets({
-  targetOne: {
-    source: require('./res/targetOne.png'),
-    orientation: 'Up',
-    physicalWidth: 0.1, // real world width in meters
-    type: 'Image',
-  },
 });
 
 ViroAnimations.registerAnimations({
@@ -199,4 +239,3 @@ ViroAnimations.registerAnimations({
 });
 
 module.exports = HelloWorldSceneAR;
-
