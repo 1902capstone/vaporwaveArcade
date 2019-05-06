@@ -33,7 +33,7 @@ let planes = [];
 let planesAdded = [];
 var testARScene = createReactClass({
   mixins: [TimerMixin],
-  componentWillMount() {
+  componentDidMount() {
     this.numAnchors = 0;
     this.anchors = {};
   },
@@ -98,9 +98,10 @@ var testARScene = createReactClass({
           position={[0, 0, 0]}
           scale={[0.2, 0.2, 0.2]}
           ref={(component)=>{this._animComponent=component}}
-          source={require('./res/emoji_smile/emoji_smile.vrx')}
+        source={require('./res/object_pug_animated/pug_animated.vrx')}
+        // animation={}
         type="VRX"
-        dragType='FixedDistance' ondrag={()=>{}}
+        dragType='FixedToWorld' ondrag={()=>{}}
           animation={{name:this.state.currentAnim,
                       delay:0,
                       loop:this.state.isAnimLooping,
