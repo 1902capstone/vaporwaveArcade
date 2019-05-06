@@ -20,8 +20,9 @@ import {
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
-const ARHelloWorld = require('./HelloWorldSceneAR');
-const Game4 = require('./Game4')
+
+const BallGameScene = require('./BallGameScene');
+
 
 const GAME_STATES = {
   INTRODUCTION: "INTRODUCTION",
@@ -39,7 +40,7 @@ export default class SceneLoader4 extends Component {
     }
     this.startGame = this.startGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
-    this.incrimentScore = this.incrimentScore.bind(this);
+    this.incrementScore = this.incrementScore.bind(this);
   }
 
 
@@ -76,16 +77,17 @@ export default class SceneLoader4 extends Component {
 
   renderBallGame() {
     
-    setTimeout(() => {this.gameEnd()}, 6000)
+    // setTimeout(() => {this.gameEnd()}, 6000)
     
     return (
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
-          initialScene={{ scene: ARHelloWorld }}
+          initialScene={{ scene: BallGameScene }}
           viroAppProps = {{
             gameEnd: this.gameEnd,
-            incrimentScore: this.incrimentScore,
+            incrementScore: this.incrementScore,
+            score: this.state.score
           }}
           
         />
@@ -125,7 +127,8 @@ export default class SceneLoader4 extends Component {
     })
   }
   
-  incrimentScore() {
+  incrementScore(colliderTag) {
+    console.log(colliderTag);
     this.setState({
       score: this.state.score + 1
     })
