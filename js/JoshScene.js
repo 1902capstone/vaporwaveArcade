@@ -26,7 +26,7 @@ import {
   ViroNode,
 } from 'react-viro';
 
-export default class HelloWorldSceneAR extends Component {
+export default class JoshScene extends Component {
   constructor() {
     super();
 
@@ -259,4 +259,4 @@ ViroAnimations.registerAnimations({
   },
 });
 
-module.exports = HelloWorldSceneAR;
+module.exports = JoshScene;

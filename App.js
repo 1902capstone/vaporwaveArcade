@@ -30,10 +30,10 @@ import {
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
 const ARHelloWorld = require('./js/HelloWorldSceneAR');
-const Game1Component = require('./js/Game1')
-const Game2Component = require('./js/Game2')
-const Game3Component = require('./js/Game3')
-const Game4Component = require('./js/Game4')
+// const Game1Component = require('./js/Game1')
+// const Game2Component = require('./js/Game2')
+// const Game3Component = require('./js/Game3')
+// const Game4Component = require('./js/Game4')
 
 const SceneLoader1 = require('./js/SceneLoader1')
 const SceneLoader2 = require('./js/SceneLoader2')
