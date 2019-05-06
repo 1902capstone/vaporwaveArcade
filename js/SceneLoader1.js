@@ -17,14 +17,14 @@ import {
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
-const ARHelloWorld = require('./HelloWorldSceneAR');
+const ARHelloWorld = require('./Game1Scene.js');
 const Game1 = require('./Game1')
 
 
 export default class SceneLoader1 extends Component {
 
   render() {
-    console.log('helo');
+   
     return (
       <View style={localStyles.flex}>
         <ViroARSceneNavigator

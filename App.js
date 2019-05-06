@@ -102,7 +102,7 @@ export default class App extends Component {
             onPress={this.selectGame(MENU_STATES.GAME_1)}
             underlayColor="#68a0ff" >
             
-            <Text style={localStyles.buttonText}>Game 1</Text>
+            <Text style={localStyles.buttonText}>Michael</Text>
           </TouchableHighlight>
           
           {/* SCENE 2 BUTTON */}
