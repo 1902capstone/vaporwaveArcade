@@ -61,8 +61,8 @@ var localStyles = StyleSheet.create({
     flex: 1,
   },
   buttons: {
-    height: 80,
-    width: 150,
+    height: 25,
+    width: 100,
     paddingTop: 20,
     paddingBottom: 20,
     marginTop: 10,
@@ -71,7 +71,12 @@ var localStyles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: 'rgba(123,087,231,.4)'
-  }
+  },
+  myButton: {
+    width: 100,
+    height: 30,
+    backgroundColor: 'rgba(100, 100, 100, 1)'
+  },
 })
 
 module.exports = SceneLoader4
