@@ -8,8 +8,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "ngrok": "^3.1.1",
     "react": "16.8.3",
-    "react-native": "0.59.3",
+    "react-native": "^0.59.6",
+    "react-timer-mixin": "^0.13.4",
     "react-viro": "2.14.0"
   },
   "devDependencies": {
