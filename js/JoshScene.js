@@ -19,6 +19,7 @@ import {
   ViroQuad,
   ViroButton,
   ViroARPlane,
+  ViroARCamera,
   ViroSphere,
   ViroARPlaneSelector,
   ViroAnimations,
@@ -42,7 +43,10 @@ export default class JoshScene extends Component {
 
   render() {
     return (
-      <ViroARScene onTrackingUpdated={this._onInitialized}>
+      <ViroARScene
+        onTrackingUpdated={this._onInitialized}
+        physicsWorld={{ gravity: [0, -3, 0] }}
+      >
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
@@ -51,128 +55,109 @@ export default class JoshScene extends Component {
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
-          <ViroBox
-            position={[0, -0.5, -1]}
-            scale={[0.3, 0.3, 0.1]}
-            materials={['grid']}
-            animation={{ name: 'rotate', run: true, loop: true }}
-            physicsBody={{
-                type: 'Dynamic',
-                mass: 8,
-                restitution: 1
-              }}
-          />
           <ViroSphere
             heightSegmentCount={20}
             widthSegmentCount={20}
-            radius={.1}
-            position={[0, 2, -1]}
+            radius={0.1}
+            position={[0, 1.5, -4]}
             height={1}
             materials={['blue']}
             physicsBody={{
-                type: 'Dynamic',
-                mass: 8,
-                restitution: 1
-              }}
+              type: 'Dynamic',
+              mass: 8,
+              restitution: 1,
+            }}
           />
           <ViroSphere
             heightSegmentCount={20}
             widthSegmentCount={20}
-            radius={.1}
-            position={[.5, 2, -1]}
+            radius={0.1}
+            position={[0.5, 1, -4]}
             height={1}
             materials={['purple']}
-            physicsBody={{
-                type: 'Dynamic',
-                mass: 8,
-                restitution: .999
-              }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={.1}
-            position={[.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-                type: 'Dynamic',
-                mass: 8,
-                restitution: .999
-              }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={.1}
-            position={[.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-                type: 'Dynamic',
-                mass: 8,
-                restitution: .999
-              }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={.1}
-            position={[.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-                type: 'Dynamic',
-                mass: 8,
-                restitution: .999
-              }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={.1}
-            position={[.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-                type: 'Dynamic',
-                mass: 8,
-                restitution: .999
-              }}
-          />
-          <ViroBox
-            position={[0, 5, -3]}
-            height={1}
-            width={1}
-            length={1}
-            opacity={.4}
             physicsBody={{
               type: 'Dynamic',
               mass: 8,
+              restitution: 0.999,
             }}
           />
-
-          <ViroButton
-            source={require('./res/smile1.jpg')}
-            gazeSource={require('./res/smile2.jpg')}
-            tapSource={require('./res/explode.jpg')}
-            width={5.0}
-            height={5.0}
-            position={[-2.0, 0.0, -10.0]}
-            rotation={[0, 45, 0]}
-            opacity={1}
-            onTap={this._onButtonTap}
-            onGaze={this._onButtonGaze}
+          <ViroSphere
+            heightSegmentCount={20}
+            widthSegmentCount={20}
+            radius={0.1}
+            position={[0.5, 2, -2]}
+            height={1}
+            materials={['purple']}
+            physicsBody={{
+              type: 'Dynamic',
+              mass: 8,
+              restitution: 0.999,
+            }}
+          />
+          <ViroSphere
+            heightSegmentCount={20}
+            widthSegmentCount={20}
+            radius={0.1}
+            position={[0.5, 2, -3]}
+            height={1}
+            materials={['purple']}
+            physicsBody={{
+              type: 'Dynamic',
+              mass: 8,
+              restitution: 0.999,
+            }}
+          />
+          <ViroSphere
+            heightSegmentCount={20}
+            widthSegmentCount={20}
+            radius={0.1}
+            position={[0.5, 2, -1]}
+            height={1}
+            materials={['purple']}
+            physicsBody={{
+              type: 'Dynamic',
+              mass: 8,
+              restitution: 0.999,
+            }}
+          />
+          <ViroSphere
+            heightSegmentCount={20}
+            widthSegmentCount={20}
+            radius={0.1}
+            position={[0.5, 2, -1]}
+            height={1}
+            materials={['purple']}
+            physicsBody={{
+              type: 'Dynamic',
+              mass: 8,
+              restitution: 0.999,
+            }}
           />
           <ViroQuad
-            position={[0, -2, -1]}
-            height={10}
-            width={10}
-            rotation={[-89, 0, 0]}
-            opacity={0.7}
+            position={[0, -2, -4]}
+            height={7}
+            width={4}
+            rotation={[-87, 0, 0]}
+            opacity={0.8}
             physicsBody={{ type: 'Static', restitution: 1 }}
-            materials={['test']}
+            materials={['red']}
           />
+          
+          <ViroARCamera>
+          <Viro3DObject
+            animation={{ name: 'rotate', run: true, loop: true }}
+            source={require('./res/Skull.obj')}
+            opacity={0.2}
+            // resources={[
+            //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
+            //   require('./res/emoji_smile/emoji_smile_normal.png'),
+            //   require('./res/emoji_smile/emoji_smile_specular.png'),
+            // ]}
+            position={[0, -.5, -1]}
+            scale={[0.0008, 0.0008, 0.0008]}
+            type="OBJ"
+          />
+          </ViroARCamera>
         </ViroARPlaneSelector>
       </ViroARScene>
     );
@@ -230,15 +215,15 @@ ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('./res/grid_bg.jpg'),
   },
-  test: {
+  red: {
     diffuseColor: 'red',
   },
   blue: {
-    diffuseColor: 'lightblue'
+    diffuseColor: 'lightblue',
   },
   purple: {
-      diffuseColor: 'lavender'
-  }
+    diffuseColor: 'lavender',
+  },
 });
 
 ViroARTrackingTargets.createTargets({
