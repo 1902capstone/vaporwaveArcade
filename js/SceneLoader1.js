@@ -58,8 +58,8 @@ var localStyles = StyleSheet.create({
     flex: 1,
   },
   buttons: {
-    height: 80,
-    width: 150,
+    height: 25,
+    width: 100,
     paddingTop: 20,
     paddingBottom: 20,
     marginTop: 10,
