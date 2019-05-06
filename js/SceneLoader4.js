@@ -1,3 +1,6 @@
+/* eslint-disable default-case */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable no-use-before-define */
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -20,23 +23,75 @@ const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 const ARHelloWorld = require('./HelloWorldSceneAR');
 const Game4 = require('./Game4')
 
+const GAME_STATES = {
+  INTRODUCTION: "INTRODUCTION",
+  IN_GAME: "IN_GAME",
+  POST_GAME: "POST_GAME"
+}
+
 
 export default class SceneLoader4 extends Component {
   constructor() {
     super()
+    this.state = {
+      gameState: GAME_STATES.INTRODUCTION,
+      score: 0,
+    }
+    this.startGame = this.startGame.bind(this);
+    this.gameEnd = this.gameEnd.bind(this);
+    this.incrimentScore = this.incrimentScore.bind(this);
   }
-  
+
+
   render() {
-    console.log('helo');
+    switch (this.state.gameState) {
+      case GAME_STATES.INTRODUCTION:
+        return this.renderIntro();
+      case GAME_STATES.IN_GAME:
+        return this.renderBallGame();
+      case GAME_STATES.POST_GAME:
+        return this.renderPostGame();
+    }
+  }
+
+
+  ////
+  // render conditional states
+  
+  renderIntro() {
+    return (
+      <View style={localStyles.outer} >
+        <View style={localStyles.inner}>
+          <Text style={localStyles.titleText}>{`Welcome to Ball Game!`}</Text>
+          <Text style={localStyles.text}>{`You have thirty seconds to catch as many balls as you can in the cup.`}</Text>
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={this.startGame}
+            underlayColor={'#68a0ff'} >
+            <Text style={localStyles.buttonText}>Start Level</Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    )
+  }
+
+  renderBallGame() {
+    
+    setTimeout(() => {this.gameEnd()}, 6000)
+    
     return (
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
           initialScene={{ scene: ARHelloWorld }}
+          viroAppProps = {{
+            gameEnd: this.gameEnd,
+            incrimentScore: this.incrimentScore,
+          }}
+          
         />
         <View>
           <TouchableHighlight style={localStyles.buttons}
-            underlayColor={'#68a0ff'}
+            underlayColor="#68a0ff"
             onPress={this.props.propObj.returnToMenu}
           >
             <Text>
@@ -47,7 +102,36 @@ export default class SceneLoader4 extends Component {
       </View>
     )
   }
+
+  renderPostGame() {
+    return;
+  }
   
+  //
+  ////
+  
+  ////
+  // helper functions
+  
+  startGame() {
+    this.setState({
+      gameState: GAME_STATES.IN_GAME
+    })
+  }
+  
+  gameEnd() {
+    this.setState({
+      gameState: GAME_STATES.INTRODUCTION
+    })
+  }
+  
+  incrimentScore() {
+    this.setState({
+      score: this.state.score + 1
+    })
+  }
+  
+
 }
 
 
@@ -60,9 +144,49 @@ var localStyles = StyleSheet.create({
   flex: {
     flex: 1,
   },
+  arView: {
+    flex: 1,
+  },
+  topMenu: {
+    width: '100%',
+    position: 'absolute',
+    top: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  outer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: "black",
+  },
+  inner: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: "black",
+  },
+  titleText: {
+    paddingTop: 30,
+    paddingBottom: 20,
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 25
+  },
+  text: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20
+  },
   buttons: {
-    height: 25,
-    width: 100,
+    height: 80,
+    width: 150,
     paddingTop: 20,
     paddingBottom: 20,
     marginTop: 10,
@@ -72,11 +196,18 @@ var localStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(123,087,231,.4)'
   },
-  myButton: {
+  exitButton: {
+    height: 50,
     width: 100,
-    height: 30,
-    backgroundColor: 'rgba(100, 100, 100, 1)'
-  },
-})
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: '#68a0cf',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#fff',
+  }
+});
 
 module.exports = SceneLoader4

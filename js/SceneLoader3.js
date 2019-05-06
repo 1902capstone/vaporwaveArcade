@@ -28,7 +28,6 @@ export default class SceneLoader3 extends Component {
   }
   
   render() {
-    console.log('helo');
     return (
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
