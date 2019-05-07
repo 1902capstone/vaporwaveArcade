@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import { StyleSheet, TouchableHighlight, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import {
   ViroARScene,
@@ -12,20 +12,15 @@ import {
   ViroMaterials,
   ViroARImageMarker,
   Viro3DObject,
-  ViroAmbientLight,
-  ViroFlexView,
-  ViroSpotLight,
-  ViroImage,
-  ViroQuad,
-  ViroButton,
-  ViroARPlane,
   ViroARCamera,
-  ViroSphere,
   ViroARPlaneSelector,
   ViroAnimations,
   ViroARTrackingTargets,
+  ViroSphere,
   ViroNode,
 } from 'react-viro';
+// import console = require('console');
+// import console = require('console');
 
 export default class JoshScene extends Component {
   constructor() {
@@ -34,14 +29,19 @@ export default class JoshScene extends Component {
     // Set initial state here
     this.state = {
       text: 'Initializing AR...',
+      totalBullets: 0,
+      score: 0,
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this._onButtonTap = this._onButtonTap.bind(this);
+    this._addBullet = this._addBullet.bind(this);
+    this._renderBullets = this._renderBullets.bind(this);
   }
 
   render() {
+    const currentScore = this.props.arSceneNavigator.viroAppProps.score;
     return (
       <ViroARScene
         onTrackingUpdated={this._onInitialized}
@@ -55,108 +55,51 @@ export default class JoshScene extends Component {
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0, 1.5, -4]}
-            height={1}
-            materials={['blue']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 1,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 1, -4]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 2, -2]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 2, -3]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroQuad
-            position={[0, -2, -4]}
-            height={7}
-            width={4}
-            rotation={[-87, 0, 0]}
-            opacity={0.8}
-            physicsBody={{ type: 'Static', restitution: 1 }}
-            materials={['red']}
-          />
-          
-          <ViroARCamera>
           <Viro3DObject
-            animation={{ name: 'rotate', run: true, loop: true }}
-            source={require('./res/Skull.obj')}
-            opacity={0.2}
-            // resources={[
-            //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
-            //   require('./res/emoji_smile/emoji_smile_normal.png'),
-            //   require('./res/emoji_smile/emoji_smile_specular.png'),
-            // ]}
-            position={[0, -.5, -1]}
-            scale={[0.0008, 0.0008, 0.0008]}
+            animation={{ name: 'sway', run: true, loop: true }}
+            source={require('./res/Love.obj')}
+            resources={[require('./res/Love.mtl')]}
+            opacity={1}
+            position={[-2, -2, -20]}
+            scale={[0.08, 0.08, 0.08]}
             type="OBJ"
+            materials={['pink']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
           />
+          <ViroText
+            text={currentScore.toString()}
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
+            style={localStyles.helloWorldTextStyle}
+          />
+
+          <ViroARCamera>
+            <ViroNode onClick={this._addBullet}>
+              <Viro3DObject
+                source={require('./res/zapper.obj')}
+                //   resources={[
+                //       require('./res/zapper.mtl'),
+                //            require('./res/zaper_diff.jpg'),
+                //            require('./res/zaper_diff_NRM.jpg')]}
+                opacity={0.7}
+                rotation={[-15, 168, 0]}
+                position={[0, -0.5, -1]}
+                scale={[0.0025, 0.0025, 0.0025]}
+                type="OBJ"
+              />
+              {this._renderBullets()}
+              {/* <ViroSphere
+                heightSegmentCount={5}
+                widthSegmentCount={5}
+                radius={0.06}
+                position={[0.15, -0.1, -1.5]}
+                materials={['red']}
+                animation={{ name: 'shoot', run: true, loop: false }}
+              /> */}
+            </ViroNode>
           </ViroARCamera>
         </ViroARPlaneSelector>
       </ViroARScene>
@@ -181,6 +124,36 @@ export default class JoshScene extends Component {
     this.setState({
       buttonStateTag: 'onTap',
     });
+  }
+  _renderBullets() {
+    var bang = [];
+    for (var i = 0; i < this.state.totalBullets; i++) {
+      var bulletKey = 'BulletTag_' + i;
+      bang.push(
+        <ViroSphere
+          heightSegmentCount={5}
+          widthSegmentCount={5}
+          key={bulletKey}
+          radius={0.069}
+          position={[0.15, -0.1, -1.5]}
+          materials={['red']}
+          physicsBody={{
+            type: 'Dynamic',
+            mass: 1,
+          }}
+          animation={{ name: 'shoot', run: true, loop: true }}
+        />
+      );
+    }
+    return bang;
+  }
+  _addBullet() {
+    this.setState({ totalBullets: this.state.totalBullets + 1 });
+    // change this to slow down rapidfire and empty state
+    if (this.state.totalBullets === 10) {
+      this.setState({ totalBullets: 0 });
+    }
+    console.log('bullets', this.state.totalBullets);
   }
 }
 
@@ -224,6 +197,13 @@ ViroMaterials.createMaterials({
   purple: {
     diffuseColor: 'lavender',
   },
+  testSkull: {
+    diffuseColor: 'red',
+    diffuseTexture: require('./res/grid_bg.jpg'),
+  },
+  pink: {
+    diffuseColor: 'lightpink',
+  },
 });
 
 ViroARTrackingTargets.createTargets({
@@ -238,10 +218,47 @@ ViroARTrackingTargets.createTargets({
 ViroAnimations.registerAnimations({
   rotate: {
     properties: {
-      rotateY: '+=30',
+      rotateY: '+=90',
     },
-    duration: 25000, //.25 seconds
+    easing: 'Bounce',
+    duration: 1000, //.25 seconds
   },
+  shoot: {
+    properties: { positionZ: '-=6', positionX: '+=1', positionY: '+=1' },
+    duration: 600,
+  },
+  animateImage: {
+    properties: { rotateY: '+=90' },
+    easing: 'Bounce',
+    duration: 1000,
+  },
+  moveRight: { properties: { positionX: '+=10' }, duration: 600 },
+  moveLeft: { properties: { positionX: '-=8' }, duration: 1000 },
+  moveUpL: {
+    properties: { positionX: '-=10', positionY: '+=5' },
+    duration: 1000,
+  },
+  moveDownR: {
+    properties: { positionX: '+=12', positionY: '-=4' },
+    duration: 800,
+  },
+  moveUp: { properties: { positionY: '+=2' }, duration: 400 },
+  moveDown: { properties: { positionY: '-=3' }, duration: 500 },
+  forward: { properties: { positionZ: '+=7' }, duration: 200 },
+  back: { properties: { positionZ: '-=7' }, duration: 200 },
+
+  sway: [
+    [
+      'moveLeft',
+      'moveDownR',
+      'moveUp',
+      'forward',
+      'moveRight',
+      'moveDown',
+      'moveUpL',
+      'back',
+    ],
+  ],
 });
 
 module.exports = JoshScene;
