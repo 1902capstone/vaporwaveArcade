@@ -57,3 +57,7 @@ buck-out/
 
 #josh's testing
 /Users/loren/Desktop/AR_capstone/ARCapstone/js/NewScene.js
+
+ios/Pods
+
+ios/Firebase
