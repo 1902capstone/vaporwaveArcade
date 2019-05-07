@@ -39,6 +39,7 @@ const SceneLoader1 = require('./js/SceneLoader1')
 const SceneLoader2 = require('./js/SceneLoader2')
 const SceneLoader3 = require('./js/SceneLoader3')
 const SceneLoader4 = require('./js/SceneLoader4')
+const SceneLoader5 = require('./js/SceneLoader5')
 
 
 
@@ -48,6 +49,7 @@ const MENU_STATES = {
   GAME_2: "GAME_2",
   GAME_3: "GAME_3",
   GAME_4: "GAME_4",
+  DATABASE:"DATABASE"
 }
 
 export default class App extends Component {
@@ -81,6 +83,8 @@ export default class App extends Component {
         return this.renderGame3();
       case MENU_STATES.GAME_4:
         return this.renderGame4();
+      case MENU_STATES.DATABASE:
+        return this.renderDatabase();
     }
   }
   
@@ -125,6 +129,16 @@ export default class App extends Component {
             underlayColor="#68a0ff" >
 
             <Text style={localStyles.buttonText}>Armon's Test Scene</Text>
+            </TouchableHighlight>
+            
+
+
+          {/* Database BUTTON */}
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={this.selectGame(MENU_STATES.DATABASE)}
+            underlayColor="#68a0ff" >
+
+            <Text style={localStyles.buttonText}>Database</Text>
           </TouchableHighlight>
           </ImageBackground>
         </View>
@@ -185,7 +199,15 @@ export default class App extends Component {
       />
     )
   }
-  
+  renderDatabase() {
+    return (
+      <SceneLoader5 
+      propObj = {{
+        returnToMenu: this.returnToMenu,
+      }}
+      />
+    )
+  }
   
   
 }
