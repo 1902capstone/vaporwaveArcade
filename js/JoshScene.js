@@ -2,30 +2,28 @@
 
 import React, { Component } from 'react';
 
-import { StyleSheet, TouchableHighlight, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import {
   ViroARScene,
+  ViroAnimatedImage,
   ViroText,
   ViroConstants,
   ViroBox,
   ViroMaterials,
   ViroARImageMarker,
   Viro3DObject,
-  ViroAmbientLight,
-  ViroFlexView,
-  ViroSpotLight,
-  ViroImage,
-  ViroQuad,
-  ViroButton,
-  ViroARPlane,
   ViroARCamera,
-  ViroSphere,
   ViroARPlaneSelector,
   ViroAnimations,
   ViroARTrackingTargets,
+  ViroSphere,
+  ViroAmbientLight,
+  ViroQuad,
   ViroNode,
 } from 'react-viro';
+// import console = require('console');
+// import console = require('console');
 
 export default class JoshScene extends Component {
   constructor() {
@@ -34,14 +32,18 @@ export default class JoshScene extends Component {
     // Set initial state here
     this.state = {
       text: 'Initializing AR...',
+      totalHoles: 0,
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this._onButtonTap = this._onButtonTap.bind(this);
+    this._addHole = this._addHole.bind(this);
+    this._renderHoles = this._renderHoles.bind(this);
   }
 
   render() {
+    const currentScore = this.props.arSceneNavigator.viroAppProps.score;
     return (
       <ViroARScene
         onTrackingUpdated={this._onInitialized}
@@ -50,113 +52,147 @@ export default class JoshScene extends Component {
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
+          maxPlanes={1}
           onPlaneSelected={() => {
             this.setState({ pauseUpdates: true });
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0, 1.5, -4]}
-            height={1}
-            materials={['blue']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 1,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 1, -4]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 2, -2]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 2, -3]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.1}
-            position={[0.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroQuad
-            position={[0, -2, -4]}
-            height={7}
-            width={4}
-            rotation={[-87, 0, 0]}
-            opacity={0.8}
-            physicsBody={{ type: 'Static', restitution: 1 }}
-            materials={['red']}
-          />
-          
-          <ViroARCamera>
           <Viro3DObject
-            animation={{ name: 'rotate', run: true, loop: true }}
-            source={require('./res/Skull.obj')}
-            opacity={0.2}
-            // resources={[
-            //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
-            //   require('./res/emoji_smile/emoji_smile_normal.png'),
-            //   require('./res/emoji_smile/emoji_smile_specular.png'),
-            // ]}
-            position={[0, -.5, -1]}
-            scale={[0.0008, 0.0008, 0.0008]}
-            type="OBJ"
+            source={require('./res/PalmTree.vrx')}
+            position={[-1, -40, -2]}
+            materials={['palm']}
+            type="VRX"
+            scale={[2, 2, 2]}
+          /><ViroAmbientLight color="#FFFFFF" />
+
+          <ViroAnimatedImage
+            height={9}
+            width={9}
+            loop={true}
+            opacity={1}
+            rotation={[-90, 0, 0]}
+            position={[0, -3, -4]}
+            source={require('../assets/images/pool.gif')}
           />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[-1.7, -3.22, -3]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['redRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[0, -3.22, -3]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['redRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[1.7, -3.22, -3]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['redRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[1, -3.22, -4.5]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['blueRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[0.9, -3.22, -1.4]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['blueRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[-0.9, -3.22, -1.4]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['blueRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[-0.9, -3.22, -4.5]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['blueRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          {/* SCORE */}
+          <ViroText
+            text={currentScore.toString()}
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
+            style={localStyles.helloWorldTextStyle}
+          />
+          {this._renderHoles()}
+
+          <ViroARCamera>
+            <ViroNode onClick={this._addHole}>
+              {/* <Viro3DObject
+                source={require('./res/hand-free.obj')}
+                opacity={0.7}
+                rotation={[-40, 110, 10]}
+                position={[-0.3, -0.5, -1.5]}
+                scale={[0.025, 0.025, 0.025]}
+                type="OBJ"
+              /> */}
+            </ViroNode>
           </ViroARCamera>
         </ViroARPlaneSelector>
       </ViroARScene>
@@ -181,6 +217,48 @@ export default class JoshScene extends Component {
     this.setState({
       buttonStateTag: 'onTap',
     });
+  }
+  _renderHoles() {
+    var bang = [];
+    for (var i = 0; i < this.state.totalHoles; i++) {
+      var holeKey = 'holeTag_' + i;
+      bang.push(
+        // <ViroSphere
+        //   heightSegmentCount={5}
+        //   widthSegmentCount={5}
+        //   key={holeKey}
+        //   radius={0.069}
+        //   position={[0.15, -0.1, -1.5]}
+        //   materials={['red']}
+        //   physicsBody={{
+        //     type: 'Dynamic',
+        //     mass: 1,
+        //   }}
+        //   animation={{ name: 'shoot', run: true, loop: true }}
+        // />
+        <Viro3DObject
+          // animation={{ name: 'sway', run: true, loop: true }}
+          source={require('./res/pap-cup-obj.obj')}
+          // resources={[require('./res/Love.mtl')]}
+          opacity={1}
+          key={holeKey}
+          position={[2, -3.7, -2]}
+          scale={[0.08, 0.08, 0.08]}
+          type="OBJ"
+          materials={['pink']}
+          physicsBody={{ type: 'Static' }}
+        />
+      );
+    }
+    return bang;
+  }
+  _addHole() {
+    this.setState({ totalHoles: this.state.totalHoles + 1 });
+    // change this to slow down rapidfire and empty state
+    // if (this.state.totalBullets === 10) {
+    //   this.setState({ totalBullets: 0 });
+    // }
+    console.log('holes', this.state.totalholes);
   }
 }
 
@@ -218,11 +296,25 @@ ViroMaterials.createMaterials({
   red: {
     diffuseColor: 'red',
   },
-  blue: {
+  blueRaft: {
     diffuseColor: 'lightblue',
+    diffuseTexture: require('./res/grid_bg.jpg'),
   },
   purple: {
     diffuseColor: 'lavender',
+  },
+  redRaft: {
+    diffuseColor: 'red',
+    diffuseTexture: require('./res/grid_bg.jpg'),
+  },
+  pink: {
+    diffuseColor: 'lightpink',
+  },
+  black: {
+    diffuseColor: 'black',
+  },
+  palm: {
+    diffuseTexture: require('./res/palmTree.png'),
   },
 });
 
@@ -236,12 +328,52 @@ ViroARTrackingTargets.createTargets({
 });
 
 ViroAnimations.registerAnimations({
+  cupUp: { properties: { positionY: '+=.1' }, duration: 2000 },
+  cupDown: { properties: { positionY: '-=.1' }, duration: 2000 },
+  bob: [['cupDown', 'cupUp']],
   rotate: {
     properties: {
-      rotateY: '+=30',
+      rotateY: '+=90',
     },
-    duration: 25000, //.25 seconds
+    easing: 'Bounce',
+    duration: 1000, //.25 seconds
   },
+  shoot: {
+    properties: { positionZ: '-=6', positionX: '+=1', positionY: '+=1' },
+    duration: 600,
+  },
+  animateImage: {
+    properties: { rotateY: '+=90' },
+    easing: 'Bounce',
+    duration: 1000,
+  },
+  moveRight: { properties: { positionX: '+=10' }, duration: 600 },
+  moveLeft: { properties: { positionX: '-=8' }, duration: 1000 },
+  moveUpL: {
+    properties: { positionX: '-=10', positionY: '+=5' },
+    duration: 1000,
+  },
+  moveDownR: {
+    properties: { positionX: '+=12', positionY: '-=4' },
+    duration: 800,
+  },
+  moveUp: { properties: { positionY: '+=2' }, duration: 400 },
+  moveDown: { properties: { positionY: '-=3' }, duration: 500 },
+  forward: { properties: { positionZ: '+=7' }, duration: 200 },
+  back: { properties: { positionZ: '-=7' }, duration: 200 },
+
+  sway: [
+    [
+      'moveLeft',
+      'moveDownR',
+      'moveUp',
+      'forward',
+      'moveRight',
+      'moveDown',
+      'moveUpL',
+      'back',
+    ],
+  ],
 });
 
 module.exports = JoshScene;
