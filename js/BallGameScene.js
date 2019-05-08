@@ -58,7 +58,7 @@ export default class JoshScene extends Component {
 
 
   componentDidMount() {
-    gamestarted = false;
+    gameStarted = false;
     spheres = [];
   }
 
@@ -77,158 +77,7 @@ export default class JoshScene extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -1.8, 0] }}
       >
-<<<<<<< HEAD
-        <ViroARPlaneSelector
-          minHeight={0.01}
-          minWidth={0.01}
-          onPlaneSelected={() => {
-            this.setState({ pauseUpdates: true });
-          }}
-          pauseUpdates={this.state.pauseUpdates}
-        >
-          <ViroSphere
-            // viroTag="BallTag"
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.5}
-            position={[0, 1.5, -4]}
-            height={1}
-            materials={['blue']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 1,
-            }}
-          />
-          <ViroSphere
-            // viroTag="BallTag"
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.5}
-            position={[0.5, 1, -4]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            // viroTag="BallTag"
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.5}
-            position={[0.5, 2, -2]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            // viroTag="BallTag"
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.5}
-            position={[0.5, 2, -3]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            // viroTag="BallTag"
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.5}
-            position={[0.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroSphere
-            // viroTag="BallTag"
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.5}
-            position={[0.5, 2, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-            <ViroSphere
-            // viroTag="BallTag"
-            heightSegmentCount={20}
-            widthSegmentCount={20}
-            radius={0.5}
-            position={[0, -1, -1]}
-            height={1}
-            materials={['purple']}
-            physicsBody={{
-              type: 'Dynamic',
-              mass: 8,
-              restitution: 0.999,
-            }}
-          />
-          <ViroQuad
-            position={[0, -2, -4]}
-            height={7}
-            width={4}
-            rotation={[-87, 0, 0]}
-            opacity={0.8}
-            physicsBody={{ type: 'Static', restitution: 1 }}
-            materials={['red']}
-          />
-
-          {/* <ViroText 
-            text={this.props.arSceneNavigator.viroAppProps.score}
-            width={2}
-            height={2}
-            position={[0,0,-5]}
-            extrusionDepth={1}
-          /> */}
-
-          <ViroText
-            text={currentScore.toString()}
-            scale={[.5, .5, .5]}
-            position={[0, 0, -1]}
-            style={localStyles.helloWorldTextStyle} />
-
-          <ViroARCamera>
-            <Viro3DObject
-              animation={{ name: 'rotate', run: true, loop: true }}
-              source={require('../assets/3DModels/skull/Skull.obj')}
-              opacity={0.2}
-              // resources={[
-              //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
-              //   require('./res/emoji_smile/emoji_smile_normal.png'),
-              //   require('./res/emoji_smile/emoji_smile_specular.png'),
-              // ]}
-              position={[0, -.5, -1]}
-              scale={[0.0008, 0.0008, 0.0008]}
-              type="OBJ"
-              physicsBody={{type: 'Static'}}
-              onCollision={this.props.arSceneNavigator.viroAppProps.incrementScore}
-            />
-          </ViroARCamera>
-        </ViroARPlaneSelector>
-=======
         {this.renderARScene()}
->>>>>>> 97a5d0a8bbd98f42935ec33aadf2e346390bab3e
       </ViroARScene>
     );
   }
@@ -420,7 +269,7 @@ export default class JoshScene extends Component {
         <ViroARCamera>
           <Viro3DObject
             animation={{ name: 'rotate', run: true, loop: true }}
-            source={require('./res/Skull.obj')}
+            source={require('../assets/3DModels/skull/Skull.obj')}
             opacity={0.2}
             // resources={[
             //   require('./res/emoji_smile/emoji_smile_diffuse.png'),

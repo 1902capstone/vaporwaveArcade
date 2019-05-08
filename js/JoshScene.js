@@ -73,7 +73,7 @@ export default class JoshScene extends Component {
             opacity={1}
             rotation={[-90, 0, 0]}
             position={[0, -3, -4]}
-            source={require('../assets/images/pool.gif')}
+            source={require('../assets/Images/pool.gif')}
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
