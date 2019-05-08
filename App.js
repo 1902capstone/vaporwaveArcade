@@ -97,12 +97,12 @@ export default class App extends Component {
       
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
-        <ImageBackground source={require('./assets/images/background.png')} style={{width: '100%', height: '100%', alignItems: 'center'}}>
+        <ImageBackground source={require('./assets/Images/background.png')} style={{width: '100%', height: '100%', alignItems: 'center'}}>
           {/* BANNER IMAGE */}
           <Text style={localStyles.titleText}>
             Welcome to
           </Text>
-          <Image source={require('./assets/images/LOGO.png')}
+          <Image source={require('./assets/Images/LOGO.png')}
           style={localStyles.logo} />
           
           {/* SCENE 1 BUTTON */}
@@ -117,14 +117,14 @@ export default class App extends Component {
           <TouchableHighlight style={localStyles.buttons}
             onPress={this.selectGame(MENU_STATES.GAME_2)}
             underlayColor="#68a0ff" >
-            <Text style={localStyles.buttonText}>Game 2</Text>
+            <Text style={localStyles.buttonText}>Kitty Pool</Text>
           </TouchableHighlight>
 
           {/* SCENE 3 BUTTON */}
           <TouchableHighlight style={localStyles.buttons}
             onPress={this.selectGame(MENU_STATES.GAME_3)}
             underlayColor="#68a0ff" >
-            <Text style={localStyles.buttonText}>Josh</Text>
+            <Text style={localStyles.buttonText}>Shooter</Text>
           </TouchableHighlight>
 
           {/* SCENE 4 BUTTON */}
@@ -135,8 +135,6 @@ export default class App extends Component {
             <Text style={localStyles.buttonText}>Armon's Test Scene</Text>
             </TouchableHighlight>
             
-
-
           {/* Database BUTTON */}
           <TouchableHighlight style={localStyles.buttons}
             onPress={this.selectGame(MENU_STATES.DATABASE)}

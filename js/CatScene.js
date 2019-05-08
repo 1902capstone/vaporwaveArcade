@@ -25,7 +25,7 @@ import {
 // import console = require('console');
 // import console = require('console');
 
-export default class JoshScene extends Component {
+export default class CatScene extends Component {
   constructor() {
     super();
 
@@ -59,7 +59,7 @@ export default class JoshScene extends Component {
           pauseUpdates={this.state.pauseUpdates}
         >
           <Viro3DObject
-            source={require('./res/PalmTree.vrx')}
+            source={require('../assets/3DModels/palmTree/PalmTree.vrx')}
             position={[-1, -40, -2]}
             materials={['palm']}
             type="VRX"
@@ -77,7 +77,7 @@ export default class JoshScene extends Component {
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
-            source={require('./res/raft.obj')}
+            source={require('../assets/3DModels/raft/raft.obj')}
             opacity={1}
             position={[-1.7, -3.22, -3]}
             scale={[0.005, 0.005, 0.005]}
@@ -91,7 +91,7 @@ export default class JoshScene extends Component {
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
-            source={require('./res/raft.obj')}
+            source={require('../assets/3DModels/raft/raft.obj')}
             opacity={1}
             position={[0, -3.22, -3]}
             scale={[0.005, 0.005, 0.005]}
@@ -105,7 +105,7 @@ export default class JoshScene extends Component {
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
-            source={require('./res/raft.obj')}
+            source={require('../assets/3DModels/raft/raft.obj')}
             opacity={1}
             position={[1.7, -3.22, -3]}
             scale={[0.005, 0.005, 0.005]}
@@ -119,7 +119,7 @@ export default class JoshScene extends Component {
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
-            source={require('./res/raft.obj')}
+            source={require('../assets/3DModels/raft/raft.obj')}
             opacity={1}
             position={[1, -3.22, -4.5]}
             scale={[0.005, 0.005, 0.005]}
@@ -133,7 +133,7 @@ export default class JoshScene extends Component {
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
-            source={require('./res/raft.obj')}
+            source={require('../assets/3DModels/raft/raft.obj')}
             opacity={1}
             position={[0.9, -3.22, -1.4]}
             scale={[0.005, 0.005, 0.005]}
@@ -147,7 +147,7 @@ export default class JoshScene extends Component {
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
-            source={require('./res/raft.obj')}
+            source={require('../assets/3DModels/raft/raft.obj')}
             opacity={1}
             position={[-0.9, -3.22, -1.4]}
             scale={[0.005, 0.005, 0.005]}
@@ -161,7 +161,7 @@ export default class JoshScene extends Component {
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
-            source={require('./res/raft.obj')}
+            source={require('../assets/3DModels/raft/raft.obj')}
             opacity={1}
             position={[-0.9, -3.22, -4.5]}
             scale={[0.005, 0.005, 0.005]}
@@ -236,18 +236,6 @@ export default class JoshScene extends Component {
         //   }}
         //   animation={{ name: 'shoot', run: true, loop: true }}
         // />
-        <Viro3DObject
-          // animation={{ name: 'sway', run: true, loop: true }}
-          source={require('./res/pap-cup-obj.obj')}
-          // resources={[require('./res/Love.mtl')]}
-          opacity={1}
-          key={holeKey}
-          position={[2, -3.7, -2]}
-          scale={[0.08, 0.08, 0.08]}
-          type="OBJ"
-          materials={['pink']}
-          physicsBody={{ type: 'Static' }}
-        />
       );
     }
     return bang;
@@ -291,21 +279,21 @@ var localStyles = StyleSheet.create({
 
 ViroMaterials.createMaterials({
   grid: {
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   red: {
     diffuseColor: 'red',
   },
   blueRaft: {
     diffuseColor: 'lightblue',
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   purple: {
     diffuseColor: 'lavender',
   },
   redRaft: {
     diffuseColor: 'red',
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   pink: {
     diffuseColor: 'lightpink',
@@ -314,13 +302,13 @@ ViroMaterials.createMaterials({
     diffuseColor: 'black',
   },
   palm: {
-    diffuseTexture: require('./res/palmTree.png'),
+    diffuseTexture: require('../assets/3DModels/palmTree/palmTree.png'),
   },
 });
 
 ViroARTrackingTargets.createTargets({
   targetOne: {
-    source: require('./res/targetOne.png'),
+    source: require('../assets/Images/targetOne.png'),
     orientation: 'Up',
     physicalWidth: 0.1, // real world width in meters
     type: 'Image',
@@ -376,4 +364,4 @@ ViroAnimations.registerAnimations({
   ],
 });
 
-module.exports = JoshScene;
+module.exports = CatScene;

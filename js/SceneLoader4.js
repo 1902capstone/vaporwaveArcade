@@ -30,6 +30,7 @@ const GAME_STATES = {
   POST_GAME: "POST_GAME"
 }
 
+let timerIntervalId;
 
 export default class SceneLoader4 extends Component {
   constructor() {
@@ -37,10 +38,15 @@ export default class SceneLoader4 extends Component {
     this.state = {
       gameState: GAME_STATES.INTRODUCTION,
       score: 0,
+      timer: 25,
+      timeLeft: 25,
     }
     this.startGame = this.startGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
     this.incrementScore = this.incrementScore.bind(this);
+    this.checkTime = this.checkTime.bind(this);
+    this.beginTimer = this.beginTimer.bind(this);
+    this.decrementTime = this.decrementTime.bind(this);
   }
 
 
@@ -70,14 +76,15 @@ export default class SceneLoader4 extends Component {
             underlayColor={'#68a0ff'} >
             <Text style={localStyles.buttonText}>Start Level</Text>
           </TouchableHighlight>
+          {/* <Text>
+            timer here
+          </Text> */}
         </View>
       </View>
     )
   }
 
   renderBallGame() {
-    
-    // setTimeout(() => {this.gameEnd()}, 6000)
     
     return (
       <View style={localStyles.flex}>
@@ -87,7 +94,10 @@ export default class SceneLoader4 extends Component {
           viroAppProps = {{
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
-            score: this.state.score
+            score: this.state.score,
+            timer: this.state.timer,
+            beginTimer: this.beginTimer,
+            
           }}
           
         />
@@ -100,17 +110,29 @@ export default class SceneLoader4 extends Component {
               BACK
         </Text>
           </TouchableHighlight>
+          <Text style={localStyles.timerText}>
+            {this.state.timeLeft}
+          </Text>
         </View>
+        {/* hceck time */}
+        {this.checkTime()}
       </View>
     )
   }
 
   renderPostGame() {
-    return;
+    return (
+      <View>
+        <Text style={localStyles.text}>
+          Game has ended you won i guess
+        </Text>
+      </View>
+    )
   }
   
   //
   ////
+  
   
   ////
   // helper functions
@@ -122,21 +144,52 @@ export default class SceneLoader4 extends Component {
   }
   
   gameEnd() {
+    
     this.setState({
-      gameState: GAME_STATES.INTRODUCTION
+      gameState: GAME_STATES.INTRODUCTION,
+      timeLeft: 25
     })
   }
   
   incrementScore(colliderTag) {
-    console.log(colliderTag);
+    // console.log(colliderTag);
     this.setState({
       score: this.state.score + 1
     })
   }
   
+  setTimer(timeDiff) {
+    // calc new time
+    this.setState({
+      timeLeft: this.state.timer - timeDiff
+    })
+  }
+  
 
+  checkTime() {
+    const timeLeft = this.state.timeLeft;
+    console.log(timeLeft);
+    if (timeLeft <= 0) {
+      clearInterval(timerIntervalId);
+      this.gameEnd()
+    }
+  }
+  
+  // function that gets run when game starts. 
+  beginTimer() {
+    timerIntervalId = setInterval(this.decrementTime, 1000)
+  }
+  
+  decrementTime() {
+    let currentTime = this.state.timeLeft;
+    let newTime = currentTime - 1;
+    this.setState({
+      timeLeft: newTime
+    })
+  }
+  
+  
 }
-
 
 
 var localStyles = StyleSheet.create({
@@ -179,6 +232,11 @@ var localStyles = StyleSheet.create({
   },
   text: {
     color: '#fff',
+    textAlign: 'center',
+    fontSize: 16
+  },
+  timerText: {
+    color: '#ff0000',
     textAlign: 'center',
     fontSize: 16
   },
