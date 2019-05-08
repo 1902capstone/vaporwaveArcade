@@ -22,7 +22,7 @@ import {
 // import console = require('console');
 // import console = require('console');
 
-export default class Shooting extends Component {
+export default class ShootScene extends Component {
   constructor() {
     super();
 
@@ -57,8 +57,8 @@ export default class Shooting extends Component {
         >
           <Viro3DObject
             animation={{ name: 'sway', run: true, loop: true }}
-            source={require('./res/Love.obj')}
-            resources={[require('./res/Love.mtl')]}
+            source={require('../assets/3DModels/heart/Love.obj')}
+            resources={[require('../assets/3DModels/heart/Love.mtl')]}
             opacity={1}
             position={[-2, -2, -20]}
             scale={[0.08, 0.08, 0.08]}
@@ -79,9 +79,9 @@ export default class Shooting extends Component {
           <ViroARCamera>
             <ViroNode onClick={this._addBullet}>
               <Viro3DObject
-                source={require('./res/zapper.obj')}
+                source={require('../assets/3DModels/zapper/zapper.obj')}
                   resources={[
-                      require('./res/zapper.mtl')
+                      require('../assets/3DModels/zapper/zapper.mtl')
                     ]}
                 opacity={1}
                 rotation={[-15, 168, 0]}
@@ -179,7 +179,7 @@ var localStyles = StyleSheet.create({
 
 ViroMaterials.createMaterials({
   grid: {
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   red: {
     diffuseColor: 'red',
@@ -192,14 +192,14 @@ ViroMaterials.createMaterials({
   },
   testSkull: {
     diffuseColor: 'red',
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   pink: {
     diffuseColor: 'lightpink',
   },
   gun: {
     // lightingModel: 'PBR',
-    diffuseTexture: require('./res/zapper_diff_NRM.jpg'),
+    diffuseTexture: require('../assets/3DModels/zapper/zapper_diff_NRM.jpg'),
   }
 });
 
@@ -258,4 +258,4 @@ ViroAnimations.registerAnimations({
   ],
 });
 
-module.exports = Shooting;
+module.exports = ShootScene;

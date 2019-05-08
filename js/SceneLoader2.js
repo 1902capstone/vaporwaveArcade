@@ -17,23 +17,34 @@ import {
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
-const ARHelloWorld = require('./HelloWorldSceneAR');
-const Game2 = require('./Game2')
+const CatScene = require('./CatScene');
+// const JoshScene = require('./JoshScene');
+
+
 
 
 
 export default class SceneLoader2 extends Component {
   constructor() {
     super()
+    this.state = {
+      score: 0,
+    }
+    this.incrementScore = this.incrementScore.bind(this);
   }
   
   render() {
-    console.log('helo');
     return (
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
-          initialScene={{ scene: ARHelloWorld }}
+          // initialScene={{ scene: Shooting }}
+          initialScene={{ scene: CatScene }}  
+          viroAppProps = {{
+            gameEnd: this.gameEnd,
+            incrementScore: this.incrementScore,
+            score: this.state.score
+          }}
         />
         <View>
           <TouchableHighlight style={localStyles.buttons}
@@ -48,7 +59,12 @@ export default class SceneLoader2 extends Component {
       </View>
     )
   }
-  
+  incrementScore() {
+    console.log('BANG');
+    this.setState({
+      score: this.state.score + 1
+    })
+  }
 }
 
 

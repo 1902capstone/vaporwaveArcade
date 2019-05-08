@@ -182,7 +182,7 @@ export default class JoshScene extends Component {
           <ViroARCamera>
             <Viro3DObject
               animation={{ name: 'rotate', run: true, loop: true }}
-              source={require('./res/Skull.obj')}
+              source={require('../assets/3DModels/skull/Skull.obj')}
               opacity={0.2}
               // resources={[
               //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
@@ -251,7 +251,7 @@ var localStyles = StyleSheet.create({
 
 ViroMaterials.createMaterials({
   grid: {
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   red: {
     diffuseColor: 'red',
@@ -269,7 +269,7 @@ ViroMaterials.createMaterials({
 
 ViroARTrackingTargets.createTargets({
   targetOne: {
-    source: require('./res/targetOne.png'),
+    source: require('../assets/Images/targetOne.png'),
     orientation: 'Up',
     physicalWidth: 0.1, // real world width in meters
     type: 'Image',
