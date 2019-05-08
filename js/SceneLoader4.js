@@ -123,7 +123,7 @@ export default class SceneLoader4 extends Component {
   renderPostGame() {
     return (
       <View>
-        <Text style={localStyles.text}>
+        <Text style={localStyles.timerText}>
           Game has ended you won i guess
         </Text>
       </View>
@@ -146,7 +146,7 @@ export default class SceneLoader4 extends Component {
   gameEnd() {
     
     this.setState({
-      gameState: GAME_STATES.INTRODUCTION,
+      gameState: GAME_STATES.POST_GAME,
       timeLeft: 25
     })
   }
