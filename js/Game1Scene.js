@@ -98,7 +98,7 @@ var testARScene = createReactClass({
           position={[0, 0, 0]}
           scale={[0.2, 0.2, 0.2]}
           ref={(component)=>{this._animComponent=component}}
-        source={require('./res/object_pug_animated/pug_animated.vrx')}
+        source={require('../assets/3DModels/object_pug_animated/pug_animated.vrx')}
         // animation={}
         type="VRX"
         dragType='FixedToWorld' ondrag={()=>{}}

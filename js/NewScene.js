@@ -490,3 +490,17 @@ ViroAnimations.registerAnimations({
 });
 
 module.exports = JoshScene;
+
+========
+
+<ViroARCamera>
+          <ViroNode onClick={this._addBullet}>
+            <ViroAnimatedImage
+              height={2}
+              width={2}
+              position={[0, 0, -3]}
+              rotation={[0, 0, 0]}
+              source={require('../assets/images/testingFace.gif')}
+            />
+          </ViroNode>
+        </ViroARCamera>
