@@ -93,7 +93,7 @@ export default class App extends Component {
       
       <View style={localStyles.outer} >
         <View style={localStyles.inner} >
-        <ImageBackground source={require('./assets/Images/grid_bg.jpg')} style={{width: '100%', height: '100%', alignItems: 'center'}}>
+        <ImageBackground source={require('./assets/Images/background.png')} style={{width: '100%', height: '100%', alignItems: 'center'}}>
           {/* BANNER IMAGE */}
           <Text style={localStyles.titleText}>
             Welcome to
