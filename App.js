@@ -40,6 +40,7 @@ const SceneLoader2 = require('./js/SceneLoader2')
 const SceneLoader3 = require('./js/SceneLoader3')
 const SceneLoader4 = require('./js/SceneLoader4')
 const SceneLoader5 = require('./js/SceneLoader5')
+const LeaderBoard = require('./js/LeaderBoard')
 
 
 
@@ -49,7 +50,8 @@ const MENU_STATES = {
   GAME_2: "GAME_2",
   GAME_3: "GAME_3",
   GAME_4: "GAME_4",
-  DATABASE:"DATABASE"
+  DATABASE: "DATABASE",
+  LEADERBOARD: "LEADERBOARD"
 }
 
 export default class App extends Component {
@@ -85,6 +87,8 @@ export default class App extends Component {
         return this.renderGame4();
       case MENU_STATES.DATABASE:
         return this.renderDatabase();
+      case MENU_STATES.LEADERBOARD:
+        return this.renderLeaderBorad();
     }
   }
   
@@ -139,6 +143,14 @@ export default class App extends Component {
             underlayColor="#68a0ff" >
 
             <Text style={localStyles.buttonText}>Database</Text>
+            </TouchableHighlight>
+            
+             {/* LeaderBoard BUTTON */}
+          <TouchableHighlight style={localStyles.buttons}
+            onPress={this.selectGame(MENU_STATES.LEADERBOARD)}
+            underlayColor="#68a0ff" >
+
+            <Text style={localStyles.buttonText}>LeaderBoard</Text>
           </TouchableHighlight>
           </ImageBackground>
         </View>
@@ -208,7 +220,15 @@ export default class App extends Component {
       />
     )
   }
-  
+  renderLeaderBorad() {
+    return (
+      <LeaderBoard 
+      propObj = {{
+        returnToMenu: this.returnToMenu,
+      }}
+      />
+    )
+  }
   
 }
 

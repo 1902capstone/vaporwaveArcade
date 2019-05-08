@@ -12,72 +12,46 @@ import { db } from "../src/config";
 
 let addName = info => {
   db.ref("/leaderboards").push({
-  
-      name: info.name,
-      score: info.score
-    
+    name: info.name,
+    score: info.score
   });
 };
-// let addScore = score => {
-//   db.ref("/leaderboards").push({
-//     score: score
-//   });
-// };
 
 export default class SceneLoader5 extends Component {
-    constructor() {
-        super()
-        this.state = {
-            name: "",
-            score: ""
-        }
-        this.handleNameChange = this.handleNameChange.bind(this)
-        this.handleScoreChange = this.handleScoreChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-//   state = {
-//     name: "",
-//     score: ""
-//   };
+  constructor() {
+    super();
+    this.state = {
+      name: "",
+      score: 0
+    };
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleScoreChange = this.handleScoreChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   handleNameChange = e => {
-    // console.log(e.nativeEvent.name);
     this.setState({
       name: e.nativeEvent.text
-      // [e.nativeEvent.class]:e.nativeEvent.text
     });
   };
   handleScoreChange = e => {
-
     this.setState({
-      score: e.nativeEvent.text
-      // [e.nativeEvent.class]:e.nativeEvent.text
+      score: Number(e.nativeEvent.text)
     });
   };
   handleSubmit = () => {
-      addName({ name: this.state.name, score: this.state.score });
-    // addScore(this.state.score);
+    addName({ name: this.state.name, score: this.state.score });
+
     AlertIOS.alert("Item saved successfully");
   };
 
   render() {
-    const { name, score } = this.state;
     return (
       <View style={styles.main}>
         <Text style={styles.title}>Add user</Text>
-        <TextInput
-        //   name="name"
-          style={styles.itemInput}
-          onChange={this.handleNameChange}
-        //   text={name}
-        />
+        <TextInput style={styles.itemInput} onChange={this.handleNameChange} />
 
-        <TextInput
-        //   name="name"
-          style={styles.itemInput}
-          onChange={this.handleScoreChange}
-        //   text={score}
-        />
+        <TextInput style={styles.itemInput} onChange={this.handleScoreChange} />
 
         <TouchableHighlight
           style={styles.button}
