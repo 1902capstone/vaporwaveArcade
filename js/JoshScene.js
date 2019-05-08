@@ -6,6 +6,7 @@ import { StyleSheet } from 'react-native';
 
 import {
   ViroARScene,
+  ViroAnimatedImage,
   ViroText,
   ViroConstants,
   ViroBox,
@@ -17,6 +18,8 @@ import {
   ViroAnimations,
   ViroARTrackingTargets,
   ViroSphere,
+  ViroAmbientLight,
+  ViroQuad,
   ViroNode,
 } from 'react-viro';
 // import console = require('console');
@@ -29,15 +32,14 @@ export default class JoshScene extends Component {
     // Set initial state here
     this.state = {
       text: 'Initializing AR...',
-      totalBullets: 0,
-      score: 0,
+      totalHoles: 0,
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this._onButtonTap = this._onButtonTap.bind(this);
-    this._addBullet = this._addBullet.bind(this);
-    this._renderBullets = this._renderBullets.bind(this);
+    this._addHole = this._addHole.bind(this);
+    this._renderHoles = this._renderHoles.bind(this);
   }
 
   render() {
@@ -50,54 +52,145 @@ export default class JoshScene extends Component {
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
+          maxPlanes={1}
           onPlaneSelected={() => {
             this.setState({ pauseUpdates: true });
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
           <Viro3DObject
-            animation={{ name: 'sway', run: true, loop: true }}
-            source={require('./res/Love.obj')}
-            resources={[require('./res/Love.mtl')]}
+            source={require('./res/PalmTree.vrx')}
+            position={[-1, -40, -2]}
+            materials={['palm']}
+            type="VRX"
+            scale={[2, 2, 2]}
+          /><ViroAmbientLight color="#FFFFFF" />
+
+          <ViroAnimatedImage
+            height={9}
+            width={9}
+            loop={true}
             opacity={1}
-            position={[-2, -2, -20]}
-            scale={[0.08, 0.08, 0.08]}
+            rotation={[-90, 0, 0]}
+            position={[0, -3, -4]}
+            source={require('../assets/images/pool.gif')}
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[-1.7, -3.22, -3]}
+            scale={[0.005, 0.005, 0.005]}
             type="OBJ"
-            materials={['pink']}
+            rotation={[-90, 0, 0]}
+            materials={['redRaft']}
             physicsBody={{ type: 'Static' }}
             onCollision={
               this.props.arSceneNavigator.viroAppProps.incrementScore
             }
           />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[0, -3.22, -3]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['redRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[1.7, -3.22, -3]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['redRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[1, -3.22, -4.5]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['blueRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[0.9, -3.22, -1.4]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['blueRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[-0.9, -3.22, -1.4]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['blueRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'bob', run: true, loop: true }}
+            source={require('./res/raft.obj')}
+            opacity={1}
+            position={[-0.9, -3.22, -4.5]}
+            scale={[0.005, 0.005, 0.005]}
+            type="OBJ"
+            rotation={[-90, 0, 0]}
+            materials={['blueRaft']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          {/* SCORE */}
           <ViroText
             text={currentScore.toString()}
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
             style={localStyles.helloWorldTextStyle}
           />
+          {this._renderHoles()}
 
           <ViroARCamera>
-            <ViroNode onClick={this._addBullet}>
-              <Viro3DObject
-                source={require('./res/zapper.obj')}
-                //   resources={[
-                //       require('./res/zapper.mtl'),
-                //            require('./res/zaper_diff.jpg'),
-                //            require('./res/zaper_diff_NRM.jpg')]}
+            <ViroNode onClick={this._addHole}>
+              {/* <Viro3DObject
+                source={require('./res/hand-free.obj')}
                 opacity={0.7}
-                rotation={[-15, 168, 0]}
-                position={[0, -0.5, -1]}
-                scale={[0.0025, 0.0025, 0.0025]}
+                rotation={[-40, 110, 10]}
+                position={[-0.3, -0.5, -1.5]}
+                scale={[0.025, 0.025, 0.025]}
                 type="OBJ"
-              />
-              {this._renderBullets()}
-              {/* <ViroSphere
-                heightSegmentCount={5}
-                widthSegmentCount={5}
-                radius={0.06}
-                position={[0.15, -0.1, -1.5]}
-                materials={['red']}
-                animation={{ name: 'shoot', run: true, loop: false }}
               /> */}
             </ViroNode>
           </ViroARCamera>
@@ -125,35 +218,47 @@ export default class JoshScene extends Component {
       buttonStateTag: 'onTap',
     });
   }
-  _renderBullets() {
+  _renderHoles() {
     var bang = [];
-    for (var i = 0; i < this.state.totalBullets; i++) {
-      var bulletKey = 'BulletTag_' + i;
+    for (var i = 0; i < this.state.totalHoles; i++) {
+      var holeKey = 'holeTag_' + i;
       bang.push(
-        <ViroSphere
-          heightSegmentCount={5}
-          widthSegmentCount={5}
-          key={bulletKey}
-          radius={0.069}
-          position={[0.15, -0.1, -1.5]}
-          materials={['red']}
-          physicsBody={{
-            type: 'Dynamic',
-            mass: 1,
-          }}
-          animation={{ name: 'shoot', run: true, loop: true }}
+        // <ViroSphere
+        //   heightSegmentCount={5}
+        //   widthSegmentCount={5}
+        //   key={holeKey}
+        //   radius={0.069}
+        //   position={[0.15, -0.1, -1.5]}
+        //   materials={['red']}
+        //   physicsBody={{
+        //     type: 'Dynamic',
+        //     mass: 1,
+        //   }}
+        //   animation={{ name: 'shoot', run: true, loop: true }}
+        // />
+        <Viro3DObject
+          // animation={{ name: 'sway', run: true, loop: true }}
+          source={require('./res/pap-cup-obj.obj')}
+          // resources={[require('./res/Love.mtl')]}
+          opacity={1}
+          key={holeKey}
+          position={[2, -3.7, -2]}
+          scale={[0.08, 0.08, 0.08]}
+          type="OBJ"
+          materials={['pink']}
+          physicsBody={{ type: 'Static' }}
         />
       );
     }
     return bang;
   }
-  _addBullet() {
-    this.setState({ totalBullets: this.state.totalBullets + 1 });
+  _addHole() {
+    this.setState({ totalHoles: this.state.totalHoles + 1 });
     // change this to slow down rapidfire and empty state
-    if (this.state.totalBullets === 10) {
-      this.setState({ totalBullets: 0 });
-    }
-    console.log('bullets', this.state.totalBullets);
+    // if (this.state.totalBullets === 10) {
+    //   this.setState({ totalBullets: 0 });
+    // }
+    console.log('holes', this.state.totalholes);
   }
 }
 
@@ -191,18 +296,25 @@ ViroMaterials.createMaterials({
   red: {
     diffuseColor: 'red',
   },
-  blue: {
+  blueRaft: {
     diffuseColor: 'lightblue',
+    diffuseTexture: require('./res/grid_bg.jpg'),
   },
   purple: {
     diffuseColor: 'lavender',
   },
-  testSkull: {
+  redRaft: {
     diffuseColor: 'red',
     diffuseTexture: require('./res/grid_bg.jpg'),
   },
   pink: {
     diffuseColor: 'lightpink',
+  },
+  black: {
+    diffuseColor: 'black',
+  },
+  palm: {
+    diffuseTexture: require('./res/palmTree.png'),
   },
 });
 
@@ -216,6 +328,9 @@ ViroARTrackingTargets.createTargets({
 });
 
 ViroAnimations.registerAnimations({
+  cupUp: { properties: { positionY: '+=.1' }, duration: 2000 },
+  cupDown: { properties: { positionY: '-=.1' }, duration: 2000 },
+  bob: [['cupDown', 'cupUp']],
   rotate: {
     properties: {
       rotateY: '+=90',

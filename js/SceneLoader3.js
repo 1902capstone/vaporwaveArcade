@@ -17,7 +17,10 @@ import {
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
+// const Shooting = require('./Shooting');
 const JoshScene = require('./JoshScene');
+
+
 const Game3 = require('./Game3')
 
 
@@ -36,7 +39,8 @@ export default class SceneLoader3 extends Component {
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
-          initialScene={{ scene: JoshScene }}
+          // initialScene={{ scene: Shooting }}
+          initialScene={{ scene: JoshScene }}  
           viroAppProps = {{
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
