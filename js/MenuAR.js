@@ -38,6 +38,8 @@ export default class HelloWorldSceneAR extends Component {
   }
 
   render() {
+    console.log(this.props.arSceneNavigator.viroAppProps)
+    
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         {/* <ViroFlexView
@@ -88,49 +90,53 @@ export default class HelloWorldSceneAR extends Component {
           />
         </ViroFlexView> */}
         <ViroButton
-          source={require('./res/smile1.jpg')}
-          gazeSource={require('./res/smile2.jpg')}
-          tapSource={require('./res/explode.jpg')}
+          source={require('../assets/Images/smile1.jpg')}
+          gazeSource={require('../assets/Images/smile2.jpg')}
+          tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[-2.0, 0.0, -10.0]}
           rotation={[0, 45, 0]}
           opacity={1}
-          onTap={this._onButtonTap}
+          // onTap={this._onButtonTap}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_1)}
           onGaze={this._onButtonGaze}
         />
-         <ViroButton
-          source={require('./res/smile1.jpg')}
-          gazeSource={require('./res/smile2.jpg')}
-          tapSource={require('./res/explode.jpg')}
+          <ViroButton
+          source={require('../assets/Images/smile1.jpg')}
+          gazeSource={require('../assets/Images/smile2.jpg')}
+          tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[-5.5, 0.0, -5.0]}
           rotation={[0, 45, 0]}
-          onTap={this._onButtonTap}
+          // onTap={this._onButtonTap}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_2)}
           onGaze={this._onButtonGaze}
         />
         <ViroButton
-          source={require('./res/smile1.jpg')}
-          gazeSource={require('./res/smile2.jpg')}
-          tapSource={require('./res/explode.jpg')}
+          source={require('../assets/Images/smile1.jpg')}
+          gazeSource={require('../assets/Images/smile2.jpg')}
+          tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[2.0, 0.0, -10.0]}
           rotation={[0, -45, 0]}
           opacity={1}
-          onTap={this._onButtonTap}
+          // onTap={this._onButtonTap}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_3)}
           onGaze={this._onButtonGaze}
         />
-         <ViroButton
-          source={require('./res/smile1.jpg')}
-          gazeSource={require('./res/smile2.jpg')}
-          tapSource={require('./res/explode.jpg')}
+          <ViroButton
+          source={require('../assets/Images/smile1.jpg')}
+          gazeSource={require('../assets/Images/smile2.jpg')}
+          tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[5.5, 0.0, -5.0]}
           rotation={[0, -45, 0]}
-          onTap={this._onButtonTap}
+          // onTap={this._onButtonTap}
+          onClick={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_4)}}
           onGaze={this._onButtonGaze}
         />
         <ViroText
@@ -138,12 +144,6 @@ export default class HelloWorldSceneAR extends Component {
           scale={[0.5, 0.5, 0.5]}
           position={[0, 0, -1]}
           style={localStyles.helloWorldTextStyle}
-        />
-        <ViroBox
-          position={[0, -0.5, -1]}
-          scale={[0.3, 0.3, 0.1]}
-          materials={['grid']}
-          animation={{ name: 'rotate', run: true, loop: true }}
         />
         <ViroAmbientLight color={'#aaaaaa'} />
         <ViroSpotLight
@@ -160,16 +160,16 @@ export default class HelloWorldSceneAR extends Component {
           onDrag={() => {}}
         >
           <Viro3DObject
-            animation={{ name: 'rotate', run: true, loop: true }}
-            source={require('./res/Skull.obj')}
-            opacity={0.9}
-            // resources={[
-            //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
-            //   require('./res/emoji_smile/emoji_smile_normal.png'),
-            //   require('./res/emoji_smile/emoji_smile_specular.png'),
-            // ]}
-            position={[-2, -2, -20]}
-            scale={[0.008, 0.008, 0.008]}
+            animation={{ name: 'venusBob', run: true, loop: true }}
+            source={require('../assets/3DModels/venus/venus.obj')}
+            resources={[
+              require('../assets/3DModels/venus/venus.mtl'),
+  
+            ]}
+            rotation={[0,0,0]}
+            position={[-0, -2, -2]}
+            scale={[0.025, 0.025, 0.025]}
+            materials={['venus']}
             type="OBJ"
           />
         </ViroNode>
@@ -224,10 +224,14 @@ var localStyles = StyleSheet.create({
   },
 });
 
+
 ViroMaterials.createMaterials({
   grid: {
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
+  venus: {
+    diffuseColor: 'lightpink'
+  }
 });
 
 ViroAnimations.registerAnimations({
@@ -235,8 +239,26 @@ ViroAnimations.registerAnimations({
     properties: {
       rotateY: '+=30',
     },
-    duration: 25000, //.25 seconds
+    duration: 600, //.25 seconds
   },
+  venusUp: {
+    properties: {
+      rotateY: '+=30',
+      positionY: '+=.3'
+    },
+    duration: 1000, //.25 seconds
+    // easing: 'bounce'
+
+  },
+  venusDown: {
+    properties: {
+      rotateY: '+=30',
+      positionY: '-=.3'
+    },
+    duration: 1000, //.25 seconds
+    // easing: 'bounce'
+  },
+  venusBob: [['venusUp', 'venusDown']]
 });
 
 module.exports = HelloWorldSceneAR;
