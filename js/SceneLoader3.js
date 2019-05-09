@@ -134,7 +134,7 @@ export default class SceneLoader3 extends Component {
   
   
   incrementScore() {
-    console.log('BANG');
+    // console.log('BANG');
     this.setState({
       score: this.state.score + 1
     })
@@ -151,7 +151,7 @@ export default class SceneLoader3 extends Component {
 
   checkTime() {
     const timeLeft = this.state.timeLeft;
-    console.log(timeLeft);
+    // console.log(timeLeft);
     if (timeLeft <= 0) {
       clearInterval(timerIntervalId);
       this.gameEnd()
