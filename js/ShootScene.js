@@ -39,6 +39,7 @@ export default class ShootScene extends Component {
     this._onButtonTap = this._onButtonTap.bind(this);
     this._addBullet = this._addBullet.bind(this);
     this._renderBullets = this._renderBullets.bind(this);
+    this.handleGameStart = this.handleGameStart.bind(this);
   }
 
   render() {
@@ -52,6 +53,7 @@ export default class ShootScene extends Component {
           minHeight={0.01}
           minWidth={0.01}
           onPlaneSelected={() => {
+            this.handleGameStart()
             this.setState({ pauseUpdates: true });
           }}
           pauseUpdates={this.state.pauseUpdates}
@@ -183,6 +185,11 @@ export default class ShootScene extends Component {
     }
     console.log('bullets', this.state.totalBullets);
   }
+  
+  handleGameStart() {
+    this.props.arSceneNavigator.viroAppProps.beginTimer();
+  }
+  
 }
 
 var localStyles = StyleSheet.create({

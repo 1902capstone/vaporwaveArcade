@@ -86,7 +86,8 @@ export default class SceneLoader3 extends Component {
           viroAppProps = {{
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
-            score: this.state.score
+            score: this.state.score,
+            beginTimer: this.beginTimer,
           }}
         />
         <View>
