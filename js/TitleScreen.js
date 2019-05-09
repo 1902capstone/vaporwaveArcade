@@ -8,6 +8,7 @@ import {
   ViroARScene,
   ViroText,
   ViroConstants,
+  ViroAnimatedImage,
   ViroBox,
   ViroMaterials,
   ViroARImageMarker,
@@ -34,6 +35,10 @@ export default class TitleScreen extends Component {
     };
 
     // bind 'this' to functions
+    this._onInitialized = this._onInitialized.bind(this);
+    this._onButtonTap = this._onButtonTap.bind(this);
+    this._addBullet = this._addBullet.bind(this);
+    this._renderBullets = this._renderBullets.bind(this);
   }
 
   render() {
@@ -51,7 +56,7 @@ export default class TitleScreen extends Component {
                 width={2}
                 position={[0, 0, -3]}
                 rotation={[0, 0, 0]}
-                source={require('../assets/images/testingFace.gif')}
+                source={require('../assets/Images/bface.gif')}
               />
             </ViroNode>
           </ViroARCamera>
