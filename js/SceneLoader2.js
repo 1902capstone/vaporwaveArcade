@@ -60,14 +60,11 @@ export default class SceneLoader2 extends Component {
     )
   }
   incrementScore() {
-    console.log('BANG');
     this.setState({
       score: this.state.score + 1
     })
   }
 }
-
-
 
 var localStyles = StyleSheet.create({
   viroContainer: {
