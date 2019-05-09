@@ -25,6 +25,7 @@ import {
   ViroVRSceneNavigator,
   ViroARSceneNavigator
 } from 'react-viro';
+import { bindExpression } from '@babel/types';
 
 
 
@@ -40,7 +41,7 @@ const SceneLoader1 = require('./js/SceneLoader1')
 const SceneLoader2 = require('./js/SceneLoader2')
 const SceneLoader3 = require('./js/SceneLoader3')
 const SceneLoader4 = require('./js/SceneLoader4')
-const SceneLoader5 = require('./js/SceneLoader5')
+const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen')
 const LeaderBoard = require('./js/LeaderBoard')
 const MenuSceneLoader = require('./js/MenuSceneLoader')
 
@@ -62,8 +63,10 @@ export default class App extends Component {
       menuState: MENU_STATES.DEFAULT
     }
     this.returnToMenu = this.returnToMenu.bind(this);
+    this.goToLeaderBoard = this.goToLeaderBoard.bind(this); 
     this.selectGame = this.selectGame.bind(this);
   }
+
   
   
 
@@ -71,6 +74,12 @@ export default class App extends Component {
   returnToMenu = () => {
     this.setState({
       menuState: MENU_STATES.DEFAULT
+    })
+  }
+
+  goToLeaderBoard = () => {
+    this.setState({
+      menuState: MENU_STATES.LEADERBOARD
     })
   }
   
@@ -152,14 +161,14 @@ export default class App extends Component {
       <SceneLoader4 
       propObj = {{
         returnToMenu: this.returnToMenu,
-
+        goToLeaderBoard: this.goToLeaderBoard
       }}
       />
     )
   }
   renderDatabase() {
     return (
-      <SceneLoader5 
+      <LeaderBoardEntryScreen 
       propObj = {{
         returnToMenu: this.returnToMenu,
 

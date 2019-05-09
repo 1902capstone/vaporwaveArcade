@@ -21,7 +21,6 @@ export default class List extends Component {
     
     async componentDidMount() {
       await ans.on("value", snapshot => {
-            // console.log("leaderboard", leaderBoardRef);
             let data = snapshot.val();
             let score = Object.values(data);
             this.setState({ score });
@@ -29,8 +28,6 @@ export default class List extends Component {
   }
 
   render() {
-    console.log("ans", ans)
-
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Leaderboard</Text>

@@ -42,7 +42,7 @@ export default class LeaderBoardEntryScreen extends Component {
     addName({ name: this.state.name, score: this.props.score });
 
     AlertIOS.alert("Item saved successfully");
-    
+    this.props.goToLeaderBoard()
   };
 
   render() {
@@ -65,7 +65,7 @@ export default class LeaderBoardEntryScreen extends Component {
         <TouchableHighlight
           style={styles.button}
           underlayColor={"#68a0ff"}
-          //onPress={this.props.propObj.returnToMenu}
+          onPress={this.props.returnToMenu}
         >
           <Text style={styles.buttonText}>BACK</Text>
         </TouchableHighlight>

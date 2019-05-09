@@ -35,39 +35,24 @@ const GAME_STATES = {
 
 let timerIntervalId;
 
-let leaderBoardRef = db.ref("/Shooter")
-let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
 
 export default class SceneLoader4 extends Component {
   constructor() {
     super()
     this.state = {
       gameState: GAME_STATES.INTRODUCTION,
-      score: 9,
+      score: 0,
       timer: 25,
       timeLeft: 25,
-      // leaderBoardArray: []
     }
     this.startGame = this.startGame.bind(this);
+    this.resetGame = this.resetGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
     this.incrementScore = this.incrementScore.bind(this);
     this.checkTime = this.checkTime.bind(this);
     this.beginTimer = this.beginTimer.bind(this);
     this.decrementTime = this.decrementTime.bind(this);
   }
-
-  // async componentDidMount() {
-  //   await ans.on("value", snapshot => {
-  //     // console.log("leaderboard", leaderBoardRef);
-  //     let data = snapshot.val();
-  //     let unsortedArray = Object.values(data);
-  //     const leaderBoardArray = unsortedArray.sort(function (a, b) {
-  //       return b.score - a.score
-  //     })
-  //     this.setState({ leaderBoardArray });
-  //     console.log(leaderBoardArray)
-  //   })
-  // }
 
   render() {
     switch (this.state.gameState) {
@@ -141,7 +126,9 @@ export default class SceneLoader4 extends Component {
   renderPostGame() {
     return <PostGame1 
     returnToMenu={this.props.propObj.returnToMenu}
+    goToLeaderBoard={this.props.propObj.goToLeaderBoard}
     score={this.state.score}
+    resetGame = {this.resetGame}
     />
     // if (this.state.leaderBoardArray[9].score < this.state.score) {
     //   return (
