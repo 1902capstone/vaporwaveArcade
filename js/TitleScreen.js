@@ -48,18 +48,23 @@ export default class TitleScreen extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
       >
-         
-          <ViroARCamera>
-            <ViroNode onClick={this._addBullet}>
-              <ViroAnimatedImage
-                height={2}
-                width={2}
-                position={[0, 0, -3]}
-                rotation={[0, 0, 0]}
-                source={require('../assets/Images/bface.gif')}
-              />
-            </ViroNode>
-          </ViroARCamera>
+        <ViroARCamera>
+          <ViroNode onClick={this._addBullet}>
+            <ViroAnimatedImage
+              height={2}
+              width={2}
+              position={[0, 0, -3]}
+              rotation={[0, 0, 0]}
+              source={require('../assets/Images/bface_logo.gif')}
+            />
+            <ViroText
+              text={'TAP TO START'}
+              scale={[0.5, 0.5, 0.5]}
+              position={[0, -.5, -1]}
+              style={localStyles.text}
+            />
+          </ViroNode>
+        </ViroARCamera>
       </ViroARScene>
     );
   }
@@ -117,9 +122,9 @@ export default class TitleScreen extends Component {
 }
 
 var localStyles = StyleSheet.create({
-  helloWorldTextStyle: {
+  text: {
     fontFamily: 'Arial',
-    fontSize: 20,
+    fontSize: 10,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
