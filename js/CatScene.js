@@ -73,7 +73,7 @@ export default class CatScene extends Component {
             opacity={1}
             rotation={[-90, 0, 0]}
             position={[0, -3, -4]}
-            source={require('../assets/Images/pool.gif')}
+            source={require('../assets/Images/poolcircle.gif')}
           />
           <Viro3DObject
             animation={{ name: 'bob', run: true, loop: true }}
