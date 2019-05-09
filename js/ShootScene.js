@@ -15,6 +15,7 @@ import {
   ViroARCamera,
   ViroARPlaneSelector,
   ViroAnimations,
+  ViroSound,
   ViroARTrackingTargets,
   ViroSphere,
   ViroNode,
@@ -55,15 +56,51 @@ export default class ShootScene extends Component {
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
+          <ViroSound
+            paused={true}
+            source={require('../assets/SoundFX/bang.mp3')}
+            loop={true}
+            volume={1.0}
+            onFinish={this.onFinishSound}
+            onError={this.onErrorSound}
+          />
           <Viro3DObject
-            animation={{ name: 'sway', run: true, loop: true }}
+            animation={{ name: 'swayA', run: true, loop: true }}
             source={require('../assets/3DModels/heart/Love.obj')}
             resources={[require('../assets/3DModels/heart/Love.mtl')]}
             opacity={1}
-            position={[-2, -2, -20]}
+            position={[-1, -2, -20]}
             scale={[0.08, 0.08, 0.08]}
             type="OBJ"
             materials={['pink']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'swayB', run: true, loop: true }}
+            source={require('../assets/3DModels/heart/Love.obj')}
+            resources={[require('../assets/3DModels/heart/Love.mtl')]}
+            opacity={1}
+            position={[1, -3, -20]}
+            scale={[0.05, 0.05, 0.05]}
+            type="OBJ"
+            materials={['blue']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.incrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'swayC', run: true, loop: true }}
+            source={require('../assets/3DModels/heart/Love.obj')}
+            resources={[require('../assets/3DModels/heart/Love.mtl')]}
+            opacity={1}
+            position={[-0.5, 0, -20]}
+            scale={[0.02, 0.02, 0.02]}
+            type="OBJ"
+            materials={['teal']}
             physicsBody={{ type: 'Static' }}
             onCollision={
               this.props.arSceneNavigator.viroAppProps.incrementScore
@@ -80,9 +117,7 @@ export default class ShootScene extends Component {
             <ViroNode onClick={this._addBullet}>
               <Viro3DObject
                 source={require('../assets/3DModels/zapper/zapper.obj')}
-                  resources={[
-                      require('../assets/3DModels/zapper/zapper.mtl')
-                    ]}
+                resources={[require('../assets/3DModels/zapper/zapper.mtl')]}
                 opacity={1}
                 rotation={[-15, 168, 0]}
                 position={[0, -0.5, -1]}
@@ -129,7 +164,7 @@ export default class ShootScene extends Component {
           radius={0.08}
           position={[0.15, -0.1, -1.5]}
           materials={['red']}
-          opacity={.4}
+          opacity={0.4}
           physicsBody={{
             type: 'Dynamic',
             mass: 1,
@@ -200,7 +235,10 @@ ViroMaterials.createMaterials({
   gun: {
     // lightingModel: 'PBR',
     diffuseTexture: require('../assets/3DModels/zapper/zapper_diff.jpg'),
-  }
+  },
+  teal: {
+    diffuseColor: 'teal',
+  },
 });
 
 ViroAnimations.registerAnimations({
@@ -213,7 +251,7 @@ ViroAnimations.registerAnimations({
   },
   shoot: {
     properties: { positionZ: '-=6', positionX: '+=1', positionY: '+=1' },
-    duration: 600,
+    duration: 450,
   },
   animateImage: {
     properties: { rotateY: '+=90' },
@@ -221,21 +259,24 @@ ViroAnimations.registerAnimations({
     duration: 1000,
   },
   moveRight: { properties: { positionX: '+=12' }, duration: 600 },
-  moveLeft: { properties: { positionX: '-=10' }, duration: 1000 },
+  moveLeft: {
+    properties: { positionX: '-=10', rotateY: '+=90' },
+    duration: 1000,
+  },
   moveUpL: {
-    properties: { positionX: '-=12', positionY: '+=4' },
+    properties: { positionX: '-=12', positionY: '+=4', rotateY: '+=90' },
     duration: 1000,
   },
   moveDownR: {
     properties: { positionX: '+=10', positionY: '-=4' },
     duration: 800,
   },
-  moveUp: { properties: { positionY: '+=2' }, duration: 400 },
+  moveUp: { properties: { positionY: '+=2', rotateY: '+=90' }, duration: 400 },
   moveDown: { properties: { positionY: '-=2' }, duration: 500 },
   forward: { properties: { positionZ: '+=7' }, duration: 200 },
   back: { properties: { positionZ: '-=7' }, duration: 200 },
 
-  sway: [
+  swayA: [
     [
       'moveLeft',
       'moveDownR',
@@ -247,6 +288,36 @@ ViroAnimations.registerAnimations({
       'moveRight',
       'moveUpL',
       'back',
+    ],
+  ],
+  swayB: [
+    [
+      'moveRight',
+      'moveDown',
+      'moveDownR',
+      'forward',
+      'moveUpL',
+      'back',
+      'moveRight',
+      'moveLeft',
+      'moveUp',
+      'moveDown',
+      'moveLeft',
+    ],
+  ],
+  swayC: [
+    [
+      'moveDown',
+      'forward',
+      'moveRight',
+      'moveDownR',
+      'moveLeft',
+      'moveUpL',
+      'back',
+      'moveRight',
+      'moveLeft',
+      'moveUp',
+      'moveDown',
     ],
   ],
 });
