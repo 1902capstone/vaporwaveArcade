@@ -12,7 +12,7 @@ import {
   ImageBackground,
   TouchableHighlight,
 } from 'react-native';
-import SceneLoader5 from "./SceneLoader5"
+import SceneLoader5 from "./LeaderBoardEntryScreen"
 import PostGame1 from './PostGame1';
 import {
   ViroARSceneNavigator
@@ -43,10 +43,10 @@ export default class SceneLoader4 extends Component {
     super()
     this.state = {
       gameState: GAME_STATES.INTRODUCTION,
-      score: 0,
+      score: 9,
       timer: 25,
       timeLeft: 25,
-      leaderBoardArray: []
+      // leaderBoardArray: []
     }
     this.startGame = this.startGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
@@ -56,18 +56,18 @@ export default class SceneLoader4 extends Component {
     this.decrementTime = this.decrementTime.bind(this);
   }
 
-  async componentDidMount() {
-    await ans.on("value", snapshot => {
-      // console.log("leaderboard", leaderBoardRef);
-      let data = snapshot.val();
-      let unsortedArray = Object.values(data);
-      const leaderBoardArray = unsortedArray.sort(function (a, b) {
-        return b.score - a.score
-      })
-      this.setState({ leaderBoardArray });
-      console.log(leaderBoardArray)
-    })
-  }
+  // async componentDidMount() {
+  //   await ans.on("value", snapshot => {
+  //     // console.log("leaderboard", leaderBoardRef);
+  //     let data = snapshot.val();
+  //     let unsortedArray = Object.values(data);
+  //     const leaderBoardArray = unsortedArray.sort(function (a, b) {
+  //       return b.score - a.score
+  //     })
+  //     this.setState({ leaderBoardArray });
+  //     console.log(leaderBoardArray)
+  //   })
+  // }
 
   render() {
     switch (this.state.gameState) {
@@ -139,7 +139,10 @@ export default class SceneLoader4 extends Component {
   }
 
   renderPostGame() {
-    return <PostGame1 returnToMenu={this.props.propObj.returnToMenu} />
+    return <PostGame1 
+    returnToMenu={this.props.propObj.returnToMenu}
+    score={this.state.score}
+    />
     // if (this.state.leaderBoardArray[9].score < this.state.score) {
     //   return (
     //     <SceneLoader5 score={this.state.score} gameName="BallGame" />

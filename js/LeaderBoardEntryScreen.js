@@ -17,7 +17,7 @@ let addName = info => {
   });
 };
 
-export default class SceneLoader5 extends Component {
+export default class LeaderBoardEntryScreen extends Component {
   constructor() {
     super();
     this.state = {
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = SceneLoader5;
+module.exports = LeaderBoardEntryScreen;

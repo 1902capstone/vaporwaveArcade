@@ -1,5 +1,12 @@
+/* eslint-disable no-use-before-define */
 import React, { Component } from "react";
-import {StyleSheet} from "react-native"
+import {StyleSheet, View, TouchableHighlight, Text} from "react-native"
+
+const LeaderBoardEntryScreen = require('./LeaderBoardEntryScreen')
+
+import { db } from "../src/config";
+let leaderBoardRef = db.ref("/Shooter")
+let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
 
 export default class PostGame1 extends Component {
   constructor() {
@@ -22,9 +29,11 @@ export default class PostGame1 extends Component {
   }
   render() {
 
-    const leaderBoardArray1 = this.state.leaderBoardArray[9].score || Infinity
-    if (leaderBoardArray1 < this.state.score) {
-      return <SceneLoader5 score={this.state.score} gameName="BallGame" />;
+    const leaderBoardArray1 = this.state.leaderBoardArray[9] || {}
+    
+    // if (leaderBoardArray1.score < this.state.score) {
+    if (2 < this.props.score) {
+      return <LeaderBoardEntryScreen score={this.state.score} gameName="BallGame" />;
     } else {
       return (
         <View>
@@ -40,7 +49,7 @@ export default class PostGame1 extends Component {
           <TouchableHighlight
             style={localStyles.buttons}
             underlayColor="#68a0ff"
-            onPress={() => this.resetGame()}
+            onPress={() => this.props.resetGame()}
           >
             <Text>PLAY AGAIN!</Text>
           </TouchableHighlight>
