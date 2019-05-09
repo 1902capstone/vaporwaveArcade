@@ -27,6 +27,7 @@ import {
 } from 'react-viro';
 
 
+
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
 const ARHelloWorld = require('./js/HelloWorldSceneAR');
@@ -41,7 +42,7 @@ const SceneLoader3 = require('./js/SceneLoader3')
 const SceneLoader4 = require('./js/SceneLoader4')
 const SceneLoader5 = require('./js/SceneLoader5')
 const LeaderBoard = require('./js/LeaderBoard')
-
+const MenuSceneLoader = require('./js/MenuSceneLoader')
 
 
 const MENU_STATES = {
@@ -94,76 +95,21 @@ export default class App extends Component {
   
   renderMenu() {
     return (
-      
-      <View style={localStyles.outer} >
-        <View style={localStyles.inner} >
-        <ImageBackground source={require('./assets/Images/background.png')} style={{width: '100%', height: '100%', alignItems: 'center'}}>
-          {/* BANNER IMAGE */}
-          <Text style={localStyles.titleText}>
-            Welcome to
-          </Text>
-          <Image source={require('./assets/Images/LOGO.png')}
-          style={localStyles.logo} />
-          
-          {/* SCENE 1 BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.GAME_1)}
-            underlayColor="#68a0ff" >
-            
-            <Text style={localStyles.buttonText}>Michael</Text>
-          </TouchableHighlight>
-          
-          {/* SCENE 2 BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.GAME_2)}
-            underlayColor="#68a0ff" >
-            <Text style={localStyles.buttonText}>Kitty Pool</Text>
-          </TouchableHighlight>
-
-          {/* SCENE 3 BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.GAME_3)}
-            underlayColor="#68a0ff" >
-            <Text style={localStyles.buttonText}>Shooter</Text>
-          </TouchableHighlight>
-
-          {/* SCENE 4 BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.GAME_4)}
-            underlayColor="#68a0ff" >
-
-            <Text style={localStyles.buttonText}>Armon's Test Scene</Text>
-            </TouchableHighlight>
-            
-          {/* Database BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.DATABASE)}
-            underlayColor="#68a0ff" >
-
-            <Text style={localStyles.buttonText}>Database</Text>
-            </TouchableHighlight>
-            
-             {/* LeaderBoard BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.LEADERBOARD)}
-            underlayColor="#68a0ff" >
-
-            <Text style={localStyles.buttonText}>LeaderBoard</Text>
-          </TouchableHighlight>
-          </ImageBackground>
-        </View>
-      </View>
+      <MenuSceneLoader 
+      propObj = {{
+        selectGame: this.selectGame,
+        MENU_STATES: MENU_STATES
+      }}
+      />
     )
   }
   
   
   
   selectGame(gameConstant) {
-    return () => {
-      this.setState({
-        menuState: gameConstant
-      })
-    }
+    this.setState({
+      menuState: gameConstant
+    })
   }
   
   
