@@ -163,15 +163,19 @@ export default class ShootScene extends Component {
       return;
     }
     
+    // this works
+    // if (this.sceneRef.current) {
+    //   this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
+    //     console.log(positions)
+    //     myPos = positions.forward;
+    //   })
+    //   // myPos = await this.sceneRef.current.getCameraOrientationAsync()
+    // }
+    
+    
     let myPos;
     
-    if (this.sceneRef.current) {
-      this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
-        console.log(positions)
-        myPos = positions.forward;
-      })
-      // myPos = await this.sceneRef.current.getCameraOrientationAsync()
-    }
+
     
     
     

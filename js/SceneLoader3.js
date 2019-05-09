@@ -47,6 +47,12 @@ export default class SceneLoader3 extends Component {
   }
   
   
+  componentWillUnmount() {
+    clearInterval(timerIntervalId)
+    timerIntervalId = 0;
+  }
+  
+  
   render() {
     switch (this.state.gameState) {
       case GAME_STATES.INTRODUCTION:
