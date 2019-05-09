@@ -230,6 +230,7 @@ var localStyles = StyleSheet.create({
   },
 });
 
+
 ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('../assets/Images/grid_bg.jpg'),
