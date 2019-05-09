@@ -99,11 +99,10 @@ export default class HelloWorldSceneAR extends Component {
           rotation={[0, 45, 0]}
           opacity={1}
           // onTap={this._onButtonTap}
-          // onTouch={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_1)}
-          onClick={() => console.log('test1')}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_1)}
           onGaze={this._onButtonGaze}
         />
-         <ViroButton
+          <ViroButton
           source={require('../assets/Images/smile1.jpg')}
           gazeSource={require('../assets/Images/smile2.jpg')}
           tapSource={require('../assets/Images/explode.jpg')}
@@ -112,8 +111,7 @@ export default class HelloWorldSceneAR extends Component {
           position={[-5.5, 0.0, -5.0]}
           rotation={[0, 45, 0]}
           // onTap={this._onButtonTap}
-          // onTouch={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_2)}
-          onClick={() => console.log('test2')}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_2)}
           onGaze={this._onButtonGaze}
         />
         <ViroButton
@@ -126,11 +124,10 @@ export default class HelloWorldSceneAR extends Component {
           rotation={[0, -45, 0]}
           opacity={1}
           // onTap={this._onButtonTap}
-          // onTouch={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_3)}
-          onClick={() => console.log('test3')}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_3)}
           onGaze={this._onButtonGaze}
         />
-         <ViroButton
+          <ViroButton
           source={require('../assets/Images/smile1.jpg')}
           gazeSource={require('../assets/Images/smile2.jpg')}
           tapSource={require('../assets/Images/explode.jpg')}
@@ -139,8 +136,7 @@ export default class HelloWorldSceneAR extends Component {
           position={[5.5, 0.0, -5.0]}
           rotation={[0, -45, 0]}
           // onTap={this._onButtonTap}
-          // onTouch={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_4)}}
-          onClick={() => console.log('test4')}
+          onClick={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_4)}}
           onGaze={this._onButtonGaze}
         />
         <ViroText

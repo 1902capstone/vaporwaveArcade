@@ -107,12 +107,9 @@ export default class App extends Component {
   
   
   selectGame(gameConstant) {
-    console.log(gameConstant);
-    return () => {
-      this.setState({
-        menuState: gameConstant
-      })
-    }
+    this.setState({
+      menuState: gameConstant
+    })
   }
   
   
