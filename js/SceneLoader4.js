@@ -13,7 +13,7 @@ import {
   TouchableHighlight,
 } from 'react-native';
 import SceneLoader5 from "./SceneLoader5"
-
+import PostGame1 from './PostGame1';
 import {
   ViroARSceneNavigator
 } from 'react-viro';
@@ -139,39 +139,40 @@ export default class SceneLoader4 extends Component {
   }
 
   renderPostGame() {
-    if (this.state.leaderBoardArray[9].score < this.state.score) {
-      return (
-        <SceneLoader5 score={this.state.score} gameName="BallGame" />
-      )
-    }
-    else{
-      return(
-        <View>  
-          <Text style={localStyles.losingText}>
-            Score: {this.state.score}
-          </Text>
-          <Text style={localStyles.losingText}>
-            Nice try. Play again?
-          </Text>
-          <TouchableHighlight style={localStyles.buttons}
-            underlayColor="#68a0ff"
-            onPress={this.props.propObj.returnToMenu}
-          >
-          <Text>
-            BACK TO MENU
-          </Text>
-          </TouchableHighlight>
-          <TouchableHighlight style={localStyles.buttons}
-            underlayColor="#68a0ff"
-            onPress={() => this.resetGame()}
-          >
-          <Text>
-            PLAY AGAIN!
-          </Text>
-          </TouchableHighlight>
-        </View>
-      )
-    }
+    return <PostGame1 returnToMenu={this.props.propObj.returnToMenu} />
+    // if (this.state.leaderBoardArray[9].score < this.state.score) {
+    //   return (
+    //     <SceneLoader5 score={this.state.score} gameName="BallGame" />
+    //   )
+    // }
+    // else{
+    //   return(
+    //     <View>  
+    //       <Text style={localStyles.losingText}>
+    //         Score: {this.state.score}
+    //       </Text>
+    //       <Text style={localStyles.losingText}>
+    //         Nice try. Play again?
+    //       </Text>
+    //       <TouchableHighlight style={localStyles.buttons}
+    //         underlayColor="#68a0ff"
+    //         onPress={this.props.propObj.returnToMenu}
+    //       >
+    //       <Text>
+    //         BACK TO MENU
+    //       </Text>
+    //       </TouchableHighlight>
+    //       <TouchableHighlight style={localStyles.buttons}
+    //         underlayColor="#68a0ff"
+    //         onPress={() => this.resetGame()}
+    //       >
+    //       <Text>
+    //         PLAY AGAIN!
+    //       </Text>
+    //       </TouchableHighlight>
+    //     </View>
+    //   )
+    // }
   }
   
   //
