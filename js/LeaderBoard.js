@@ -4,9 +4,11 @@ import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import LeaderBoardComponent from "./LeaderBoardComponent";
 import { db } from "../src/config";
 
+
 //collection of all the names
-let leaderBoardRef = db.ref("/leaderboards")
+let leaderBoardRef = db.ref("/Shooter")
 let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
+let fifthscore = ans[5]
 //we want the scores;
 
 export default class List extends Component {
@@ -17,8 +19,8 @@ export default class List extends Component {
         };
     }
     
-    componentDidMount() {
-      ans.on("value", snapshot => {
+    async componentDidMount() {
+      await ans.on("value", snapshot => {
             // console.log("leaderboard", leaderBoardRef);
             let data = snapshot.val();
             let score = Object.values(data);
@@ -27,6 +29,8 @@ export default class List extends Component {
   }
 
   render() {
+    console.log("ans", ans)
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Leaderboard</Text>

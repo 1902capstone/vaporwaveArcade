@@ -11,7 +11,7 @@ import {
 import { db } from "../src/config";
 
 let addName = info => {
-  db.ref("/leaderboards").push({
+  db.ref("/Shooter").push({
     name: info.name,
     score: info.score
   });
@@ -22,10 +22,9 @@ export default class SceneLoader5 extends Component {
     super();
     this.state = {
       name: "",
-      score: 0
     };
     this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleScoreChange = this.handleScoreChange.bind(this);
+    // this.handleScoreChange = this.handleScoreChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -34,24 +33,27 @@ export default class SceneLoader5 extends Component {
       name: e.nativeEvent.text
     });
   };
-  handleScoreChange = e => {
-    this.setState({
-      score: Number(e.nativeEvent.text)
-    });
-  };
+  // handleScoreChange = e => {
+  //   this.setState({
+  //     score: Number(e.nativeEvent.text)
+  //   });
+  // };
   handleSubmit = () => {
-    addName({ name: this.state.name, score: this.state.score });
+    addName({ name: this.state.name, score: this.props.score });
 
     AlertIOS.alert("Item saved successfully");
+    
   };
 
   render() {
     return (
       <View style={styles.main}>
-        <Text style={styles.title}>Add user</Text>
+        <Text style={styles.title}>Your Score: {this.props.score}</Text>
+        <Text style={styles.title}>CONGRATULATIONS! HIGH SCORE!</Text>
+        <Text style={styles.title}>Enter your name:</Text>
         <TextInput style={styles.itemInput} onChange={this.handleNameChange} />
 
-        <TextInput style={styles.itemInput} onChange={this.handleScoreChange} />
+        {/* <TextInput style={styles.itemInput} onChange={this.handleScoreChange} /> */}
 
         <TouchableHighlight
           style={styles.button}
@@ -63,7 +65,7 @@ export default class SceneLoader5 extends Component {
         <TouchableHighlight
           style={styles.button}
           underlayColor={"#68a0ff"}
-          onPress={this.props.propObj.returnToMenu}
+          //onPress={this.props.propObj.returnToMenu}
         >
           <Text style={styles.buttonText}>BACK</Text>
         </TouchableHighlight>

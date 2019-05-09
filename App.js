@@ -213,7 +213,7 @@ export default class App extends Component {
     return (
       <SceneLoader5 
       propObj = {{
-        returnToMenu: this.returnToMenu,
+        returnToMenu: this.returnToMenu
       }}
       />
     )
