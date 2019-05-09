@@ -57,7 +57,7 @@ export default class CatScene extends Component {
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
-          <ViroAnimatedImage
+          {/* <ViroAnimatedImage
             height={9}
             width={9}
             loop={true}
@@ -72,9 +72,9 @@ export default class CatScene extends Component {
             loop={true}
             opacity={0.7}
             rotation={[0, 25, 0]}
-            position={[-1, -2, -9]}
+            position={[-1, -1.6, -9]}
             source={require('../assets/Images/sun.gif')}
-          />
+          /> */}
           <ViroNode
             onClick={this._saveCat}
           >

@@ -139,12 +139,13 @@ export default class HelloWorldSceneAR extends Component {
           position={[0, 0, -1]}
           style={localStyles.helloWorldTextStyle}
         />
-        <ViroBox
+        {/* <ViroBox
           position={[0, -0.5, -1]}
           scale={[0.3, 0.3, 0.1]}
           materials={['grid']}
           animation={{ name: 'rotate', run: true, loop: true }}
-        />
+        /> */}
+         
         <ViroAmbientLight color={'#aaaaaa'} />
         <ViroSpotLight
           innerAngle={5}
@@ -160,18 +161,16 @@ export default class HelloWorldSceneAR extends Component {
           onDrag={() => {}}
         >
           <Viro3DObject
-            animation={{ name: 'rotate', run: true, loop: true }}
-            source={require('./res/Skull.obj')}
-            opacity={0.9}
-            // resources={[
-            //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
-            //   require('./res/emoji_smile/emoji_smile_normal.png'),
-            //   require('./res/emoji_smile/emoji_smile_specular.png'),
-            // ]}
-            position={[-2, -2, -20]}
-            scale={[0.008, 0.008, 0.008]}
-            type="OBJ"
-          />
+              animation={{ name: 'catBob', run: true, loop: true }}
+              source={require('../assets/3DModels/venus/venus.obj')}
+              opacity={1}
+              position={[0, -0.5, -1]}
+               scale={[0.05, 0.05, 0.05]}
+              type="OBJ"
+              rotation={[-90, 0, 0]}
+              materials={['venus']}
+              physicsBody={{ type: 'Static' }}
+            />
         </ViroNode>
       </ViroARScene>
     );
@@ -225,9 +224,10 @@ var localStyles = StyleSheet.create({
 });
 
 ViroMaterials.createMaterials({
-  grid: {
-    diffuseTexture: require('./res/grid_bg.jpg'),
-  },
+  venus: {
+    diffuseTexture: require('../assets/3DModels/venus/statue.jpg'),
+    diffuseColor: 'red'
+  }
 });
 
 ViroAnimations.registerAnimations({
