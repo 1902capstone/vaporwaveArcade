@@ -69,16 +69,13 @@ export default class SceneLoader4 extends Component {
     return (
       <View style={localStyles.outer} >
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>{`Welcome to Ball Game!`}</Text>
-          <Text style={localStyles.text}>{`You have thirty seconds to catch as many balls as you can in the cup.`}</Text>
+          <Text style={localStyles.titleText}>Welcome to Ball Game!</Text>
+          <Text style={localStyles.text}>You have thirty seconds to catch as many balls as you can in the cup.</Text>
           <TouchableHighlight style={localStyles.buttons}
             onPress={this.startGame}
-            underlayColor={'#68a0ff'} >
+            underlayColor="#68a0ff" >
             <Text style={localStyles.buttonText}>Start Level</Text>
           </TouchableHighlight>
-          {/* <Text>
-            timer here
-          </Text> */}
         </View>
       </View>
     )
@@ -114,7 +111,6 @@ export default class SceneLoader4 extends Component {
             {this.state.timeLeft}
           </Text>
         </View>
-        {/* hceck time */}
         {this.checkTime()}
       </View>
     )

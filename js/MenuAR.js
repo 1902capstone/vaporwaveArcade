@@ -38,6 +38,8 @@ export default class HelloWorldSceneAR extends Component {
   }
 
   render() {
+    console.log(this.props.arSceneNavigator.viroAppProps)
+    
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         {/* <ViroFlexView
@@ -88,49 +90,53 @@ export default class HelloWorldSceneAR extends Component {
           />
         </ViroFlexView> */}
         <ViroButton
-          source={require('./res/smile1.jpg')}
-          gazeSource={require('./res/smile2.jpg')}
-          tapSource={require('./res/explode.jpg')}
+          source={require('../assets/Images/smile1.jpg')}
+          gazeSource={require('../assets/Images/smile2.jpg')}
+          tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[-2.0, 0.0, -10.0]}
           rotation={[0, 45, 0]}
           opacity={1}
-          onTap={this._onButtonTap}
+          // onTap={this._onButtonTap}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_1)}
           onGaze={this._onButtonGaze}
         />
-         <ViroButton
-          source={require('./res/smile1.jpg')}
-          gazeSource={require('./res/smile2.jpg')}
-          tapSource={require('./res/explode.jpg')}
+          <ViroButton
+          source={require('../assets/Images/smile1.jpg')}
+          gazeSource={require('../assets/Images/smile2.jpg')}
+          tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[-5.5, 0.0, -5.0]}
           rotation={[0, 45, 0]}
-          onTap={this._onButtonTap}
+          // onTap={this._onButtonTap}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_2)}
           onGaze={this._onButtonGaze}
         />
         <ViroButton
-          source={require('./res/smile1.jpg')}
-          gazeSource={require('./res/smile2.jpg')}
-          tapSource={require('./res/explode.jpg')}
+          source={require('../assets/Images/smile1.jpg')}
+          gazeSource={require('../assets/Images/smile2.jpg')}
+          tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[2.0, 0.0, -10.0]}
           rotation={[0, -45, 0]}
           opacity={1}
-          onTap={this._onButtonTap}
+          // onTap={this._onButtonTap}
+          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_3)}
           onGaze={this._onButtonGaze}
         />
-         <ViroButton
-          source={require('./res/smile1.jpg')}
-          gazeSource={require('./res/smile2.jpg')}
-          tapSource={require('./res/explode.jpg')}
+          <ViroButton
+          source={require('../assets/Images/smile1.jpg')}
+          gazeSource={require('../assets/Images/smile2.jpg')}
+          tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[5.5, 0.0, -5.0]}
           rotation={[0, -45, 0]}
-          onTap={this._onButtonTap}
+          // onTap={this._onButtonTap}
+          onClick={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_4)}}
           onGaze={this._onButtonGaze}
         />
         <ViroText
@@ -161,7 +167,7 @@ export default class HelloWorldSceneAR extends Component {
         >
           <Viro3DObject
             animation={{ name: 'rotate', run: true, loop: true }}
-            source={require('./res/Skull.obj')}
+            source={require('../assets/3DModels/skull/Skull.obj')}
             opacity={0.9}
             // resources={[
             //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
@@ -224,9 +230,10 @@ var localStyles = StyleSheet.create({
   },
 });
 
+
 ViroMaterials.createMaterials({
   grid: {
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
 });
 
