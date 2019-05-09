@@ -74,6 +74,7 @@ export default class App extends Component {
     })
   }
   
+  
   render() {
     switch (this.state.menuState) {
       case MENU_STATES.DEFAULT:
@@ -89,7 +90,7 @@ export default class App extends Component {
       case MENU_STATES.DATABASE:
         return this.renderDatabase();
       case MENU_STATES.LEADERBOARD:
-        return this.renderLeaderBorad();
+        return this.renderLeaderBoard();
     }
   }
   
@@ -151,6 +152,7 @@ export default class App extends Component {
       <SceneLoader4 
       propObj = {{
         returnToMenu: this.returnToMenu,
+
       }}
       />
     )
@@ -160,11 +162,12 @@ export default class App extends Component {
       <SceneLoader5 
       propObj = {{
         returnToMenu: this.returnToMenu,
+
       }}
       />
     )
   }
-  renderLeaderBorad() {
+  renderLeaderBoard() {
     return (
       <LeaderBoard 
       propObj = {{
