@@ -36,7 +36,7 @@ let gameStarted = false;
 let sphereCount = 0;
 
 
-export default class JoshScene extends Component {
+export default class BallGameScene extends Component {
   constructor() {
     super();
 
@@ -117,7 +117,7 @@ export default class JoshScene extends Component {
       // between 1 and 12
       const randomRad = Math.floor(Math.random() * 0.3) + 0.2
       // between 0.2 and 0.5
-      
+  
       
       const x = <ViroSphere
         key={sphereTag}
@@ -359,4 +359,4 @@ ViroAnimations.registerAnimations({
   },
 });
 
-module.exports = JoshScene;
+module.exports = BallGameScene;

@@ -22,7 +22,7 @@ import {
 // import console = require('console');
 // import console = require('console');
 
-export default class ShootScene extends Component {
+export default class TitleScreen extends Component {
   constructor() {
     super();
 
@@ -34,10 +34,6 @@ export default class ShootScene extends Component {
     };
 
     // bind 'this' to functions
-    this._onInitialized = this._onInitialized.bind(this);
-    this._onButtonTap = this._onButtonTap.bind(this);
-    this._addBullet = this._addBullet.bind(this);
-    this._renderBullets = this._renderBullets.bind(this);
   }
 
   render() {
@@ -47,53 +43,18 @@ export default class ShootScene extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
       >
-        <ViroARPlaneSelector
-          minHeight={0.01}
-          minWidth={0.01}
-          onPlaneSelected={() => {
-            this.setState({ pauseUpdates: true });
-          }}
-          pauseUpdates={this.state.pauseUpdates}
-        >
-          <Viro3DObject
-            animation={{ name: 'sway', run: true, loop: true }}
-            source={require('../assets/3DModels/heart/Love.obj')}
-            resources={[require('../assets/3DModels/heart/Love.mtl')]}
-            opacity={1}
-            position={[-2, -2, -20]}
-            scale={[0.08, 0.08, 0.08]}
-            type="OBJ"
-            materials={['pink']}
-            physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
-          />
-          <ViroText
-            text={currentScore.toString()}
-            scale={[0.5, 0.5, 0.5]}
-            position={[0, 0, -1]}
-            style={localStyles.helloWorldTextStyle}
-          />
-
+         
           <ViroARCamera>
             <ViroNode onClick={this._addBullet}>
-              <Viro3DObject
-                source={require('../assets/3DModels/zapper/zapper.obj')}
-                  resources={[
-                      require('../assets/3DModels/zapper/zapper.mtl')
-                    ]}
-                opacity={1}
-                rotation={[-15, 168, 0]}
-                position={[0, -0.5, -1]}
-                scale={[0.0025, 0.0025, 0.0025]}
-                materials={['gun']}
-                type="OBJ"
+              <ViroAnimatedImage
+                height={2}
+                width={2}
+                position={[0, 0, -3]}
+                rotation={[0, 0, 0]}
+                source={require('../assets/images/testingFace.gif')}
               />
-              {this._renderBullets()}
             </ViroNode>
           </ViroARCamera>
-        </ViroARPlaneSelector>
       </ViroARScene>
     );
   }
@@ -129,7 +90,7 @@ export default class ShootScene extends Component {
           radius={0.08}
           position={[0.15, -0.1, -1.5]}
           materials={['red']}
-          opacity={.4}
+          opacity={0.4}
           physicsBody={{
             type: 'Dynamic',
             mass: 1,
@@ -199,8 +160,8 @@ ViroMaterials.createMaterials({
   },
   gun: {
     // lightingModel: 'PBR',
-    diffuseTexture: require('../assets/3DModels/zapper/zapper_diff.jpg'),
-  }
+    diffuseTexture: require('../assets/3DModels/zapper/zapper_diff_NRM.jpg'),
+  },
 });
 
 ViroAnimations.registerAnimations({
@@ -220,18 +181,18 @@ ViroAnimations.registerAnimations({
     easing: 'Bounce',
     duration: 1000,
   },
-  moveRight: { properties: { positionX: '+=12' }, duration: 600 },
-  moveLeft: { properties: { positionX: '-=10' }, duration: 1000 },
+  moveRight: { properties: { positionX: '+=10' }, duration: 600 },
+  moveLeft: { properties: { positionX: '-=8' }, duration: 1000 },
   moveUpL: {
-    properties: { positionX: '-=12', positionY: '+=4' },
+    properties: { positionX: '-=10', positionY: '+=5' },
     duration: 1000,
   },
   moveDownR: {
-    properties: { positionX: '+=10', positionY: '-=4' },
+    properties: { positionX: '+=12', positionY: '-=4' },
     duration: 800,
   },
   moveUp: { properties: { positionY: '+=2' }, duration: 400 },
-  moveDown: { properties: { positionY: '-=2' }, duration: 500 },
+  moveDown: { properties: { positionY: '-=3' }, duration: 500 },
   forward: { properties: { positionZ: '+=7' }, duration: 200 },
   back: { properties: { positionZ: '-=7' }, duration: 200 },
 
@@ -241,14 +202,12 @@ ViroAnimations.registerAnimations({
       'moveDownR',
       'moveUp',
       'forward',
-      'moveLeft',
       'moveRight',
       'moveDown',
-      'moveRight',
       'moveUpL',
       'back',
     ],
   ],
 });
 
-module.exports = ShootScene;
+module.exports = TitleScreen;
