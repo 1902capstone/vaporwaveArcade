@@ -28,7 +28,7 @@ export default class PostGame1 extends Component {
   render() {
 
     const leaderBoardArray1 = this.state.leaderBoardArray[9] || {}
-    if (leaderBoardArray1.score < this.props.score) {
+    if (leaderBoardArray1.score < this.props.score || (this.state.leaderBoardArray.length < 10 && this.state.leaderBoardArray.length > 1)) {
       return <LeaderBoardEntryScreen returnToMenu={this.props.returnToMenu} goToLeaderBoard={this.props.goToLeaderBoard} score={this.props.score} gameName="BallGame" />;
     } else if (this.state.leaderBoardArray.length) {
       return (
