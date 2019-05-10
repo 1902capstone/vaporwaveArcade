@@ -11,7 +11,7 @@ import {
 import { db } from "../src/config";
 
 let addName = info => {
-  db.ref("/Shooter").push({
+  db.ref("/BallGame").push({
     name: info.name,
     score: info.score
   });
@@ -24,7 +24,6 @@ export default class LeaderBoardEntryScreen extends Component {
       name: "",
     };
     this.handleNameChange = this.handleNameChange.bind(this);
-    // this.handleScoreChange = this.handleScoreChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -33,11 +32,7 @@ export default class LeaderBoardEntryScreen extends Component {
       name: e.nativeEvent.text
     });
   };
-  // handleScoreChange = e => {
-  //   this.setState({
-  //     score: Number(e.nativeEvent.text)
-  //   });
-  // };
+
   handleSubmit = () => {
     addName({ name: this.state.name, score: this.props.score });
 
@@ -52,8 +47,6 @@ export default class LeaderBoardEntryScreen extends Component {
         <Text style={styles.title}>CONGRATULATIONS! HIGH SCORE!</Text>
         <Text style={styles.title}>Enter your name:</Text>
         <TextInput style={styles.itemInput} onChange={this.handleNameChange} />
-
-        {/* <TextInput style={styles.itemInput} onChange={this.handleScoreChange} /> */}
 
         <TouchableHighlight
           style={styles.button}

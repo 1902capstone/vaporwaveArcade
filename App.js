@@ -43,6 +43,7 @@ const SceneLoader3 = require('./js/SceneLoader3')
 const SceneLoader4 = require('./js/SceneLoader4')
 const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen')
 const LeaderBoard = require('./js/LeaderBoard')
+const LeaderBoard2 = require('./js/LeaderBoard2')
 const MenuSceneLoader = require('./js/MenuSceneLoader')
 
 
@@ -53,7 +54,8 @@ const MENU_STATES = {
   GAME_3: "GAME_3",
   GAME_4: "GAME_4",
   DATABASE: "DATABASE",
-  LEADERBOARD: "LEADERBOARD"
+  LEADERBOARD: "LEADERBOARD",
+  LEADERBOARD_2:"LEADERBOARD_2"
 }
 
 export default class App extends Component {
@@ -65,6 +67,7 @@ export default class App extends Component {
     this.returnToMenu = this.returnToMenu.bind(this);
     this.goToLeaderBoard = this.goToLeaderBoard.bind(this); 
     this.selectGame = this.selectGame.bind(this);
+    this.goToLeaderBoard2 = this.goToLeaderBoard2.bind(this)
   }
 
   
@@ -82,7 +85,11 @@ export default class App extends Component {
       menuState: MENU_STATES.LEADERBOARD
     })
   }
-  
+  goToLeaderBoard2 = () => {
+    this.setState({
+      menuState: MENU_STATES.LEADERBOARD_2
+    })
+  }
   
   render() {
     switch (this.state.menuState) {
@@ -100,6 +107,8 @@ export default class App extends Component {
         return this.renderDatabase();
       case MENU_STATES.LEADERBOARD:
         return this.renderLeaderBoard();
+      case MENU_STATES.LEADERBOARD_2:
+        return this.renderLeaderBoard2();
     }
   }
   
@@ -149,7 +158,8 @@ export default class App extends Component {
     return (
       <SceneLoader3 
       propObj = {{
-        returnToMenu: this.returnToMenu,
+          returnToMenu: this.returnToMenu,
+          goToLeaderBoard2: this.goToLeaderBoard2        
       }}
       />
     )
@@ -179,6 +189,15 @@ export default class App extends Component {
   renderLeaderBoard() {
     return (
       <LeaderBoard 
+      propObj = {{
+        returnToMenu: this.returnToMenu,
+      }}
+      />
+    )
+  }
+  renderLeaderBoard2() {
+    return (
+      <LeaderBoard2 
       propObj = {{
         returnToMenu: this.returnToMenu,
       }}
