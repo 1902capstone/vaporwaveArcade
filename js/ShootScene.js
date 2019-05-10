@@ -20,8 +20,7 @@ import {
   ViroSphere,
   ViroNode,
 } from 'react-viro';
-// import console = require('console');
-// import console = require('console');
+
 
 export default class ShootScene extends Component {
   constructor() {
