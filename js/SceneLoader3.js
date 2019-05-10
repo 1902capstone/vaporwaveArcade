@@ -32,6 +32,7 @@ export default class SceneLoader3 extends Component {
     this.checkTime = this.checkTime.bind(this);
     this.beginTimer = this.beginTimer.bind(this);
     this.decrementTime = this.decrementTime.bind(this);
+    this.resetGame = this.resetGame.bind(this)
   }
 
   render() {

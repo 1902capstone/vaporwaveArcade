@@ -5,7 +5,8 @@ import {
   TouchableHighlight,
   StyleSheet,
   TextInput,
-  AlertIOS
+  AlertIOS,
+  Alert
 } from "react-native";
 
 import { db } from "../src/config";
@@ -38,7 +39,7 @@ export default class LeaderBoardEntryScreen2 extends Component {
     handleSubmit = () => {
       addName({ name: this.state.name, score: this.props.score });
   
-      AlertIOS.alert("Item saved successfully");
+      Alert.alert("Item saved successfully");
       this.props.goToLeaderBoard()
     };
   
