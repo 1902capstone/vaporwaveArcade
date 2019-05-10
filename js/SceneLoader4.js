@@ -12,10 +12,13 @@ import {
   ImageBackground,
   TouchableHighlight,
 } from 'react-native';
-
+import SceneLoader5 from "./LeaderBoardEntryScreen"
+import PostGame1 from './PostGame1';
 import {
   ViroARSceneNavigator
 } from 'react-viro';
+import { db } from "../src/config";
+
 
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
@@ -32,6 +35,7 @@ const GAME_STATES = {
 
 let timerIntervalId;
 
+
 export default class SceneLoader4 extends Component {
   constructor() {
     super()
@@ -42,13 +46,13 @@ export default class SceneLoader4 extends Component {
       timeLeft: 25,
     }
     this.startGame = this.startGame.bind(this);
+    this.resetGame = this.resetGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
     this.incrementScore = this.incrementScore.bind(this);
     this.checkTime = this.checkTime.bind(this);
     this.beginTimer = this.beginTimer.bind(this);
     this.decrementTime = this.decrementTime.bind(this);
   }
-
 
   render() {
     switch (this.state.gameState) {
@@ -94,7 +98,6 @@ export default class SceneLoader4 extends Component {
             score: this.state.score,
             timer: this.state.timer,
             beginTimer: this.beginTimer,
-            
           }}
           
         />
@@ -117,13 +120,45 @@ export default class SceneLoader4 extends Component {
   }
 
   renderPostGame() {
-    return (
-      <View>
-        <Text style={localStyles.timerText}>
-          Game has ended you won i guess
-        </Text>
-      </View>
-    )
+    return <PostGame1 
+    returnToMenu={this.props.propObj.returnToMenu}
+    goToLeaderBoard={this.props.propObj.goToLeaderBoard}
+    score={this.state.score}
+    resetGame = {this.resetGame}
+    />
+    // if (this.state.leaderBoardArray[9].score < this.state.score) {
+    //   return (
+    //     <SceneLoader5 score={this.state.score} gameName="BallGame" />
+    //   )
+    // }
+    // else{
+    //   return(
+    //     <View>  
+    //       <Text style={localStyles.losingText}>
+    //         Score: {this.state.score}
+    //       </Text>
+    //       <Text style={localStyles.losingText}>
+    //         Nice try. Play again?
+    //       </Text>
+    //       <TouchableHighlight style={localStyles.buttons}
+    //         underlayColor="#68a0ff"
+    //         onPress={this.props.propObj.returnToMenu}
+    //       >
+    //       <Text>
+    //         BACK TO MENU
+    //       </Text>
+    //       </TouchableHighlight>
+    //       <TouchableHighlight style={localStyles.buttons}
+    //         underlayColor="#68a0ff"
+    //         onPress={() => this.resetGame()}
+    //       >
+    //       <Text>
+    //         PLAY AGAIN!
+    //       </Text>
+    //       </TouchableHighlight>
+    //     </View>
+    //   )
+    // }
   }
   
   //
@@ -139,6 +174,15 @@ export default class SceneLoader4 extends Component {
     })
   }
   
+  resetGame() {
+    this.setState({
+      score: 0,
+      timer: 25,
+      timeLeft: 25,
+      gameState: GAME_STATES.INTRODUCTION
+    })
+  }
+
   gameEnd() {
     
     this.setState({
@@ -230,6 +274,11 @@ var localStyles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontSize: 16
+  },
+  losingText: {
+    color: '#ff0000',
+    textAlign: 'center',
+    fontSize: 40
   },
   timerText: {
     color: '#ff0000',

@@ -31,7 +31,7 @@ export default class ShootScene extends Component {
     this.state = {
       text: 'Initializing AR...',
       totalBullets: 0,
-      score: 0,
+      score: 0
     };
 
     // bind 'this' to functions
