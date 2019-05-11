@@ -17,7 +17,6 @@ import {
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
-const ARHelloWorld = require('./Game1Scene.js');
 const MenuAR = require('./MenuAR.js')
 
 
@@ -34,16 +33,6 @@ export default class MenuSceneLoader extends Component {
             ...this.props.propObj
           }}
         />
-        <View>
-          <TouchableHighlight style={localStyles.buttons}
-            underlayColor={'#68a0ff'}
-            onPress={this.props.propObj.returnToMenu}
-          >
-            <Text>
-              BACK
-        </Text>
-          </TouchableHighlight>
-        </View>
       </View>
     )
   }
