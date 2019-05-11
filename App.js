@@ -38,9 +38,9 @@ const ARHelloWorld = require('./js/HelloWorldSceneAR');
 // const Game4Component = require('./js/Game4')
 
 const SceneLoader1 = require('./js/SceneLoader1')
-const SceneLoader2 = require('./js/SceneLoader2')
-const SceneLoader3 = require('./js/SceneLoader3')
-const SceneLoader4 = require('./js/SceneLoader4')
+const KittyPoolSceneLoader = require('./js/KittyPoolSceneLoader')
+const HeartbreakerSceneLoader = require('./js/HeartbreakerSceneLoader')
+const BallGameSceneLoader = require('./js/BallGameSceneLoader')
 const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen')
 const LeaderBoard = require('./js/LeaderBoard')
 const LeaderBoard2 = require('./js/LeaderBoard2')
@@ -145,7 +145,7 @@ export default class App extends Component {
   
   renderGame2() {
     return (
-      <SceneLoader2 
+      <KittyPoolSceneLoader 
       propObj = {{
         returnToMenu: this.returnToMenu,
       }}
@@ -156,7 +156,7 @@ export default class App extends Component {
   
   renderGame3() {
     return (
-      <SceneLoader3 
+      <HeartbreakerSceneLoader 
       propObj = {{
           returnToMenu: this.returnToMenu,
           goToLeaderBoard2: this.goToLeaderBoard2        
@@ -168,7 +168,7 @@ export default class App extends Component {
   
   renderGame4() {
     return (
-      <SceneLoader4 
+      <BallGameSceneLoader 
       propObj = {{
         returnToMenu: this.returnToMenu,
         goToLeaderBoard: this.goToLeaderBoard

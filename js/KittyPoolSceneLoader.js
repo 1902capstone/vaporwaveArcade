@@ -1,35 +1,40 @@
-/* eslint-disable default-case */
-/* eslint-disable no-useless-constructor */
-/* eslint-disable no-use-before-define */
-import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  Text,
+  View,
+  StyleSheet,
+  PixelRatio,
+  Image,
+  ImageBackground,
+  TouchableHighlight,
+} from 'react-native';
 
-import PostGame1 from "./PostGame1";
-import { ViroARSceneNavigator } from "react-viro";
+import { ViroARSceneNavigator } from 'react-viro';
 
-const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
+const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
-const BallGameScene = require("./BallGameScene");
+const CatScene = require('./CatScene');
+// const JoshScene = require('./JoshScene');
 
 const GAME_STATES = {
-  INTRODUCTION: "INTRODUCTION",
-  IN_GAME: "IN_GAME",
-  POST_GAME: "POST_GAME"
+  INTRODUCTION: 'INTRODUCTION',
+  IN_GAME: 'IN_GAME',
+  POST_GAME: 'POST_GAME',
 };
 
 let timerIntervalId;
 
-export default class SceneLoader4 extends Component {
+export default class KittyPoolSceneLoader extends Component {
   constructor() {
     super();
     this.state = {
       gameState: GAME_STATES.INTRODUCTION,
       score: 0,
       timer: 25,
-      timeLeft: 25
+      timeLeft: 35,
     };
     this.startGame = this.startGame.bind(this);
-    this.resetGame = this.resetGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
     this.incrementScore = this.incrementScore.bind(this);
     this.checkTime = this.checkTime.bind(this);
@@ -42,111 +47,103 @@ export default class SceneLoader4 extends Component {
       case GAME_STATES.INTRODUCTION:
         return this.renderIntro();
       case GAME_STATES.IN_GAME:
-        return this.renderBallGame();
+        return this.renderCatGame();
       case GAME_STATES.POST_GAME:
         return this.renderPostGame();
     }
   }
-
+  ////
   // render conditional states
 
   renderIntro() {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Welcome to Ball Game!</Text>
-          <Text style={localStyles.text}>
-            You have thirty seconds to catch as many balls as you can in the
-            cup.
-          </Text>
+          <Text style={localStyles.titleText}>{`Save the cats!`}</Text>
+          <Text
+            style={localStyles.text}
+          >{`You have thirty seconds to catch as many cats as you can in the cup.`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}
-            underlayColor="#68a0ff"
+            underlayColor={'#68a0ff'}
           >
             <Text style={localStyles.buttonText}>Start Level</Text>
           </TouchableHighlight>
+          {/* <Text>
+            timer here
+          </Text> */}
         </View>
       </View>
     );
   }
 
-  renderBallGame() {
+  renderCatGame() {
     return (
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
-          initialScene={{ scene: BallGameScene }}
+          initialScene={{ scene: CatScene }}
           viroAppProps={{
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
             score: this.state.score,
             timer: this.state.timer,
-            beginTimer: this.beginTimer
+            beginTimer: this.beginTimer,
           }}
         />
         <View>
           <TouchableHighlight
-            style={localStyles.buttons}
+            style={localStyles.hudButton}
             underlayColor="#68a0ff"
             onPress={this.props.propObj.returnToMenu}
           >
-            <Text>BACK</Text>
+            <Text style={localStyles.buttonText}>QUIT</Text>
           </TouchableHighlight>
-          <Text style={localStyles.timerText}>{this.state.timeLeft}</Text>
+          <Text style={localStyles.timerText}> Score:{this.state.score}</Text>
+          <Text style={localStyles.timerText}> Time Left:{this.state.timeLeft}</Text>
         </View>
-        {this.checkTime()}
       </View>
     );
   }
 
   renderPostGame() {
     return (
-      <PostGame1
-        returnToMenu={this.props.propObj.returnToMenu}
-        goToLeaderBoard={this.props.propObj.goToLeaderBoard}
-        score={this.state.score}
-        resetGame={this.resetGame}
-        gameName="BallGame"
-      />
+      <View>
+        <Text style={localStyles.loseText}>
+          Game has ended you won i guess
+        </Text>
+      </View>
     );
   }
 
+  ////
   // helper functions
 
   startGame() {
     this.setState({
-      gameState: GAME_STATES.IN_GAME
-    });
-  }
-
-  resetGame() {
-    this.setState({
-      score: 0,
-      timer: 25,
-      timeLeft: 25,
-      gameState: GAME_STATES.INTRODUCTION
+      gameState: GAME_STATES.IN_GAME,
     });
   }
 
   gameEnd() {
     this.setState({
       gameState: GAME_STATES.POST_GAME,
-      timeLeft: 25
+      timeLeft: 25,
     });
   }
 
   incrementScore(colliderTag) {
     // console.log(colliderTag);
     this.setState({
-      score: this.state.score + 1
+      score: this.state.score + 1,
     });
   }
 
   setTimer(timeDiff) {
     // calc new time
     this.setState({
-      timeLeft: this.state.timer - timeDiff
+      timeLeft: this.state.timer - timeDiff,
     });
   }
 
@@ -163,12 +160,11 @@ export default class SceneLoader4 extends Component {
   beginTimer() {
     timerIntervalId = setInterval(this.decrementTime, 1000);
   }
-
   decrementTime() {
     let currentTime = this.state.timeLeft;
     let newTime = currentTime - 1;
     this.setState({
-      timeLeft: newTime
+      timeLeft: newTime,
     });
   }
 }
@@ -176,60 +172,60 @@ export default class SceneLoader4 extends Component {
 var localStyles = StyleSheet.create({
   viroContainer: {
     flex: 1,
-    backgroundColor: "black"
+    backgroundColor: 'black',
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   arView: {
-    flex: 1
+    flex: 1,
   },
   topMenu: {
-    width: "100%",
-    position: "absolute",
+    width: '100%',
+    position: 'absolute',
     top: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   outer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "black"
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   inner: {
     flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "black"
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   titleText: {
     paddingTop: 30,
     paddingBottom: 20,
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 25
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 25,
   },
   text: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 16
-  },
-  losingText: {
-    color: "#ff0000",
-    textAlign: "center",
-    fontSize: 40
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16,
   },
   timerText: {
-    color: "#ff0000",
-    textAlign: "center",
-    fontSize: 16
+    color: '#ff0000',
+    textAlign: 'right',
+    fontSize: 25,
+  },
+  loseText: {
+    color: '#ff0000',
+    textAlign: 'right',
+    fontSize: 45,
   },
   buttonText: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 20
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20,
   },
   buttons: {
     height: 80,
@@ -238,10 +234,10 @@ var localStyles = StyleSheet.create({
     paddingBottom: 20,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "rgba(123,123,231,.4)",
+    backgroundColor: 'rgba(123,123,231,.4)',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "rgba(123,087,231,.4)"
+    borderColor: 'rgba(123,087,231,.4)',
   },
   exitButton: {
     height: 50,
@@ -250,11 +246,22 @@ var localStyles = StyleSheet.create({
     paddingBottom: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "#68a0cf",
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#fff"
+    borderColor: '#fff',
+  },
+  hudButton: {
+      height: 55,
+      width: 100,
+      paddingTop: 20,
+      marginTop: 10,
+      marginBottom: 10,
+      backgroundColor: 'rgba(123,123,231,.4)',
+      borderRadius: 10,
+      borderWidth: 1,
+      borderColor: 'rgba(123,087,231,.4)',
   }
 });
 
-module.exports = SceneLoader4;
+module.exports = KittyPoolSceneLoader;
