@@ -1,37 +1,11 @@
 import React, { Component } from "react";
-import {
-  View,
-  Text,
-  TouchableHighlight,
-  StyleSheet,
-  TextInput,
-  AlertIOS,
-  Alert
-} from "react-native";
-import Spinner from "react-native-loading-spinner-overlay";
+import { View, Text, StyleSheet } from "react-native";
 
-export default class BallGameLoading extends Component {
-  state = {
-    spinner: false
-  };
-
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        spinner: !this.state.spinner
-      });
-    }, 3000);
-  }
+export default class GameLoading extends Component {
   render() {
     return (
-        <View style={styles.main}>
-            <Text style={styles.title}>Your Score: {this.props.score}</Text>
-        <Spinner
-          visible={this.state.spinner}
-          textContent={"Loading...."}
-          textStyle={styles.buttonText}
-        />
-        {/* <Text style={styles.buttonText}>Loading for a shorttime...</Text> */}
+      <View style={styles.main}>
+        <Text style={styles.title}>Your Score: {this.props.score}</Text>
       </View>
     );
   }
@@ -79,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = BallGameLoading;
+module.exports = GameLoading;

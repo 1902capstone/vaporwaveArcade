@@ -127,7 +127,8 @@ export default class SceneLoader4 extends Component {
       score: 0,
       timer: 25,
       timeLeft: 25,
-      gameState: GAME_STATES.INTRODUCTION
+      gameState: GAME_STATES.INTRODUCTION,
+      showLeaderboard: false
     });
   }
 
