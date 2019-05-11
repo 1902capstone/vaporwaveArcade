@@ -25,7 +25,9 @@ import {
   ViroAnimations,
   ViroARTrackingTargets,
   ViroNode,
+  ViroAnimatedImage,
 } from 'react-viro';
+// import console = require('console');
 
 
 let spheres = [];
@@ -115,24 +117,26 @@ export default class BallGameScene extends Component {
       // between 1 and 12
       const randomRad = Math.floor(Math.random() * 0.3) + 0.2
       // between 0.2 and 0.5
-  
-      
-      const x = <ViroSphere
+      const randomColor = Math.floor(Math.random() * 3)
+      // 0, 1, 2, 3
+      const colors = ['pink', 'purple', 'red', 'white']
+
+
+      const x = (<ViroSphere
         key={sphereTag}
         viroTag={sphereTag}
-        heightSegmentCount={20}
-        widthSegmentCount={20}
+        heightSegmentCount={10}
+        widthSegmentCount={10}
         radius={randomRad}
         position={[randomXPos, randomYPos, -3]}
         height={1}
-        materials={['purple']}
+        materials={[colors[randomColor]]}
         physicsBody={{
           type: 'Dynamic',
           mass: randomMass,
           restitution: 0.999,
         }}
-
-      />
+      />)
       const SphereObj = {
         show: false,
         model: x,
@@ -142,32 +146,6 @@ export default class BallGameScene extends Component {
       spheres.push(SphereObj);
 
     }
-
-    // const sphereTag = `sphere-${sphereCount+1}`
-    // sphereCount++;
-    // const x = <ViroSphere
-    //   key = {sphereTag}
-    //   viroTag = {sphereTag}
-    //   heightSegmentCount={20}
-    //   widthSegmentCount={20}
-    //   radius={0.7}
-    //   position={[0.5, 1, -4]}
-    //   height={1}
-    //   materials={['purple']}
-    //   physicsBody={{
-    //     type: 'Dynamic',
-    //     mass: 8,
-    //     restitution: 0.999,
-    //   }}
-
-    // />
-    //   const SphereObj = {
-    //     show: false,
-    //     model: x,
-    //     num: spheres.length+1,
-    //     time: 0,
-    //   }
-    //   spheres.push(SphereObj);
 
     this.setState({
       spheres: this.state.spheres + spheresToLoad.length
@@ -246,13 +224,21 @@ export default class BallGameScene extends Component {
         {this.handleGameStart()}
         {this.renderSpheres()}
 
-
+        <ViroAnimatedImage
+            height={9}
+            width={9}
+            loop={true}
+            opacity={1}
+            rotation={[-30, 0, 0]}
+            position={[0, -3, -5]}
+            source={require('../assets/Images/purplegrid.gif')}
+          />
         <ViroQuad
           position={[0, -2, -4]}
           height={7}
           width={4}
           rotation={[-87, 0, 0]}
-          opacity={0.8}
+          opacity={0}
           physicsBody={{ type: 'Static', restitution: 1 }}
           materials={['red']}
         />
@@ -265,7 +251,21 @@ export default class BallGameScene extends Component {
 
 
         <ViroARCamera>
-          <Viro3DObject
+        <Viro3DObject
+            // animation={{ name: 'rotate', run: true, loop: true }}
+            source={require('../assets/3DModels/cup/CokeCup.obj')}
+            resources={[require('../assets/3DModels/cup/CokeCup.mtl')]}
+            opacity={1}
+            materials={['coke']}
+            position={[0, -1, -2]}
+            scale={[0.08, 0.08, 0.08]}
+            type="OBJ"
+            physicsBody={{ type: 'Static' }}
+            // onCollision={this.props.arSceneNavigator.viroAppProps.incrementScore}
+            onCollision={this.handleScore}
+            onClick={this.createSpheres}
+          />
+          {/* <Viro3DObject
             animation={{ name: 'rotate', run: true, loop: true }}
             source={require('../assets/3DModels/skull/Skull.obj')}
             opacity={0.2}
@@ -281,7 +281,7 @@ export default class BallGameScene extends Component {
             // onCollision={this.props.arSceneNavigator.viroAppProps.incrementScore}
             onCollision={this.handleScore}
             onClick={this.createSpheres}
-          />
+          /> */}
         </ViroARCamera>
       </ViroARPlaneSelector>
 
@@ -325,6 +325,9 @@ ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
+  coke: {
+    diffuseTexture: require('../assets/3DModels/cup/JazzTexture.jpg'),
+  },
   red: {
     diffuseColor: 'red',
   },
@@ -332,7 +335,15 @@ ViroMaterials.createMaterials({
     diffuseColor: 'lightblue',
   },
   purple: {
-    diffuseColor: 'lavender',
+    diffuseColor: 'purple',
+  },
+  pink: {
+    diffuseColor: 'pink',
+
+  },
+  white: {
+    diffuseColor: 'gray',
+
   },
   helloWorldTextStyle: {
 
