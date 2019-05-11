@@ -129,7 +129,7 @@ export default class CatScene extends Component {
             source={require('../assets/3DModels/beachball/BeachBall.obj')}
             resources={[require('../assets/3DModels/beachball/BeachBall.mtl')]}
             opacity={1}
-            position={[-0.9, -3.15, -4.5]}
+            position={[-1.3, -3.15, -4.5]}
             scale={[0.025, 0.025, 0.025]}
             type="OBJ"
             rotation={[-40, 0, 0]}
