@@ -20,9 +20,6 @@ import {
   ViroSphere,
   ViroNode,
 } from 'react-viro';
-import { variableDeclaration } from '@babel/types';
-// import console = require('console');
-// import console = require('console');
 
 export default class ShootScene extends Component {
   constructor() {
@@ -32,7 +29,7 @@ export default class ShootScene extends Component {
     this.state = {
       text: 'Initializing AR...',
       totalBullets: 0,
-      score: 0,
+      score: 0
     };
 
     // bind 'this' to functions
@@ -40,6 +37,7 @@ export default class ShootScene extends Component {
     this._onButtonTap = this._onButtonTap.bind(this);
     this._addBullet = this._addBullet.bind(this);
     this._renderBullets = this._renderBullets.bind(this);
+    this.handleGameStart = this.handleGameStart.bind(this);
   }
 
   render() {
@@ -53,6 +51,7 @@ export default class ShootScene extends Component {
           minHeight={0.01}
           minWidth={0.01}
           onPlaneSelected={() => {
+            this.handleGameStart()
             this.setState({ pauseUpdates: true });
           }}
           pauseUpdates={this.state.pauseUpdates}
@@ -184,6 +183,11 @@ export default class ShootScene extends Component {
     }
    console.log('bullets', this.state.totalBullets);
   }
+  
+  handleGameStart() {
+    this.props.arSceneNavigator.viroAppProps.beginTimer();
+  }
+  
 }
 
 var localStyles = StyleSheet.create({

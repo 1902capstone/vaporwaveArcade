@@ -25,6 +25,8 @@ import {
   ViroVRSceneNavigator,
   ViroARSceneNavigator
 } from 'react-viro';
+import { bindExpression } from '@babel/types';
+
 
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
@@ -39,9 +41,10 @@ const SceneLoader1 = require('./js/SceneLoader1')
 const SceneLoader2 = require('./js/SceneLoader2')
 const SceneLoader3 = require('./js/SceneLoader3')
 const SceneLoader4 = require('./js/SceneLoader4')
-const SceneLoader5 = require('./js/SceneLoader5')
+const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen')
 const LeaderBoard = require('./js/LeaderBoard')
-
+const LeaderBoard2 = require('./js/LeaderBoard2')
+const MenuSceneLoader = require('./js/MenuSceneLoader')
 
 
 const MENU_STATES = {
@@ -51,7 +54,8 @@ const MENU_STATES = {
   GAME_3: "GAME_3",
   GAME_4: "GAME_4",
   DATABASE: "DATABASE",
-  LEADERBOARD: "LEADERBOARD"
+  LEADERBOARD: "LEADERBOARD",
+  LEADERBOARD_2:"LEADERBOARD_2"
 }
 
 export default class App extends Component {
@@ -61,8 +65,11 @@ export default class App extends Component {
       menuState: MENU_STATES.DEFAULT
     }
     this.returnToMenu = this.returnToMenu.bind(this);
+    this.goToLeaderBoard = this.goToLeaderBoard.bind(this); 
     this.selectGame = this.selectGame.bind(this);
+    this.goToLeaderBoard2 = this.goToLeaderBoard2.bind(this)
   }
+
   
   
 
@@ -70,6 +77,17 @@ export default class App extends Component {
   returnToMenu = () => {
     this.setState({
       menuState: MENU_STATES.DEFAULT
+    })
+  }
+
+  goToLeaderBoard = () => {
+    this.setState({
+      menuState: MENU_STATES.LEADERBOARD
+    })
+  }
+  goToLeaderBoard2 = () => {
+    this.setState({
+      menuState: MENU_STATES.LEADERBOARD_2
     })
   }
   
@@ -88,82 +106,29 @@ export default class App extends Component {
       case MENU_STATES.DATABASE:
         return this.renderDatabase();
       case MENU_STATES.LEADERBOARD:
-        return this.renderLeaderBorad();
+        return this.renderLeaderBoard();
+      case MENU_STATES.LEADERBOARD_2:
+        return this.renderLeaderBoard2();
     }
   }
   
   renderMenu() {
     return (
-      
-      <View style={localStyles.outer} >
-        <View style={localStyles.inner} >
-        <ImageBackground source={require('./assets/Images/background.png')} style={{width: '100%', height: '100%', alignItems: 'center'}}>
-          {/* BANNER IMAGE */}
-          <Text style={localStyles.titleText}>
-            Welcome to
-          </Text>
-          <Image source={require('./assets/Images/LOGO.png')}
-          style={localStyles.logo} />
-          
-          {/* SCENE 1 BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.GAME_1)}
-            underlayColor="#68a0ff" >
-            
-            <Text style={localStyles.buttonText}>Michael</Text>
-          </TouchableHighlight>
-          
-          {/* SCENE 2 BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.GAME_2)}
-            underlayColor="#68a0ff" >
-            <Text style={localStyles.buttonText}>Kitty Pool</Text>
-          </TouchableHighlight>
-
-          {/* SCENE 3 BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.GAME_3)}
-            underlayColor="#68a0ff" >
-            <Text style={localStyles.buttonText}>Shooter</Text>
-          </TouchableHighlight>
-
-          {/* SCENE 4 BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.GAME_4)}
-            underlayColor="#68a0ff" >
-
-            <Text style={localStyles.buttonText}>Armon's Test Scene</Text>
-            </TouchableHighlight>
-            
-          {/* Database BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.DATABASE)}
-            underlayColor="#68a0ff" >
-
-            <Text style={localStyles.buttonText}>Database</Text>
-            </TouchableHighlight>
-            
-             {/* LeaderBoard BUTTON */}
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this.selectGame(MENU_STATES.LEADERBOARD)}
-            underlayColor="#68a0ff" >
-
-            <Text style={localStyles.buttonText}>LeaderBoard</Text>
-          </TouchableHighlight>
-          </ImageBackground>
-        </View>
-      </View>
+      <MenuSceneLoader 
+      propObj = {{
+        selectGame: this.selectGame,
+        MENU_STATES: MENU_STATES
+      }}
+      />
     )
   }
   
   
   
   selectGame(gameConstant) {
-    return () => {
-      this.setState({
-        menuState: gameConstant
-      })
-    }
+    this.setState({
+      menuState: gameConstant
+    })
   }
   
   
@@ -193,7 +158,8 @@ export default class App extends Component {
     return (
       <SceneLoader3 
       propObj = {{
-        returnToMenu: this.returnToMenu,
+          returnToMenu: this.returnToMenu,
+          goToLeaderBoard2: this.goToLeaderBoard2        
       }}
       />
     )
@@ -205,22 +171,33 @@ export default class App extends Component {
       <SceneLoader4 
       propObj = {{
         returnToMenu: this.returnToMenu,
+        goToLeaderBoard: this.goToLeaderBoard
       }}
       />
     )
   }
   renderDatabase() {
     return (
-      <SceneLoader5 
+      <LeaderBoardEntryScreen 
+      propObj = {{
+        returnToMenu: this.returnToMenu,
+
+      }}
+      />
+    )
+  }
+  renderLeaderBoard() {
+    return (
+      <LeaderBoard 
       propObj = {{
         returnToMenu: this.returnToMenu,
       }}
       />
     )
   }
-  renderLeaderBorad() {
+  renderLeaderBoard2() {
     return (
-      <LeaderBoard 
+      <LeaderBoard2 
       propObj = {{
         returnToMenu: this.returnToMenu,
       }}

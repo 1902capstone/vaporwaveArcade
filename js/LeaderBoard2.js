@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import LeaderBoardComponent2 from "./LeaderBoardComponent2";
 
-import LeaderBoardComponent from "./LeaderBoardComponent";
-import { db } from "../src/config";
-
-
+import { db } from '../src/config'
 //collection of all the names
-let leaderBoardRef = db.ref("/BallGame")
+let leaderBoardRef = db.ref("/Shooter")
 let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
 
 
 
-export default class List extends Component {
+export default class List2 extends Component {
     constructor() {
         super();
         this.state = {
@@ -32,7 +30,7 @@ export default class List extends Component {
       <View style={styles.container}>
         <Text style={styles.title}>Leaderboard</Text>
         {this.state.score.length > 0 ? (
-          <LeaderBoardComponent score={this.state.score} />
+          <LeaderBoardComponent2 score={this.state.score} />
         ) : (
           <Text>No user</Text>
         )}
@@ -86,4 +84,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = List;
+module.exports = List2;
