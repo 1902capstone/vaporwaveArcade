@@ -94,10 +94,6 @@ export default class BallGameScene extends Component {
     }
   }
 
-
-
-
-
   createSpheres() {
     const spheresToLoad = [];
     const numOfSpheres = Math.floor(Math.random() * 2) + 3
@@ -353,9 +349,9 @@ ViroARTrackingTargets.createTargets({
 ViroAnimations.registerAnimations({
   rotate: {
     properties: {
-      rotateY: '+=30',
+      rotateY: '+=60',
     },
-    duration: 25000, //.25 seconds
+    duration: 2500, //.25 seconds
   },
 });
 

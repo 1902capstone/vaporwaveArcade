@@ -20,6 +20,7 @@ import {
   ViroSphere,
   ViroNode,
 } from 'react-viro';
+import { variableDeclaration } from '@babel/types';
 // import console = require('console');
 // import console = require('console');
 
@@ -181,7 +182,7 @@ export default class ShootScene extends Component {
     if (this.state.totalBullets === 10) {
       this.setState({ totalBullets: 0 });
     }
-    console.log('bullets', this.state.totalBullets);
+   console.log('bullets', this.state.totalBullets);
   }
 }
 
