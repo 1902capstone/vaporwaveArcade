@@ -24,6 +24,7 @@ import {
 // import console = require('console');
 
 export default class TitleScreen extends Component {
+    
   constructor() {
     super();
 

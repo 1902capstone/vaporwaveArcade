@@ -30,7 +30,7 @@ export default class ShootScene extends Component {
     this.state = {
       text: 'Initializing AR...',
       totalBullets: 0,
-      score: 0
+      score: 0,
     };
 
     // bind 'this' to functions
@@ -39,6 +39,7 @@ export default class ShootScene extends Component {
     this._addBullet = this._addBullet.bind(this);
     this._renderBullets = this._renderBullets.bind(this);
     this.handleGameStart = this.handleGameStart.bind(this);
+    this.sceneRef  = React.createRef()
   }
 
   render() {
@@ -47,7 +48,9 @@ export default class ShootScene extends Component {
       <ViroARScene
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
+        ref={this.sceneRef}
       >
+      
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
@@ -127,6 +130,7 @@ export default class ShootScene extends Component {
                 type="OBJ"
               />
               {this._renderBullets()}
+              
             </ViroNode>
           </ViroARCamera>
         </ViroARPlaneSelector>
@@ -153,7 +157,28 @@ export default class ShootScene extends Component {
       buttonStateTag: 'onTap',
     });
   }
+  
   _renderBullets() {
+    if (!this.sceneRef.currnt) {
+      return;
+    }
+    
+    // this works
+    // if (this.sceneRef.current) {
+    //   this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
+    //     console.log(positions)
+    //     myPos = positions.forward;
+    //   })
+    //   // myPos = await this.sceneRef.current.getCameraOrientationAsync()
+    // }
+    
+    
+    let myPos;
+    
+
+    
+    
+    
     var bang = [];
     for (var i = 0; i < this.state.totalBullets; i++) {
       var bulletKey = 'BulletTag_' + i;
@@ -169,8 +194,9 @@ export default class ShootScene extends Component {
           physicsBody={{
             type: 'Dynamic',
             mass: 1,
+            force: {value: [0, 0, -30]}
           }}
-          animation={{ name: 'shoot', run: true, loop: true }}
+          // animation={{ name: 'shoot', run: true, loop: true }}
         />
       );
     }
@@ -182,7 +208,7 @@ export default class ShootScene extends Component {
     if (this.state.totalBullets === 10) {
       this.setState({ totalBullets: 0 });
     }
-    console.log('bullets', this.state.totalBullets);
+    // console.log('bullets', this.state.totalBullets);
   }
   
   handleGameStart() {
