@@ -21,7 +21,6 @@ import {
   ViroNode,
 } from 'react-viro';
 
-
 export default class ShootScene extends Component {
   constructor() {
     super();
@@ -182,7 +181,7 @@ export default class ShootScene extends Component {
     if (this.state.totalBullets === 10) {
       this.setState({ totalBullets: 0 });
     }
-    console.log('bullets', this.state.totalBullets);
+   console.log('bullets', this.state.totalBullets);
   }
   
   handleGameStart() {
