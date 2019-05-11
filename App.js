@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-use-before-define */
 /* eslint-disable default-case */
 /**
@@ -55,7 +56,8 @@ const MENU_STATES = {
   GAME_4: "GAME_4",
   DATABASE: "DATABASE",
   LEADERBOARD: "LEADERBOARD",
-  LEADERBOARD_2:"LEADERBOARD_2"
+  LEADERBOARD_2:"LEADERBOARD_2",
+  LOADING: "LOADING"
 }
 
 export default class App extends Component {
@@ -68,6 +70,7 @@ export default class App extends Component {
     this.goToLeaderBoard = this.goToLeaderBoard.bind(this); 
     this.selectGame = this.selectGame.bind(this);
     this.goToLeaderBoard2 = this.goToLeaderBoard2.bind(this)
+    this.renderLoadScreen = this.renderLoadScreen.bind(this);
   }
 
   
@@ -76,7 +79,7 @@ export default class App extends Component {
   
   returnToMenu = () => {
     this.setState({
-      menuState: MENU_STATES.DEFAULT
+      menuState: MENU_STATES.LOADING
     })
   }
 
@@ -109,6 +112,8 @@ export default class App extends Component {
         return this.renderLeaderBoard();
       case MENU_STATES.LEADERBOARD_2:
         return this.renderLeaderBoard2();
+      case MENU_STATES.LOADING:
+        return this.renderLoadScreen();
     }
   }
   
@@ -204,6 +209,23 @@ export default class App extends Component {
       />
     )
   }
+  
+  renderLoadScreen() {
+    setTimeout(()=>{
+      this.setState({
+        menuState: MENU_STATES.DEFAULT
+      })
+    }, 250)
+    return(
+      <View>
+        <Text>
+          Loading...
+        </Text>
+      </View>
+    )
+    
+  }
+  
   
 }
 
