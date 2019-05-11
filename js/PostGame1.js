@@ -1,10 +1,13 @@
 /* eslint-disable no-use-before-define */
 import React, { Component } from "react";
-import {StyleSheet, View, TouchableHighlight, Text} from "react-native"
+import { StyleSheet, View, TouchableHighlight, Text } from "react-native"
+import Spinner from 'react-native-loading-spinner-overlay'
 
 const LeaderBoardEntryScreen = require('./LeaderBoardEntryScreen')
 
 import { db } from "../src/config";
+import BallGameLoading from "./BallGameLoading";
+// import console = require("console");
 let leaderBoardRef = db.ref("/BallGame")
 let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
 
@@ -12,8 +15,9 @@ export default class PostGame1 extends Component {
   constructor() {
     super();
     this.state = {
-      leaderBoardArray: []
+      leaderBoardArray: [],
     };
+    this.renderPostGame = this.renderPostGame.bind(this)
   }
   async componentDidMount() {
     await ans.on("value", snapshot => {
@@ -22,43 +26,61 @@ export default class PostGame1 extends Component {
       const leaderBoardArray = unsortedArray.sort(function(a, b) {
         return b.score - a.score;
       });
-      this.setState({ leaderBoardArray });
+      this.setState({
+        leaderBoardArray,
+      });
     });
   }
+  renderPostGame() {
+//  setInterval(function(){<Text>I'm here</Text>},3000)
+    return <LeaderBoardEntryScreen returnToMenu={this.props.returnToMenu} goToLeaderBoard={this.props.goToLeaderBoard} score={this.props.score} gameName="BallGame" />;  
+
+} 
   render() {
 
     const leaderBoardArray1 = this.state.leaderBoardArray[9] || {}
     if (leaderBoardArray1.score < this.props.score || (this.state.leaderBoardArray.length < 10 && this.state.leaderBoardArray.length > 1)) {
-      return <LeaderBoardEntryScreen returnToMenu={this.props.returnToMenu} goToLeaderBoard={this.props.goToLeaderBoard} score={this.props.score} gameName="BallGame" />;
+      return (
+        this.props.showLeaderboard ? this.renderPostGame() : <BallGameLoading score={this.props.score} />
+      )
+
+
     } else if (this.state.leaderBoardArray.length) {
       return (
-        <View style={localStyles.main}>
-          <Text style={localStyles.title}>Score: {this.props.score}</Text>
-          <Text style={localStyles.title}>Nice try. Play again?</Text>
-          <TouchableHighlight
-            style={localStyles.button}
-            underlayColor="#68a0ff"
-            onPress={this.props.returnToMenu}
-          >
-            <Text style={localStyles.buttonText}>BACK TO MENU</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={localStyles.button}
-            underlayColor="#68a0ff"
-            onPress={() => this.props.resetGame()}
-          >
-            <Text  style={localStyles.buttonText}>PLAY AGAIN!</Text>
-          </TouchableHighlight>
-        </View>
+        <View>{this.props.showLeaderboard ?
+           
+          (<View style={localStyles.main}>
+            <Text style={localStyles.title}>Score: {this.props.score}</Text>
+            <Text style={localStyles.title}>Nice try. Play again?</Text>
+            <TouchableHighlight
+              style={localStyles.button}
+              underlayColor="#68a0ff"
+              onPress={this.props.returnToMenu}
+            >
+              <Text style={localStyles.buttonText}>BACK TO MENU</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={localStyles.button}
+              underlayColor="#68a0ff"
+              onPress={() => this.props.resetGame()}
+            >
+              <Text style={localStyles.buttonText}>PLAY AGAIN!</Text>
+            </TouchableHighlight>
+          </View>) : <Text> LOADING! </Text>} </View>
       );
     }
     else {
       return (
-        <Text style={localStyles.buttonText}>Loading</Text>
+      
+        <BallGameLoading score={this.props.score} />
+
       )
     }
   }
 }
+
+
+
 
 var localStyles = StyleSheet.create({
     losingText: {
