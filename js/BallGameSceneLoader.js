@@ -1,23 +1,25 @@
-/* eslint-disable no-use-before-define */
 /* eslint-disable default-case */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable no-use-before-define */
 import React, { Component } from "react";
 import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
 
+import PostGame1 from "./PostGame1";
 import { ViroARSceneNavigator } from "react-viro";
-import PostGame2 from "./PostGame2";
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
-const ShootScene = require("./ShootScene");
+const BallGameScene = require("./BallGameScene");
 
 const GAME_STATES = {
   INTRODUCTION: "INTRODUCTION",
-  RENDER_GAME: "RENDER_GAME",
+  IN_GAME: "IN_GAME",
   POST_GAME: "POST_GAME"
 };
+
 let timerIntervalId;
 
-export default class SceneLoader3 extends Component {
+export default class BallGameSceneLoader extends Component {
   constructor() {
     super();
     this.state = {
@@ -26,35 +28,37 @@ export default class SceneLoader3 extends Component {
       timer: 25,
       timeLeft: 25
     };
-    this.incrementScore = this.incrementScore.bind(this);
     this.startGame = this.startGame.bind(this);
+    this.resetGame = this.resetGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
+    this.incrementScore = this.incrementScore.bind(this);
     this.checkTime = this.checkTime.bind(this);
     this.beginTimer = this.beginTimer.bind(this);
     this.decrementTime = this.decrementTime.bind(this);
-    this.resetGame = this.resetGame.bind(this)
   }
 
   render() {
     switch (this.state.gameState) {
       case GAME_STATES.INTRODUCTION:
         return this.renderIntro();
-      case GAME_STATES.RENDER_GAME:
-        return this.renderShootScene();
+      case GAME_STATES.IN_GAME:
+        return this.renderBallGame();
       case GAME_STATES.POST_GAME:
         return this.renderPostGame();
     }
   }
 
-  // You have twenty-five seconds to grab as many cats from the water as you can. Simply tap a cat to save it!
+  // render conditional states
+
   renderIntro() {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Welcome to Heartbreaker!</Text>
-          <Text
-            style={localStyles.text}
-          >{`Shoot the hearts for points! \n Tap to shoot.`}</Text>
+          <Text style={localStyles.titleText}>Welcome to Ball Game!</Text>
+          <Text style={localStyles.text}>
+            You have thirty seconds to catch as many balls as you can in the
+            cup.
+          </Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}
@@ -67,16 +71,17 @@ export default class SceneLoader3 extends Component {
     );
   }
 
-  renderShootScene() {
+  renderBallGame() {
     return (
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
-          initialScene={{ scene: ShootScene }}
+          initialScene={{ scene: BallGameScene }}
           viroAppProps={{
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
             score: this.state.score,
+            timer: this.state.timer,
             beginTimer: this.beginTimer
           }}
         />
@@ -97,27 +102,24 @@ export default class SceneLoader3 extends Component {
 
   renderPostGame() {
     return (
-      <PostGame2
+      <PostGame1
         returnToMenu={this.props.propObj.returnToMenu}
-        goToLeaderBoard={this.props.propObj.goToLeaderBoard2}
+        goToLeaderBoard={this.props.propObj.goToLeaderBoard}
         score={this.state.score}
         resetGame={this.resetGame}
+        gameName="BallGame"
       />
     );
   }
 
+  // helper functions
+
   startGame() {
     this.setState({
-      gameState: GAME_STATES.RENDER_GAME
+      gameState: GAME_STATES.IN_GAME
     });
   }
 
-  gameEnd() {
-    this.setState({
-      gameState: GAME_STATES.POST_GAME,
-      timeLeft: 25
-    });
-  }
   resetGame() {
     this.setState({
       score: 0,
@@ -127,8 +129,15 @@ export default class SceneLoader3 extends Component {
     });
   }
 
-  incrementScore() {
-    console.log("BANG");
+  gameEnd() {
+    this.setState({
+      gameState: GAME_STATES.POST_GAME,
+      timeLeft: 25
+    });
+  }
+
+  incrementScore(colliderTag) {
+    // console.log(colliderTag);
     this.setState({
       score: this.state.score + 1
     });
@@ -207,6 +216,11 @@ var localStyles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16
   },
+  losingText: {
+    color: "#ff0000",
+    textAlign: "center",
+    fontSize: 40
+  },
   timerText: {
     color: "#ff0000",
     textAlign: "center",
@@ -243,4 +257,4 @@ var localStyles = StyleSheet.create({
   }
 });
 
-module.exports = SceneLoader3;
+module.exports = BallGameSceneLoader;
