@@ -28,7 +28,7 @@ export default class List2 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Leaderboard</Text>
+        <Text style={styles.title}>Shooter Leaderboard</Text>
         {this.state.score.length > 0 ? (
           <LeaderBoardComponent2 score={this.state.score} />
         ) : (
