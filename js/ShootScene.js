@@ -199,7 +199,7 @@ export default class ShootScene extends Component {
             type: 'Dynamic',
             mass: 1,
             // force: {value: [this.state.cameraAngle[0] * 50, this.state.cameraAngle[1] * 50, this.state.cameraAngle[2] * 50]}
-            velocity: [this.state.cameraAngle[0] * 80, this.state.cameraAngle[1] * 80, this.state.cameraAngle[2] * 80]
+            velocity: [this.state.cameraAngle[0] * 130, this.state.cameraAngle[1] * 130, this.state.cameraAngle[2] * 130]
           }}
         />
       );
