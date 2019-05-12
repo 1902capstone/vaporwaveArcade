@@ -103,7 +103,7 @@ export default class ShootScene extends Component {
             materials={['blue']}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
+              this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
           <Viro3DObject
@@ -117,7 +117,7 @@ export default class ShootScene extends Component {
             materials={['teal']}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
+              this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
           <ViroText
