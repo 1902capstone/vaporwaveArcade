@@ -167,7 +167,7 @@ export default class HelloWorldSceneAR extends Component {
   
             ]}
             rotation={[0,0,0]}
-            position={[-0, -2, -2]}
+            position={[-0, -1.8, -2]}
             scale={[0.025, 0.025, 0.025]}
             materials={['venus']}
             type="OBJ"
