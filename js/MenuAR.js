@@ -1,4 +1,3 @@
-
 'use strict';
 
 import React, { Component } from 'react';
@@ -21,7 +20,11 @@ import {
   ViroARPlaneSelector,
   ViroAnimations,
   ViroNode,
+  ViroSphere,
 } from 'react-viro';
+
+let spheresToLoad = [];
+let sphereCount = 0;
 
 export default class HelloWorldSceneAR extends Component {
   constructor() {
@@ -30,65 +33,22 @@ export default class HelloWorldSceneAR extends Component {
     // Set initial state here
     this.state = {
       text: 'Initializing AR...',
+      spheres: 0,
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this._onButtonTap = this._onButtonTap.bind(this);
+    this._onGazeMakeBalls = this._onGazeMakeBalls.bind(this);
+    this._renderGazeBall = this._renderGazeBall.bind(this);
   }
 
   render() {
-    console.log(this.props.arSceneNavigator.viroAppProps)
-    
+    console.log(this.props.arSceneNavigator.viroAppProps);
+
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        {/* <ViroFlexView
-          style={{ flexDirection: 'row', padding: 0.1 }}
-          width={10.0}
-          height={5.0}
-          position={[-2.0, 0.0, -10.0]}
-          rotation={[0, 45, 0]}
-        >
-          <ViroImage
-            source={require('./res/smile1.jpg')}
-            style={{ flex: 0.5 }}
-          />
-          <ViroImage
-            source={require('./res/smile2.jpg')}
-            style={{ flex: 0.5 }}
-            opacity={0.5}
-            onClick={this._onButtonTap}
-          />
-          <ViroQuad
-            // source={require('./res/press.jpg')}
-            source={require('./res/smile2.jpg')}
-            // tapSource={require('./res/explode.jpg')}
-            position={[1, 3, -5]}
-            height={2}
-            width={3}
-            opacity={0.5}
-            onClick={this._onButtonTap}
-            onGaze={this._onButtonGaze}
-          />
-        </ViroFlexView> */}
-        {/* <ViroFlexView
-          style={{ flexDirection: 'row', padding: 0.1 }}
-          width={10.0}
-          height={5.0}
-          position={[5.0, 0.0, -10.0]}
-          rotation={[0, -45, 0]}
-        >
-          <ViroImage
-            source={require('./res/smile1.jpg')}
-            style={{ flex: 0.5 }}
-          />
-          <ViroImage
-            source={require('./res/smile2.jpg')}
-            style={{ flex: 0.5 }}
-            opacity={0.5}
-            onClick={this._onButtonTap}
-          />
-        </ViroFlexView> */}
+        {/* UNUSED BUTTON */}
         <ViroButton
           source={require('../assets/Images/smile1.jpg')}
           gazeSource={require('../assets/Images/smile2.jpg')}
@@ -99,11 +59,16 @@ export default class HelloWorldSceneAR extends Component {
           rotation={[0, 45, 0]}
           opacity={1}
           // onTap={this._onButtonTap}
-          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_1)}
+          onClick={() =>
+            this.props.arSceneNavigator.viroAppProps.selectGame(
+              this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_1
+            )
+          }
           onGaze={this._onButtonGaze}
         />
-          <ViroButton
-          source={require('../assets/Images/smile1.jpg')}
+        {/* CAT GAME */}
+        <ViroButton
+          source={require('../assets/Images/pool.gif')}
           gazeSource={require('../assets/Images/smile2.jpg')}
           tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
@@ -111,9 +76,14 @@ export default class HelloWorldSceneAR extends Component {
           position={[-5.5, 0.0, -5.0]}
           rotation={[0, 45, 0]}
           // onTap={this._onButtonTap}
-          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_2)}
+          onClick={() =>
+            this.props.arSceneNavigator.viroAppProps.selectGame(
+              this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_2
+            )
+          }
           onGaze={this._onButtonGaze}
         />
+        {/* SHOOTER */}
         <ViroButton
           source={require('../assets/Images/smile1.jpg')}
           gazeSource={require('../assets/Images/smile2.jpg')}
@@ -124,11 +94,16 @@ export default class HelloWorldSceneAR extends Component {
           rotation={[0, -45, 0]}
           opacity={1}
           // onTap={this._onButtonTap}
-          onClick={() => this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_3)}
+          onClick={() =>
+            this.props.arSceneNavigator.viroAppProps.selectGame(
+              this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_3
+            )
+          }
           onGaze={this._onButtonGaze}
         />
-          <ViroButton
-          source={require('../assets/Images/smile1.jpg')}
+        {/* BALL GAME */}
+        <ViroButton
+          source={require('../assets/Images/purplegrid.gif')}
           gazeSource={require('../assets/Images/smile2.jpg')}
           tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
@@ -136,13 +111,19 @@ export default class HelloWorldSceneAR extends Component {
           position={[5.5, 0.0, -5.0]}
           rotation={[0, -45, 0]}
           // onTap={this._onButtonTap}
-          onClick={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_4)}}
-          onGaze={this._onButtonGaze}
+          onClick={() => {
+            this.props.arSceneNavigator.viroAppProps.selectGame(
+              this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_4
+            );
+          }}
+          onGaze={this._onGazeMakeBalls()}
         />
+        {this._renderGazeBall()}
         <ViroText
           text={this.state.text}
           scale={[0.5, 0.5, 0.5]}
           position={[0, 0, -1]}
+          extrusionDepth={8}
           style={localStyles.helloWorldTextStyle}
         />
         <ViroAmbientLight color={'#aaaaaa'} />
@@ -162,13 +143,10 @@ export default class HelloWorldSceneAR extends Component {
           <Viro3DObject
             animation={{ name: 'venusBob', run: true, loop: true }}
             source={require('../assets/3DModels/venus/venus.obj')}
-            resources={[
-              require('../assets/3DModels/venus/venus.mtl'),
-  
-            ]}
-            rotation={[0,0,0]}
+            resources={[require('../assets/3DModels/venus/venus.mtl')]}
+            rotation={[-90, 0, 0]}
             position={[-0, -1.8, -2]}
-            scale={[0.025, 0.025, 0.025]}
+            scale={[0.012, 0.012, 0.012]}
             materials={['venus']}
             type="OBJ"
           />
@@ -195,13 +173,59 @@ export default class HelloWorldSceneAR extends Component {
       buttonStateTag: 'onTap',
     });
   }
+  _onGazeMakeBalls() {
+    console.log('is this working?');
+    sphereCount++;
+    const sphere1 = (
+      <ViroSphere
+        heightSegmentCount={10}
+        widthSegmentCount={10}
+        key={sphereCount}
+        radius={5}
+        position={[2, 0, -20]}
+        height={1}
+        materials={['white']}
+        physicsBody={{
+          type: 'Dynamic',
+          mass: 3,
+          restitution: 0.999,
+        }}
+      />
+    );
+    sphereCount++;
+    const sphere2 = (
+      <ViroSphere
+        heightSegmentCount={10}
+        widthSegmentCount={10}
+        key={sphereCount}
+        radius={5}
+        position={[3, 0, -20]}
+        height={1}
+        materials={['red']}
+        physicsBody={{
+          type: 'Dynamic',
+          mass: 3,
+          restitution: 0.999,
+        }}
+      />
+    );
+    spheresToLoad.push(sphere1)
+    spheresToLoad.push(sphere2)
+    console.log('spheres', spheresToLoad)
+  }
+
+  _renderGazeBall() {
+    let holder = [...spheresToLoad]
+    spheresToLoad = [];
+    return holder
+  }
 }
 
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
     fontFamily: 'Arial',
     fontSize: 20,
-    color: '#ffffff',
+    color: 'teal',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
@@ -224,14 +248,29 @@ var localStyles = StyleSheet.create({
   },
 });
 
-
 ViroMaterials.createMaterials({
   grid: {
     diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   venus: {
-    diffuseColor: 'lightpink'
-  }
+    diffuseColor: 'lightpink',
+    diffuseTexture: require('../assets/3DModels/venus/statue.jpg'),
+  },
+  red: {
+    diffuseColor: 'red',
+  },
+  blue: {
+    diffuseColor: 'lightblue',
+  },
+  purple: {
+    diffuseColor: 'purple',
+  },
+  pink: {
+    diffuseColor: 'pink',
+  },
+  white: {
+    diffuseColor: 'gray',
+  },
 });
 
 ViroAnimations.registerAnimations({
@@ -244,21 +283,20 @@ ViroAnimations.registerAnimations({
   venusUp: {
     properties: {
       rotateY: '+=30',
-      positionY: '+=.3'
+      positionY: '+=.3',
     },
-    duration: 1000, //.25 seconds
+    duration: 1200, //.25 seconds
     // easing: 'bounce'
-
   },
   venusDown: {
     properties: {
       rotateY: '+=30',
-      positionY: '-=.3'
+      positionY: '-=.3',
     },
-    duration: 1000, //.25 seconds
+    duration: 1200, //.25 seconds
     // easing: 'bounce'
   },
-  venusBob: [['venusUp', 'venusDown']]
+  venusBob: [['venusUp', 'venusDown']],
 });
 
 module.exports = HelloWorldSceneAR;
