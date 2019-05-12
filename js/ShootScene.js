@@ -219,34 +219,24 @@ export default class ShootScene extends Component {
     }
     // console.log('bullets', this.state.totalBullets);
   }
-  
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
     this.beginCameraUpdates()
   }
-  
   beginCameraUpdates() {
     if (!cameraCheckIntervalId) {
-      
       cameraCheckIntervalId = setInterval(()=> {
         this.updateCamera()
       }, 100)
-      
     }
   }
-  
   async updateCamera() {
-    
     let myPos = await this.sceneRef.current.getCameraOrientationAsync()
     // console.log(myPos.forward);
     this.setState({
       cameraAngle: myPos.forward
     })
-    
   }
-  
-  
-  
 }
 
 var localStyles = StyleSheet.create({

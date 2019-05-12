@@ -123,7 +123,7 @@ export default class HelloWorldSceneAR extends Component {
           text={this.state.text}
           scale={[0.5, 0.5, 0.5]}
           position={[0, 0, -1]}
-          extrusionDepth={8}
+          extrusionDepth={4 }
           style={localStyles.helloWorldTextStyle}
         />
         <ViroAmbientLight color={'#aaaaaa'} />
@@ -144,8 +144,8 @@ export default class HelloWorldSceneAR extends Component {
             animation={{ name: 'venusBob', run: true, loop: true }}
             source={require('../assets/3DModels/venus/venus.obj')}
             resources={[require('../assets/3DModels/venus/venus.mtl')]}
-            rotation={[-90, 0, 0]}
-            position={[-0, -1.8, -2]}
+            rotation={[-90, -60, 0]}
+            position={[-0, -1.7, -2]}
             scale={[0.012, 0.012, 0.012]}
             materials={['venus']}
             type="OBJ"
@@ -181,9 +181,9 @@ export default class HelloWorldSceneAR extends Component {
         heightSegmentCount={10}
         widthSegmentCount={10}
         key={sphereCount}
-        radius={5}
-        position={[2, 0, -20]}
-        height={1}
+        radius={2}
+        position={[18, 0, -20]}
+        height={.3}
         materials={['white']}
         physicsBody={{
           type: 'Dynamic',
@@ -198,9 +198,9 @@ export default class HelloWorldSceneAR extends Component {
         heightSegmentCount={10}
         widthSegmentCount={10}
         key={sphereCount}
-        radius={5}
-        position={[3, 0, -20]}
-        height={1}
+        radius={2}
+        position={[17, 0, -20]}
+        height={.3}
         materials={['red']}
         physicsBody={{
           type: 'Dynamic',
@@ -211,7 +211,7 @@ export default class HelloWorldSceneAR extends Component {
     );
     spheresToLoad.push(sphere1)
     spheresToLoad.push(sphere2)
-    console.log('spheres', spheresToLoad)
+    console.log('spheres', sphereCount)
   }
 
   _renderGazeBall() {
@@ -253,7 +253,7 @@ ViroMaterials.createMaterials({
     diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   venus: {
-    diffuseColor: 'lightpink',
+    diffuseColor: 'pink',
     diffuseTexture: require('../assets/3DModels/venus/statue.jpg'),
   },
   red: {
@@ -280,7 +280,7 @@ ViroAnimations.registerAnimations({
     },
     duration: 600, //.25 seconds
   },
-  venusUp: {
+  venusUpR: {
     properties: {
       rotateY: '+=30',
       positionY: '+=.3',
@@ -288,7 +288,7 @@ ViroAnimations.registerAnimations({
     duration: 1200, //.25 seconds
     // easing: 'bounce'
   },
-  venusDown: {
+  venusDownR: {
     properties: {
       rotateY: '+=30',
       positionY: '-=.3',
@@ -296,7 +296,23 @@ ViroAnimations.registerAnimations({
     duration: 1200, //.25 seconds
     // easing: 'bounce'
   },
-  venusBob: [['venusUp', 'venusDown']],
+  venusUpL: {
+    properties: {
+      rotateY: '-=30',
+      positionY: '+=.3',
+    },
+    duration: 1200, //.25 seconds
+    // easing: 'bounce'
+  },
+  venusDownL: {
+    properties: {
+      rotateY: '-=30',
+      positionY: '-=.3',
+    },
+    duration: 1200, //.25 seconds
+    // easing: 'bounce'
+  },
+  venusBob: [['venusUpR', 'venusDownR', 'venusUpR', 'venusDownR', 'venusUpL', 'venusDownL', 'venusUpL', 'venusDownL']],
 });
 
 module.exports = HelloWorldSceneAR;

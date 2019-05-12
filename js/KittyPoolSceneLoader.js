@@ -59,10 +59,10 @@ export default class KittyPoolSceneLoader extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>{`Save the cats!`}</Text>
+          <Text style={localStyles.titleText}>{`Kitty Pool`}</Text>
           <Text
             style={localStyles.text}
-          >{`You have thirty seconds to catch as many cats as you can in the cup.`}</Text>
+          >{`You have thirty seconds to catch as many cats as you can!  Tap the cats to rescue them.`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}

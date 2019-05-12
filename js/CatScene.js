@@ -104,14 +104,14 @@ export default class CatScene extends Component {
           />
           <ViroNode onClick={this._saveCat}>
             {this._renderCats()}
-            <ViroText  text={this.state.catText}
-            scale={[0.5, 0.5, 0.5]}
-            position={[0, -1, -1]}
-            style={localStyles.scoreStyle}
-            extrusionDepth={2} 
-            outerStroke={{type:"DropShadow", width:2, color:'#444444'}}
+            <ViroText
+              text={this.state.catText}
+              scale={[0.5, 0.5, 0.5]}
+              position={[0, -1, -1]}
+              style={localStyles.scoreStyle}
+              extrusionDepth={2}
+              outerStroke={{ type: 'DropShadow', width: 2, color: '#444444' }}
             />
-
           </ViroNode>
           <Viro3DObject
             source={require('../assets/3DModels/plant/palmtree.obj')}
@@ -122,6 +122,17 @@ export default class CatScene extends Component {
             type="OBJ"
             rotation={[0, 0, 0]}
             materials={['palm']}
+            // physicsBody={{ type: 'Static' }}
+          />
+          <Viro3DObject
+            animation={{ name: 'birdPath', run: true, loop: true }}
+            source={require('../assets/3DModels/birds/bird.obj')}
+            opacity={1}
+            position={[2, 0, -6]}
+            scale={[0.05, 0.05, 0.05]}
+            type="OBJ"
+            rotation={[0, 180, 0]}
+            materials={['red']}
             // physicsBody={{ type: 'Static' }}
           />
           <Viro3DObject
@@ -227,7 +238,7 @@ export default class CatScene extends Component {
       };
       cats.push(CatObj);
       console.log('these are cats', cats);
-      console.log('state cats', this.state.cats)
+      console.log('state cats', this.state.cats);
     }
     this.setState({
       cats: this.state.cats + catsToLoad.length,
@@ -320,7 +331,7 @@ ViroMaterials.createMaterials({
   },
   beachball: {
     diffuseTexture: require('../assets/3DModels/beachball/BeachBall.jpg'),
-  }
+  },
 });
 
 ViroARTrackingTargets.createTargets({
@@ -368,6 +379,23 @@ ViroAnimations.registerAnimations({
     duration: 1200,
   },
   raft: [['raftL', 'raftR']],
+  bird1: {
+    properties: { positionX: '+=.3', rotateY: '+=45' },
+    duration: 1200,
+  },
+  bird2: {
+    properties: { positionX: '+=.3', rotateY: '+=45' },
+    duration: 1200,
+  },
+  bird3: {
+    properties: { positionX: '+=.3', rotateY: '+=45' },
+    duration: 1200,
+  },
+  bird4: {
+    properties: { positionX: '+=.3', positionZ: '+=1', rotateY: '+=45' },
+    duration: 1200,
+  },
+  birdPath: [['bird1', 'bird2', 'bird3', 'bird4']]
 });
 
 module.exports = CatScene;
