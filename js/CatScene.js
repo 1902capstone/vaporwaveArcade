@@ -102,7 +102,9 @@ export default class CatScene extends Component {
             position={[-1, -1.4, -9]}
             source={require('../assets/Images/sun.gif')}
           />
-          <ViroNode onClick={this._saveCat}>
+          <ViroNode 
+          // onClick={this._saveCat}
+          >
             {this._renderCats()}
             <ViroText
               text={this.state.catText}
@@ -189,10 +191,22 @@ export default class CatScene extends Component {
       buttonStateTag: 'onTap',
     });
   }
-  _saveCat() {
+  _saveCat(a, b, c) {
+    console.log('==========')
+    console.log(a);
+    console.log(b);
+    console.log(c)
+    // let indexOfCat = cats.findIndex(elt => {
+    //   return elt.model.props.viroTag === colliderTag;
+    // });
+    let indexOfCat = 0;
+    cats.splice(indexOfCat, 1);
+    
+    this.setState({
+      cats: this.state.cats - 1,
+    });
+    
     this.props.arSceneNavigator.viroAppProps.incrementScore();
-    // console.log('saved a cat', this.state.cats); //cats is already empty
-    // console.log('last cat', cats)
     this.setState({ catText: 'saved' });
   }
   _createCats() {
@@ -217,6 +231,7 @@ export default class CatScene extends Component {
             interruptable: true,
             onFinish: this._deadCat,
           }}
+          onClick={(pos) => this._saveCat('test', pos)}
           source={require('../assets/3DModels/cat/cat.obj')}
           opacity={1}
           key={catTag}
@@ -237,8 +252,8 @@ export default class CatScene extends Component {
         time: 0,
       };
       cats.push(CatObj);
-      console.log('these are cats', cats);
-      console.log('state cats', this.state.cats);
+      // console.log('these are cats', cats);
+      // console.log('state cats', this.state.cats);
     }
     this.setState({
       cats: this.state.cats + catsToLoad.length,
@@ -254,7 +269,7 @@ export default class CatScene extends Component {
   handleGameStart() {
     if (!catSpawnIntervalId && this.state.startTime) {
       this.props.arSceneNavigator.viroAppProps.beginTimer();
-      catSpawnIntervalId = setInterval(this._createCats, 3000);
+      catSpawnIntervalId = setInterval(this._createCats, 600);
     }
   }
 }

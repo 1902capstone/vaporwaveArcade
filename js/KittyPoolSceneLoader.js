@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -26,8 +27,8 @@ const GAME_STATES = {
 
 let timerIntervalId;
 
-const DURATION = 500 ;
- 
+const DURATION = 500;
+
 const PATTERN = [1000, 2000, 3000, 4000];
 export default class KittyPoolSceneLoader extends Component {
   constructor() {
@@ -56,8 +57,6 @@ export default class KittyPoolSceneLoader extends Component {
         return this.renderPostGame();
     }
   }
-  ////
-  // render conditional states
 
   renderIntro() {
     return (
@@ -121,30 +120,28 @@ export default class KittyPoolSceneLoader extends Component {
       </View>
     );
   }
-
-  ////
-  // helper functions
-
+  
+  
   startGame() {
     this.setState({
       gameState: GAME_STATES.IN_GAME,
     });
   }
-
+  
   gameEnd() {
     this.setState({
       gameState: GAME_STATES.POST_GAME,
       timeLeft: 10,
     });
   }
-
+  
   incrementScore(colliderTag) {
     Vibration.vibrate(DURATION)  
     this.setState({
       score: this.state.score + 1,
     });
   }
-
+  
   setTimer(timeDiff) {
     // calc new time
     this.setState({
