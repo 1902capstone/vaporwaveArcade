@@ -31,8 +31,8 @@ export default class KittyPoolSceneLoader extends Component {
     this.state = {
       gameState: GAME_STATES.INTRODUCTION,
       score: 0,
-      timer: 25,
-      timeLeft: 35,
+      timer: 10,
+      timeLeft: 10,
     };
     this.startGame = this.startGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
@@ -108,6 +108,7 @@ export default class KittyPoolSceneLoader extends Component {
   }
 
   renderPostGame() {
+    console.log(this.state);
     return (
       <View>
         <Text style={localStyles.loseText}>
@@ -129,7 +130,7 @@ export default class KittyPoolSceneLoader extends Component {
   gameEnd() {
     this.setState({
       gameState: GAME_STATES.POST_GAME,
-      timeLeft: 25,
+      timeLeft: 10,
     });
   }
 
@@ -160,13 +161,26 @@ export default class KittyPoolSceneLoader extends Component {
   beginTimer() {
     timerIntervalId = setInterval(this.decrementTime, 1000);
   }
+  
+  
   decrementTime() {
     let currentTime = this.state.timeLeft;
     let newTime = currentTime - 1;
     this.setState({
       timeLeft: newTime,
     });
+    
+    if (this.state.timeLeft <= 0) {
+      this.handleGameOver()
+    }
   }
+  
+  handleGameOver() {
+    clearInterval(timerIntervalId);
+    this.gameEnd();
+  }
+  
+  
 }
 
 var localStyles = StyleSheet.create({
