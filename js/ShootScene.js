@@ -21,6 +21,7 @@ import {
   ViroNode,
 } from 'react-viro';
 
+let cameraCheckIntervalId;
 
 export default class ShootScene extends Component {
   constructor() {
@@ -31,6 +32,8 @@ export default class ShootScene extends Component {
       text: 'Initializing AR...',
       totalBullets: 0,
       score: 0,
+      cameraAngle: [0, 0, -1],
+      
     };
 
     // bind 'this' to functions
@@ -40,8 +43,15 @@ export default class ShootScene extends Component {
     this._renderBullets = this._renderBullets.bind(this);
     this.handleGameStart = this.handleGameStart.bind(this);
     this.sceneRef  = React.createRef()
+    this.updateCamera = this.updateCamera.bind(this);
+    this.beginCameraUpdates = this.beginCameraUpdates.bind(this);
   }
 
+  componentWillUnmount() {
+    clearInterval(cameraCheckIntervalId);
+  }
+  
+  
   render() {
     const currentScore = this.props.arSceneNavigator.viroAppProps.score;
     return (
@@ -123,8 +133,8 @@ export default class ShootScene extends Component {
                 source={require('../assets/3DModels/zapper/zapper.obj')}
                 resources={[require('../assets/3DModels/zapper/zapper.mtl')]}
                 opacity={1}
-                rotation={[-15, 168, 0]}
-                position={[0, -0.5, -1]}
+                rotation={[-15, 172, -5]}
+                position={[-0.14, -0.5, -1]}
                 scale={[0.0025, 0.0025, 0.0025]}
                 materials={['gun']}
                 type="OBJ"
@@ -159,50 +169,49 @@ export default class ShootScene extends Component {
   }
   
   _renderBullets() {
-    // if (!this.sceneRef.currnt) {
-    //   return;
-    // }
+    if (!this.sceneRef.current) {
+      return;
+    }
     
-    // this works
+    // let myDirection;
     // if (this.sceneRef.current) {
-    //   this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
-    //     console.log(positions)
-    //     myPos = positions.forward;
+    // this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
+    //     myDirection = positions.forward;
+    //     console.log(myDirection) // [0] [1] [2]
     //   })
-    //   // myPos = await this.sceneRef.current.getCameraOrientationAsync()
     // }
-    
-    
-    let myPos;
-    
-
-    
     
     
     var bang = [];
     for (var i = 0; i < this.state.totalBullets; i++) {
+      
       var bulletKey = 'BulletTag_' + i;
       bang.push(
         <ViroSphere
           heightSegmentCount={5}
           widthSegmentCount={5}
           key={bulletKey}
-          radius={0.08}
-          position={[0.15, -0.1, -1.5]}
+          radius={0.17}
+          position={[-0.14, -0.5, -4]}
           materials={['red']}
-          opacity={0.4}
+          opacity={1}
           physicsBody={{
             type: 'Dynamic',
             mass: 1,
-            // force: {value: [0, 0, -30]}
+            // force: {value: [this.state.cameraAngle[0] * 50, this.state.cameraAngle[1] * 50, this.state.cameraAngle[2] * 50]}
+            velocity: [this.state.cameraAngle[0] * 130, this.state.cameraAngle[1] * 130, this.state.cameraAngle[2] * 130]
           }}
-          animation={{ name: 'shoot', run: true, loop: true }}
         />
       );
     }
+    // console.log(bang);
+    
     return bang;
   }
+  
+  
   _addBullet() {
+    
     this.setState({ totalBullets: this.state.totalBullets + 1 });
     // change this to slow down rapidfire and empty state
     if (this.state.totalBullets === 10) {
@@ -213,7 +222,30 @@ export default class ShootScene extends Component {
   
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
+    this.beginCameraUpdates()
   }
+  
+  beginCameraUpdates() {
+    if (!cameraCheckIntervalId) {
+      
+      cameraCheckIntervalId = setInterval(()=> {
+        this.updateCamera()
+      }, 100)
+      
+    }
+  }
+  
+  async updateCamera() {
+    
+    let myPos = await this.sceneRef.current.getCameraOrientationAsync()
+    // console.log(myPos.forward);
+    this.setState({
+      cameraAngle: myPos.forward
+    })
+    
+  }
+  
+  
   
 }
 

@@ -46,7 +46,14 @@ export default class HeartbreakerSceneLoader extends Component {
     this.resetGame = this.resetGame.bind(this)
     this.decrementScore = this.decrementScore.bind(this)
   }
-
+  
+  
+  componentWillUnmount() {
+    clearInterval(timerIntervalId)
+    timerIntervalId = 0;
+  }
+  
+  
   render() {
     switch (this.state.gameState) {
       case GAME_STATES.INTRODUCTION:
@@ -176,7 +183,7 @@ showLeaderboard:false
 
   checkTime() {
     const timeLeft = this.state.timeLeft;
-    console.log(timeLeft);
+    // console.log(timeLeft);
     if (timeLeft <= 0) {
       clearInterval(timerIntervalId);
       this.gameEnd();
