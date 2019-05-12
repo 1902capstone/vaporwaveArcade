@@ -22,8 +22,14 @@ import {
   ViroQuad,
   ViroNode,
 } from 'react-viro';
-// import console = require('console');
-// import console = require('console');
+// import { CustomConsole } from '@jest/console';
+
+let cats = [];
+let timerStarted = false;
+let timerIntervalId;
+let catSpawnIntervalId;
+let gameStarted = false;
+let catCount = 0;
 
 export default class CatScene extends Component {
   constructor() {
@@ -32,18 +38,36 @@ export default class CatScene extends Component {
     // Set initial state here
     this.state = {
       text: 'Initializing AR...',
-      totalHoles: 0,
+      score: 0,
+      cats: 0,
+      startTime: 0,
+      catText: '',
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this._onButtonTap = this._onButtonTap.bind(this);
-    this._addHole = this._addHole.bind(this);
-    this._renderHoles = this._renderHoles.bind(this);
+    this._saveCat = this._saveCat.bind(this);
+    // this._deadCat = this._deadCat.bind(this);
+    this._renderCats = this._renderCats.bind(this);
+    this._createCats = this._createCats.bind(this);
+    this.handleGameStart = this.handleGameStart.bind(this);
+  }
+
+  componentDidMount() {
+    gameStarted = false;
+    cats = [];
+  }
+
+  componentWillUnmount() {
+    clearInterval(catSpawnIntervalId);
+    catSpawnIntervalId = 0;
+    cats = [];
   }
 
   render() {
     const currentScore = this.props.arSceneNavigator.viroAppProps.score;
+    const timer = this.props.arSceneNavigator.viroAppProps.timer;
     return (
       <ViroARScene
         onTrackingUpdated={this._onInitialized}
@@ -54,18 +78,12 @@ export default class CatScene extends Component {
           minWidth={0.01}
           maxPlanes={1}
           onPlaneSelected={() => {
-            this.setState({ pauseUpdates: true });
+            // this.handleGameStart();
+            this.setState({ pauseUpdates: true, startTime: Date.now() });
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
-          <Viro3DObject
-            source={require('../assets/3DModels/palmTree/PalmTree.vrx')}
-            position={[-1, -40, -2]}
-            materials={['palm']}
-            type="VRX"
-            scale={[2, 2, 2]}
-          /><ViroAmbientLight color="#FFFFFF" />
-
+          {this.handleGameStart()}
           <ViroAnimatedImage
             height={9}
             width={9}
@@ -73,127 +91,69 @@ export default class CatScene extends Component {
             opacity={1}
             rotation={[-90, 0, 0]}
             position={[0, -3, -4]}
-            source={require('../assets/Images/poolcircle.gif')}
+            source={require('../assets/Images/poolcircle2.gif')}
           />
+          <ViroAnimatedImage
+            height={7}
+            width={10}
+            loop={true}
+            opacity={0.8}
+            rotation={[0, 25, 0]}
+            position={[-1, -1.4, -9]}
+            source={require('../assets/Images/sun.gif')}
+          />
+          <ViroNode onClick={this._saveCat}>
+            {this._renderCats()}
+            <ViroText  text={this.state.catText}
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, -1, -1]}
+            style={localStyles.scoreStyle}
+            extrusionDepth={2} 
+            outerStroke={{type:"DropShadow", width:2, color:'#444444'}}
+            />
+
+          </ViroNode>
           <Viro3DObject
-            animation={{ name: 'bob', run: true, loop: true }}
-            source={require('../assets/3DModels/raft/raft.obj')}
+            source={require('../assets/3DModels/plant/palmtree.obj')}
+            resources={[require('../assets/3DModels/plant/palmtree.mtl')]}
             opacity={1}
-            position={[-1.7, -3.22, -3]}
-            scale={[0.005, 0.005, 0.005]}
+            position={[2, -4, -5]}
+            scale={[0.1, 0.1, 0.1]}
             type="OBJ"
-            rotation={[-90, 0, 0]}
-            materials={['redRaft']}
-            physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
+            rotation={[0, 0, 0]}
+            materials={['palm']}
+            // physicsBody={{ type: 'Static' }}
           />
           <Viro3DObject
-            animation={{ name: 'bob', run: true, loop: true }}
-            source={require('../assets/3DModels/raft/raft.obj')}
+            animation={{ name: 'ballBob', run: true, loop: true }}
+            source={require('../assets/3DModels/beachball/BeachBall.obj')}
+            resources={[require('../assets/3DModels/beachball/BeachBall.mtl')]}
             opacity={1}
-            position={[0, -3.22, -3]}
-            scale={[0.005, 0.005, 0.005]}
+            position={[-1.3, -3.15, -4.5]}
+            scale={[0.025, 0.025, 0.025]}
             type="OBJ"
-            rotation={[-90, 0, 0]}
-            materials={['redRaft']}
+            rotation={[-40, 0, 0]}
+            materials={['beachball']}
             physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
           />
-          <Viro3DObject
-            animation={{ name: 'bob', run: true, loop: true }}
-            source={require('../assets/3DModels/raft/raft.obj')}
-            opacity={1}
-            position={[1.7, -3.22, -3]}
-            scale={[0.005, 0.005, 0.005]}
-            type="OBJ"
-            rotation={[-90, 0, 0]}
-            materials={['redRaft']}
-            physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
-          />
-          <Viro3DObject
-            animation={{ name: 'bob', run: true, loop: true }}
-            source={require('../assets/3DModels/raft/raft.obj')}
-            opacity={1}
-            position={[1, -3.22, -4.5]}
-            scale={[0.005, 0.005, 0.005]}
-            type="OBJ"
-            rotation={[-90, 0, 0]}
-            materials={['blueRaft']}
-            physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
-          />
-          <Viro3DObject
-            animation={{ name: 'bob', run: true, loop: true }}
-            source={require('../assets/3DModels/raft/raft.obj')}
-            opacity={1}
-            position={[0.9, -3.22, -1.4]}
-            scale={[0.005, 0.005, 0.005]}
-            type="OBJ"
-            rotation={[-90, 0, 0]}
-            materials={['blueRaft']}
-            physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
-          />
-          <Viro3DObject
-            animation={{ name: 'bob', run: true, loop: true }}
-            source={require('../assets/3DModels/raft/raft.obj')}
-            opacity={1}
-            position={[-0.9, -3.22, -1.4]}
-            scale={[0.005, 0.005, 0.005]}
-            type="OBJ"
-            rotation={[-90, 0, 0]}
-            materials={['blueRaft']}
-            physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
-          />
-          <Viro3DObject
-            animation={{ name: 'bob', run: true, loop: true }}
+          {/* <Viro3DObject
+            animation={{ name: 'raft', run: true, loop: true }}
             source={require('../assets/3DModels/raft/raft.obj')}
             opacity={1}
             position={[-0.9, -3.22, -4.5]}
             scale={[0.005, 0.005, 0.005]}
             type="OBJ"
             rotation={[-90, 0, 0]}
-            materials={['blueRaft']}
+            materials={['redRaft']}
             physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
-          />
+          /> */}
           {/* SCORE */}
           <ViroText
             text={currentScore.toString()}
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
-            style={localStyles.helloWorldTextStyle}
+            style={localStyles.scoreStyle}
           />
-          {this._renderHoles()}
-
-          <ViroARCamera>
-            <ViroNode onClick={this._addHole}>
-              {/* <Viro3DObject
-                source={require('./res/hand-free.obj')}
-                opacity={0.7}
-                rotation={[-40, 110, 10]}
-                position={[-0.3, -0.5, -1.5]}
-                scale={[0.025, 0.025, 0.025]}
-                type="OBJ"
-              /> */}
-            </ViroNode>
-          </ViroARCamera>
         </ViroARPlaneSelector>
       </ViroARScene>
     );
@@ -218,35 +178,73 @@ export default class CatScene extends Component {
       buttonStateTag: 'onTap',
     });
   }
-  _renderHoles() {
-    var bang = [];
-    for (var i = 0; i < this.state.totalHoles; i++) {
-      var holeKey = 'holeTag_' + i;
-      bang.push(
-        // <ViroSphere
-        //   heightSegmentCount={5}
-        //   widthSegmentCount={5}
-        //   key={holeKey}
-        //   radius={0.069}
-        //   position={[0.15, -0.1, -1.5]}
-        //   materials={['red']}
-        //   physicsBody={{
-        //     type: 'Dynamic',
-        //     mass: 1,
-        //   }}
-        //   animation={{ name: 'shoot', run: true, loop: true }}
-        // />
-      );
-    }
-    return bang;
+  _saveCat() {
+    this.props.arSceneNavigator.viroAppProps.incrementScore();
+    // console.log('saved a cat', this.state.cats); //cats is already empty
+    // console.log('last cat', cats)
+    this.setState({ catText: 'saved' });
   }
-  _addHole() {
-    this.setState({ totalHoles: this.state.totalHoles + 1 });
-    // change this to slow down rapidfire and empty state
-    // if (this.state.totalBullets === 10) {
-    //   this.setState({ totalBullets: 0 });
-    // }
-    console.log('holes', this.state.totalholes);
+  _createCats() {
+    const catsToLoad = [];
+    // const numOfCats = Math.floor(Math.random() * 2) + 3;
+    const numOfCats = 1;
+
+    for (let i = 0; i < numOfCats; i++) {
+      const catTag = `cat-${catCount + 1}`;
+      catCount++;
+
+      const randomZPos = (Math.random() * 4 + 1) * -1;
+      // between -1.5 and -4.5
+      // const randomXPos = Math.random() * 4 - .8;
+      const randomXPos = Math.random() * 3 - 1.5;
+      // between -1.5 and 1.5
+      const x = (
+        <Viro3DObject
+          animation={{
+            name: 'catBob',
+            run: true,
+            interruptable: true,
+            onFinish: this._deadCat,
+          }}
+          source={require('../assets/3DModels/cat/cat.obj')}
+          opacity={1}
+          key={catTag}
+          viroTag={catTag}
+          position={[randomXPos, -4.3, randomZPos]}
+          scale={[0.05, 0.05, 0.05]}
+          type="OBJ"
+          rotation={[-90, 0, 0]}
+          visible={true}
+          materials={['cat']}
+          physicsBody={{ type: 'Static' }}
+        />
+      );
+      const CatObj = {
+        show: false,
+        model: x,
+        num: cats.length + 1,
+        time: 0,
+      };
+      cats.push(CatObj);
+      console.log('these are cats', cats);
+      console.log('state cats', this.state.cats)
+    }
+    this.setState({
+      cats: this.state.cats + catsToLoad.length,
+    });
+  }
+
+  _renderCats() {
+    let catList = cats.map(item => {
+      return item.model;
+    });
+    return catList;
+  }
+  handleGameStart() {
+    if (!catSpawnIntervalId && this.state.startTime) {
+      this.props.arSceneNavigator.viroAppProps.beginTimer();
+      catSpawnIntervalId = setInterval(this._createCats, 3000);
+    }
   }
 }
 
@@ -254,6 +252,13 @@ var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
     fontFamily: 'Arial',
     fontSize: 20,
+    color: '#ffffff',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  },
+  scoreStyle: {
+    fontFamily: 'Arial',
+    fontSize: 50,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
@@ -295,6 +300,14 @@ ViroMaterials.createMaterials({
     diffuseColor: 'red',
     diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
+  cat: {
+    diffuseColor: 'pink',
+    diffuseTexture: require('../assets/3DModels/cat/cat.png'),
+  },
+  coke: {
+    diffuseColor: 'pink',
+    diffuseTexture: require('../assets/3DModels/coke/colaOpacity.jpg'),
+  },
   pink: {
     diffuseColor: 'lightpink',
   },
@@ -302,8 +315,12 @@ ViroMaterials.createMaterials({
     diffuseColor: 'black',
   },
   palm: {
-    diffuseTexture: require('../assets/3DModels/palmTree/palmTree.png'),
+    diffuseTexture: require('../assets/3DModels/palm/PALM.png'),
+    diffuseColor: 'lightgreen',
   },
+  beachball: {
+    diffuseTexture: require('../assets/3DModels/beachball/BeachBall.jpg'),
+  }
 });
 
 ViroARTrackingTargets.createTargets({
@@ -326,42 +343,31 @@ ViroAnimations.registerAnimations({
     easing: 'Bounce',
     duration: 1000, //.25 seconds
   },
-  shoot: {
-    properties: { positionZ: '-=6', positionX: '+=1', positionY: '+=1' },
-    duration: 600,
-  },
+  ballL: { properties: { positionX: '+=.2', rotateY: '+=35' }, duration: 800 },
+  ballR: { properties: { positionX: '-=.2' }, duration: 800 },
+  ballBob: [['ballL', 'ballR']],
+
   animateImage: {
     properties: { rotateY: '+=90' },
     easing: 'Bounce',
     duration: 1000,
   },
-  moveRight: { properties: { positionX: '+=10' }, duration: 600 },
-  moveLeft: { properties: { positionX: '-=8' }, duration: 1000 },
-  moveUpL: {
-    properties: { positionX: '-=10', positionY: '+=5' },
-    duration: 1000,
+  catUp: { properties: { positionY: '+=.5' }, duration: 800 },
+  //catSpin: { properties: { rotateY: '+=95' }, duration: 800 },
+  catPause: { duration: 1000 },
+  catDown: { properties: { positionY: '-=.5' }, duration: 800 },
+  catBob: [['catPause', 'catUp', 'catDown']],
+  raftL: {
+    properties: { positionX: '+=.3' },
+    easing: 'EaseInEaseOut',
+    duration: 1200,
   },
-  moveDownR: {
-    properties: { positionX: '+=12', positionY: '-=4' },
-    duration: 800,
+  raftR: {
+    properties: { positionX: '-=.3', rotateY: '+=45' },
+    easing: 'EaseInEaseOut',
+    duration: 1200,
   },
-  moveUp: { properties: { positionY: '+=2' }, duration: 400 },
-  moveDown: { properties: { positionY: '-=3' }, duration: 500 },
-  forward: { properties: { positionZ: '+=7' }, duration: 200 },
-  back: { properties: { positionZ: '-=7' }, duration: 200 },
-
-  sway: [
-    [
-      'moveLeft',
-      'moveDownR',
-      'moveUp',
-      'forward',
-      'moveRight',
-      'moveDown',
-      'moveUpL',
-      'back',
-    ],
-  ],
+  raft: [['raftL', 'raftR']],
 });
 
 module.exports = CatScene;

@@ -37,6 +37,7 @@ let sphereCount = 0;
 
 
 export default class BallGameScene extends Component {
+  _isMounted = false  
   constructor() {
     super();
 
@@ -51,13 +52,13 @@ export default class BallGameScene extends Component {
     this._onInitialized = this._onInitialized.bind(this);
     this.createSpheres = this.createSpheres.bind(this);
     this.renderSpheres = this.renderSpheres.bind(this);
-    // this.handleTime = this.handleTime.bind(this);
     this.handleGameStart = this.handleGameStart.bind(this);
     this.handleScore = this.handleScore.bind(this);
   }
 
 
   componentDidMount() {
+    this._isMounted = true
     gameStarted = false;
     spheres = [];
   }
@@ -67,6 +68,7 @@ export default class BallGameScene extends Component {
     clearInterval(ballSpawnIntervalId)
     ballSpawnIntervalId = 0;
     spheres = [];
+    this._isMounted = false;
   }
   
   render() {
@@ -93,10 +95,6 @@ export default class BallGameScene extends Component {
       // Handle loss of tracking
     }
   }
-
-
-
-
 
   createSpheres() {
     const spheresToLoad = [];
@@ -353,9 +351,9 @@ ViroARTrackingTargets.createTargets({
 ViroAnimations.registerAnimations({
   rotate: {
     properties: {
-      rotateY: '+=30',
+      rotateY: '+=60',
     },
-    duration: 25000, //.25 seconds
+    duration: 2500, //.25 seconds
   },
 });
 

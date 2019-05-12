@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 /* eslint-disable no-use-before-define */
 /* eslint-disable default-case */
 /**
@@ -25,6 +26,7 @@ import {
   ViroVRSceneNavigator,
   ViroARSceneNavigator
 } from 'react-viro';
+import { bindExpression } from '@babel/types';
 
 
 
@@ -37,11 +39,12 @@ const ARHelloWorld = require('./js/HelloWorldSceneAR');
 // const Game4Component = require('./js/Game4')
 
 const SceneLoader1 = require('./js/SceneLoader1')
-const SceneLoader2 = require('./js/SceneLoader2')
-const SceneLoader3 = require('./js/SceneLoader3')
-const SceneLoader4 = require('./js/SceneLoader4')
-const SceneLoader5 = require('./js/SceneLoader5')
+const KittyPoolSceneLoader = require('./js/KittyPoolSceneLoader')
+const HeartbreakerSceneLoader = require('./js/HeartbreakerSceneLoader')
+const BallGameSceneLoader = require('./js/BallGameSceneLoader')
+const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen')
 const LeaderBoard = require('./js/LeaderBoard')
+const LeaderBoard2 = require('./js/LeaderBoard2')
 const MenuSceneLoader = require('./js/MenuSceneLoader')
 
 
@@ -52,7 +55,9 @@ const MENU_STATES = {
   GAME_3: "GAME_3",
   GAME_4: "GAME_4",
   DATABASE: "DATABASE",
-  LEADERBOARD: "LEADERBOARD"
+  LEADERBOARD: "LEADERBOARD",
+  LEADERBOARD_2:"LEADERBOARD_2",
+  LOADING: "LOADING"
 }
 
 export default class App extends Component {
@@ -62,15 +67,30 @@ export default class App extends Component {
       menuState: MENU_STATES.DEFAULT
     }
     this.returnToMenu = this.returnToMenu.bind(this);
+    this.goToLeaderBoard = this.goToLeaderBoard.bind(this); 
     this.selectGame = this.selectGame.bind(this);
+    this.goToLeaderBoard2 = this.goToLeaderBoard2.bind(this)
+    this.renderLoadScreen = this.renderLoadScreen.bind(this);
   }
+
   
   
 
   
   returnToMenu = () => {
     this.setState({
-      menuState: MENU_STATES.DEFAULT
+      menuState: MENU_STATES.LOADING
+    })
+  }
+
+  goToLeaderBoard = () => {
+    this.setState({
+      menuState: MENU_STATES.LEADERBOARD
+    })
+  }
+  goToLeaderBoard2 = () => {
+    this.setState({
+      menuState: MENU_STATES.LEADERBOARD_2
     })
   }
   
@@ -89,7 +109,11 @@ export default class App extends Component {
       case MENU_STATES.DATABASE:
         return this.renderDatabase();
       case MENU_STATES.LEADERBOARD:
-        return this.renderLeaderBorad();
+        return this.renderLeaderBoard();
+      case MENU_STATES.LEADERBOARD_2:
+        return this.renderLeaderBoard2();
+      case MENU_STATES.LOADING:
+        return this.renderLoadScreen();
     }
   }
   
@@ -126,7 +150,7 @@ export default class App extends Component {
   
   renderGame2() {
     return (
-      <SceneLoader2 
+      <KittyPoolSceneLoader 
       propObj = {{
         returnToMenu: this.returnToMenu,
       }}
@@ -137,9 +161,10 @@ export default class App extends Component {
   
   renderGame3() {
     return (
-      <SceneLoader3 
+      <HeartbreakerSceneLoader 
       propObj = {{
-        returnToMenu: this.returnToMenu,
+          returnToMenu: this.returnToMenu,
+          goToLeaderBoard2: this.goToLeaderBoard2        
       }}
       />
     )
@@ -148,23 +173,25 @@ export default class App extends Component {
   
   renderGame4() {
     return (
-      <SceneLoader4 
+      <BallGameSceneLoader 
       propObj = {{
         returnToMenu: this.returnToMenu,
+        goToLeaderBoard: this.goToLeaderBoard
       }}
       />
     )
   }
   renderDatabase() {
     return (
-      <SceneLoader5 
+      <LeaderBoardEntryScreen 
       propObj = {{
         returnToMenu: this.returnToMenu,
+
       }}
       />
     )
   }
-  renderLeaderBorad() {
+  renderLeaderBoard() {
     return (
       <LeaderBoard 
       propObj = {{
@@ -173,6 +200,32 @@ export default class App extends Component {
       />
     )
   }
+  renderLeaderBoard2() {
+    return (
+      <LeaderBoard2 
+      propObj = {{
+        returnToMenu: this.returnToMenu,
+      }}
+      />
+    )
+  }
+  
+  renderLoadScreen() {
+    setTimeout(()=>{
+      this.setState({
+        menuState: MENU_STATES.DEFAULT
+      })
+    }, 250)
+    return(
+      <View>
+        <Text>
+          Loading...
+        </Text>
+      </View>
+    )
+    
+  }
+  
   
 }
 

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';  
 import PropTypes from 'prop-types';
 
+
+
 export default class LeaderBoardComponent extends Component {  
   static propTypes = {
     score: PropTypes.array.isRequired
