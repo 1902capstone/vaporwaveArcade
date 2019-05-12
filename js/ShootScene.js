@@ -21,10 +21,7 @@ import {
   ViroNode,
 } from 'react-viro';
 
-<<<<<<< HEAD
 let cameraCheckIntervalId;
-=======
->>>>>>> b077f5b570e20bb742fa147c343e71c7bfe001e9
 
 export default class ShootScene extends Component {
   constructor() {
@@ -46,11 +43,8 @@ export default class ShootScene extends Component {
     this._renderBullets = this._renderBullets.bind(this);
     this.handleGameStart = this.handleGameStart.bind(this);
     this.sceneRef  = React.createRef()
-<<<<<<< HEAD
     this.updateCamera = this.updateCamera.bind(this);
     this.beginCameraUpdates = this.beginCameraUpdates.bind(this);
-=======
->>>>>>> b077f5b570e20bb742fa147c343e71c7bfe001e9
   }
 
   componentWillUnmount() {
