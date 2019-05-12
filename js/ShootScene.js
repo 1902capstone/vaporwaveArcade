@@ -148,12 +148,12 @@ export default class ShootScene extends Component {
               this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
-          <ViroText
+          {/* <ViroText
             text={currentScore.toString()}
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
             style={localStyles.helloWorldTextStyle}
-          />
+          /> */}
 
           <ViroARCamera>
             <ViroNode onClick={this._addBullet}>
@@ -200,7 +200,6 @@ export default class ShootScene extends Component {
     if (!this.sceneRef.current) {
       return;
     }
-    
     // let myDirection;
     // if (this.sceneRef.current) {
     // this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
@@ -208,7 +207,6 @@ export default class ShootScene extends Component {
     //     console.log(myDirection) // [0] [1] [2]
     //   })
     // }
-    
     
     var bang = [];
     for (var i = 0; i < this.state.totalBullets; i++) {
@@ -236,7 +234,6 @@ export default class ShootScene extends Component {
     
     return bang;
   }
-  
   
   _addBullet() {
     

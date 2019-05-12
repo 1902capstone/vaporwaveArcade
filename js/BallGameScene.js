@@ -237,12 +237,12 @@ export default class BallGameScene extends Component {
           materials={['red']}
         />
 
-        <ViroText
+        {/* <ViroText
           text={currentScore.toString()}
           scale={[0.5, 0.5, 0.5]}
           position={[0, 0, -1]}
           style={localStyles.helloWorldTextStyle}
-        />
+        /> */}
 
         <ViroARCamera>
           <Viro3DObject

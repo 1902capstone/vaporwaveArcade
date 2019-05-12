@@ -35,7 +35,6 @@ export default class PostGame1 extends Component {
         returnToMenu={this.props.returnToMenu}
         goToLeaderBoard={this.props.goToLeaderBoard}
         score={this.props.score}
-        gameName="BallGame"
       />
     );
   }
