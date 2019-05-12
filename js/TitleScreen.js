@@ -58,6 +58,7 @@ export default class TitleScreen extends Component {
               text={'TAP TO START'}
               scale={[0.5, 0.5, 0.5]}
               position={[0, -.5, -1]}
+              extrusionDepth={2}
               style={localStyles.text}
             />
           </ViroNode>
