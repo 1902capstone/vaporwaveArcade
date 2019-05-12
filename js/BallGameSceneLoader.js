@@ -26,7 +26,8 @@ export default class BallGameSceneLoader extends Component {
       gameState: GAME_STATES.INTRODUCTION,
       score: 0,
       timer: 25,
-      timeLeft: 25
+      timeLeft: 25,
+      showLeaderboard: false
     };
     this.startGame = this.startGame.bind(this);
     this.resetGame = this.resetGame.bind(this);
@@ -108,6 +109,7 @@ export default class BallGameSceneLoader extends Component {
         score={this.state.score}
         resetGame={this.resetGame}
         gameName="BallGame"
+        showLeaderboard = {this.state.showLeaderboard}
       />
     );
   }
@@ -125,7 +127,8 @@ export default class BallGameSceneLoader extends Component {
       score: 0,
       timer: 25,
       timeLeft: 25,
-      gameState: GAME_STATES.INTRODUCTION
+      gameState: GAME_STATES.INTRODUCTION,
+      showLeaderboard: false
     });
   }
 
@@ -134,6 +137,11 @@ export default class BallGameSceneLoader extends Component {
       gameState: GAME_STATES.POST_GAME,
       timeLeft: 25
     });
+    setTimeout(() => {
+      this.setState({
+        showLeaderboard: true
+      })
+    }, 3000)
   }
 
   incrementScore(colliderTag) {

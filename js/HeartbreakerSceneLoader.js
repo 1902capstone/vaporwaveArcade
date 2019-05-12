@@ -24,7 +24,9 @@ export default class HeartbreakerSceneLoader extends Component {
       gameState: GAME_STATES.INTRODUCTION,
       score: 0,
       timer: 25,
-      timeLeft: 25
+      
+      timeLeft: 25,
+      showLeaderboard: false
     };
     this.incrementScore = this.incrementScore.bind(this);
     this.startGame = this.startGame.bind(this);
@@ -34,7 +36,14 @@ export default class HeartbreakerSceneLoader extends Component {
     this.decrementTime = this.decrementTime.bind(this);
     this.resetGame = this.resetGame.bind(this)
   }
-
+  
+  
+  componentWillUnmount() {
+    clearInterval(timerIntervalId)
+    timerIntervalId = 0;
+  }
+  
+  
   render() {
     switch (this.state.gameState) {
       case GAME_STATES.INTRODUCTION:
@@ -102,6 +111,7 @@ export default class HeartbreakerSceneLoader extends Component {
         goToLeaderBoard={this.props.propObj.goToLeaderBoard2}
         score={this.state.score}
         resetGame={this.resetGame}
+        showLeaderboard = {this.state.showLeaderboard}
       />
     );
   }
@@ -117,18 +127,24 @@ export default class HeartbreakerSceneLoader extends Component {
       gameState: GAME_STATES.POST_GAME,
       timeLeft: 25
     });
+    setTimeout(() => {
+      this.setState({
+        showLeaderboard: true
+      })
+    }, 3000)
   }
   resetGame() {
     this.setState({
       score: 0,
       timer: 25,
       timeLeft: 25,
-      gameState: GAME_STATES.INTRODUCTION
+      gameState: GAME_STATES.INTRODUCTION,
+showLeaderboard:false
     });
   }
 
   incrementScore() {
-    console.log("BANG");
+    // console.log('BANG');
     this.setState({
       score: this.state.score + 1
     });
@@ -143,7 +159,7 @@ export default class HeartbreakerSceneLoader extends Component {
 
   checkTime() {
     const timeLeft = this.state.timeLeft;
-    console.log(timeLeft);
+    // console.log(timeLeft);
     if (timeLeft <= 0) {
       clearInterval(timerIntervalId);
       this.gameEnd();
