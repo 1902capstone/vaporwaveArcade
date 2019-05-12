@@ -392,7 +392,7 @@ ViroAnimations.registerAnimations({
     duration: 1200,
   },
   bird4: {
-    properties: { positionX: '+=.3', positionZ: '+=1', rotateY: '+=45' },
+    properties: { positionX: '+=.3', positionZ: '+=2', rotateY: '+=45' },
     duration: 1200,
   },
   birdPath: [['bird1', 'bird2', 'bird3', 'bird4']]

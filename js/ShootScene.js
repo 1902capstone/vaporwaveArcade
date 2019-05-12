@@ -120,6 +120,34 @@ export default class ShootScene extends Component {
               this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
+          <Viro3DObject
+            animation={{ name: 'swayC', run: true, loop: true }}
+            source={require('../assets/3DModels/heart/Love.obj')}
+            resources={[require('../assets/3DModels/heart/Love.mtl')]}
+            opacity={1}
+            position={[1, -1, -20]}
+            scale={[0.02, 0.02, 0.02]}
+            type="OBJ"
+            materials={['teal']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.decrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'swayC', run: true, loop: true }}
+            source={require('../assets/3DModels/heart/Love.obj')}
+            resources={[require('../assets/3DModels/heart/Love.mtl')]}
+            opacity={1}
+            position={[-2, 2, -18]}
+            scale={[0.02, 0.02, 0.02]}
+            type="OBJ"
+            materials={['teal']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.decrementScore
+            }
+          />
           <ViroText
             text={currentScore.toString()}
             scale={[0.5, 0.5, 0.5]}
@@ -192,7 +220,7 @@ export default class ShootScene extends Component {
           widthSegmentCount={5}
           key={bulletKey}
           radius={0.17}
-          position={[-0.14, -0.5, -4]}
+          position={[-0.05, -0.5, -4]}
           materials={['red']}
           opacity={1}
           physicsBody={{
