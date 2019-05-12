@@ -171,6 +171,7 @@ export default class HelloWorldSceneAR extends Component {
             scale={[0.025, 0.025, 0.025]}
             materials={['venus']}
             type="OBJ"
+            onClick={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.ALL_LEADERBOARDS)}}
           />
         </ViroNode>
       </ViroARScene>

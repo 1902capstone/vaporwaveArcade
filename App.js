@@ -43,6 +43,7 @@ const KittyPoolSceneLoader = require('./js/KittyPoolSceneLoader')
 const HeartbreakerSceneLoader = require('./js/HeartbreakerSceneLoader')
 const BallGameSceneLoader = require('./js/BallGameSceneLoader')
 const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen')
+const AllLeaderboards = require('./js/AllLeaderboards')
 const LeaderBoard = require('./js/LeaderBoard')
 const LeaderBoard2 = require('./js/LeaderBoard2')
 const MenuSceneLoader = require('./js/MenuSceneLoader')
@@ -55,6 +56,7 @@ const MENU_STATES = {
   GAME_3: "GAME_3",
   GAME_4: "GAME_4",
   DATABASE: "DATABASE",
+  ALL_LEADERBOARDS: "ALL_LEADERBOARDS",
   LEADERBOARD: "LEADERBOARD",
   LEADERBOARD_2:"LEADERBOARD_2",
   LOADING: "LOADING"
@@ -108,6 +110,8 @@ export default class App extends Component {
         return this.renderGame4();
       case MENU_STATES.DATABASE:
         return this.renderDatabase();
+      case MENU_STATES.ALL_LEADERBOARDS:
+        return this.renderAllLeaderboards();
       case MENU_STATES.LEADERBOARD:
         return this.renderLeaderBoard();
       case MENU_STATES.LEADERBOARD_2:
@@ -186,11 +190,23 @@ export default class App extends Component {
       <LeaderBoardEntryScreen 
       propObj = {{
         returnToMenu: this.returnToMenu,
-
       }}
       />
     )
   }
+
+  renderAllLeaderboards() {
+    return (
+      <AllLeaderboards 
+      propObj = {{
+        returnToMenu: this.returnToMenu,
+        goToLeaderBoard: this.goToLeaderBoard,
+        goToLeaderBoard2: this.goToLeaderBoard2
+      }}
+      />
+    )
+  }
+
   renderLeaderBoard() {
     return (
       <LeaderBoard 

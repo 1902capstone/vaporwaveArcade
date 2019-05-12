@@ -1,40 +1,24 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
-import LeaderBoardComponent2 from "./LeaderBoardComponent2";
 
-import { db } from '../src/config'
-//collection of all the names
-let leaderBoardRef = db.ref("/Shooter")
-let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
-
-
-
-export default class List2 extends Component {
-    constructor() {
-        super();
-        this.state = {
-            score: []
-        };
-    }
-    
-    async componentDidMount() {
-      await ans.on("value", snapshot => {
-            let data = snapshot.val();
-            let score = Object.values(data);
-            this.setState({ score });
-        });
-  }
-
+export default class AllLeaderboards extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Shooter Leaderboard</Text>
-        {this.state.score.length > 0 ? (
-          <LeaderBoardComponent2 score={this.state.score} />
-        ) : (
-          <Text>No user</Text>
-        )}
-
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor={"#68a0ff"}
+          onPress={() => this.props.propObj.goToLeaderBoard2()}
+        >
+          <Text style={styles.buttonText}>Heartbreaker High Scores</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor={"#68a0ff"}
+          onPress={() => this.props.propObj.goToLeaderBoard()}
+        >
+          <Text style={styles.buttonText}>Ball Game High Scores</Text>
+        </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
           underlayColor={"#68a0ff"}
@@ -84,4 +68,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = List2;
+module.exports = AllLeaderboards;
