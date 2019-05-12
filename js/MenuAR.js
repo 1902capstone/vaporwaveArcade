@@ -21,6 +21,7 @@ import {
   ViroAnimations,
   ViroNode,
   ViroSphere,
+  ViroAnimatedImage,
 } from 'react-viro';
 
 let spheresToLoad = [];
@@ -48,6 +49,26 @@ export default class HelloWorldSceneAR extends Component {
 
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
+      {/* CEILING */}
+      <ViroAnimatedImage
+          height={12}
+          width={19}
+          loop={true}
+          opacity={.6}
+          rotation={[114, 180, 0]}
+          position={[0, 4, -8]}
+          source={require('../assets/Images/purplegrid.gif')}
+        />
+        {/* FLOOR */}
+      <ViroAnimatedImage
+          height={12}
+          width={19}
+          loop={true}
+          opacity={.6}
+          rotation={[-65, 0, 0]}
+          position={[0, -4, -8]}
+          source={require('../assets/Images/purplegrid.gif')}
+        />
         {/* UNUSED BUTTON */}
         <ViroButton
           source={require('../assets/Images/smile1.jpg')}
@@ -122,7 +143,7 @@ export default class HelloWorldSceneAR extends Component {
         <ViroText
           text={this.state.text}
           scale={[0.5, 0.5, 0.5]}
-          position={[0, 0, -1]}
+          position={[0, -.3, -1]}
           extrusionDepth={4 }
           style={localStyles.helloWorldTextStyle}
         />
