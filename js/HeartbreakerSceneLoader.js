@@ -79,7 +79,7 @@ export default class HeartbreakerSceneLoader extends Component {
             onPress={this.startGame}
             underlayColor="#68a0ff"
           >
-            <Text style={localStyles.buttonText}>Start Level</Text>
+            <Text style={localStyles.buttonText}>Start</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -100,21 +100,26 @@ export default class HeartbreakerSceneLoader extends Component {
             decrementScore: this.decrementScore
           }}
         />
-        <View>
+        <View style={localStyles.bottomMenu}>
           <TouchableHighlight
             style={localStyles.buttons}
             underlayColor="#68a0ff"
             onPress={this.props.propObj.returnToMenu}
           >
-            <Text>BACK</Text>
+            <Text style={localStyles.buttonText}>BACK</Text>
           </TouchableHighlight>
-          <Text style={localStyles.timerText}>{this.state.timeLeft}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             underlayColor="#68a0ff"
-            onPress={() => ReactNativeHaptic.prepare()}
+
           >
-            <Text>test</Text>
+          <Text style={localStyles.buttonText}>Time: {this.state.timeLeft}</Text>
+          </TouchableHighlight>
+          <TouchableHighlight
+            style={localStyles.buttons}
+            underlayColor="#68a0ff"
+          >
+          <Text style={localStyles.timerText}> Score: {this.state.score}</Text>
           </TouchableHighlight>
         </View>
         {this.checkTime()}
@@ -250,24 +255,27 @@ var localStyles = StyleSheet.create({
   timerText: {
     color: "#ff0000",
     textAlign: "center",
-    fontSize: 16
+    fontSize: 20
   },
   buttonText: {
     color: "#fff",
     textAlign: "center",
-    fontSize: 20
+    fontSize: 20,
+    // fontFamily: "Apple Color Emoji",
+    // fontStyle: "italic"
   },
   buttons: {
     height: 80,
-    width: 150,
+    width: 110,
     paddingTop: 20,
     paddingBottom: 20,
+    margin: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "rgba(123,123,231,.4)",
+    backgroundColor: 'rgba(123,123,231,.4)',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "rgba(123,087,231,.4)"
+    borderColor: 'rgba(123,087,231,.4)',
   },
   exitButton: {
     height: 50,
@@ -280,7 +288,20 @@ var localStyles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#fff"
-  }
+  },
+  bottomMenu: {
+    width : '100%',
+    position : 'absolute',
+    top : 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  timerText: {
+    color: '#ff0000',
+    textAlign: 'center',
+    fontSize: 20,
+  },
 });
 
 module.exports = HeartbreakerSceneLoader;

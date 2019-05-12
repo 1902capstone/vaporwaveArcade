@@ -148,12 +148,12 @@ export default class CatScene extends Component {
             physicsBody={{ type: 'Static' }}
           /> */}
           {/* SCORE */}
-          <ViroText
+          {/* <ViroText
             text={currentScore.toString()}
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
             style={localStyles.scoreStyle}
-          />
+          /> */}
         </ViroARPlaneSelector>
       </ViroARScene>
     );
