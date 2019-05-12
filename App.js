@@ -47,7 +47,7 @@ const AllLeaderboards = require('./js/AllLeaderboards')
 const LeaderBoard = require('./js/LeaderBoard')
 const LeaderBoard2 = require('./js/LeaderBoard2')
 const MenuSceneLoader = require('./js/MenuSceneLoader')
-
+const TitleScreenLoader = require('./js/TitleScreenLoader')
 
 const MENU_STATES = {
   DEFAULT: "DEFAULT",
@@ -59,14 +59,15 @@ const MENU_STATES = {
   ALL_LEADERBOARDS: "ALL_LEADERBOARDS",
   LEADERBOARD: "LEADERBOARD",
   LEADERBOARD_2:"LEADERBOARD_2",
-  LOADING: "LOADING"
+  LOADING: "LOADING",
+  INTRO: "INTRO"
 }
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
-      menuState: MENU_STATES.DEFAULT
+      menuState: MENU_STATES.INTRO
     }
     this.returnToMenu = this.returnToMenu.bind(this);
     this.goToLeaderBoard = this.goToLeaderBoard.bind(this); 
@@ -118,8 +119,23 @@ export default class App extends Component {
         return this.renderLeaderBoard2();
       case MENU_STATES.LOADING:
         return this.renderLoadScreen();
+      case MENU_STATES.INTRO:
+        return this.renderIntro();
     }
   }
+  
+  
+  renderIntro() {
+    return (
+      <TitleScreenLoader 
+      propObj = {{
+        returnToMenu: this.returnToMenu
+      }}
+      />
+    )
+    
+  }
+  
   
   renderMenu() {
     return (
@@ -231,9 +247,10 @@ export default class App extends Component {
       this.setState({
         menuState: MENU_STATES.DEFAULT
       })
-    }, 250)
+    }, 200)
     return(
-      <View>
+      // can maybe put a cool quick "transition effect" here in place of a loading screen
+      <View style={localStyles.black}>
         <Text>
           Loading...
         </Text>
@@ -251,6 +268,10 @@ var localStyles = StyleSheet.create({
   logo: {
     width: 200,
     height: 50,
+  },
+  black: {
+    flex: 1,
+    backgroundColor: 'black'
   },
   viroContainer :{
     flex : 1,

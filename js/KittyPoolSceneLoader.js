@@ -8,6 +8,7 @@ import {
   Image,
   ImageBackground,
   TouchableHighlight,
+  Vibration
 } from 'react-native';
 
 import { ViroARSceneNavigator } from 'react-viro';
@@ -25,6 +26,9 @@ const GAME_STATES = {
 
 let timerIntervalId;
 
+const DURATION = 500 ;
+ 
+const PATTERN = [1000, 2000, 3000, 4000];
 export default class KittyPoolSceneLoader extends Component {
   constructor() {
     super();
@@ -59,10 +63,10 @@ export default class KittyPoolSceneLoader extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>{`Save the cats!`}</Text>
+          <Text style={localStyles.titleText}>{`Kitty Pool`}</Text>
           <Text
             style={localStyles.text}
-          >{`You have thirty seconds to catch as many cats as you can in the cup.`}</Text>
+          >{`You have thirty seconds to catch as many cats as you can!  Tap the cats to rescue them.`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}
@@ -135,7 +139,7 @@ export default class KittyPoolSceneLoader extends Component {
   }
 
   incrementScore(colliderTag) {
-    // console.log(colliderTag);
+    Vibration.vibrate(DURATION)  
     this.setState({
       score: this.state.score + 1,
     });

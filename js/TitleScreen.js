@@ -24,28 +24,24 @@ import {
 // import console = require('console');
 
 export default class TitleScreen extends Component {
-    
   constructor() {
     super();
-
     // Set initial state here
     this.state = {
       text: 'Initializing AR...',
       totalBullets: 0,
       score: 0,
     };
-
+    
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this._onButtonTap = this._onButtonTap.bind(this);
-    this._addBullet = this._addBullet.bind(this);
-    this._renderBullets = this._renderBullets.bind(this);
   }
-
+  
   render() {
     const currentScore = this.props.arSceneNavigator.viroAppProps.score;
     return (
-      <ViroARScene
+      <ViroARScene onClick={this.props.arSceneNavigator.viroAppProps.returnToMenu}
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
       >
@@ -62,6 +58,7 @@ export default class TitleScreen extends Component {
               text={'TAP TO START'}
               scale={[0.5, 0.5, 0.5]}
               position={[0, -.5, -1]}
+              extrusionDepth={2}
               style={localStyles.text}
             />
           </ViroNode>
@@ -89,37 +86,9 @@ export default class TitleScreen extends Component {
       buttonStateTag: 'onTap',
     });
   }
-  _renderBullets() {
-    var bang = [];
-    for (var i = 0; i < this.state.totalBullets; i++) {
-      var bulletKey = 'BulletTag_' + i;
-      bang.push(
-        <ViroSphere
-          heightSegmentCount={5}
-          widthSegmentCount={5}
-          key={bulletKey}
-          radius={0.08}
-          position={[0.15, -0.1, -1.5]}
-          materials={['red']}
-          opacity={0.4}
-          physicsBody={{
-            type: 'Dynamic',
-            mass: 1,
-          }}
-          animation={{ name: 'shoot', run: true, loop: true }}
-        />
-      );
-    }
-    return bang;
-  }
-  _addBullet() {
-    this.setState({ totalBullets: this.state.totalBullets + 1 });
-    // change this to slow down rapidfire and empty state
-    if (this.state.totalBullets === 10) {
-      this.setState({ totalBullets: 0 });
-    }
-    console.log('bullets', this.state.totalBullets);
-  }
+  
+  
+  
 }
 
 var localStyles = StyleSheet.create({

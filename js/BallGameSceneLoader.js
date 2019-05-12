@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable no-use-before-define */
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
+import { Text, View, StyleSheet, TouchableHighlight, Vibration } from "react-native";
 
 import PostGame1 from "./PostGame1";
 import { ViroARSceneNavigator } from "react-viro";
@@ -18,6 +18,10 @@ const GAME_STATES = {
 };
 
 let timerIntervalId;
+
+const DURATION = 500 ;
+ 
+const PATTERN = [1000, 2000, 3000, 4000];
 
 export default class BallGameSceneLoader extends Component {
   constructor() {
@@ -145,7 +149,7 @@ export default class BallGameSceneLoader extends Component {
   }
 
   incrementScore(colliderTag) {
-    // console.log(colliderTag);
+    Vibration.vibrate(DURATION)   
     this.setState({
       score: this.state.score + 1
     });

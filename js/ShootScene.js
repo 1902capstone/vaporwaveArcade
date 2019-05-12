@@ -103,7 +103,7 @@ export default class ShootScene extends Component {
             materials={['blue']}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
+              this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
           <Viro3DObject
@@ -117,7 +117,7 @@ export default class ShootScene extends Component {
             materials={['teal']}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
+              this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
           <ViroText
@@ -219,34 +219,24 @@ export default class ShootScene extends Component {
     }
     // console.log('bullets', this.state.totalBullets);
   }
-  
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
     this.beginCameraUpdates()
   }
-  
   beginCameraUpdates() {
     if (!cameraCheckIntervalId) {
-      
       cameraCheckIntervalId = setInterval(()=> {
         this.updateCamera()
       }, 100)
-      
     }
   }
-  
   async updateCamera() {
-    
     let myPos = await this.sceneRef.current.getCameraOrientationAsync()
     // console.log(myPos.forward);
     this.setState({
       cameraAngle: myPos.forward
     })
-    
   }
-  
-  
-  
 }
 
 var localStyles = StyleSheet.create({
