@@ -30,6 +30,8 @@ let timerIntervalId;
 let catSpawnIntervalId;
 let gameStarted = false;
 let catCount = 0;
+let texts = [];
+let textCount = 0;
 
 export default class CatScene extends Component {
   constructor() {
@@ -42,6 +44,7 @@ export default class CatScene extends Component {
       cats: 0,
       startTime: 0,
       catText: '',
+      texts: 0,
     };
 
     // bind 'this' to functions
@@ -191,15 +194,10 @@ export default class CatScene extends Component {
       buttonStateTag: 'onTap',
     });
   }
-  _saveCat(a, b, c) {
-    console.log('==========')
-    console.log(a);
-    console.log(b);
-    console.log(c)
-    // let indexOfCat = cats.findIndex(elt => {
-    //   return elt.model.props.viroTag === colliderTag;
-    // });
-    let indexOfCat = 0;
+  _saveCat(pos, tagName) {
+    let indexOfCat = cats.findIndex(elt => {
+      return elt.model.props.viroTag === tagName;
+    });
     cats.splice(indexOfCat, 1);
     
     this.setState({
@@ -207,6 +205,8 @@ export default class CatScene extends Component {
     });
     
     this.props.arSceneNavigator.viroAppProps.incrementScore();
+    
+    
     this.setState({ catText: 'saved' });
   }
   _createCats() {
@@ -231,7 +231,7 @@ export default class CatScene extends Component {
             interruptable: true,
             onFinish: this._deadCat,
           }}
-          onClick={(pos) => this._saveCat('test', pos)}
+          onClick={(pos) => this._saveCat(pos, catTag)}
           source={require('../assets/3DModels/cat/cat.obj')}
           opacity={1}
           key={catTag}
