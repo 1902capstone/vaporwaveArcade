@@ -29,7 +29,6 @@ import {
 } from 'react-viro';
 // import console = require('console');
 
-
 let spheres = [];
 let timerStarted = false;
 let timerIntervalId;
@@ -37,9 +36,8 @@ let ballSpawnIntervalId;
 let gameStarted = false;
 let sphereCount = 0;
 
-
 export default class BallGameScene extends Component {
-  _isMounted = false  
+  _isMounted = false;
   constructor() {
     super();
 
@@ -58,21 +56,19 @@ export default class BallGameScene extends Component {
     this.handleScore = this.handleScore.bind(this);
   }
 
-
   componentDidMount() {
-    this._isMounted = true
+    this._isMounted = true;
     gameStarted = false;
     spheres = [];
   }
 
-  
   componentWillUnmount() {
-    clearInterval(ballSpawnIntervalId)
+    clearInterval(ballSpawnIntervalId);
     ballSpawnIntervalId = 0;
     spheres = [];
     this._isMounted = false;
   }
-  
+
   render() {
     //const timer = this.props.arSceneNavigator.viroAppProps.timer
 
@@ -87,8 +83,6 @@ export default class BallGameScene extends Component {
   }
 
   _onInitialized(state, reason) {
-
-
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
         text: 'Welcome to the arcade!',
@@ -100,64 +94,61 @@ export default class BallGameScene extends Component {
 
   createSpheres() {
     const spheresToLoad = [];
-    const numOfSpheres = Math.floor(Math.random() * 2) + 3
+    const numOfSpheres = Math.floor(Math.random() * 2) + 3;
 
     for (let i = 0; i < numOfSpheres; i++) {
-      const sphereTag = `sphere-${sphereCount + 1}`
+      const sphereTag = `sphere-${sphereCount + 1}`;
       sphereCount++;
-      
 
-      const randomYPos = (Math.random() * 2) + 0.5
+      const randomYPos = Math.random() * 2 + 0.5;
       // between 0.5 and 2.5
-      const randomZPos = ((Math.random() * 3) + 1.5) * -1
+      const randomZPos = (Math.random() * 3 + 1.5) * -1;
       // between -1.5 and -4.5
-      const randomXPos = ((Math.random() * 3)  - 1.5)
+      const randomXPos = Math.random() * 3 - 1.5;
       // between -1.5 and 1.5
-      const randomMass = Math.floor(Math.random() * 11) + 1
+      const randomMass = Math.floor(Math.random() * 11) + 1;
       // between 1 and 12
-      const randomRad = Math.floor(Math.random() * 0.3) + 0.2
+      const randomRad = Math.floor(Math.random() * 0.3) + 0.2;
       // between 0.2 and 0.5
-      const randomColor = Math.floor(Math.random() * 3)
+      const randomColor = Math.floor(Math.random() * 3);
       // 0, 1, 2, 3
-      const colors = ['pink', 'purple', 'red', 'white']
+      const colors = ['pink', 'purple', 'red', 'white'];
 
-
-      const x = (<ViroSphere
-        key={sphereTag}
-        viroTag={sphereTag}
-        heightSegmentCount={10}
-        widthSegmentCount={10}
-        radius={randomRad}
-        position={[randomXPos, randomYPos, -3]}
-        height={1}
-        materials={[colors[randomColor]]}
-        physicsBody={{
-          type: 'Dynamic',
-          mass: randomMass,
-          restitution: 0.999,
-        }}
-      />)
+      const x = (
+        <ViroSphere
+          key={sphereTag}
+          viroTag={sphereTag}
+          heightSegmentCount={10}
+          widthSegmentCount={10}
+          radius={randomRad}
+          position={[randomXPos, randomYPos, -3]}
+          height={1}
+          materials={[colors[randomColor]]}
+          physicsBody={{
+            type: 'Dynamic',
+            mass: randomMass,
+            restitution: 0.999,
+          }}
+        />
+      );
       const SphereObj = {
         show: false,
         model: x,
         num: spheres.length + 1,
         time: 0,
-      }
+      };
       spheres.push(SphereObj);
-
     }
 
     this.setState({
-      spheres: this.state.spheres + spheresToLoad.length
-    })
-
+      spheres: this.state.spheres + spheresToLoad.length,
+    });
   }
 
-
   renderSpheres() {
-    let sphereList = spheres.map((item) => {
+    let sphereList = spheres.map(item => {
       return item.model;
-    })
+    });
     return sphereList;
   }
 
@@ -182,57 +173,60 @@ export default class BallGameScene extends Component {
 
   handleGameStart() {
     if (!ballSpawnIntervalId && this.state.startTime) {
-      this.props.arSceneNavigator.viroAppProps.beginTimer()
-      ballSpawnIntervalId = setInterval(this.createSpheres, 1800)
+      this.props.arSceneNavigator.viroAppProps.beginTimer();
+      ballSpawnIntervalId = setInterval(this.createSpheres, 1800);
     }
   }
 
   handleScore(colliderTag) {
-
-
-    let indexOfSphere = spheres.findIndex((elt) => {
-      return (elt.model.props.viroTag === colliderTag)
-    })
+    let indexOfSphere = spheres.findIndex(elt => {
+      return elt.model.props.viroTag === colliderTag;
+    });
     spheres.splice(indexOfSphere, 1);
 
     this.setState({
-      spheres: this.state.spheres - 1
-    })
-    this.props.arSceneNavigator.viroAppProps.incrementScore()
+      spheres: this.state.spheres - 1,
+    });
+    this.props.arSceneNavigator.viroAppProps.incrementScore();
   }
 
   renderARScene() {
-
-    const currentScore = this.props.arSceneNavigator.viroAppProps.score
-    const timer = this.props.arSceneNavigator.viroAppProps.timer
+    const currentScore = this.props.arSceneNavigator.viroAppProps.score;
+    const timer = this.props.arSceneNavigator.viroAppProps.timer;
 
     return (
-
       <ViroARPlaneSelector
         minHeight={0.01}
         minWidth={0.01}
         onPlaneSelected={() => {
-          this.handleGameStart()
+          this.handleGameStart();
           this.setState({ pauseUpdates: true, startTime: Date.now() });
         }}
         pauseUpdates={this.state.pauseUpdates}
       >
-
-
-
         {/* {this.handleTime()} */}
         {this.handleGameStart()}
         {this.renderSpheres()}
 
         <ViroAnimatedImage
-            height={9}
-            width={9}
-            loop={true}
-            opacity={1}
-            rotation={[-30, 0, 0]}
-            position={[0, -3, -5]}
-            source={require('../assets/Images/purplegrid.gif')}
-          />
+          height={9}
+          width={9}
+          loop={true}
+          opacity={1}
+          rotation={[-30, 0, 0]}
+          position={[0, -3, -5]}
+          source={require('../assets/Images/purplegrid.gif')}
+        />
+        <ViroSpotLight
+          position={[0, 5, 0]}
+          color="#777777"
+          direction={[0, 0, -1]}
+          attenuationStartDistance={5}
+          attenuationEndDistance={10}
+          innerAngle={5}
+          outerAngle={20}
+          castsShadow={true}
+        />
         <ViroQuad
           position={[0, -2, -4]}
           height={7}
@@ -245,20 +239,20 @@ export default class BallGameScene extends Component {
 
         <ViroText
           text={currentScore.toString()}
-          scale={[.5, .5, .5]}
+          scale={[0.5, 0.5, 0.5]}
           position={[0, 0, -1]}
-          style={localStyles.helloWorldTextStyle} />
-
+          style={localStyles.helloWorldTextStyle}
+        />
 
         <ViroARCamera>
-        <Viro3DObject
+          <Viro3DObject
             // animation={{ name: 'rotate', run: true, loop: true }}
             source={require('../assets/3DModels/cup/CokeCup.obj')}
             resources={[require('../assets/3DModels/cup/CokeCup.mtl')]}
             opacity={1}
             materials={['coke']}
-            position={[0, -1, -2]}
-            scale={[0.08, 0.08, 0.08]}
+            position={[0, -1.6, -3]}
+            scale={[0.13, 0.13, 0.13]}
             type="OBJ"
             physicsBody={{ type: 'Static' }}
             // onCollision={this.props.arSceneNavigator.viroAppProps.incrementScore}
@@ -284,14 +278,8 @@ export default class BallGameScene extends Component {
           /> */}
         </ViroARCamera>
       </ViroARPlaneSelector>
-
-
-    )
-
+    );
   }
-
-
-
 }
 
 var localStyles = StyleSheet.create({
@@ -339,15 +327,11 @@ ViroMaterials.createMaterials({
   },
   pink: {
     diffuseColor: 'pink',
-
   },
   white: {
     diffuseColor: 'gray',
-
   },
-  helloWorldTextStyle: {
-
-  },
+  helloWorldTextStyle: {},
 });
 
 ViroARTrackingTargets.createTargets({
