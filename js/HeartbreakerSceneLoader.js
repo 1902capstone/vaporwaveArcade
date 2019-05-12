@@ -1,8 +1,9 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable default-case */
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableHighlight } from "react-native";
-
+import { Text, View, StyleSheet, TouchableHighlight, Vibration } from "react-native";
+import ReactNativeHaptic from 'react-native-haptic';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback'
 import { ViroARSceneNavigator } from "react-viro";
 import PostGame2 from "./PostGame2";
 
@@ -17,6 +18,14 @@ const GAME_STATES = {
 };
 let timerIntervalId;
 
+const DURATION = 500 ;
+ 
+const PATTERN = [1000, 2000, 3000, 4000];
+
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false
+};
 export default class HeartbreakerSceneLoader extends Component {
   constructor() {
     super();
@@ -35,6 +44,7 @@ export default class HeartbreakerSceneLoader extends Component {
     this.beginTimer = this.beginTimer.bind(this);
     this.decrementTime = this.decrementTime.bind(this);
     this.resetGame = this.resetGame.bind(this)
+    this.decrementScore = this.decrementScore.bind(this)
   }
 
   render() {
@@ -79,7 +89,8 @@ export default class HeartbreakerSceneLoader extends Component {
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
             score: this.state.score,
-            beginTimer: this.beginTimer
+            beginTimer: this.beginTimer,
+            decrementScore: this.decrementScore
           }}
         />
         <View>
@@ -91,6 +102,13 @@ export default class HeartbreakerSceneLoader extends Component {
             <Text>BACK</Text>
           </TouchableHighlight>
           <Text style={localStyles.timerText}>{this.state.timeLeft}</Text>
+          <TouchableHighlight
+            style={localStyles.buttons}
+            underlayColor="#68a0ff"
+            onPress={() => ReactNativeHaptic.prepare()}
+          >
+            <Text>test</Text>
+          </TouchableHighlight>
         </View>
         {this.checkTime()}
       </View>
@@ -110,6 +128,7 @@ export default class HeartbreakerSceneLoader extends Component {
   }
 
   startGame() {
+    Vibration.vibrate(DURATION)
     this.setState({
       gameState: GAME_STATES.RENDER_GAME
     });
@@ -137,10 +156,15 @@ showLeaderboard:false
   }
 
   incrementScore() {
-    console.log("BANG");
+   Vibration.vibrate(DURATION)
     this.setState({
       score: this.state.score + 1
     });
+  }
+  decrementScore() {
+    this.setState({
+      score: this.state.score - 1
+    })
   }
 
   setTimer(timeDiff) {

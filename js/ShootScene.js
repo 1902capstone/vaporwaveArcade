@@ -93,7 +93,7 @@ export default class ShootScene extends Component {
             materials={['blue']}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
+              this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
           <Viro3DObject
@@ -107,7 +107,7 @@ export default class ShootScene extends Component {
             materials={['teal']}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
+              this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
           <ViroText
@@ -159,9 +159,9 @@ export default class ShootScene extends Component {
   }
   
   _renderBullets() {
-    if (!this.sceneRef.currnt) {
-      return;
-    }
+    // if (!this.sceneRef.currnt) {
+    //   return;
+    // }
     
     // this works
     // if (this.sceneRef.current) {
@@ -194,9 +194,9 @@ export default class ShootScene extends Component {
           physicsBody={{
             type: 'Dynamic',
             mass: 1,
-            force: {value: [0, 0, -30]}
+            // force: {value: [0, 0, -30]}
           }}
-          // animation={{ name: 'shoot', run: true, loop: true }}
+          animation={{ name: 'shoot', run: true, loop: true }}
         />
       );
     }
