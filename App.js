@@ -46,6 +46,7 @@ const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen')
 const AllLeaderboards = require('./js/AllLeaderboards')
 const LeaderBoard = require('./js/LeaderBoard')
 const LeaderBoard2 = require('./js/LeaderBoard2')
+const LeaderBoard3 = require('./js/LeaderBoard3')
 const MenuSceneLoader = require('./js/MenuSceneLoader')
 const TitleScreenLoader = require('./js/TitleScreenLoader')
 
@@ -59,6 +60,7 @@ const MENU_STATES = {
   ALL_LEADERBOARDS: "ALL_LEADERBOARDS",
   LEADERBOARD: "LEADERBOARD",
   LEADERBOARD_2:"LEADERBOARD_2",
+  LEADERBOARD_3: "LEADERBOARD_3",
   LOADING: "LOADING",
   INTRO: "INTRO"
 }
@@ -73,6 +75,7 @@ export default class App extends Component {
     this.goToLeaderBoard = this.goToLeaderBoard.bind(this); 
     this.selectGame = this.selectGame.bind(this);
     this.goToLeaderBoard2 = this.goToLeaderBoard2.bind(this)
+    this.goToLeaderBoard3 = this.goToLeaderBoard3.bind(this)
     this.renderLoadScreen = this.renderLoadScreen.bind(this);
   }
 
@@ -96,6 +99,12 @@ export default class App extends Component {
       menuState: MENU_STATES.LEADERBOARD_2
     })
   }
+
+  goToLeaderBoard3 = () => {
+    this.setState({
+      menuState: MENU_STATES.LEADERBOARD_3
+    })
+  }
   
   render() {
     switch (this.state.menuState) {
@@ -117,6 +126,8 @@ export default class App extends Component {
         return this.renderLeaderBoard();
       case MENU_STATES.LEADERBOARD_2:
         return this.renderLeaderBoard2();
+      case MENU_STATES.LEADERBOARD_3:
+        return this.renderLeaderBoard3();
       case MENU_STATES.LOADING:
         return this.renderLoadScreen();
       case MENU_STATES.INTRO:
@@ -173,6 +184,7 @@ export default class App extends Component {
       <KittyPoolSceneLoader 
       propObj = {{
         returnToMenu: this.returnToMenu,
+        goToLeaderBoard3: this.goToLeaderBoard3 
       }}
       />
     )
@@ -217,7 +229,8 @@ export default class App extends Component {
       propObj = {{
         returnToMenu: this.returnToMenu,
         goToLeaderBoard: this.goToLeaderBoard,
-        goToLeaderBoard2: this.goToLeaderBoard2
+        goToLeaderBoard2: this.goToLeaderBoard2,
+        goToLeaderBoard3: this.goToLeaderBoard3
       }}
       />
     )
@@ -235,6 +248,16 @@ export default class App extends Component {
   renderLeaderBoard2() {
     return (
       <LeaderBoard2 
+      propObj = {{
+        returnToMenu: this.returnToMenu,
+      }}
+      />
+    )
+  }
+
+  renderLeaderBoard3() {
+    return (
+      <LeaderBoard3 
       propObj = {{
         returnToMenu: this.returnToMenu,
       }}

@@ -163,7 +163,7 @@ export default class HeartbreakerSceneLoader extends Component {
       timer: 25,
       timeLeft: 25,
       gameState: GAME_STATES.INTRODUCTION,
-showLeaderboard:false
+      showLeaderboard:false
     });
   }
 
