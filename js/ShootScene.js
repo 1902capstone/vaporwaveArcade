@@ -35,6 +35,7 @@ export default class ShootScene extends Component {
       totalBullets: 0,
       score: 0,
       cameraAngle: [0, 0, -1],
+      shootSoundPause: true
     };
 
     // bind 'this' to functions
@@ -46,6 +47,8 @@ export default class ShootScene extends Component {
     this.sceneRef = React.createRef();
     this.updateCamera = this.updateCamera.bind(this);
     this.beginCameraUpdates = this.beginCameraUpdates.bind(this);
+    this.handleShootSoundEnd = this.handleShootSoundEnd.bind(this);
+    this.shootSoundRef = React.createRef()
   }
 
   componentWillUnmount() {
@@ -80,11 +83,12 @@ export default class ShootScene extends Component {
           pauseUpdates={this.state.pauseUpdates}
         >
           <ViroSound
-            paused={true}
+            ref={this.shootSoundRef}
+            paused={this.state.shootSoundPause}
             source={require('../assets/SoundFX/bang.mp3')}
             loop={true}
             volume={1.0}
-            onFinish={this.onFinishSound}
+            onFinish={this.handleShootSoundEnd}
             onError={this.onErrorSound}
           />
           <Viro3DObject
@@ -218,6 +222,12 @@ export default class ShootScene extends Component {
     });
   }
 
+  handleShootSoundEnd() {
+    this.setState({
+      shootSoundPause: true
+    })
+  }
+  
   _renderBullets() {
     if (!this.sceneRef.current) {
       return;
@@ -261,7 +271,12 @@ export default class ShootScene extends Component {
   }
 
   _addBullet() {
-    this.setState({ totalBullets: this.state.totalBullets + 1 });
+    this.setState({ 
+      totalBullets: this.state.totalBullets + 1,
+      shootSoundPause: false
+    });
+    this.shootSoundRef.current.seekToTime(0)
+    
     // change this to slow down rapidfire and empty state
     if (this.state.totalBullets === 10) {
       this.setState({ totalBullets: 0 });
@@ -286,7 +301,11 @@ export default class ShootScene extends Component {
       cameraAngle: myPos.forward,
     });
   }
+  
+  
+  
 }
+
 
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
