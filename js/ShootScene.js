@@ -163,7 +163,21 @@ export default class ShootScene extends Component {
             position={[0, 0, -1]}
             style={localStyles.helloWorldTextStyle}
           /> */}
-
+          {/* BOMB */}
+          <Viro3DObject
+            // animation={{ name: 'swayC', run: true, loop: true }}
+            source={require('../assets/3DModels/bomb/Bomb.obj')}
+            resources={[require('../assets/3DModels/bomb/Bomb.mtl')]}
+            opacity={1}
+            position={[0, 0, -3]}
+            scale={[0.9, 0.9, 0.9]}
+            type="OBJ"
+            materials={['bomb']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.decrementScore
+            }
+          />
           <ViroARCamera>
             <ViroNode onClick={this._addBullet}>
               <Viro3DObject
@@ -317,6 +331,10 @@ ViroMaterials.createMaterials({
   testSkull: {
     diffuseColor: 'red',
     diffuseTexture: require('../assets/Images/grid_bg.jpg'),
+  },
+  bomb: {
+    diffuseColor: 'red',
+    diffuseTexture: require('../assets/3DModels/bomb/Albedo.png'),
   },
   pink: {
     diffuseColor: 'lightpink',

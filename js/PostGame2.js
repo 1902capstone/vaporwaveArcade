@@ -63,7 +63,7 @@ export default class PostGame2 extends Component {
           <Image
             source={require('../assets/Images/spin.gif')}
             style={{ width: 250, height: 250 }}
-          />{' '}
+          />
           <TouchableHighlight
             style={localStyles.button}
             underlayColor="#68a0ff"
