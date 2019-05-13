@@ -39,7 +39,7 @@ export default class LeaderBoardComponent extends Component {
             style={{ flex: 0.66, height: 60, width: 60, borderRadius: 60 / 2 }}
             source={{
               uri:
-                "https://st2.depositphotos.com/1006318/5909/v/950/depositphotos_59094043-stock-illustration-profile-icon-male-avatar.jpg"
+                "https://www.washingtonpost.com/resizer/3YlTwR14jJfbnCqB4iAwDR37x_o=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/EQF7CE3V2U7ZTNZXTZ573JRCHQ.jpg"
             }}
           />
         </View>
