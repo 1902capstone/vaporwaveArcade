@@ -22,6 +22,7 @@ import {
   ViroQuad,
   ViroImage,
   ViroNode,
+  ViroSound,
 } from 'react-viro';
 
 
@@ -47,6 +48,9 @@ export default class CatScene extends Component {
       startTime: 0,
       catText: '',
       texts: 0,
+      splashSoundPause: true,
+      catMeowPause: true,
+      
     };
 
     // bind 'this' to functions
@@ -59,6 +63,10 @@ export default class CatScene extends Component {
     this.handleGameStart = this.handleGameStart.bind(this);
     this._renderTexts = this._renderTexts.bind(this);
     this.removeText = this.removeText.bind(this);
+    this.catMeowRef = React.createRef();
+    this.splashSoundRef = React.createRef();
+    this.handleCatSoundEnd = this.handleCatSoundEnd.bind(this);
+    this.handleSplashSoundEnd = this.handleSplashSoundEnd.bind(this);
   }
 
   componentDidMount() {
@@ -100,6 +108,24 @@ export default class CatScene extends Component {
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
+            <ViroSound
+            ref={this.catMeowRef}
+            paused={this.state.catMeowPause}
+            source={require('../assets/SoundFX/cat_save.wav')}
+            loop={false}
+            volume={1.0}
+            onFinish={this.handleCatSoundEnd}
+            onError={this.onErrorSound}
+          />
+          <ViroSound
+            ref={this.splashSoundRef}
+            paused={this.state.splashSoundPause}
+            source={require('../assets/SoundFX/splash_1.wav')}
+            loop={false}
+            volume={1.0}
+            onFinish={this.handleSplashSoundEnd}
+            onError={this.onErrorSound}
+          />
           {this.handleGameStart()}
           <ViroAnimatedImage
             height={9}
@@ -220,7 +246,12 @@ export default class CatScene extends Component {
     
     this.setState({
       cats: this.state.cats - 1,
+      catMeowPause: false,
+      splashSoundPause: false,
     });
+    
+    this.catMeowRef.current.seekToTime(0);
+    this.splashSoundRef.current.seekToTime(0);
     
     this.props.arSceneNavigator.viroAppProps.incrementScore();
     
@@ -229,7 +260,6 @@ export default class CatScene extends Component {
     
     // this.setState({ catText: 'saved' });
   }
-  
   
   _createCats() {
     const catsToLoad = [];
@@ -361,6 +391,21 @@ export default class CatScene extends Component {
       catSpawnIntervalId = setInterval(this._createCats, 600);
     }
   }
+  
+  handleSplashSoundEnd() {
+    this.setState({
+      splashSoundPause: true
+    })
+  }
+  
+  handleCatSoundEnd() {
+    this.setState({
+      catMeowPause: true
+    })
+  }
+  
+  
+  
 }
 
 var localStyles = StyleSheet.create({
