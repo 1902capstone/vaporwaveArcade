@@ -165,12 +165,12 @@ export default class ShootScene extends Component {
           /> */}
           {/* BOMB */}
           <Viro3DObject
-            // animation={{ name: 'swayC', run: true, loop: true }}
+            animation={{ name: 'swayD', run: true, loop: true }}
             source={require('../assets/3DModels/bomb/Bomb.obj')}
             resources={[require('../assets/3DModels/bomb/Bomb.mtl')]}
             opacity={1}
-            position={[0, 0, -3]}
-            scale={[0.9, 0.9, 0.9]}
+            position={[-2, 2, -18]}
+            scale={[5,5, 5]}
             type="OBJ"
             materials={['bomb']}
             physicsBody={{ type: 'Static' }}
@@ -427,6 +427,21 @@ ViroAnimations.registerAnimations({
       'moveDown',
     ],
   ],
+  swayD: [
+    [
+      'moveLeft',
+      'forward',
+      'moveRight',
+      'moveDownR',
+      'moveRight',
+      'moveUpL',
+      'back',
+      'moveLeft', 
+      'moveUp',
+      'moveDown',
+    ],
+  ],
+  
 });
 
 module.exports = ShootScene;
