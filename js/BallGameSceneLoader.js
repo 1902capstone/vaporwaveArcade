@@ -6,6 +6,7 @@ import { Text, View, StyleSheet, TouchableHighlight, Vibration } from "react-nat
 
 import PostGame1 from "./PostGame1";
 import { ViroARSceneNavigator } from "react-viro";
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
@@ -22,6 +23,10 @@ let timerIntervalId;
 const DURATION = 500 ;
  
 const PATTERN = [1000, 2000, 3000, 4000];
+
+const options = {
+  enableVibrateFallback: true,
+};
 
 export default class BallGameSceneLoader extends Component {
   constructor() {
@@ -59,10 +64,10 @@ export default class BallGameSceneLoader extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Welcome to Ball Game!</Text>
+          <Text style={localStyles.titleText}>Donut Drop</Text>
           <Text style={localStyles.text}>
-            You have thirty seconds to catch as many balls as you can in the
-            cup.
+            You have thirty seconds to catch as many donuts as you can in the
+            cup.  Avoid the avocado.
           </Text>
           <TouchableHighlight
             style={localStyles.buttons}

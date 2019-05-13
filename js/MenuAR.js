@@ -177,7 +177,7 @@ export default class HelloWorldSceneAR extends Component {
         </ViroNode>
         {/* MUSIC change paused to FALSE to turn on */}
         <ViroSound
-            paused={true}
+            paused={false}
             source={require('../assets/Music/menuMusic.mp3')}
             loop={true}
             volume={.2}

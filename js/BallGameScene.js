@@ -35,6 +35,7 @@ let timerIntervalId;
 let ballSpawnIntervalId;
 let gameStarted = false;
 let sphereCount = 0;
+let hide = true;
 
 export default class BallGameScene extends Component {
   _isMounted = false;
@@ -67,6 +68,7 @@ export default class BallGameScene extends Component {
     ballSpawnIntervalId = 0;
     spheres = [];
     this._isMounted = false;
+    hide = true;
   }
 
   render() {
@@ -77,6 +79,13 @@ export default class BallGameScene extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -1.8, 0] }}
       >
+        <ViroImage
+          height={1}
+          width={2.8}
+          visible={hide}
+          position={[0, 0, -4]}
+          source={require('../assets/Images/planeFind.png')}
+        />
         {this.renderARScene()}
       </ViroARScene>
     );
@@ -130,6 +139,23 @@ export default class BallGameScene extends Component {
             restitution: 0.999,
           }}
         />
+        // <Viro3DObject
+        //   animation={{ name: 'flip', run: true, loop: true }}
+        //   source={require('../assets/3DModels/donut/Donut_OBJ.obj')}
+        //   opacity={1}
+        //   materials={[colors[randomColor]]}
+        //   position={[randomXPos, randomYPos, -3]}
+        //   scale={[0.013, 0.013, 0.013]}
+        //   type="OBJ"
+        //   rotation={[-90, 0, 0]}
+        //   physicsBody={{
+        //         type: 'Dynamic',
+        //         mass: randomMass,
+        //         restitution: 0.999,
+        //       }}
+        //   onCollision={this.handleScore}
+        //   onClick={this.createSpheres}
+        // />
       );
       const SphereObj = {
         show: false,
@@ -183,6 +209,7 @@ export default class BallGameScene extends Component {
         onPlaneSelected={() => {
           this.handleGameStart();
           this.setState({ pauseUpdates: true, startTime: Date.now() });
+          hide = false; // to hide the plane fine image
         }}
         pauseUpdates={this.state.pauseUpdates}
       >
@@ -225,7 +252,19 @@ export default class BallGameScene extends Component {
           position={[0, 0, -1]}
           style={localStyles.helloWorldTextStyle}
         /> */}
-
+        <Viro3DObject
+          animation={{ name: 'flip', run: true, loop: true }}
+          source={require('../assets/3DModels/donut/Donut_FBX.vrx')}
+          opacity={1}
+          // materials={['coke']}
+          position={[0, 0, -3]}
+          scale={[0.013, 0.013, 0.013]}
+          type="VRX"
+          rotation={[-90, 0, 0]}
+          physicsBody={{ type: 'Static' }}
+          onCollision={this.handleScore}
+          onClick={this.createSpheres}
+        />
         <ViroARCamera>
           <Viro3DObject
             // animation={{ name: 'rotate', run: true, loop: true }}
@@ -332,6 +371,12 @@ ViroAnimations.registerAnimations({
     },
     duration: 2500, //.25 seconds
   },
+  flip: {
+    properties: {
+      rotateX: '+=60',
+    },
+    duration: 1000, //.
+  }
 });
 
 module.exports = BallGameScene;
