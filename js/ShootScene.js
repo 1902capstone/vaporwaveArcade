@@ -155,7 +155,10 @@ export default class ShootScene extends Component {
             materials={this.state.heart4Color}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.decrementScore
+              () => {
+                this.props.arSceneNavigator.viroAppProps.incrementScore();
+                this._changeColor('heart4Color')
+              }
             }
           />
           <Viro3DObject
@@ -169,7 +172,10 @@ export default class ShootScene extends Component {
             materials={this.state.heart5Color}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.decrementScore
+              () => {
+                this.props.arSceneNavigator.viroAppProps.incrementScore();
+                this._changeColor('heart5Color')
+              }
             }
           />
           {/* <ViroText
