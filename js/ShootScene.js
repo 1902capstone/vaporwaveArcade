@@ -35,6 +35,11 @@ export default class ShootScene extends Component {
       totalBullets: 0,
       score: 0,
       cameraAngle: [0, 0, -1],
+      heart1Color: ['pink'],
+      heart2Color: ['blue'],
+      heart3Color: ['teal'],
+      heart4Color: ['teal'],
+      heart5Color: ['teal']
     };
 
     // bind 'this' to functions
@@ -42,6 +47,7 @@ export default class ShootScene extends Component {
     this._onButtonTap = this._onButtonTap.bind(this);
     this._addBullet = this._addBullet.bind(this);
     this._renderBullets = this._renderBullets.bind(this);
+    this._changeColor = this._changeColor.bind(this);
     this.handleGameStart = this.handleGameStart.bind(this);
     this.sceneRef = React.createRef();
     this.updateCamera = this.updateCamera.bind(this);
@@ -95,10 +101,13 @@ export default class ShootScene extends Component {
             position={[-1, -2, -20]}
             scale={[0.08, 0.08, 0.08]}
             type="OBJ"
-            materials={['pink']}
+            materials={this.state.heart1Color}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
+              () => {
+                this.props.arSceneNavigator.viroAppProps.incrementScore();
+                this._changeColor('heart1Color')
+              }
             }
           />
           <Viro3DObject
@@ -109,10 +118,13 @@ export default class ShootScene extends Component {
             position={[1, -3, -20]}
             scale={[0.05, 0.05, 0.05]}
             type="OBJ"
-            materials={['blue']}
+            materials={this.state.heart2Color}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.decrementScore
+              () => {
+                this.props.arSceneNavigator.viroAppProps.incrementScore();
+                this._changeColor('heart2Color')
+              }
             }
           />
           <Viro3DObject
@@ -123,10 +135,13 @@ export default class ShootScene extends Component {
             position={[-0.5, 0, -20]}
             scale={[0.02, 0.02, 0.02]}
             type="OBJ"
-            materials={['teal']}
+            materials={this.state.heart3Color}
             physicsBody={{ type: 'Static' }}
             onCollision={
-              this.props.arSceneNavigator.viroAppProps.decrementScore
+              () => {
+                this.props.arSceneNavigator.viroAppProps.incrementScore();
+                this._changeColor('heart3Color')
+              }
             }
           />
           <Viro3DObject
@@ -137,7 +152,7 @@ export default class ShootScene extends Component {
             position={[1, -1, -20]}
             scale={[0.02, 0.02, 0.02]}
             type="OBJ"
-            materials={['teal']}
+            materials={this.state.heart4Color}
             physicsBody={{ type: 'Static' }}
             onCollision={
               this.props.arSceneNavigator.viroAppProps.decrementScore
@@ -151,7 +166,7 @@ export default class ShootScene extends Component {
             position={[-2, 2, -18]}
             scale={[0.02, 0.02, 0.02]}
             type="OBJ"
-            materials={['teal']}
+            materials={this.state.heart5Color}
             physicsBody={{ type: 'Static' }}
             onCollision={
               this.props.arSceneNavigator.viroAppProps.decrementScore
@@ -218,6 +233,28 @@ export default class ShootScene extends Component {
     });
   }
 
+  _changeColor(heartObj) {
+    if (this.state[heartObj][0] === 'teal'){
+      this.setState({[heartObj]: ['red']})
+      setTimeout(() => {
+        this.setState({[heartObj]: ['teal']})
+      }, 500)
+    }
+    if (this.state[heartObj][0] === 'blue'){
+      this.setState({[heartObj]: ['red']})
+      setTimeout(() => {
+        this.setState({[heartObj]: ['blue']})
+    }, 500)
+    }
+    if (this.state[heartObj][0] === 'pink') {
+      this.setState({[heartObj]: ['red']})
+      setTimeout(() => {
+        this.setState({[heartObj]: ['pink']})
+      }, 500)
+    }
+  }
+
+
   _renderBullets() {
     if (!this.sceneRef.current) {
       return;
@@ -229,6 +266,8 @@ export default class ShootScene extends Component {
     //     console.log(myDirection) // [0] [1] [2]
     //   })
     // }
+
+
 
     var bang = [];
     for (var i = 0; i < this.state.totalBullets; i++) {
