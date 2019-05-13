@@ -28,7 +28,7 @@ export default class List2 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Kitty Pool Leaderboard</Text>
+        {/* <Text style={styles.title}>Kitty Pool Leaderboard</Text> */}
         {this.state.score.length > 0 ? (
           <LeaderBoardComponent3 score={this.state.score} />
         ) : (
