@@ -86,7 +86,7 @@ export default class ShootScene extends Component {
             ref={this.shootSoundRef}
             paused={this.state.shootSoundPause}
             source={require('../assets/SoundFX/bang.mp3')}
-            loop={true}
+            loop={false}
             volume={1.0}
             onFinish={this.handleShootSoundEnd}
             onError={this.onErrorSound}
