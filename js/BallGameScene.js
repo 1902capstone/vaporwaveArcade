@@ -165,51 +165,33 @@ export default class BallGameScene extends Component {
       };
       spheres.push(SphereObj);
     }
-
+    
     this.setState({
       spheres: this.state.spheres + spheresToLoad.length,
     });
   }
-
+  
   renderSpheres() {
     let sphereList = spheres.map(item => {
       return item.model;
     });
     return sphereList;
   }
-
-  // handleTime() {
-  //   if (!timerStarted) {
-  //     console.log(this.props.arSceneNavigator.viroAppProps)
-  //     const setTimer = this.props.arSceneNavigator.viroAppProps.setTimer
-  //     const myStartTime = this.state.startTime
-  //     this.setState({
-  //       startTime: Date.now()
-  //     })
-  //     const findNewTime = function(setTimerFunc, myStartTimeVar) {
-  //       const currentTime = Date.now();
-  //       let timeElapsed = currentTime - myStartTimeVar;
-  //       setTimerFunc(timeElapsed);
-  //     }
-
-  //     timerIntervalId = setInterval(findNewTime(setTimer, myStartTime), 1000);
-  //     timerStarted = true;
-  //   }
-  // }
-
+  
+  
   handleGameStart() {
     if (!ballSpawnIntervalId && this.state.startTime) {
       this.props.arSceneNavigator.viroAppProps.beginTimer();
       ballSpawnIntervalId = setInterval(this.createSpheres, 1800);
     }
   }
-
+  
   handleScore(colliderTag) {
     let indexOfSphere = spheres.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
     });
     spheres.splice(indexOfSphere, 1);
-
+    
     this.setState({
       spheres: this.state.spheres - 1,
     });

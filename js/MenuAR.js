@@ -190,7 +190,7 @@ export default class HelloWorldSceneAR extends Component {
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text: 'Welcome to the arcade!',
+        text: 'Welcome to the arcade!Tap to see Leaderboard',
       });
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
@@ -257,7 +257,7 @@ export default class HelloWorldSceneAR extends Component {
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
     fontFamily: 'Arial',
-    fontSize: 20,
+    fontSize: 12,
     color: 'teal',
     textAlignVertical: 'center',
     textAlign: 'center',

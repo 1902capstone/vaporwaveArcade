@@ -33,6 +33,7 @@ const options = {
   ignoreAndroidSystemSettings: false,
 };
 export default class HeartbreakerSceneLoader extends Component {
+  _isMounted = false;  
   constructor() {
     super();
     this.state = {
@@ -52,9 +53,13 @@ export default class HeartbreakerSceneLoader extends Component {
     this.resetGame = this.resetGame.bind(this);
     this.decrementScore = this.decrementScore.bind(this);
   }
-
+  
+  componentDidMount() {
+    this._isMounted = true;
+  }
   componentWillUnmount() {
-    clearInterval(timerIntervalId);
+  _isMounted = false;
+    clearInterval(timerIntervalId)
     timerIntervalId = 0;
   }
 
