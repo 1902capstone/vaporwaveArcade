@@ -56,6 +56,7 @@ export default class CatScene extends Component {
     this._createCats = this._createCats.bind(this);
     this.handleGameStart = this.handleGameStart.bind(this);
     this._renderTexts = this._renderTexts.bind(this);
+    this.removeText = this.removeText.bind(this);
   }
 
   componentDidMount() {
@@ -286,6 +287,8 @@ export default class CatScene extends Component {
         loop: false,
         interruptable: true,
       }}
+      key={textTag}
+      viroTag={textTag}
       text={"+1"}
       scale={[1, 1, 1]}
       position={[pos[0], pos[1]+1.5, pos[2]-0.8]}
@@ -308,10 +311,24 @@ export default class CatScene extends Component {
     });
   
     setTimeout(() => {
-      
+      this.removeText(textTag);
     }, 1500)
-    
+  }
   
+  
+  removeText(textTag) {
+    let indexOfText = texts.findIndex(elt => {
+      return elt.model.props.viroTag === textTag;
+    });
+    
+    texts.splice(indexOfText, 1);
+    
+    this.setState({
+      texts: this.state.texts - 1,
+    });
+    
+    
+    
   }
   
   _renderCats() {
