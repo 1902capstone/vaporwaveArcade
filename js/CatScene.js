@@ -78,7 +78,7 @@ export default class CatScene extends Component {
         <ViroImage
           height={1}
           width={2.8}
-          visible={true}
+          visible={hide}
           position={[0, 0, -4]}
           source={require('../assets/Images/planeFind.png')}
         />
