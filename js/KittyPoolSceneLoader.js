@@ -8,11 +8,10 @@ import {
   Image,
   ImageBackground,
   TouchableHighlight,
-  Vibration
+  Vibration,
 } from 'react-native';
 import { ViroARSceneNavigator } from 'react-viro';
-import PostGame3 from "./PostGame3"
-
+import PostGame3 from './PostGame3';
 
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
@@ -27,8 +26,8 @@ const GAME_STATES = {
 
 let timerIntervalId;
 
-const DURATION = 500 ;
- 
+const DURATION = 500;
+
 const PATTERN = [1000, 2000, 3000, 4000];
 export default class KittyPoolSceneLoader extends Component {
   constructor() {
@@ -38,7 +37,7 @@ export default class KittyPoolSceneLoader extends Component {
       score: 0,
       timer: 10,
       timeLeft: 10,
-      showLeaderboard: false
+      showLeaderboard: false,
     };
     this.startGame = this.startGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
@@ -66,7 +65,10 @@ export default class KittyPoolSceneLoader extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>{`Kitty Pool`}</Text>
+          <Image
+            source={require('../assets/Images/kittypool.jpg')}
+            style={{ width: 300, height: 300 }}
+          />
           <Text
             style={localStyles.text}
           >{`You have thirty seconds to catch as many cats as you can!  Tap the cats to rescue them.`}</Text>
@@ -111,16 +113,20 @@ export default class KittyPoolSceneLoader extends Component {
             style={localStyles.buttons}
             underlayColor="#68a0ff"
           >
-          <Text style={localStyles.buttonText}>Time: {this.state.timeLeft}</Text>
+            <Text style={localStyles.buttonText}>
+              Time: {this.state.timeLeft}
+            </Text>
           </TouchableHighlight>
 
           <TouchableHighlight
             style={localStyles.buttons}
             underlayColor="#68a0ff"
           >
-          <Text style={localStyles.timerText}> Score: {this.state.score}</Text>
+            <Text style={localStyles.timerText}>
+              {' '}
+              Score: {this.state.score}
+            </Text>
           </TouchableHighlight>
-
         </View>
       </View>
     );
@@ -134,7 +140,7 @@ export default class KittyPoolSceneLoader extends Component {
         goToLeaderBoard={this.props.propObj.goToLeaderBoard3}
         score={this.state.score}
         resetGame={this.resetGame}
-        showLeaderboard = {this.state.showLeaderboard}
+        showLeaderboard={this.state.showLeaderboard}
       />
     );
   }
@@ -145,7 +151,7 @@ export default class KittyPoolSceneLoader extends Component {
       timer: 10,
       timeLeft: 10,
       gameState: GAME_STATES.INTRODUCTION,
-      showLeaderboard: false
+      showLeaderboard: false,
     });
   }
 
@@ -165,13 +171,13 @@ export default class KittyPoolSceneLoader extends Component {
     });
     setTimeout(() => {
       this.setState({
-        showLeaderboard: true
-      })
-    }, 3000)
+        showLeaderboard: true,
+      });
+    }, 3000);
   }
 
   incrementScore(colliderTag) {
-    Vibration.vibrate(DURATION)  
+    Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });
@@ -197,26 +203,23 @@ export default class KittyPoolSceneLoader extends Component {
   beginTimer() {
     timerIntervalId = setInterval(this.decrementTime, 1000);
   }
-  
-  
+
   decrementTime() {
     let currentTime = this.state.timeLeft;
     let newTime = currentTime - 1;
     this.setState({
       timeLeft: newTime,
     });
-    
+
     if (this.state.timeLeft <= 0) {
-      this.handleGameOver()
+      this.handleGameOver();
     }
   }
-  
+
   handleGameOver() {
     clearInterval(timerIntervalId);
     this.gameEnd();
   }
-  
-  
 }
 
 var localStyles = StyleSheet.create({
@@ -276,7 +279,6 @@ var localStyles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontSize: 20,
-    
   },
   buttons: {
     height: 80,
@@ -304,20 +306,20 @@ var localStyles = StyleSheet.create({
     borderColor: '#fff',
   },
   hudButton: {
-      height: 55,
-      width: 100,
-      paddingTop: 20,
-      marginTop: 10,
-      marginBottom: 10,
-      backgroundColor: 'rgba(123,123,231,.4)',
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: 'rgba(123,087,231,.4)',
+    height: 55,
+    width: 100,
+    paddingTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: 'rgba(123,123,231,.4)',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'rgba(123,087,231,.4)',
   },
   bottomMenu: {
-    width : '100%',
-    position : 'absolute',
-    top : 0,
+    width: '100%',
+    position: 'absolute',
+    top: 0,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

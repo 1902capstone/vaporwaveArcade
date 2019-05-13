@@ -20,6 +20,7 @@ import {
   ViroSphere,
   ViroAmbientLight,
   ViroQuad,
+  ViroImage,
   ViroNode,
 } from 'react-viro';
 // import { CustomConsole } from '@jest/console';
@@ -30,6 +31,7 @@ let timerIntervalId;
 let catSpawnIntervalId;
 let gameStarted = false;
 let catCount = 0;
+let hide = true;
 
 export default class CatScene extends Component {
   constructor() {
@@ -73,6 +75,13 @@ export default class CatScene extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
       >
+        <ViroImage
+          height={1}
+          width={2.8}
+          visible={hide}
+          position={[0, 0, -4]}
+          source={require('../assets/Images/planeFind.png')}
+        />
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
@@ -80,6 +89,7 @@ export default class CatScene extends Component {
           onPlaneSelected={() => {
             // this.handleGameStart();
             this.setState({ pauseUpdates: true, startTime: Date.now() });
+            hide = false; // to hide the plane find image
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
@@ -395,7 +405,7 @@ ViroAnimations.registerAnimations({
     properties: { positionX: '+=.3', positionZ: '+=2', rotateY: '+=45' },
     duration: 1200,
   },
-  birdPath: [['bird1', 'bird2', 'bird3', 'bird4']]
+  birdPath: [['bird1', 'bird2', 'bird3', 'bird4']],
 });
 
 module.exports = CatScene;

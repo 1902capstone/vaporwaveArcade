@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable default-case */
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableHighlight, Vibration } from "react-native";
+import { Text, View, StyleSheet, TouchableHighlight, Vibration, Image } from "react-native";
 import ReactNativeHaptic from 'react-native-haptic';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback'
 import { ViroARSceneNavigator } from "react-viro";
@@ -70,7 +70,10 @@ export default class HeartbreakerSceneLoader extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Welcome to Heartbreaker!</Text>
+        <Image
+            source={require('../assets/Images/heartbreaker.jpg')}
+            style={{ width: 300, height: 100 }}
+          />
           <Text
             style={localStyles.text}
           >{`Shoot the hearts for points! \n Tap to shoot.`}</Text>
