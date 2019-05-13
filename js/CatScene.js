@@ -111,7 +111,7 @@ export default class CatScene extends Component {
             <ViroSound
             ref={this.catMeowRef}
             paused={this.state.catMeowPause}
-            source={require('../assets/SoundFX/cat_save.wav')}
+            source={require('../assets/SoundFX/cat_save.mp3')}
             loop={false}
             volume={1.0}
             onFinish={this.handleCatSoundEnd}

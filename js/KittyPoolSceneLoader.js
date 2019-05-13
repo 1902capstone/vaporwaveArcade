@@ -36,8 +36,8 @@ export default class KittyPoolSceneLoader extends Component {
     this.state = {
       gameState: GAME_STATES.INTRODUCTION,
       score: 0,
-      timer: 10,
-      timeLeft: 10,
+      timer: 20,
+      timeLeft: 20,
       showLeaderboard: false,
     };
     this.startGame = this.startGame.bind(this);
