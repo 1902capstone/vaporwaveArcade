@@ -4,20 +4,20 @@ import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 export default class AllLeaderboards extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <TouchableHighlight
-          style={styles.button}
-          underlayColor={"#68a0ff"}
-          onPress={() => this.props.propObj.goToLeaderBoard2()}
-        >
-          <Text style={styles.buttonText}>Heartbreaker High Scores</Text>
-        </TouchableHighlight>
+      <View style={styles.main}>
         <TouchableHighlight
           style={styles.button}
           underlayColor={"#68a0ff"}
           onPress={() => this.props.propObj.goToLeaderBoard()}
         >
           <Text style={styles.buttonText}>Ball Game High Scores</Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor={"#68a0ff"}
+          onPress={() => this.props.propObj.goToLeaderBoard2()}
+        >
+          <Text style={styles.buttonText}>Heartbreaker High Scores</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
