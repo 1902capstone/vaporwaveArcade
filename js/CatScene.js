@@ -114,7 +114,7 @@ export default class CatScene extends Component {
             paused={this.state.catMeowPause}
             source={require('../assets/SoundFX/cat_save.mp3')}
             loop={false}
-            volume={1.0}
+            volume={0.7}
             onFinish={this.handleCatSoundEnd}
             onError={this.onErrorSound}
           />
