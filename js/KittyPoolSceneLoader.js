@@ -10,8 +10,9 @@ import {
   TouchableHighlight,
   Vibration
 } from 'react-native';
-
 import { ViroARSceneNavigator } from 'react-viro';
+import PostGame3 from "./PostGame3"
+
 
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
@@ -37,6 +38,7 @@ export default class KittyPoolSceneLoader extends Component {
       score: 0,
       timer: 10,
       timeLeft: 10,
+      showLeaderboard: false
     };
     this.startGame = this.startGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
@@ -44,6 +46,7 @@ export default class KittyPoolSceneLoader extends Component {
     this.checkTime = this.checkTime.bind(this);
     this.beginTimer = this.beginTimer.bind(this);
     this.decrementTime = this.decrementTime.bind(this);
+    this.resetGame = this.resetGame.bind(this);
   }
 
   render() {
@@ -126,12 +129,24 @@ export default class KittyPoolSceneLoader extends Component {
   renderPostGame() {
     console.log(this.state);
     return (
-      <View>
-        <Text style={localStyles.loseText}>
-          Game has ended you won i guess
-        </Text>
-      </View>
+      <PostGame3
+        returnToMenu={this.props.propObj.returnToMenu}
+        goToLeaderBoard={this.props.propObj.goToLeaderBoard3}
+        score={this.state.score}
+        resetGame={this.resetGame}
+        showLeaderboard = {this.state.showLeaderboard}
+      />
     );
+  }
+
+  resetGame() {
+    this.setState({
+      score: 0,
+      timer: 10,
+      timeLeft: 10,
+      gameState: GAME_STATES.INTRODUCTION,
+      showLeaderboard: false
+    });
   }
 
   ////
@@ -148,6 +163,11 @@ export default class KittyPoolSceneLoader extends Component {
       gameState: GAME_STATES.POST_GAME,
       timeLeft: 10,
     });
+    setTimeout(() => {
+      this.setState({
+        showLeaderboard: true
+      })
+    }, 3000)
   }
 
   incrementScore(colliderTag) {

@@ -1,31 +1,40 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import LeaderBoardComponent3 from "./LeaderBoardComponent3";
 
-export default class AllLeaderboards extends Component {
+import { db } from '../src/config'
+//collection of all the names
+let leaderBoardRef = db.ref("/KittyPool")
+let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
+
+
+
+export default class List2 extends Component {
+    constructor() {
+        super();
+        this.state = {
+            score: []
+        };
+    }
+    
+    async componentDidMount() {
+      await ans.on("value", snapshot => {
+            let data = snapshot.val();
+            let score = Object.values(data);
+            this.setState({ score });
+        });
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <TouchableHighlight
-          style={styles.button}
-          underlayColor={"#68a0ff"}
-          onPress={() => this.props.propObj.goToLeaderBoard2()}
-        >
-          <Text style={styles.buttonText}>Heartbreaker High Scores</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.button}
-          underlayColor={"#68a0ff"}
-          onPress={() => this.props.propObj.goToLeaderBoard()}
-        >
-          <Text style={styles.buttonText}>Ball Game High Scores</Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.button}
-          underlayColor={"#68a0ff"}
-          onPress={() => this.props.propObj.goToLeaderBoard3()}
-        >
-          <Text style={styles.buttonText}>Kitty Pool High Scores</Text>
-        </TouchableHighlight>
+        <Text style={styles.title}>Kitty Pool Leaderboard</Text>
+        {this.state.score.length > 0 ? (
+          <LeaderBoardComponent3 score={this.state.score} />
+        ) : (
+          <Text>No user</Text>
+        )}
+
         <TouchableHighlight
           style={styles.button}
           underlayColor={"#68a0ff"}
@@ -75,4 +84,4 @@ const styles = StyleSheet.create({
   }
 });
 
-module.exports = AllLeaderboards;
+module.exports = List2;
