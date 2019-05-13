@@ -21,6 +21,7 @@ import {
   ViroAnimations,
   ViroNode,
   ViroSphere,
+  ViroSound,
   ViroAnimatedImage,
 } from 'react-viro';
 
@@ -141,13 +142,14 @@ export default class HelloWorldSceneAR extends Component {
         />
         {this._renderGazeBall()}
         <ViroText
+          // animation={{ name: 'zoom', run: true, loop: true }}
           text={this.state.text}
           scale={[0.5, 0.5, 0.5]}
-          position={[0, -.3, -1]}
+          position={[0, -0.3, -1]}
           extrusionDepth={4 }
           style={localStyles.helloWorldTextStyle}
         />
-        <ViroAmbientLight color={'#aaaaaa'} />
+        <ViroAmbientLight color={'#aaaaaa'} /> 
         <ViroSpotLight
           innerAngle={5}
           outerAngle={90}
@@ -173,6 +175,15 @@ export default class HelloWorldSceneAR extends Component {
             onClick={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.ALL_LEADERBOARDS)}}
           />
         </ViroNode>
+        {/* MUSIC change paused to FALSE to turn on */}
+        <ViroSound
+            paused={true}
+            source={require('../assets/Music/menuMusic.mp3')}
+            loop={true}
+            volume={.2}
+            onFinish={this.onFinishSound}
+            onError={this.onErrorSound}
+          />
       </ViroARScene>
     );
   }
@@ -296,6 +307,12 @@ ViroMaterials.createMaterials({
 });
 
 ViroAnimations.registerAnimations({
+  zoom: {
+    properties: {
+      positionY: '+=10',
+    },
+    duration: 2200,
+  },
   rotate: {
     properties: {
       rotateY: '+=30',
