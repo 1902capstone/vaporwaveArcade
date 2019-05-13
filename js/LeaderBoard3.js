@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
-import LeaderBoardComponent2 from "./LeaderBoardComponent2";
+import LeaderBoardComponent3 from "./LeaderBoardComponent3";
 
 import { db } from '../src/config'
 //collection of all the names
-let leaderBoardRef = db.ref("/Shooter")
+let leaderBoardRef = db.ref("/KittyPool")
 let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
 
 
@@ -28,9 +28,9 @@ export default class List2 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Shooter Leaderboard</Text>
+        <Text style={styles.title}>Kitty Pool Leaderboard</Text>
         {this.state.score.length > 0 ? (
-          <LeaderBoardComponent2 score={this.state.score} />
+          <LeaderBoardComponent3 score={this.state.score} />
         ) : (
           <Text>No user</Text>
         )}

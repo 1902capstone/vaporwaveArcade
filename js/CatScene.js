@@ -20,6 +20,7 @@ import {
   ViroSphere,
   ViroAmbientLight,
   ViroQuad,
+  ViroImage,
   ViroNode,
 } from 'react-viro';
 
@@ -30,8 +31,12 @@ let timerIntervalId;
 let catSpawnIntervalId;
 let gameStarted = false;
 let catCount = 0;
+<<<<<<< HEAD
 let texts = [];
 let textCount = 0;
+=======
+let hide = true;
+>>>>>>> ded2d4987965b2c5151a9c704af8ffc9a4b4b729
 
 export default class CatScene extends Component {
   constructor() {
@@ -80,6 +85,13 @@ export default class CatScene extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
       >
+        <ViroImage
+          height={1}
+          width={2.8}
+          visible={hide}
+          position={[0, 0, -4]}
+          source={require('../assets/Images/planeFind.png')}
+        />
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
@@ -87,6 +99,7 @@ export default class CatScene extends Component {
           onPlaneSelected={() => {
             // this.handleGameStart();
             this.setState({ pauseUpdates: true, startTime: Date.now() });
+            hide = false; // to hide the plane find image
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
@@ -169,12 +182,12 @@ export default class CatScene extends Component {
             physicsBody={{ type: 'Static' }}
           /> */}
           {/* SCORE */}
-          <ViroText
+          {/* <ViroText
             text={currentScore.toString()}
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
             style={localStyles.scoreStyle}
-          />
+          /> */}
         </ViroARPlaneSelector>
       </ViroARScene>
     );
@@ -489,10 +502,10 @@ ViroAnimations.registerAnimations({
     duration: 1200,
   },
   bird4: {
-    properties: { positionX: '+=.3', positionZ: '+=1', rotateY: '+=45' },
+    properties: { positionX: '+=.3', positionZ: '+=2', rotateY: '+=45' },
     duration: 1200,
   },
-  birdPath: [['bird1', 'bird2', 'bird3', 'bird4']]
+  birdPath: [['bird1', 'bird2', 'bird3', 'bird4']],
 });
 
 module.exports = CatScene;

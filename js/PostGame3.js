@@ -6,15 +6,14 @@ import {
   Text,
   Image,
 } from 'react-native';
-
-const LeaderBoardEntryScreen2 = require('./LeaderBoardEntryScreen2');
+import LeaderBoardEntryScreen3 from './LeaderBoardEntryScreen3';
 
 import { db } from '../src/config';
 import GameLoading from './GameLoading';
-let leaderBoardRef = db.ref('/Shooter');
+let leaderBoardRef = db.ref('/KittyPool');
 let ans = leaderBoardRef.orderByChild('score').limitToLast(10);
 
-export default class PostGame2 extends Component {
+export default class PostGame3 extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,11 +32,10 @@ export default class PostGame2 extends Component {
   }
   renderPostGame() {
     return (
-      <LeaderBoardEntryScreen2
+      <LeaderBoardEntryScreen3
         returnToMenu={this.props.returnToMenu}
         goToLeaderBoard={this.props.goToLeaderBoard}
         score={this.props.score}
-        gameName="ShootGame"
       />
     );
   }

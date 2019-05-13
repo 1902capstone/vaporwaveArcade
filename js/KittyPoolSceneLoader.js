@@ -9,10 +9,10 @@ import {
   Image,
   ImageBackground,
   TouchableHighlight,
-  Vibration
+  Vibration,
 } from 'react-native';
-
 import { ViroARSceneNavigator } from 'react-viro';
+import PostGame3 from './PostGame3';
 
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
@@ -38,6 +38,7 @@ export default class KittyPoolSceneLoader extends Component {
       score: 0,
       timer: 10,
       timeLeft: 10,
+      showLeaderboard: false,
     };
     this.startGame = this.startGame.bind(this);
     this.gameEnd = this.gameEnd.bind(this);
@@ -45,6 +46,7 @@ export default class KittyPoolSceneLoader extends Component {
     this.checkTime = this.checkTime.bind(this);
     this.beginTimer = this.beginTimer.bind(this);
     this.decrementTime = this.decrementTime.bind(this);
+    this.resetGame = this.resetGame.bind(this);
   }
 
   render() {
@@ -62,7 +64,10 @@ export default class KittyPoolSceneLoader extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>{`Kitty Pool`}</Text>
+          <Image
+            source={require('../assets/Images/kittypool.jpg')}
+            style={{ width: 300, height: 300 }}
+          />
           <Text
             style={localStyles.text}
           >{`You have thirty seconds to catch as many cats as you can!  Tap the cats to rescue them.`}</Text>
@@ -71,7 +76,7 @@ export default class KittyPoolSceneLoader extends Component {
             onPress={this.startGame}
             underlayColor={'#68a0ff'}
           >
-            <Text style={localStyles.buttonText}>Start Level</Text>
+            <Text style={localStyles.buttonText}>Start</Text>
           </TouchableHighlight>
           {/* <Text>
             timer here
@@ -95,16 +100,32 @@ export default class KittyPoolSceneLoader extends Component {
             beginTimer: this.beginTimer,
           }}
         />
-        <View>
+        <View style={localStyles.bottomMenu}>
           <TouchableHighlight
-            style={localStyles.hudButton}
+            style={localStyles.buttons}
             underlayColor="#68a0ff"
             onPress={this.props.propObj.returnToMenu}
           >
-            <Text style={localStyles.buttonText}>QUIT</Text>
+            <Text style={localStyles.buttonText}>Back</Text>
           </TouchableHighlight>
-          <Text style={localStyles.timerText}> Score:{this.state.score}</Text>
-          <Text style={localStyles.timerText}> Time Left:{this.state.timeLeft}</Text>
+          <TouchableHighlight
+            style={localStyles.buttons}
+            underlayColor="#68a0ff"
+          >
+            <Text style={localStyles.buttonText}>
+              Time: {this.state.timeLeft}
+            </Text>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            style={localStyles.buttons}
+            underlayColor="#68a0ff"
+          >
+            <Text style={localStyles.timerText}>
+              {' '}
+              Score: {this.state.score}
+            </Text>
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -113,15 +134,29 @@ export default class KittyPoolSceneLoader extends Component {
   renderPostGame() {
     console.log(this.state);
     return (
-      <View>
-        <Text style={localStyles.loseText}>
-          Game has ended you won i guess
-        </Text>
-      </View>
+      <PostGame3
+        returnToMenu={this.props.propObj.returnToMenu}
+        goToLeaderBoard={this.props.propObj.goToLeaderBoard3}
+        score={this.state.score}
+        resetGame={this.resetGame}
+        showLeaderboard={this.state.showLeaderboard}
+      />
     );
   }
-  
-  
+
+  resetGame() {
+    this.setState({
+      score: 0,
+      timer: 10,
+      timeLeft: 10,
+      gameState: GAME_STATES.INTRODUCTION,
+      showLeaderboard: false,
+    });
+  }
+
+  ////
+  // helper functions
+
   startGame() {
     this.setState({
       gameState: GAME_STATES.IN_GAME,
@@ -133,10 +168,15 @@ export default class KittyPoolSceneLoader extends Component {
       gameState: GAME_STATES.POST_GAME,
       timeLeft: 10,
     });
+    setTimeout(() => {
+      this.setState({
+        showLeaderboard: true,
+      });
+    }, 3000);
   }
   
   incrementScore(colliderTag) {
-    Vibration.vibrate(DURATION)  
+    Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });
@@ -162,26 +202,23 @@ export default class KittyPoolSceneLoader extends Component {
   beginTimer() {
     timerIntervalId = setInterval(this.decrementTime, 1000);
   }
-  
-  
+
   decrementTime() {
     let currentTime = this.state.timeLeft;
     let newTime = currentTime - 1;
     this.setState({
       timeLeft: newTime,
     });
-    
+
     if (this.state.timeLeft <= 0) {
-      this.handleGameOver()
+      this.handleGameOver();
     }
   }
-  
+
   handleGameOver() {
     clearInterval(timerIntervalId);
     this.gameEnd();
   }
-  
-  
 }
 
 var localStyles = StyleSheet.create({
@@ -229,8 +266,8 @@ var localStyles = StyleSheet.create({
   },
   timerText: {
     color: '#ff0000',
-    textAlign: 'right',
-    fontSize: 25,
+    textAlign: 'center',
+    fontSize: 20,
   },
   loseText: {
     color: '#ff0000',
@@ -244,9 +281,10 @@ var localStyles = StyleSheet.create({
   },
   buttons: {
     height: 80,
-    width: 150,
+    width: 110,
     paddingTop: 20,
     paddingBottom: 20,
+    margin: 10,
     marginTop: 10,
     marginBottom: 10,
     backgroundColor: 'rgba(123,123,231,.4)',
@@ -267,16 +305,24 @@ var localStyles = StyleSheet.create({
     borderColor: '#fff',
   },
   hudButton: {
-      height: 55,
-      width: 100,
-      paddingTop: 20,
-      marginTop: 10,
-      marginBottom: 10,
-      backgroundColor: 'rgba(123,123,231,.4)',
-      borderRadius: 10,
-      borderWidth: 1,
-      borderColor: 'rgba(123,087,231,.4)',
-  }
+    height: 55,
+    width: 100,
+    paddingTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: 'rgba(123,123,231,.4)',
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'rgba(123,087,231,.4)',
+  },
+  bottomMenu: {
+    width: '100%',
+    position: 'absolute',
+    top: 0,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 module.exports = KittyPoolSceneLoader;

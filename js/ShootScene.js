@@ -16,12 +16,14 @@ import {
   ViroARPlaneSelector,
   ViroAnimations,
   ViroSound,
+  ViroImage,
   ViroARTrackingTargets,
   ViroSphere,
   ViroNode,
 } from 'react-viro';
 
 let cameraCheckIntervalId;
+let hide = true;
 
 export default class ShootScene extends Component {
   constructor() {
@@ -33,7 +35,6 @@ export default class ShootScene extends Component {
       totalBullets: 0,
       score: 0,
       cameraAngle: [0, 0, -1],
-      
     };
 
     // bind 'this' to functions
@@ -42,7 +43,7 @@ export default class ShootScene extends Component {
     this._addBullet = this._addBullet.bind(this);
     this._renderBullets = this._renderBullets.bind(this);
     this.handleGameStart = this.handleGameStart.bind(this);
-    this.sceneRef  = React.createRef()
+    this.sceneRef = React.createRef();
     this.updateCamera = this.updateCamera.bind(this);
     this.beginCameraUpdates = this.beginCameraUpdates.bind(this);
   }
@@ -50,8 +51,7 @@ export default class ShootScene extends Component {
   componentWillUnmount() {
     clearInterval(cameraCheckIntervalId);
   }
-  
-  
+
   render() {
     const currentScore = this.props.arSceneNavigator.viroAppProps.score;
     return (
@@ -60,13 +60,22 @@ export default class ShootScene extends Component {
         physicsWorld={{ gravity: [0, -3, 0] }}
         ref={this.sceneRef}
       >
-      
+        <ViroARCamera>
+          <ViroImage
+            height={1}
+            width={2.8}
+            visible={hide}
+            position={[0, 1, -4]}
+            source={require('../assets/Images/planeFind.png')}
+          />
+        </ViroARCamera>
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
           onPlaneSelected={() => {
-            this.handleGameStart()
+            this.handleGameStart();
             this.setState({ pauseUpdates: true });
+            hide = false; // to hide the plane fine image
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
@@ -120,13 +129,55 @@ export default class ShootScene extends Component {
               this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
-          <ViroText
+          <Viro3DObject
+            animation={{ name: 'swayC', run: true, loop: true }}
+            source={require('../assets/3DModels/heart/Love.obj')}
+            resources={[require('../assets/3DModels/heart/Love.mtl')]}
+            opacity={1}
+            position={[1, -1, -20]}
+            scale={[0.02, 0.02, 0.02]}
+            type="OBJ"
+            materials={['teal']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.decrementScore
+            }
+          />
+          <Viro3DObject
+            animation={{ name: 'swayC', run: true, loop: true }}
+            source={require('../assets/3DModels/heart/Love.obj')}
+            resources={[require('../assets/3DModels/heart/Love.mtl')]}
+            opacity={1}
+            position={[-2, 2, -18]}
+            scale={[0.02, 0.02, 0.02]}
+            type="OBJ"
+            materials={['teal']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.decrementScore
+            }
+          />
+          {/* <ViroText
             text={currentScore.toString()}
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
             style={localStyles.helloWorldTextStyle}
+          /> */}
+          {/* BOMB */}
+          <Viro3DObject
+            // animation={{ name: 'swayC', run: true, loop: true }}
+            source={require('../assets/3DModels/bomb/Bomb.obj')}
+            resources={[require('../assets/3DModels/bomb/Bomb.mtl')]}
+            opacity={1}
+            position={[0, 0, -3]}
+            scale={[0.9, 0.9, 0.9]}
+            type="OBJ"
+            materials={['bomb']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.decrementScore
+            }
           />
-
           <ViroARCamera>
             <ViroNode onClick={this._addBullet}>
               <Viro3DObject
@@ -140,7 +191,6 @@ export default class ShootScene extends Component {
                 type="OBJ"
               />
               {this._renderBullets()}
-              
             </ViroNode>
           </ViroARCamera>
         </ViroARPlaneSelector>
@@ -167,12 +217,11 @@ export default class ShootScene extends Component {
       buttonStateTag: 'onTap',
     });
   }
-  
+
   _renderBullets() {
     if (!this.sceneRef.current) {
       return;
     }
-    
     // let myDirection;
     // if (this.sceneRef.current) {
     // this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
@@ -180,11 +229,9 @@ export default class ShootScene extends Component {
     //     console.log(myDirection) // [0] [1] [2]
     //   })
     // }
-    
-    
+
     var bang = [];
     for (var i = 0; i < this.state.totalBullets; i++) {
-      
       var bulletKey = 'BulletTag_' + i;
       bang.push(
         <ViroSphere
@@ -192,26 +239,28 @@ export default class ShootScene extends Component {
           widthSegmentCount={5}
           key={bulletKey}
           radius={0.17}
-          position={[-0.14, -0.5, -4]}
+          position={[-0.05, -0.5, -4]}
           materials={['red']}
           opacity={1}
           physicsBody={{
             type: 'Dynamic',
             mass: 1,
             // force: {value: [this.state.cameraAngle[0] * 50, this.state.cameraAngle[1] * 50, this.state.cameraAngle[2] * 50]}
-            velocity: [this.state.cameraAngle[0] * 130, this.state.cameraAngle[1] * 130, this.state.cameraAngle[2] * 130]
+            velocity: [
+              this.state.cameraAngle[0] * 130,
+              this.state.cameraAngle[1] * 130,
+              this.state.cameraAngle[2] * 130,
+            ],
           }}
         />
       );
     }
     // console.log(bang);
-    
+
     return bang;
   }
-  
-  
+
   _addBullet() {
-    
     this.setState({ totalBullets: this.state.totalBullets + 1 });
     // change this to slow down rapidfire and empty state
     if (this.state.totalBullets === 10) {
@@ -221,21 +270,21 @@ export default class ShootScene extends Component {
   }
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
-    this.beginCameraUpdates()
+    this.beginCameraUpdates();
   }
   beginCameraUpdates() {
     if (!cameraCheckIntervalId) {
-      cameraCheckIntervalId = setInterval(()=> {
-        this.updateCamera()
-      }, 100)
+      cameraCheckIntervalId = setInterval(() => {
+        this.updateCamera();
+      }, 100);
     }
   }
   async updateCamera() {
-    let myPos = await this.sceneRef.current.getCameraOrientationAsync()
+    let myPos = await this.sceneRef.current.getCameraOrientationAsync();
     // console.log(myPos.forward);
     this.setState({
-      cameraAngle: myPos.forward
-    })
+      cameraAngle: myPos.forward,
+    });
   }
 }
 
@@ -282,6 +331,10 @@ ViroMaterials.createMaterials({
   testSkull: {
     diffuseColor: 'red',
     diffuseTexture: require('../assets/Images/grid_bg.jpg'),
+  },
+  bomb: {
+    diffuseColor: 'red',
+    diffuseTexture: require('../assets/3DModels/bomb/Albedo.png'),
   },
   pink: {
     diffuseColor: 'lightpink',

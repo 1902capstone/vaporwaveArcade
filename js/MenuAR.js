@@ -21,6 +21,8 @@ import {
   ViroAnimations,
   ViroNode,
   ViroSphere,
+  ViroSound,
+  ViroAnimatedImage,
 } from 'react-viro';
 
 let spheresToLoad = [];
@@ -48,6 +50,26 @@ export default class HelloWorldSceneAR extends Component {
 
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
+      {/* CEILING */}
+      {/* <ViroAnimatedImage
+          height={12}
+          width={19}
+          loop={true}
+          opacity={.6}
+          rotation={[114, 180, 0]}
+          position={[0, 4, -8]}
+          source={require('../assets/Images/purplegrid.gif')}
+        /> */}
+        {/* FLOOR */}
+      <ViroAnimatedImage
+          height={12}
+          width={19}
+          loop={true}
+          opacity={.6}
+          rotation={[-65, 0, 0]}
+          position={[0, -4, -8]}
+          source={require('../assets/Images/purplegrid.gif')}
+        />
         {/* UNUSED BUTTON */}
         <ViroButton
           source={require('../assets/Images/smile1.jpg')}
@@ -120,13 +142,14 @@ export default class HelloWorldSceneAR extends Component {
         />
         {this._renderGazeBall()}
         <ViroText
+          // animation={{ name: 'zoom', run: true, loop: true }}
           text={this.state.text}
           scale={[0.5, 0.5, 0.5]}
-          position={[0, 0, -1]}
+          position={[0, -0.3, -1]}
           extrusionDepth={4 }
           style={localStyles.helloWorldTextStyle}
         />
-        <ViroAmbientLight color={'#aaaaaa'} />
+        <ViroAmbientLight color={'#aaaaaa'} /> 
         <ViroSpotLight
           innerAngle={5}
           outerAngle={90}
@@ -149,8 +172,18 @@ export default class HelloWorldSceneAR extends Component {
             scale={[0.012, 0.012, 0.012]}
             materials={['venus']}
             type="OBJ"
+            onClick={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.ALL_LEADERBOARDS)}}
           />
         </ViroNode>
+        {/* MUSIC change paused to FALSE to turn on */}
+        <ViroSound
+            paused={true}
+            source={require('../assets/Music/menuMusic.mp3')}
+            loop={true}
+            volume={.2}
+            onFinish={this.onFinishSound}
+            onError={this.onErrorSound}
+          />
       </ViroARScene>
     );
   }
@@ -274,6 +307,12 @@ ViroMaterials.createMaterials({
 });
 
 ViroAnimations.registerAnimations({
+  zoom: {
+    properties: {
+      positionY: '+=10',
+    },
+    duration: 2200,
+  },
   rotate: {
     properties: {
       rotateY: '+=30',
