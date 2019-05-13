@@ -23,7 +23,7 @@ import {
   ViroImage,
   ViroNode,
 } from 'react-viro';
-// import { CustomConsole } from '@jest/console';
+
 
 let cats = [];
 let timerStarted = false;
@@ -31,7 +31,12 @@ let timerIntervalId;
 let catSpawnIntervalId;
 let gameStarted = false;
 let catCount = 0;
+<<<<<<< HEAD
+let texts = [];
+let textCount = 0;
+=======
 let hide = true;
+>>>>>>> ded2d4987965b2c5151a9c704af8ffc9a4b4b729
 
 export default class CatScene extends Component {
   constructor() {
@@ -44,6 +49,7 @@ export default class CatScene extends Component {
       cats: 0,
       startTime: 0,
       catText: '',
+      texts: 0,
     };
 
     // bind 'this' to functions
@@ -54,17 +60,21 @@ export default class CatScene extends Component {
     this._renderCats = this._renderCats.bind(this);
     this._createCats = this._createCats.bind(this);
     this.handleGameStart = this.handleGameStart.bind(this);
+    this._renderTexts = this._renderTexts.bind(this);
+    this.removeText = this.removeText.bind(this);
   }
 
   componentDidMount() {
     gameStarted = false;
     cats = [];
+    texts = [];
   }
 
   componentWillUnmount() {
     clearInterval(catSpawnIntervalId);
     catSpawnIntervalId = 0;
     cats = [];
+    texts = [];
   }
 
   render() {
@@ -112,16 +122,19 @@ export default class CatScene extends Component {
             position={[-1, -1.4, -9]}
             source={require('../assets/Images/sun.gif')}
           />
-          <ViroNode onClick={this._saveCat}>
+          <ViroNode 
+          // onClick={this._saveCat}
+          >
             {this._renderCats()}
-            <ViroText
+            {this._renderTexts()}
+            {/* <ViroText
               text={this.state.catText}
               scale={[0.5, 0.5, 0.5]}
               position={[0, -1, -1]}
               style={localStyles.scoreStyle}
               extrusionDepth={2}
-              outerStroke={{ type: 'DropShadow', width: 2, color: '#444444' }}
-            />
+              outerStroke={{ type: 'DropShadow', width: 2, color: '#444444' }} */}
+            {/* /> */}
           </ViroNode>
           <Viro3DObject
             source={require('../assets/3DModels/plant/palmtree.obj')}
@@ -199,12 +212,28 @@ export default class CatScene extends Component {
       buttonStateTag: 'onTap',
     });
   }
-  _saveCat() {
+  _saveCat(pos, tagName) {
+    let indexOfCat = cats.findIndex(elt => {
+      return elt.model.props.viroTag === tagName;
+    });
+    
+    let catLocation = cats[indexOfCat].model.props.position
+    
+    cats.splice(indexOfCat, 1);
+    
+    this.setState({
+      cats: this.state.cats - 1,
+    });
+    
     this.props.arSceneNavigator.viroAppProps.incrementScore();
-    // console.log('saved a cat', this.state.cats); //cats is already empty
-    // console.log('last cat', cats)
-    this.setState({ catText: 'saved' });
+    
+    
+    this._createText(catLocation)
+    
+    // this.setState({ catText: 'saved' });
   }
+  
+  
   _createCats() {
     const catsToLoad = [];
     // const numOfCats = Math.floor(Math.random() * 2) + 3;
@@ -225,8 +254,9 @@ export default class CatScene extends Component {
             name: 'catBob',
             run: true,
             interruptable: true,
-            onFinish: this._deadCat,
+            // onFinish: this._deadCat,
           }}
+          onClick={(pos) => this._saveCat(pos, catTag)}
           source={require('../assets/3DModels/cat/cat.obj')}
           opacity={1}
           key={catTag}
@@ -247,24 +277,91 @@ export default class CatScene extends Component {
         time: 0,
       };
       cats.push(CatObj);
-      console.log('these are cats', cats);
-      console.log('state cats', this.state.cats);
+      // console.log('these are cats', cats);
+      // console.log('state cats', this.state.cats);
     }
     this.setState({
       cats: this.state.cats + catsToLoad.length,
     });
   }
 
+  _createText(pos) {
+
+    const textTag = `text-${textCount + 1}`;
+    textCount++;
+    
+    
+    const x = (
+      
+      <ViroText
+      animation={{
+        name: 'scoreBob',
+        run: true,
+        loop: false,
+        interruptable: true,
+      }}
+      key={textTag}
+      viroTag={textTag}
+      text={"+1"}
+      scale={[1, 1, 1]}
+      position={[pos[0], pos[1]+1.5, pos[2]-0.8]}
+      style={localStyles.scoreStyle}
+      extrusionDepth={2}
+      outerStroke={{ type: 'DropShadow', width: 2, color: '#444444' }} />
+      
+      
+    );
+    const textObj = {
+      show: false,
+      model: x,
+      num: texts.length + 1,
+      time: 0,
+    };
+    texts.push(textObj);
+    
+    this.setState({
+      texts: this.state.texts + 1,
+    });
+  
+    setTimeout(() => {
+      this.removeText(textTag);
+    }, 1500)
+  }
+  
+  
+  removeText(textTag) {
+    let indexOfText = texts.findIndex(elt => {
+      return elt.model.props.viroTag === textTag;
+    });
+    
+    texts.splice(indexOfText, 1);
+    
+    this.setState({
+      texts: this.state.texts - 1,
+    });
+    
+    
+    
+  }
+  
   _renderCats() {
     let catList = cats.map(item => {
       return item.model;
     });
     return catList;
   }
+  
+  _renderTexts() {
+    let textList = texts.map(item => {
+      return item.model;
+    })
+    return textList;
+  }
+  
   handleGameStart() {
     if (!catSpawnIntervalId && this.state.startTime) {
       this.props.arSceneNavigator.viroAppProps.beginTimer();
-      catSpawnIntervalId = setInterval(this._createCats, 3000);
+      catSpawnIntervalId = setInterval(this._createCats, 600);
     }
   }
 }
@@ -383,6 +480,9 @@ ViroAnimations.registerAnimations({
     easing: 'EaseInEaseOut',
     duration: 1200,
   },
+  scoreUp: { properties: { positionY: '+=.2' }, duration: 300, easing: 'Bounce' },
+  scoreDown: { properties: { positionY: '-=.2' }, duration: 300, easing: 'Bounce' },
+  scoreBob: [['scoreUp', 'scoreDown']],
   raftR: {
     properties: { positionX: '-=.3', rotateY: '+=45' },
     easing: 'EaseInEaseOut',

@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React, { Component } from 'react';
 import {
   AppRegistry,
@@ -58,8 +59,6 @@ export default class KittyPoolSceneLoader extends Component {
         return this.renderPostGame();
     }
   }
-  ////
-  // render conditional states
 
   renderIntro() {
     return (
@@ -163,7 +162,7 @@ export default class KittyPoolSceneLoader extends Component {
       gameState: GAME_STATES.IN_GAME,
     });
   }
-
+  
   gameEnd() {
     this.setState({
       gameState: GAME_STATES.POST_GAME,
@@ -175,14 +174,14 @@ export default class KittyPoolSceneLoader extends Component {
       });
     }, 3000);
   }
-
+  
   incrementScore(colliderTag) {
     Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });
   }
-
+  
   setTimer(timeDiff) {
     // calc new time
     this.setState({
