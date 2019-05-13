@@ -24,6 +24,7 @@ import {
 
 let cameraCheckIntervalId;
 let hide = true;
+let bangSound = true;
 
 export default class ShootScene extends Component {
   constructor() {
@@ -50,6 +51,7 @@ export default class ShootScene extends Component {
 
   componentWillUnmount() {
     clearInterval(cameraCheckIntervalId);
+    hide = true;
   }
 
   render() {
@@ -60,15 +62,13 @@ export default class ShootScene extends Component {
         physicsWorld={{ gravity: [0, -3, 0] }}
         ref={this.sceneRef}
       >
-        <ViroARCamera>
-          <ViroImage
-            height={1}
-            width={2.8}
-            visible={hide}
-            position={[0, 1, -4]}
-            source={require('../assets/Images/planeFind.png')}
-          />
-        </ViroARCamera>
+        <ViroImage
+          height={1}
+          width={2.8}
+          visible={hide}
+          position={[0, 1, -4]}
+          source={require('../assets/Images/planeFind.png')}
+        />
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
@@ -80,11 +80,14 @@ export default class ShootScene extends Component {
           pauseUpdates={this.state.pauseUpdates}
         >
           <ViroSound
-            paused={true}
+            paused={bangSound}
             source={require('../assets/SoundFX/bang.mp3')}
-            loop={true}
-            volume={1.0}
-            onFinish={this.onFinishSound}
+            loop={false}
+            interruptable={true}
+            volume={0.3}
+            onFinish={() => {
+              bangSound = true;
+            }}
             onError={this.onErrorSound}
           />
           <Viro3DObject
@@ -97,9 +100,9 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={['pink']}
             physicsBody={{ type: 'Static' }}
-            onCollision={
-              this.props.arSceneNavigator.viroAppProps.incrementScore
-            }
+            onCollision={() => {
+              return this.props.arSceneNavigator.viroAppProps.incrementScore;
+            }}
           />
           <Viro3DObject
             animation={{ name: 'swayB', run: true, loop: true }}
@@ -255,17 +258,26 @@ export default class ShootScene extends Component {
         />
       );
     }
-    // console.log(bang);
-
+    console.log('bandSound should be off', bangSound);
     return bang;
   }
 
   _addBullet() {
     this.setState({ totalBullets: this.state.totalBullets + 1 });
+    // bangSound = true;
+    // setTimeout(() => {
+    //   bangSound = false;
+    // }, 50);
+    bangSound = false;
+
+    console.log('bandSound should be on', bangSound);
+
     // change this to slow down rapidfire and empty state
     if (this.state.totalBullets === 10) {
       this.setState({ totalBullets: 0 });
     }
+    // bangSound = true;
+
     // console.log('bullets', this.state.totalBullets);
   }
   handleGameStart() {

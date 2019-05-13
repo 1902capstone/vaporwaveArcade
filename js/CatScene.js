@@ -65,6 +65,7 @@ export default class CatScene extends Component {
     clearInterval(catSpawnIntervalId);
     catSpawnIntervalId = 0;
     cats = [];
+    hide = true
   }
 
   render() {

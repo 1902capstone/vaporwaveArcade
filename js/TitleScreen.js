@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 
 import { StyleSheet } from 'react-native';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 import {
   ViroARScene,
@@ -23,6 +24,8 @@ import {
 // import console = require('console');
 // import console = require('console');
 
+
+
 export default class TitleScreen extends Component {
   constructor() {
     super();
@@ -32,16 +35,17 @@ export default class TitleScreen extends Component {
       totalBullets: 0,
       score: 0,
     };
-    
+
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
     this._onButtonTap = this._onButtonTap.bind(this);
   }
-  
+
   render() {
     const currentScore = this.props.arSceneNavigator.viroAppProps.score;
     return (
-      <ViroARScene onClick={this.props.arSceneNavigator.viroAppProps.returnToMenu}
+      <ViroARScene
+        onClick={this.props.arSceneNavigator.viroAppProps.returnToMenu}
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
       >
@@ -57,7 +61,7 @@ export default class TitleScreen extends Component {
             <ViroText
               text={'TAP TO START'}
               scale={[0.5, 0.5, 0.5]}
-              position={[0, -.5, -1]}
+              position={[0, -0.5, -1]}
               extrusionDepth={2}
               style={localStyles.text}
             />
@@ -86,9 +90,6 @@ export default class TitleScreen extends Component {
       buttonStateTag: 'onTap',
     });
   }
-  
-  
-  
 }
 
 var localStyles = StyleSheet.create({
