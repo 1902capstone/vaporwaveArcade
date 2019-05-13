@@ -31,12 +31,9 @@ let timerIntervalId;
 let catSpawnIntervalId;
 let gameStarted = false;
 let catCount = 0;
-<<<<<<< HEAD
 let texts = [];
 let textCount = 0;
-=======
 let hide = true;
->>>>>>> ded2d4987965b2c5151a9c704af8ffc9a4b4b729
 
 export default class CatScene extends Component {
   constructor() {
