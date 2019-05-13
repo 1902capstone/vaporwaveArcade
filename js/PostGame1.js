@@ -1,31 +1,37 @@
 /* eslint-disable no-use-before-define */
-import React, { Component } from "react";
-import { StyleSheet, View, TouchableHighlight, Text } from "react-native";
+import React, { Component } from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableHighlight,
+  Text,
+  Image,
+} from 'react-native';
 
-const LeaderBoardEntryScreen = require("./LeaderBoardEntryScreen");
+const LeaderBoardEntryScreen = require('./LeaderBoardEntryScreen');
 
-import { db } from "../src/config";
-import GameLoading from "./GameLoading";
-let leaderBoardRef = db.ref("/BallGame");
-let ans = leaderBoardRef.orderByChild("score").limitToLast(10);
+import { db } from '../src/config';
+import GameLoading from './GameLoading';
+let leaderBoardRef = db.ref('/BallGame');
+let ans = leaderBoardRef.orderByChild('score').limitToLast(10);
 
 export default class PostGame1 extends Component {
   constructor() {
     super();
     this.state = {
-      leaderBoardArray: []
+      leaderBoardArray: [],
     };
     this.renderPostGame = this.renderPostGame.bind(this);
   }
   async componentDidMount() {
-    await ans.on("value", snapshot => {
+    await ans.on('value', snapshot => {
       let data = snapshot.val();
       let unsortedArray = Object.values(data);
       const leaderBoardArray = unsortedArray.sort(function(a, b) {
         return b.score - a.score;
       });
       this.setState({
-        leaderBoardArray
+        leaderBoardArray,
       });
     });
   }
@@ -54,7 +60,13 @@ export default class PostGame1 extends Component {
       return this.props.showLeaderboard ? (
         <View style={localStyles.main}>
           <Text style={localStyles.title}>Score: {this.props.score}</Text>
-          <Text style={localStyles.title}>Nice try. Play again?</Text>
+          <Text style={localStyles.title}>
+            Nice try, but you didn't earn a high score. Play again?
+          </Text>
+          <Image
+            source={require('../assets/Images/spin.gif')}
+            style={{ width: 250, height: 250 }}
+          />
           <TouchableHighlight
             style={localStyles.button}
             underlayColor="#68a0ff"
@@ -81,9 +93,9 @@ export default class PostGame1 extends Component {
 
 var localStyles = StyleSheet.create({
   losingText: {
-    color: "#ff0000",
-    textAlign: "center",
-    fontSize: 40
+    color: '#ff0000',
+    textAlign: 'center',
+    fontSize: 40,
   },
   buttons: {
     height: 80,
@@ -92,22 +104,22 @@ var localStyles = StyleSheet.create({
     paddingBottom: 20,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "rgba(123,123,231,.4)",
+    backgroundColor: 'rgba(123,123,231,.4)',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "rgba(123,087,231,.4)"
+    borderColor: 'rgba(123,087,231,.4)',
   },
   main: {
     flex: 1,
     padding: 30,
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "#6565fc"
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#6565fc',
   },
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: "center"
+    textAlign: 'center',
   },
   itemInput: {
     height: 50,
@@ -115,25 +127,25 @@ var localStyles = StyleSheet.create({
     marginRight: 5,
     fontSize: 23,
     borderWidth: 1,
-    borderColor: "white",
+    borderColor: 'white',
     borderRadius: 8,
-    color: "white"
+    color: 'white',
   },
   buttonText: {
     fontSize: 18,
-    color: "#111",
-    alignSelf: "center"
+    color: '#111',
+    alignSelf: 'center',
   },
   button: {
     height: 45,
-    flexDirection: "row",
-    backgroundColor: "white",
-    borderColor: "white",
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
     marginTop: 10,
-    alignSelf: "stretch",
-    justifyContent: "center"
-  }
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+  },
 });

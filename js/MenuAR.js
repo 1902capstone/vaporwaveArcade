@@ -51,7 +51,7 @@ export default class HelloWorldSceneAR extends Component {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
       {/* CEILING */}
-      <ViroAnimatedImage
+      {/* <ViroAnimatedImage
           height={12}
           width={19}
           loop={true}
@@ -59,7 +59,7 @@ export default class HelloWorldSceneAR extends Component {
           rotation={[114, 180, 0]}
           position={[0, 4, -8]}
           source={require('../assets/Images/purplegrid.gif')}
-        />
+        /> */}
         {/* FLOOR */}
       <ViroAnimatedImage
           height={12}

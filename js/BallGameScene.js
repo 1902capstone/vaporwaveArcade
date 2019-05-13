@@ -208,7 +208,7 @@ export default class BallGameScene extends Component {
         {this.handleGameStart()}
         {this.renderSpheres()}
 
-        <ViroAnimatedImage
+        {/* <ViroAnimatedImage
           height={9}
           width={9}
           loop={true}
@@ -216,7 +216,7 @@ export default class BallGameScene extends Component {
           rotation={[-30, 0, 0]}
           position={[0, -3, -5]}
           source={require('../assets/Images/purplegrid.gif')}
-        />
+        /> */}
         <ViroSpotLight
           position={[0, 5, 0]}
           color="#777777"

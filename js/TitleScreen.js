@@ -52,7 +52,7 @@ export default class TitleScreen extends Component {
               width={2}
               position={[0, 0, -3]}
               rotation={[0, 0, 0]}
-              source={require('../assets/Images/bface_logo.gif')}
+              source={require('../assets/Images/logo_new.gif')}
             />
             <ViroText
               text={'TAP TO START'}
