@@ -31,11 +31,11 @@ import {
 // import console = require('console');
 
 let spheres = [];
+let sphereCount = 0;
 let timerStarted = false;
 let timerIntervalId;
 let ballSpawnIntervalId;
 let gameStarted = false;
-let sphereCount = 0;
 let hide = true;
 
 export default class BallGameScene extends Component {
