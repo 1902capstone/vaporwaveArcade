@@ -394,7 +394,7 @@ export default class ShootScene extends Component {
         heightSegmentCount={5}
         widthSegmentCount={5}
         key={bulletTag}
-        radius={0.18}
+        radius={0.19}
         position={[-0.05, -0.5, -4]}
         materials={['red']}
         opacity={1}
@@ -402,7 +402,7 @@ export default class ShootScene extends Component {
           type: 'Dynamic',
           mass: 1,
           velocity: [
-            this.state.cameraAngle[0] * 160,
+            this.state.cameraAngle[0] * 165,
             this.state.cameraAngle[1] * 150,
             this.state.cameraAngle[2] * 150,
           ],
