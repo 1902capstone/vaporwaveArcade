@@ -31,11 +31,11 @@ import {
 // import console = require('console');
 
 let spheres = [];
+let sphereCount = 0;
 let timerStarted = false;
 let timerIntervalId;
 let ballSpawnIntervalId;
 let gameStarted = false;
-let sphereCount = 0;
 let hide = true;
 
 export default class BallGameScene extends Component {
@@ -335,14 +335,14 @@ export default class BallGameScene extends Component {
 
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
-    fontFamily: 'Arial',
+    fontFamily: 'Cochin',
     fontSize: 20,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
   instructions: {
-    fontFamily: 'Arial',
+    fontFamily: 'Cochin',
     fontSize: 8,
     color: 'hotpink',
     textAlignVertical: 'center',

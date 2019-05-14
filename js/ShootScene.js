@@ -45,7 +45,7 @@ export default class ShootScene extends Component {
       heart3Color: ['teal'],
       heart4Color: ['teal'],
       heart5Color: ['teal'],
-      bullets: [],
+      bullets: 0,
     };
 
     // bind 'this' to functions
@@ -61,10 +61,12 @@ export default class ShootScene extends Component {
     this.handleShootSoundEnd = this.handleShootSoundEnd.bind(this);
     this.shootSoundRef = React.createRef();
     this.createBullets2 = this.createBullets2.bind(this);
+    this.handleScore = this.handleScore.bind(this);
   }
 
   componentWillUnmount() {
     clearInterval(cameraCheckIntervalId);
+    cameraCheckIntervalId = 0;
     hide = true;
     bullets = [];
   }
@@ -161,9 +163,9 @@ export default class ShootScene extends Component {
             scale={[0.08, 0.08, 0.08]}
             type="OBJ"
             materials={this.state.heart1Color}
-            physicsBody={{ type: 'Static' }}
+            physicsBody={{ type: 'Kinematic' }}
             onCollision={() => {
-              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this.handleScore();
               this._changeColor('heart1Color');
             }}
           />
@@ -176,9 +178,9 @@ export default class ShootScene extends Component {
             scale={[0.05, 0.05, 0.05]}
             type="OBJ"
             materials={this.state.heart2Color}
-            physicsBody={{ type: 'Static' }}
+            physicsBody={{ type: 'Kinematic' }}
             onCollision={() => {
-              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this.handleScore();
               this._changeColor('heart2Color');
             }}
           />
@@ -191,9 +193,9 @@ export default class ShootScene extends Component {
             scale={[0.02, 0.02, 0.02]}
             type="OBJ"
             materials={this.state.heart3Color}
-            physicsBody={{ type: 'Static' }}
+            physicsBody={{ type: 'Kinematic' }}
             onCollision={() => {
-              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this.handleScore();
               this._changeColor('heart3Color');
             }}
           />
@@ -206,9 +208,9 @@ export default class ShootScene extends Component {
             scale={[0.02, 0.02, 0.02]}
             type="OBJ"
             materials={this.state.heart4Color}
-            physicsBody={{ type: 'Static' }}
+            physicsBody={{ type: 'Kinematic' }}
             onCollision={() => {
-              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this.handleScore();
               this._changeColor('heart4Color');
             }}
           />
@@ -221,9 +223,9 @@ export default class ShootScene extends Component {
             scale={[0.02, 0.02, 0.02]}
             type="OBJ"
             materials={this.state.heart5Color}
-            physicsBody={{ type: 'Static' }}
+            physicsBody={{ type: 'Kinematic' }}
             onCollision={() => {
-              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this.handleScore();
               this._changeColor('heart5Color');
             }}
           />
@@ -236,6 +238,20 @@ export default class ShootScene extends Component {
           {/* BOMB */}
           <Viro3DObject
             animation={{ name: 'swayD', run: true, loop: true }}
+            source={require('../assets/3DModels/bomb/Bomb.obj')}
+            resources={[require('../assets/3DModels/bomb/Bomb.mtl')]}
+            opacity={1}
+            position={[-2, 2, -18]}
+            scale={[9, 9, 9]}
+            type="OBJ"
+            materials={['bomb']}
+            physicsBody={{ type: 'Kinematic' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.decrementScore
+            }
+          />
+                <Viro3DObject
+            animation={{ name: 'swayE', run: true, loop: true }}
             source={require('../assets/3DModels/bomb/Bomb.obj')}
             resources={[require('../assets/3DModels/bomb/Bomb.mtl')]}
             opacity={1}
@@ -348,15 +364,15 @@ export default class ShootScene extends Component {
             mass: 1,
             // force: {value: [this.state.cameraAngle[0] * 50, this.state.cameraAngle[1] * 50, this.state.cameraAngle[2] * 50]}
             velocity: [
-              this.state.cameraAngle[0] * 130,
-              this.state.cameraAngle[1] * 130,
-              this.state.cameraAngle[2] * 130,
+              this.state.cameraAngle[0] * 160,
+              this.state.cameraAngle[1] * 160,
+              this.state.cameraAngle[2] * 160,
             ],
           }}
         />
       );
     }
-    console.log('bandSound should be off', bangSound);
+    // console.log('bandSound should be off', bangSound);
     return bang;
   }
 
@@ -393,7 +409,7 @@ export default class ShootScene extends Component {
         heightSegmentCount={5}
         widthSegmentCount={5}
         key={bulletTag}
-        radius={0.17}
+        radius={0.19}
         position={[-0.05, -0.5, -4]}
         materials={['red']}
         opacity={1}
@@ -401,9 +417,9 @@ export default class ShootScene extends Component {
           type: 'Dynamic',
           mass: 1,
           velocity: [
-            this.state.cameraAngle[0] * 130,
-            this.state.cameraAngle[1] * 130,
-            this.state.cameraAngle[2] * 130,
+            this.state.cameraAngle[0] * 165,
+            this.state.cameraAngle[1] * 150,
+            this.state.cameraAngle[2] * 150,
           ],
         }}
       />
@@ -421,12 +437,29 @@ export default class ShootScene extends Component {
     });
   }
 
+  handleScore(colliderTag) {
+    // console.log(bullets.length);
+    let indexOfBullet = bullets.findIndex(elt => {
+      return elt.model.props.viroTag === colliderTag;
+    });
+    bullets.splice(indexOfBullet, 1);
+    // console.log(bullets.length);
+    this.setState({
+      bullets: this.state.bullets - 1,
+    });
+    this.props.arSceneNavigator.viroAppProps.incrementScore();
+  }
+  
+  
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
     this.beginCameraUpdates();
   }
+  
   beginCameraUpdates() {
+    console.log(cameraCheckIntervalId);
     if (!cameraCheckIntervalId) {
+      console.log('begincamupdates2')
       cameraCheckIntervalId = setInterval(() => {
         this.updateCamera();
       }, 100);
@@ -602,6 +635,21 @@ ViroAnimations.registerAnimations({
       'moveLeft',
       // 'moveUp',
       'moveDown',
+    ],
+  ],
+  swayE: [
+    [
+      'moveLeft',
+      'moveUp',
+      'moveDown',
+      'moveRight',
+      'forward',
+      'moveUp',
+      'moveDown',
+      'moveRight',
+      'moveUpL',
+      'moveDown',
+      'back',
     ],
   ],
 });
