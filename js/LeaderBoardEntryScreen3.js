@@ -79,7 +79,8 @@ export default class LeaderBoardEntryScreen3 extends Component {
     title: {
       marginBottom: 20,
       fontSize: 25,
-      textAlign: "center"
+      textAlign: "center",
+      color: "white"
     },
     itemInput: {
       height: 50,
