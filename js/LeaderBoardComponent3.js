@@ -22,7 +22,7 @@ export default class LeaderBoardComponent3 extends Component {
         <View
           colors={[, "#1da2c6", "#1695b7"]}
           style={{
-            backgroundColor: "#119abf",
+            backgroundColor: "#6565fc",
             padding: 15,
             paddingTop: 35,
             alignItems: "center"
