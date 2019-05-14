@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ImageBackground } from "react-native";
 
 export default class GameLoading extends Component {
   render() {
     return (
       <View style={styles.main}>
+        <Text style={styles.title}>Game Over</Text>
         <Text style={styles.title}>Your Score: {this.props.score}</Text>
       </View>
     );
@@ -17,12 +18,12 @@ const styles = StyleSheet.create({
     padding: 30,
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#6565fc"
   },
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: "center"
+    textAlign: "center",
+    color: "white",
   },
   itemInput: {
     height: 50,

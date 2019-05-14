@@ -74,8 +74,7 @@ export default class LeaderBoardEntryScreen3 extends Component {
       flex: 1,
       padding: 30,
       flexDirection: "column",
-      justifyContent: "center",
-      backgroundColor: "#6565fc"
+      justifyContent: "center"
     },
     title: {
       marginBottom: 20,
