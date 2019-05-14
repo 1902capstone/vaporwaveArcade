@@ -66,6 +66,7 @@ export default class ShootScene extends Component {
 
   componentWillUnmount() {
     clearInterval(cameraCheckIntervalId);
+    cameraCheckIntervalId = 0;
     hide = true;
     bullets = [];
   }
@@ -357,7 +358,7 @@ export default class ShootScene extends Component {
         />
       );
     }
-    console.log('bandSound should be off', bangSound);
+    // console.log('bandSound should be off', bangSound);
     return bang;
   }
 
@@ -423,12 +424,12 @@ export default class ShootScene extends Component {
   }
 
   handleScore(colliderTag) {
-    console.log(bullets.length);
+    // console.log(bullets.length);
     let indexOfBullet = bullets.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
     });
     bullets.splice(indexOfBullet, 1);
-    console.log(bullets.length);
+    // console.log(bullets.length);
     this.setState({
       bullets: this.state.bullets - 1,
     });
@@ -440,8 +441,11 @@ export default class ShootScene extends Component {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
     this.beginCameraUpdates();
   }
+  
   beginCameraUpdates() {
+    console.log(cameraCheckIntervalId);
     if (!cameraCheckIntervalId) {
+      console.log('begincamupdates2')
       cameraCheckIntervalId = setInterval(() => {
         this.updateCamera();
       }, 100);
