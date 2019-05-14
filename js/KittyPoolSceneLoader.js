@@ -36,8 +36,8 @@ export default class KittyPoolSceneLoader extends Component {
     this.state = {
       gameState: GAME_STATES.INTRODUCTION,
       score: 0,
-      timer: 20,
-      timeLeft: 20,
+      timer: 30,
+      timeLeft: 30,
       showLeaderboard: false,
     };
     this.startGame = this.startGame.bind(this);
@@ -70,7 +70,9 @@ export default class KittyPoolSceneLoader extends Component {
           />
           <Text
             style={localStyles.text}
-          >{`You have thirty seconds to catch as many cats as you can!  Tap the cats to rescue them.`}</Text>
+              // You have 30 seconds to grab as many cats from the water as you can. Simply tap a cat to save it!
+
+          >{`You have 30 seconds to catch as many cats as you can!  Tap the cats to rescue them from drowning.`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}

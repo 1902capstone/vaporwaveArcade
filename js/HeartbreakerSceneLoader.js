@@ -80,12 +80,12 @@ export default class HeartbreakerSceneLoader extends Component {
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
           <Image
-            source={require('../assets/Images/heartbreaker.jpg')}
-            style={{ width: 300, height: 100 }}
+            source={require('../assets/Images/heartbreakerSquare.jpg')}
+            style={{ width: 300, height: 300 }}
           />
           <Text
             style={localStyles.text}
-          >{`Shoot the hearts for points! \n Tap to shoot.`}</Text>
+          >{`Shoot the hearts for points! Watch out for bombs! \n Aim by moving your device and tap the zapper to shoot.`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}

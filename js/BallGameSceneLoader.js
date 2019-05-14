@@ -1,27 +1,34 @@
 /* eslint-disable default-case */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable no-use-before-define */
-import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableHighlight, Vibration } from "react-native";
+import React, { Component } from 'react';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  Vibration,
+  Image,
+} from 'react-native';
 
-import PostGame1 from "./PostGame1";
-import { ViroARSceneNavigator } from "react-viro";
+import PostGame1 from './PostGame1';
+import { ViroARSceneNavigator } from 'react-viro';
 import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
-const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
+const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
-const BallGameScene = require("./BallGameScene");
+const BallGameScene = require('./BallGameScene');
 
 const GAME_STATES = {
-  INTRODUCTION: "INTRODUCTION",
-  IN_GAME: "IN_GAME",
-  POST_GAME: "POST_GAME"
+  INTRODUCTION: 'INTRODUCTION',
+  IN_GAME: 'IN_GAME',
+  POST_GAME: 'POST_GAME',
 };
 
 let timerIntervalId;
 
-const DURATION = 500 ;
- 
+const DURATION = 500;
+
 const PATTERN = [1000, 2000, 3000, 4000];
 
 const options = {
@@ -36,7 +43,7 @@ export default class BallGameSceneLoader extends Component {
       score: 0,
       timer: 25,
       timeLeft: 25,
-      showLeaderboard: false
+      showLeaderboard: false,
     };
     this.startGame = this.startGame.bind(this);
     this.resetGame = this.resetGame.bind(this);
@@ -64,10 +71,14 @@ export default class BallGameSceneLoader extends Component {
     return (
       <View style={localStyles.outer}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Donut Drop</Text>
+          <Image
+            source={require('../assets/Images/donutDrop.jpg')}
+            style={{ width: 300, height: 300 }}
+          />
           <Text style={localStyles.text}>
             You have thirty seconds to catch as many donuts as you can in the
-            cup.  Avoid the avocado.
+            cup. Move your device under the falling donuts to catch them in your
+            cup. Avoid the avocado.
           </Text>
           <TouchableHighlight
             style={localStyles.buttons}
@@ -92,7 +103,7 @@ export default class BallGameSceneLoader extends Component {
             incrementScore: this.incrementScore,
             score: this.state.score,
             timer: this.state.timer,
-            beginTimer: this.beginTimer
+            beginTimer: this.beginTimer,
           }}
         />
         <View style={localStyles.bottomMenu}>
@@ -106,15 +117,19 @@ export default class BallGameSceneLoader extends Component {
           <TouchableHighlight
             style={localStyles.buttons}
             underlayColor="#68a0ff"
-
           >
-          <Text style={localStyles.buttonText}>Time: {this.state.timeLeft}</Text>
+            <Text style={localStyles.buttonText}>
+              Time: {this.state.timeLeft}
+            </Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={localStyles.buttons}
             underlayColor="#68a0ff"
           >
-          <Text style={localStyles.timerText}> Score: {this.state.score}</Text>
+            <Text style={localStyles.timerText}>
+              {' '}
+              Score: {this.state.score}
+            </Text>
           </TouchableHighlight>
         </View>
         {this.checkTime()}
@@ -130,7 +145,7 @@ export default class BallGameSceneLoader extends Component {
         score={this.state.score}
         resetGame={this.resetGame}
         gameName="BallGame"
-        showLeaderboard = {this.state.showLeaderboard}
+        showLeaderboard={this.state.showLeaderboard}
       />
     );
   }
@@ -139,7 +154,7 @@ export default class BallGameSceneLoader extends Component {
 
   startGame() {
     this.setState({
-      gameState: GAME_STATES.IN_GAME
+      gameState: GAME_STATES.IN_GAME,
     });
   }
 
@@ -149,14 +164,14 @@ export default class BallGameSceneLoader extends Component {
       timer: 25,
       timeLeft: 25,
       gameState: GAME_STATES.INTRODUCTION,
-      showLeaderboard: false
+      showLeaderboard: false,
     });
   }
 
   gameEnd() {
     this.setState({
       gameState: GAME_STATES.POST_GAME,
-      timeLeft: 25
+      timeLeft: 25,
     });
     setTimeout(() => {
       this.setState({
@@ -166,16 +181,16 @@ export default class BallGameSceneLoader extends Component {
   }
 
   incrementScore(colliderTag) {
-    Vibration.vibrate(DURATION)   
+    Vibration.vibrate(DURATION);
     this.setState({
-      score: this.state.score + 1
+      score: this.state.score + 1,
     });
   }
 
   setTimer(timeDiff) {
     // calc new time
     this.setState({
-      timeLeft: this.state.timer - timeDiff
+      timeLeft: this.state.timer - timeDiff,
     });
   }
 
@@ -197,7 +212,7 @@ export default class BallGameSceneLoader extends Component {
     let currentTime = this.state.timeLeft;
     let newTime = currentTime - 1;
     this.setState({
-      timeLeft: newTime
+      timeLeft: newTime,
     });
   }
 }
@@ -205,60 +220,60 @@ export default class BallGameSceneLoader extends Component {
 var localStyles = StyleSheet.create({
   viroContainer: {
     flex: 1,
-    backgroundColor: "black"
+    backgroundColor: 'black',
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   arView: {
-    flex: 1
+    flex: 1,
   },
   topMenu: {
-    width: "100%",
-    position: "absolute",
+    width: '100%',
+    position: 'absolute',
     top: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   outer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "black"
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   inner: {
     flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "black"
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   titleText: {
     paddingTop: 30,
     paddingBottom: 20,
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 25
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 25,
   },
   text: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 16
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 16,
   },
   losingText: {
-    color: "#ff0000",
-    textAlign: "center",
-    fontSize: 40
+    color: '#ff0000',
+    textAlign: 'center',
+    fontSize: 40,
   },
   timerText: {
-    color: "#ff0000",
-    textAlign: "center",
-    fontSize: 20
+    color: '#ff0000',
+    textAlign: 'center',
+    fontSize: 20,
   },
   buttonText: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 20
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20,
   },
   buttons: {
     height: 80,
@@ -280,15 +295,15 @@ var localStyles = StyleSheet.create({
     paddingBottom: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "#68a0cf",
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#fff"
+    borderColor: '#fff',
   },
   bottomMenu: {
-    width : '100%',
-    position : 'absolute',
-    top : 0,
+    width: '100%',
+    position: 'absolute',
+    top: 0,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

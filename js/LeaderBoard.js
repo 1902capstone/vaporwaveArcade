@@ -30,7 +30,7 @@ export default class List extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Ball Game Leaderboard</Text>
+        {/* <Text style={styles.title}>Ball Game Leaderboard</Text> */}
         {this.state.score.length > 0 ? (
           <LeaderBoardComponent score={this.state.score} />
         ) : (

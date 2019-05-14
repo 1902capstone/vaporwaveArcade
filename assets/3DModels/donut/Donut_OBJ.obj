@@ -1,6 +1,6 @@
 # This file uses centimeters as units for non-parametric coordinates.
 
-mtllib Donut_OBJ.mtl
+mtllib 
 g default
 v 5.375151 2.474874 -2.226457
 v 4.113963 2.474874 -4.113959

@@ -73,8 +73,7 @@ export default class HelloWorldSceneAR extends Component {
         {/* UNUSED BUTTON */}
         <ViroButton
           source={require('../assets/Images/smile1.jpg')}
-          gazeSource={require('../assets/Images/smile2.jpg')}
-          tapSource={require('../assets/Images/explode.jpg')}
+          gazeSource={require('../assets/Images/smile1.jpg')}
           width={5.0}
           height={5.0}
           position={[-2.0, 0.0, -10.0]}
@@ -90,9 +89,8 @@ export default class HelloWorldSceneAR extends Component {
         />
         {/* CAT GAME */}
         <ViroButton
-          source={require('../assets/Images/pool.gif')}
-          gazeSource={require('../assets/Images/smile2.jpg')}
-          tapSource={require('../assets/Images/explode.jpg')}
+          source={require('../assets/Images/catMenu1.jpg')}
+          gazeSource={require('../assets/Images/catMenu2.jpg')}
           width={5.0}
           height={5.0}
           position={[-5.5, 0.0, -5.0]}
@@ -107,9 +105,8 @@ export default class HelloWorldSceneAR extends Component {
         />
         {/* SHOOTER */}
         <ViroButton
-          source={require('../assets/Images/smile1.jpg')}
-          gazeSource={require('../assets/Images/smile2.jpg')}
-          tapSource={require('../assets/Images/explode.jpg')}
+          source={require('../assets/Images/heartMenu1.jpg')}
+          gazeSource={require('../assets/Images/heartMenu2.jpg')}
           width={5.0}
           height={5.0}
           position={[2.0, 0.0, -10.0]}
@@ -125,9 +122,9 @@ export default class HelloWorldSceneAR extends Component {
         />
         {/* BALL GAME */}
         <ViroButton
-          source={require('../assets/Images/purplegrid.gif')}
-          gazeSource={require('../assets/Images/smile2.jpg')}
-          tapSource={require('../assets/Images/explode.jpg')}
+          source={require('../assets/Images/donutMenu1.jpg')}
+          gazeSource={require('../assets/Images/donutMenu2.jpg')}
+          // tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
           position={[5.5, 0.0, -5.0]}
@@ -138,9 +135,9 @@ export default class HelloWorldSceneAR extends Component {
               this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_4
             );
           }}
-          onGaze={this._onGazeMakeBalls()}
+          // onGaze={this._onGazeMakeBalls()}
         />
-        {this._renderGazeBall()}
+        {/* {this._renderGazeBall()} */}
         <ViroText
           // animation={{ name: 'zoom', run: true, loop: true }}
           text={this.state.text}
