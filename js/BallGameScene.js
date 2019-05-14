@@ -24,6 +24,7 @@ import {
   ViroARPlaneSelector,
   ViroAnimations,
   ViroARTrackingTargets,
+  ViroSound,
   ViroNode,
   ViroAnimatedImage,
 } from 'react-viro';
@@ -243,6 +244,15 @@ export default class BallGameScene extends Component {
           position={[0, 0, -8]}
           source={require('../assets/Images/donutGlaze.gif')}
         />
+        {/* MUSIC AND SOUND FX */}
+        <ViroSound
+            paused={false}
+            source={require('../assets/Music/donutMusic.mp3')}
+            loop={true}
+            volume={0.4}
+            onFinish={this.onFinishSound}
+            onError={this.onErrorSound}
+          />
         {/* <ViroAnimatedImage
           height={4}
           width={4}
