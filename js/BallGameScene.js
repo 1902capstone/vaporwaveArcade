@@ -124,38 +124,40 @@ export default class BallGameScene extends Component {
       const colors = ['pink', 'purple', 'red', 'white'];
 
       const x = (
-        <ViroSphere
+        // <ViroSphere
+        //   key={sphereTag}
+        //   viroTag={sphereTag}
+        //   heightSegmentCount={10}
+        //   widthSegmentCount={10}
+        //   radius={randomRad}
+        //   position={[randomXPos, randomYPos, -3]}
+        //   height={1}
+        //   materials={[colors[randomColor]]}
+        //   physicsBody={{
+        //     type: 'Dynamic',
+        //     mass: randomMass,
+        //     restitution: 0.999,
+        //   }}
+        // />
+        <Viro3DObject
+          // animation={{ name: 'flip', run: true, loop: true }}
+          source={require('../assets/3DModels/donut/Donut_OBJ.obj')}
+          opacity={1}
           key={sphereTag}
           viroTag={sphereTag}
-          heightSegmentCount={10}
-          widthSegmentCount={10}
-          radius={randomRad}
-          position={[randomXPos, randomYPos, -3]}
-          height={1}
           materials={[colors[randomColor]]}
+          position={[randomXPos, randomYPos, -3]}
+          scale={[0.013, 0.013, 0.013]}
+          type="OBJ"
+          rotation={[-90, 0, 0]}
           physicsBody={{
             type: 'Dynamic',
             mass: randomMass,
             restitution: 0.999,
           }}
+          onCollision={this.handleScore}
+          onClick={this.createSpheres}
         />
-        // <Viro3DObject
-        //   animation={{ name: 'flip', run: true, loop: true }}
-        //   source={require('../assets/3DModels/donut/Donut_OBJ.obj')}
-        //   opacity={1}
-        //   materials={[colors[randomColor]]}
-        //   position={[randomXPos, randomYPos, -3]}
-        //   scale={[0.013, 0.013, 0.013]}
-        //   type="OBJ"
-        //   rotation={[-90, 0, 0]}
-        //   physicsBody={{
-        //         type: 'Dynamic',
-        //         mass: randomMass,
-        //         restitution: 0.999,
-        //       }}
-        //   onCollision={this.handleScore}
-        //   onClick={this.createSpheres}
-        // />
       );
       const SphereObj = {
         show: false,
@@ -165,33 +167,30 @@ export default class BallGameScene extends Component {
       };
       spheres.push(SphereObj);
     }
-    
     this.setState({
       spheres: this.state.spheres + spheresToLoad.length,
     });
   }
-  
   renderSpheres() {
     let sphereList = spheres.map(item => {
       return item.model;
     });
     return sphereList;
   }
-  
-  
+
   handleGameStart() {
     if (!ballSpawnIntervalId && this.state.startTime) {
       this.props.arSceneNavigator.viroAppProps.beginTimer();
       ballSpawnIntervalId = setInterval(this.createSpheres, 1800);
     }
   }
-  
+
   handleScore(colliderTag) {
     let indexOfSphere = spheres.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
     });
     spheres.splice(indexOfSphere, 1);
-    
+
     this.setState({
       spheres: this.state.spheres - 1,
     });
@@ -199,8 +198,8 @@ export default class BallGameScene extends Component {
   }
 
   renderARScene() {
-    const currentScore = this.props.arSceneNavigator.viroAppProps.score;
-    const timer = this.props.arSceneNavigator.viroAppProps.timer;
+    // const currentScore = this.props.arSceneNavigator.viroAppProps.score;
+    // const timer = this.props.arSceneNavigator.viroAppProps.timer;
 
     return (
       <ViroARPlaneSelector
@@ -213,19 +212,9 @@ export default class BallGameScene extends Component {
         }}
         pauseUpdates={this.state.pauseUpdates}
       >
-        {/* {this.handleTime()} */}
         {this.handleGameStart()}
         {this.renderSpheres()}
 
-        {/* <ViroAnimatedImage
-          height={9}
-          width={9}
-          loop={true}
-          opacity={1}
-          rotation={[-30, 0, 0]}
-          position={[0, -3, -5]}
-          source={require('../assets/Images/purplegrid.gif')}
-        /> */}
         <ViroSpotLight
           position={[0, 5, 0]}
           color="#777777"
@@ -246,13 +235,7 @@ export default class BallGameScene extends Component {
           materials={['red']}
         />
 
-        {/* <ViroText
-          text={currentScore.toString()}
-          scale={[0.5, 0.5, 0.5]}
-          position={[0, 0, -1]}
-          style={localStyles.helloWorldTextStyle}
-        /> */}
-        <Viro3DObject
+        {/* <Viro3DObject
           animation={{ name: 'flip', run: true, loop: true }}
           source={require('../assets/3DModels/donut/Donut_FBX.vrx')}
           opacity={1}
@@ -264,7 +247,7 @@ export default class BallGameScene extends Component {
           physicsBody={{ type: 'Static' }}
           onCollision={this.handleScore}
           onClick={this.createSpheres}
-        />
+        /> */}
         <ViroARCamera>
           <Viro3DObject
             // animation={{ name: 'rotate', run: true, loop: true }}
@@ -376,7 +359,7 @@ ViroAnimations.registerAnimations({
       rotateX: '+=60',
     },
     duration: 1000, //.
-  }
+  },
 });
 
 module.exports = BallGameScene;
