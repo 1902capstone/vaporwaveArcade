@@ -50,8 +50,8 @@ export default class HelloWorldSceneAR extends Component {
 
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-      {/* CEILING */}
-      {/* <ViroAnimatedImage
+        {/* CEILING */}
+        {/* <ViroAnimatedImage
           height={12}
           width={19}
           loop={true}
@@ -61,30 +61,31 @@ export default class HelloWorldSceneAR extends Component {
           source={require('../assets/Images/purplegrid.gif')}
         /> */}
         {/* FLOOR */}
-      <ViroAnimatedImage
+        <ViroAnimatedImage
           height={12}
           width={19}
           loop={true}
-          opacity={.6}
+          opacity={0.6}
           rotation={[-65, 0, 0]}
           position={[0, -4, -8]}
           source={require('../assets/Images/purplegrid.gif')}
         />
-        {/* UNUSED BUTTON */}
+        {/* LEADER BOARD */}
         <ViroButton
-          source={require('../assets/Images/smile1.jpg')}
-          gazeSource={require('../assets/Images/smile1.jpg')}
+          source={require('../assets/Images/leadMenu1.jpg')}
+          gazeSource={require('../assets/Images/leadMenu2.jpg')}
           width={5.0}
           height={5.0}
-          position={[-2.0, 0.0, -10.0]}
-          rotation={[0, 45, 0]}
+          position={[5.5, 0.0, -5.0]}
+          rotation={[0, -45, 0]}
           opacity={1}
           // onTap={this._onButtonTap}
-          onClick={() =>
+          onClick={() => {
             this.props.arSceneNavigator.viroAppProps.selectGame(
-              this.props.arSceneNavigator.viroAppProps.MENU_STATES.GAME_1
-            )
-          }
+              this.props.arSceneNavigator.viroAppProps.MENU_STATES
+                .ALL_LEADERBOARDS
+            );
+          }}
           onGaze={this._onButtonGaze}
         />
         {/* CAT GAME */}
@@ -120,15 +121,15 @@ export default class HelloWorldSceneAR extends Component {
           }
           onGaze={this._onButtonGaze}
         />
-        {/* BALL GAME */}
+        {/* DONUT DROP */}
         <ViroButton
           source={require('../assets/Images/donutMenu1.jpg')}
           gazeSource={require('../assets/Images/donutMenu2.jpg')}
           // tapSource={require('../assets/Images/explode.jpg')}
           width={5.0}
           height={5.0}
-          position={[5.5, 0.0, -5.0]}
-          rotation={[0, -45, 0]}
+          position={[-2.0, 0.0, -10.0]}
+          rotation={[0, 45, 0]}
           // onTap={this._onButtonTap}
           onClick={() => {
             this.props.arSceneNavigator.viroAppProps.selectGame(
@@ -143,10 +144,10 @@ export default class HelloWorldSceneAR extends Component {
           text={this.state.text}
           scale={[0.5, 0.5, 0.5]}
           position={[0, -0.3, -1]}
-          extrusionDepth={4 }
+          extrusionDepth={4}
           style={localStyles.helloWorldTextStyle}
         />
-        <ViroAmbientLight color={'#aaaaaa'} /> 
+        <ViroAmbientLight color={'#aaaaaa'} />
         <ViroSpotLight
           innerAngle={5}
           outerAngle={90}
@@ -169,25 +170,24 @@ export default class HelloWorldSceneAR extends Component {
             scale={[0.012, 0.012, 0.012]}
             materials={['venus']}
             type="OBJ"
-            onClick={() => {this.props.arSceneNavigator.viroAppProps.selectGame(this.props.arSceneNavigator.viroAppProps.MENU_STATES.ALL_LEADERBOARDS)}}
           />
         </ViroNode>
         {/* MUSIC change paused to FALSE to turn on */}
         <ViroSound
-            paused={false}
-            source={require('../assets/Music/menuMusic.mp3')}
-            loop={true}
-            volume={.2}
-            onFinish={this.onFinishSound}
-            onError={this.onErrorSound}
-          />
+          paused={false}
+          source={require('../assets/Music/menuMusic.mp3')}
+          loop={true}
+          volume={0.2}
+          onFinish={this.onFinishSound}
+          onError={this.onErrorSound}
+        />
       </ViroARScene>
     );
   }
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text: 'Welcome to the arcade!Tap to see Leaderboard',
+        text: 'welcome to the arcade!',
       });
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
@@ -213,7 +213,7 @@ export default class HelloWorldSceneAR extends Component {
         key={sphereCount}
         radius={2}
         position={[18, 0, -20]}
-        height={.3}
+        height={0.3}
         materials={['white']}
         physicsBody={{
           type: 'Dynamic',
@@ -230,7 +230,7 @@ export default class HelloWorldSceneAR extends Component {
         key={sphereCount}
         radius={2}
         position={[17, 0, -20]}
-        height={.3}
+        height={0.3}
         materials={['red']}
         physicsBody={{
           type: 'Dynamic',
@@ -239,15 +239,15 @@ export default class HelloWorldSceneAR extends Component {
         }}
       />
     );
-    spheresToLoad.push(sphere1)
-    spheresToLoad.push(sphere2)
-    console.log('spheres', sphereCount)
+    spheresToLoad.push(sphere1);
+    spheresToLoad.push(sphere2);
+    console.log('spheres', sphereCount);
   }
 
   _renderGazeBall() {
-    let holder = [...spheresToLoad]
+    let holder = [...spheresToLoad];
     spheresToLoad = [];
-    return holder
+    return holder;
   }
 }
 
@@ -348,7 +348,18 @@ ViroAnimations.registerAnimations({
     duration: 1200, //.25 seconds
     // easing: 'bounce'
   },
-  venusBob: [['venusUpR', 'venusDownR', 'venusUpR', 'venusDownR', 'venusUpL', 'venusDownL', 'venusUpL', 'venusDownL']],
+  venusBob: [
+    [
+      'venusUpR',
+      'venusDownR',
+      'venusUpR',
+      'venusDownR',
+      'venusUpL',
+      'venusDownL',
+      'venusUpL',
+      'venusDownL',
+    ],
+  ],
 });
 
 module.exports = HelloWorldSceneAR;

@@ -77,17 +77,25 @@ export default class ShootScene extends Component {
         physicsWorld={{ gravity: [0, -3, 0] }}
         ref={this.sceneRef}
       >
-      <ViroARCamera>
-      <ViroAnimatedImage
-            height={1.5}
-            width={3}
+        <ViroARCamera>
+          <ViroAnimatedImage
+            height={.8}
+            width={2}
             loop={true}
             opacity={0.6}
             visible={hide}
-            position={[0, 0, -5]}
-            source={require('../assets/Images/findPlane.gif')}
+            position={[0, -1, -5]}
+            source={require('../assets/Images/findPlane3.gif')}
           />
-      </ViroARCamera>
+          <ViroText
+            text='slowly scan the area to find a flat surface, tap the surface to select'
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
+            visible={hide}
+            extrusionDepth={1}
+            style={localStyles.instructions}
+          />
+        </ViroARCamera>
         {/* <ViroImage
           height={1}
           width={2.8}
@@ -104,6 +112,8 @@ export default class ShootScene extends Component {
             hide = false; // to hide the plane fine image
           }}
           pauseUpdates={this.state.pauseUpdates}
+          style={localStyles.plane}
+
         >
           {/* MUSIC AND SOUND FX */}
           <ViroSound
@@ -113,6 +123,14 @@ export default class ShootScene extends Component {
             loop={false}
             volume={1.0}
             onFinish={this.handleShootSoundEnd}
+            onError={this.onErrorSound}
+          />
+          <ViroSound
+            paused={false}
+            source={require('../assets/Music/heartMusic.mp3')}
+            loop={true}
+            volume={0.1}
+            onFinish={this.onFinishSound}
             onError={this.onErrorSound}
           />
           {/* DECORATIVE IMAGES */}
@@ -430,6 +448,16 @@ var localStyles = StyleSheet.create({
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
+  },
+  instructions: {
+    fontFamily: 'Arial',
+    fontSize: 8,
+    color: 'hotpink',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  },
+  plane: {
+    color: 'pink',
   },
   buttonText: {
     color: '#fff',
