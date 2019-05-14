@@ -248,6 +248,20 @@ export default class ShootScene extends Component {
               this.props.arSceneNavigator.viroAppProps.decrementScore
             }
           />
+                <Viro3DObject
+            animation={{ name: 'swayE', run: true, loop: true }}
+            source={require('../assets/3DModels/bomb/Bomb.obj')}
+            resources={[require('../assets/3DModels/bomb/Bomb.mtl')]}
+            opacity={1}
+            position={[-2, 2, -18]}
+            scale={[9, 9, 9]}
+            type="OBJ"
+            materials={['bomb']}
+            physicsBody={{ type: 'Static' }}
+            onCollision={
+              this.props.arSceneNavigator.viroAppProps.decrementScore
+            }
+          />
           <ViroARCamera>
             <ViroNode
               // onClick={this._addBullet}
@@ -602,6 +616,21 @@ ViroAnimations.registerAnimations({
       'moveLeft',
       // 'moveUp',
       'moveDown',
+    ],
+  ],
+  swayE: [
+    [
+      'moveLeft',
+      'moveUp',
+      'moveDown',
+      'moveRight',
+      'forward',
+      'moveUp',
+      'moveDown',
+      'moveRight',
+      'moveUpL',
+      'moveDown',
+      'back',
     ],
   ],
 });

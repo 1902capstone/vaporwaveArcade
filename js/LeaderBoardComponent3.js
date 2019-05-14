@@ -28,7 +28,8 @@ export default class LeaderBoardComponent3 extends Component {
             alignItems: "center"
           }}
         >
-          <Text style={{ fontSize: 25, color: "white" }}>Leaderboard</Text>
+          <Text style={{   fontFamily: "Cochin",
+    fontWeight: 'bold', fontSize: 25, color: "white" }}>Leaderboard</Text>
           <View
             style={{
               flexDirection: "row",
