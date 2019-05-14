@@ -53,7 +53,7 @@ export default class ShootScene extends Component {
     this.handleGameStart = this.handleGameStart.bind(this);
     this.sceneRef = React.createRef();
     this.updateCamera = this.updateCamera.bind(this);
-    // this.beginCameraUpdates = this.beginCameraUpdates.bind(this);
+    this.beginCameraUpdates = this.beginCameraUpdates.bind(this);
     this.handleShootSoundEnd = this.handleShootSoundEnd.bind(this);
     this.shootSoundRef = React.createRef()
   }
@@ -70,7 +70,6 @@ export default class ShootScene extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
         ref={this.sceneRef}
-        onCameraTransformUpdate={(pos) => this.updateCamera(pos)}
       >
         <ViroImage
           height={1}
@@ -276,6 +275,14 @@ export default class ShootScene extends Component {
     if (!this.sceneRef.current) {
       return;
     }
+    // let myDirection;
+    // if (this.sceneRef.current) {
+    // this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
+    //     myDirection = positions.forward;
+    //     console.log(myDirection) // [0] [1] [2]
+    //   })
+    // }
+
 
 
     var bang = [];
@@ -293,6 +300,7 @@ export default class ShootScene extends Component {
           physicsBody={{
             type: 'Dynamic',
             mass: 1,
+            // force: {value: [this.state.cameraAngle[0] * 50, this.state.cameraAngle[1] * 50, this.state.cameraAngle[2] * 50]}
             velocity: [
               this.state.cameraAngle[0] * 130,
               this.state.cameraAngle[1] * 130,
@@ -302,6 +310,7 @@ export default class ShootScene extends Component {
         />
       );
     }
+    console.log('bandSound should be off', bangSound);
     return bang;
   }
 
@@ -322,29 +331,23 @@ export default class ShootScene extends Component {
   }
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
-    // this.beginCameraUpdates();
+    this.beginCameraUpdates();
   }
-  // beginCameraUpdates() {
-  //   if (!cameraCheckIntervalId) {
-  //     cameraCheckIntervalId = setInterval(() => {
-  //       this.updateCamera();
-  //     }, 100);
-  //   }
-  // }
-  
-  // async updateCamera() {
-  //   let myPos = await this.sceneRef.current.getCameraOrientationAsync();
-  //   // console.log(myPos.forward);
-  //   this.setState({
-  //     cameraAngle: myPos.forward,
-  //   });
-  // }
-  
-  updateCamera(pos) {
+  beginCameraUpdates() {
+    if (!cameraCheckIntervalId) {
+      cameraCheckIntervalId = setInterval(() => {
+        this.updateCamera();
+      }, 100);
+    }
+  }
+  async updateCamera() {
+    let myPos = await this.sceneRef.current.getCameraOrientationAsync();
+    // console.log(myPos.forward);
     this.setState({
-      cameraAngle: pos.forward
-    })
+      cameraAngle: myPos.forward,
+    });
   }
+  
   
   
 }

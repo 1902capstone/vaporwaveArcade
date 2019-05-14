@@ -70,7 +70,9 @@ export default class KittyPoolSceneLoader extends Component {
           />
           <Text
             style={localStyles.text}
-          >{`You have thirty seconds to catch as many cats as you can!  Tap the cats to rescue them.`}</Text>
+              // You have twenty-five seconds to grab as many cats from the water as you can. Simply tap a cat to save it!
+
+          >{`You have thirty seconds to catch as many cats as you can!  Tap the cats to rescue them from drowning.`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}
