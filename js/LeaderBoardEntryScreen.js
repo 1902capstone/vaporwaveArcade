@@ -44,8 +44,6 @@ export default class LeaderBoardEntryScreen extends Component {
 
   render() {
     return (
-      <View>
-      <ImageBackground source={require('../assets/Images/moving_palm_trees.gif')} style={{width: '100%', height: '100%'}}>
       <View style={styles.main}>
         <Text style={styles.title}>Your Score: {this.props.score}</Text>
         <Text style={styles.title}>CONGRATULATIONS! HIGH SCORE!</Text>
@@ -67,8 +65,6 @@ export default class LeaderBoardEntryScreen extends Component {
           <Text style={styles.buttonText}>BACK TO MENU</Text>
         </TouchableHighlight>
         </View>
-      </ImageBackground>
-      </View>
     );
   }
 }
@@ -83,7 +79,8 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: "center"
+    textAlign: "center",
+    color: "white"
   },
   itemInput: {
     height: 50,
@@ -99,7 +96,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#111",
     alignSelf: "center",
-    color: "white"
+    color: "black"
   },
   button: {
     height: 45,

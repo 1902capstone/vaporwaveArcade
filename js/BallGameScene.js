@@ -83,7 +83,7 @@ export default class BallGameScene extends Component {
        <ViroText text = "Find a surface and tap to select it"     
         textAlign="left"
         textAlignVertical="top"
-        textLineBreakMode="justify"
+        textLineBreakMode="Justify"
         color="#ff0000"
         visible={hide}
         width={2} height={2}

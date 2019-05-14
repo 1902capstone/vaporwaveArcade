@@ -77,7 +77,6 @@ export default class ShootScene extends Component {
         physicsWorld={{ gravity: [0, -3, 0] }}
         ref={this.sceneRef}
       >
-<<<<<<< HEAD
       <ViroText text = "Find a surface and tap to select it"     
         textAlign="left"
         textAlignVertical="top"
@@ -89,20 +88,6 @@ export default class ShootScene extends Component {
         position={[0, 1,-4]}
       />
         <ViroImage
-=======
-      <ViroARCamera>
-      <ViroAnimatedImage
-            height={1.5}
-            width={3}
-            loop={true}
-            opacity={0.6}
-            visible={hide}
-            position={[0, 0, -5]}
-            source={require('../assets/Images/findPlane.gif')}
-          />
-      </ViroARCamera>
-        {/* <ViroImage
->>>>>>> 5ccafb69cc8fb92b92501273ad81b6f9905f04ba
           height={1}
           width={2.8}
           visible={hide}

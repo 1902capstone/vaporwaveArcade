@@ -5,7 +5,7 @@ import {
   View,
   TouchableHighlight,
   Text,
-  Image,
+  Image
 } from 'react-native';
 
 const LeaderBoardEntryScreen = require('./LeaderBoardEntryScreen');
@@ -51,13 +51,19 @@ export default class PostGame1 extends Component {
       (this.state.leaderBoardArray.length < 10 &&
         this.state.leaderBoardArray.length > 1)
     ) {
-      return this.props.showLeaderboard ? (
-        this.renderPostGame()
-      ) : (
+      return (
+        this.props.showLeaderboard ? 
+        <LeaderBoardEntryScreen
+        returnToMenu={this.props.returnToMenu}
+        goToLeaderBoard={this.props.goToLeaderBoard}
+        score={this.props.score}
+        /> 
+        :
         <GameLoading score={this.props.score} />
       );
     } else if (this.state.leaderBoardArray.length) {
-      return this.props.showLeaderboard ? (
+      return (
+        this.props.showLeaderboard ? (
         <View style={localStyles.main}>
           <Text style={localStyles.title}>Score: {this.props.score}</Text>
           <Text style={localStyles.title}>
@@ -84,12 +90,70 @@ export default class PostGame1 extends Component {
         </View>
       ) : (
         <GameLoading score={this.props.score} />
-      );
+      ))
     } else {
-      return <GameLoading score={this.props.score} />;
+      return (
+        <GameLoading score={this.props.score} />)
     }
   }
 }
+
+
+
+
+
+{/* <View>
+<ImageBackground source={require('../assets/Images/moving_palm_trees.gif')} style={{width: '100%', height: '100%'}}>
+  {
+  (leaderBoardArray1.score < this.props.score ||
+  (this.state.leaderBoardArray.length < 10 &&
+  this.state.leaderBoardArray.length > 1)) ?         
+  (<View>
+  <ImageBackground source={require('../assets/Images/moving_palm_trees.gif')} style={{width: '100%', height: '100%'}}>
+    {this.props.showLeaderboard ? 
+     <LeaderBoardEntryScreen
+     returnToMenu={this.props.returnToMenu}
+     goToLeaderBoard={this.props.goToLeaderBoard}
+     score={this.props.score}
+    /> 
+    :
+    <GameLoading score={this.props.score} />
+  }
+  </ImageBackground>
+</View>)
+ :
+this.props.showLeaderboard ? (
+  <View style={localStyles.main}>
+    <Text style={localStyles.title}>Score: {this.props.score}</Text>
+    <Text style={localStyles.title}>
+      Nice try, but you didn't earn a high score. Play again?
+    </Text>
+    <Image
+      source={require('../assets/Images/spin.gif')}
+      style={{ width: 250, height: 250 }}
+    />
+    <TouchableHighlight
+      style={localStyles.button}
+      underlayColor="#68a0ff"
+      onPress={this.props.returnToMenu}
+    >
+      <Text style={localStyles.buttonText}>BACK TO MENU</Text>
+    </TouchableHighlight>
+    <TouchableHighlight
+      style={localStyles.button}
+      underlayColor="#68a0ff"
+      onPress={() => this.props.resetGame()}
+    >
+      <Text style={localStyles.buttonText}>PLAY AGAIN!</Text>
+    </TouchableHighlight>
+  </View>
+) : (
+  <GameLoading score={this.props.score} />
+)}
+</ImageBackground>
+</View>
+)
+} */}
 
 var localStyles = StyleSheet.create({
   losingText: {
