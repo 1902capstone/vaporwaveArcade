@@ -6,8 +6,7 @@ import {
   StyleSheet,
   TextInput,
   AlertIOS,
-  Alert,
-  ImageBackground
+  Alert
 } from "react-native";
 
 import { db } from "../src/config";

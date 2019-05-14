@@ -144,16 +144,16 @@ export default class BallGameSceneLoader extends Component {
   renderPostGame() {
     return (
       <View>
-      <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
-      <PostGame1
-        returnToMenu={this.props.propObj.returnToMenu}
-        goToLeaderBoard={this.props.propObj.goToLeaderBoard}
-        score={this.state.score}
-        resetGame={this.resetGame}
-        gameName="BallGame"
-        showLeaderboard={this.state.showLeaderboard}
-      />
-      </ImageBackground>
+        <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
+          <PostGame1
+            returnToMenu={this.props.propObj.returnToMenu}
+            goToLeaderBoard={this.props.propObj.goToLeaderBoard}
+            score={this.state.score}
+            resetGame={this.resetGame}
+            gameName="BallGame"
+            showLeaderboard={this.state.showLeaderboard}
+          />
+        </ImageBackground>
       </View>
     );
   }
@@ -185,7 +185,7 @@ export default class BallGameSceneLoader extends Component {
       this.setState({
         showLeaderboard: true
       })
-    }, 2000)
+    }, 2550)
   }
 
   incrementScore(colliderTag) {

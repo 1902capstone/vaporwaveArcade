@@ -8,6 +8,7 @@ import {
   TouchableHighlight,
   Vibration,
   Image,
+  ImageBackground
 } from 'react-native';
 
 import { ViroARSceneNavigator } from 'react-viro';
@@ -16,6 +17,7 @@ import PostGame2 from './PostGame2';
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const ShootScene = require('./ShootScene');
+const backgroundImage = require('../assets/Images/moving_palm_trees.gif')
 
 const GAME_STATES = {
   INTRODUCTION: 'INTRODUCTION',
@@ -145,13 +147,17 @@ export default class HeartbreakerSceneLoader extends Component {
 
   renderPostGame() {
     return (
-      <PostGame2
-        returnToMenu={this.props.propObj.returnToMenu}
-        goToLeaderBoard={this.props.propObj.goToLeaderBoard2}
-        score={this.state.score}
-        resetGame={this.resetGame}
-        showLeaderboard={this.state.showLeaderboard}
-      />
+      <View>
+        <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
+          <PostGame2
+            returnToMenu={this.props.propObj.returnToMenu}
+            goToLeaderBoard={this.props.propObj.goToLeaderBoard2}
+            score={this.state.score}
+            resetGame={this.resetGame}
+            showLeaderboard={this.state.showLeaderboard}
+          />
+        </ImageBackground>
+      </View>
     );
   }
 
@@ -172,7 +178,7 @@ export default class HeartbreakerSceneLoader extends Component {
       this.setState({
         showLeaderboard: true,
       });
-    }, 2000);
+    }, 2550);
   }
   resetGame() {
     this.setState({

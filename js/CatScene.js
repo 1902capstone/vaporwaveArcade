@@ -89,23 +89,25 @@ export default class CatScene extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
       >
-      <ViroText text = "Find a surface and tap to select it"     
-        textAlign="left"
-        textAlignVertical="top"
-        textLineBreakMode="justify"
-        color="#ff0000"
-        width={2} height={2}
-        visible={hide}
-        style={{fontFamily:"Arial", fontSize:20, color:"#0000FF"}}
-        position={[0,0,-4]}
-      />
-        <ViroImage
-          height={1}
-          width={2.8}
-          visible={hide}
-          position={[0, 0, -4]}
-          source={require('../assets/Images/planeFind.png')}
-        />
+       <ViroARCamera>
+          <ViroAnimatedImage
+            height={.8}
+            width={2}
+            loop={true}
+            opacity={0.6}
+            visible={hide}
+            position={[0, -1, -5]}
+            source={require('../assets/Images/findPlane3.gif')}
+          />
+          <ViroText
+            text='slowly scan the area to highlight a flat surface, tap the surface to select it.'
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
+            visible={hide}
+            extrusionDepth={1}
+            style={localStyles.instructions}
+          />
+        </ViroARCamera>
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
@@ -420,6 +422,13 @@ var localStyles = StyleSheet.create({
     fontFamily: 'Arial',
     fontSize: 20,
     color: '#ffffff',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  },
+  instructions: {
+    fontFamily: 'Arial',
+    fontSize: 8,
+    color: 'hotpink',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
