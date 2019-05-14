@@ -71,6 +71,16 @@ export default class ShootScene extends Component {
         physicsWorld={{ gravity: [0, -3, 0] }}
         ref={this.sceneRef}
       >
+      <ViroText text = "Find a surface and tap to select it"     
+        textAlign="left"
+        textAlignVertical="top"
+        textLineBreakMode="justify"
+        color="#ff0000"
+        visible={hide}
+        width={2} height={2}
+        style={{fontFamily:"Arial", fontSize:20, color:"#0000FF"}}
+        position={[0, 1,-4]}
+      />
         <ViroImage
           height={1}
           width={2.8}

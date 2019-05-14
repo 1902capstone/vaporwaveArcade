@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TextInput,
   AlertIOS,
-  Alert
+  Alert,
+  ImageBackground
 } from "react-native";
 
 import { db } from "../src/config";
@@ -43,6 +44,8 @@ export default class LeaderBoardEntryScreen extends Component {
 
   render() {
     return (
+      <View>
+      <ImageBackground source={require('../assets/Images/moving_palm_trees.gif')} style={{width: '100%', height: '100%'}}>
       <View style={styles.main}>
         <Text style={styles.title}>Your Score: {this.props.score}</Text>
         <Text style={styles.title}>CONGRATULATIONS! HIGH SCORE!</Text>
@@ -61,8 +64,10 @@ export default class LeaderBoardEntryScreen extends Component {
           underlayColor={"#68a0ff"}
           onPress={this.props.returnToMenu}
         >
-          <Text style={styles.buttonText}>BACK</Text>
+          <Text style={styles.buttonText}>BACK TO MENU</Text>
         </TouchableHighlight>
+        </View>
+      </ImageBackground>
       </View>
     );
   }
@@ -73,8 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 30,
     flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "#6565fc"
+    justifyContent: "center"
   },
   title: {
     marginBottom: 20,
@@ -94,7 +98,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: "#111",
-    alignSelf: "center"
+    alignSelf: "center",
+    color: "white"
   },
   button: {
     height: 45,

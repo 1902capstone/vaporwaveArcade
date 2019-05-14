@@ -172,7 +172,7 @@ export default class HeartbreakerSceneLoader extends Component {
       this.setState({
         showLeaderboard: true,
       });
-    }, 3000);
+    }, 2000);
   }
   resetGame() {
     this.setState({

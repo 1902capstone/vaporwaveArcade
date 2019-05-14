@@ -5,6 +5,7 @@ export default class GameLoading extends Component {
   render() {
     return (
       <View style={styles.main}>
+        <Text style={styles.title}>Game Over</Text>
         <Text style={styles.title}>Your Score: {this.props.score}</Text>
       </View>
     );

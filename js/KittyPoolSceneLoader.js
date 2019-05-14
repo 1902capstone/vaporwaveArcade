@@ -172,7 +172,7 @@ export default class KittyPoolSceneLoader extends Component {
       this.setState({
         showLeaderboard: true,
       });
-    }, 3000);
+    }, 2000);
   }
   
   incrementScore(colliderTag) {
