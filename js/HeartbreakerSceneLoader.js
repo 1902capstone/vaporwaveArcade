@@ -6,7 +6,7 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
-  Vibration,
+  // Vibration,
   Image,
 } from 'react-native';
 
@@ -24,14 +24,15 @@ const GAME_STATES = {
 };
 let timerIntervalId;
 
-const DURATION = 500;
+// const DURATION = 500;
 
 const PATTERN = [1000, 2000, 3000, 4000];
 
-const options = {
-  enableVibrateFallback: true,
-  ignoreAndroidSystemSettings: false,
-};
+// const options = {
+//   enableVibrateFallback: true,
+//   ignoreAndroidSystemSettings: false,
+// };
+
 export default class HeartbreakerSceneLoader extends Component {
   _isMounted = false;  
   constructor() {
@@ -156,7 +157,7 @@ export default class HeartbreakerSceneLoader extends Component {
   }
 
   startGame() {
-    Vibration.vibrate(DURATION)
+    // Vibration.vibrate(DURATION)
 
     this.setState({
       gameState: GAME_STATES.RENDER_GAME,
@@ -185,7 +186,7 @@ export default class HeartbreakerSceneLoader extends Component {
   }
 
   incrementScore() {
-    Vibration.vibrate(DURATION);
+    // Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });
