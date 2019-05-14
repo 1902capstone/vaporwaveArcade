@@ -90,8 +90,8 @@ export default class HelloWorldSceneAR extends Component {
         />
         {/* CAT GAME */}
         <ViroButton
-          source={require('../assets/Images/catMenu1.jpg')}
-          gazeSource={require('../assets/Images/catMenu2.jpg')}
+          source={require('../assets/Images/poolMenu1.jpg')}
+          gazeSource={require('../assets/Images/poolMenu2.jpg')}
           width={5.0}
           height={5.0}
           position={[-5.5, 0.0, -5.0]}
@@ -104,7 +104,7 @@ export default class HelloWorldSceneAR extends Component {
           }
           onGaze={this._onButtonGaze}
         />
-        {/* SHOOTER */}
+        {/* HEARTBREAKER */}
         <ViroButton
           source={require('../assets/Images/heartMenu1.jpg')}
           gazeSource={require('../assets/Images/heartMenu2.jpg')}
