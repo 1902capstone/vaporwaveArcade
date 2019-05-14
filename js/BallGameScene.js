@@ -256,14 +256,14 @@ export default class BallGameScene extends Component {
           position={[0, 0, -8]}
           source={require('../assets/Images/donutGlaze.gif')}
         />
-        <ViroImage
+        {/* <ViroImage
             height={18}
             width={8}
             opacity={0.6}
             rotation={[0, 0, 0]}
             position={[-10, 0, -15]}
             source={require('../assets/Images/squiggles.png')}
-          />
+          /> */}
         {/* MUSIC AND SOUND FX */}
         <ViroSound
             paused={false}
