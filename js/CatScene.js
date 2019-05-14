@@ -100,7 +100,7 @@ export default class CatScene extends Component {
             source={require('../assets/Images/findPlane3.gif')}
           />
           <ViroText
-            text='slowly scan the area to find a flat surface, tap the surface to select'
+            text='slowly scan the area to highlight a flat surface, tap the surface to select it.'
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
             visible={hide}
@@ -422,6 +422,13 @@ var localStyles = StyleSheet.create({
     fontFamily: 'Arial',
     fontSize: 20,
     color: '#ffffff',
+    textAlignVertical: 'center',
+    textAlign: 'center',
+  },
+  instructions: {
+    fontFamily: 'Arial',
+    fontSize: 8,
+    color: 'hotpink',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
