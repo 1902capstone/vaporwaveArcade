@@ -25,7 +25,6 @@ import {
   ViroSound,
 } from 'react-viro';
 
-
 let cats = [];
 let timerStarted = false;
 let timerIntervalId;
@@ -48,9 +47,8 @@ export default class CatScene extends Component {
       startTime: 0,
       catText: '',
       texts: 0,
-      splashSoundPause: true,
+      // splashSoundPause: true,
       catMeowPause: true,
-      
     };
 
     // bind 'this' to functions
@@ -64,9 +62,9 @@ export default class CatScene extends Component {
     this._renderTexts = this._renderTexts.bind(this);
     this.removeText = this.removeText.bind(this);
     this.catMeowRef = React.createRef();
-    this.splashSoundRef = React.createRef();
+    // this.splashSoundRef = React.createRef();
     this.handleCatSoundEnd = this.handleCatSoundEnd.bind(this);
-    this.handleSplashSoundEnd = this.handleSplashSoundEnd.bind(this);
+    // this.handleSplashSoundEnd = this.handleSplashSoundEnd.bind(this);
   }
 
   componentDidMount() {
@@ -79,7 +77,7 @@ export default class CatScene extends Component {
     clearInterval(catSpawnIntervalId);
     catSpawnIntervalId = 0;
     cats = [];
-    hide = true
+    hide = true;
     texts = [];
   }
 
@@ -109,16 +107,25 @@ export default class CatScene extends Component {
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
-            <ViroSound
+          {/* MUSIC AND SOUND FX */}
+          <ViroSound
+            paused={false}
+            source={require('../assets/Music/catMusic.mp3')}
+            loop={true}
+            volume={0.4}
+            onFinish={this.onFinishSound}
+            onError={this.onErrorSound}
+          />
+          <ViroSound
             ref={this.catMeowRef}
             paused={this.state.catMeowPause}
             source={require('../assets/SoundFX/cat_save.mp3')}
             loop={false}
-            volume={0.7}
+            volume={0.4}
             onFinish={this.handleCatSoundEnd}
             onError={this.onErrorSound}
           />
-          <ViroSound
+          {/* <ViroSound
             ref={this.splashSoundRef}
             paused={this.state.splashSoundPause}
             source={require('../assets/SoundFX/splash_1.wav')}
@@ -126,7 +133,7 @@ export default class CatScene extends Component {
             volume={1.0}
             onFinish={this.handleSplashSoundEnd}
             onError={this.onErrorSound}
-          />
+          /> */}
           {this.handleGameStart()}
           <ViroAnimatedImage
             height={9}
@@ -146,7 +153,7 @@ export default class CatScene extends Component {
             position={[-1, -1.4, -9]}
             source={require('../assets/Images/sun.gif')}
           />
-          <ViroNode 
+          <ViroNode
           // onClick={this._saveCat}
           >
             {this._renderCats()}
@@ -194,6 +201,7 @@ export default class CatScene extends Component {
             materials={['beachball']}
             physicsBody={{ type: 'Static' }}
           />
+
           {/* <Viro3DObject
             animation={{ name: 'raft', run: true, loop: true }}
             source={require('../assets/3DModels/raft/raft.obj')}
@@ -240,28 +248,27 @@ export default class CatScene extends Component {
     let indexOfCat = cats.findIndex(elt => {
       return elt.model.props.viroTag === tagName;
     });
-    
-    let catLocation = cats[indexOfCat].model.props.position
-    
+
+    let catLocation = cats[indexOfCat].model.props.position;
+
     cats.splice(indexOfCat, 1);
-    
+
     this.setState({
       cats: this.state.cats - 1,
       catMeowPause: false,
-      splashSoundPause: false,
+      // splashSoundPause: false,
     });
-    
+
     this.catMeowRef.current.seekToTime(0);
-    this.splashSoundRef.current.seekToTime(0);
-    
+    // this.splashSoundRef.current.seekToTime(0);
+
     this.props.arSceneNavigator.viroAppProps.incrementScore();
-    
-    
-    this._createText(catLocation)
-    
+
+    this._createText(catLocation);
+
     // this.setState({ catText: 'saved' });
   }
-  
+
   _createCats() {
     const catsToLoad = [];
     // const numOfCats = Math.floor(Math.random() * 2) + 3;
@@ -284,7 +291,7 @@ export default class CatScene extends Component {
             interruptable: true,
             // onFinish: this._deadCat,
           }}
-          onClick={(pos) => this._saveCat(pos, catTag)}
+          onClick={pos => this._saveCat(pos, catTag)}
           source={require('../assets/3DModels/cat/cat.obj')}
           opacity={1}
           key={catTag}
@@ -314,30 +321,26 @@ export default class CatScene extends Component {
   }
 
   _createText(pos) {
-
     const textTag = `text-${textCount + 1}`;
     textCount++;
-    
-    
+
     const x = (
-      
       <ViroText
-      animation={{
-        name: 'scoreBob',
-        run: true,
-        loop: false,
-        interruptable: true,
-      }}
-      key={textTag}
-      viroTag={textTag}
-      text={"+1"}
-      scale={[1, 1, 1]}
-      position={[pos[0], pos[1]+1.5, pos[2]-0.8]}
-      style={localStyles.scoreStyle}
-      extrusionDepth={2}
-      outerStroke={{ type: 'DropShadow', width: 2, color: '#444444' }} />
-      
-      
+        animation={{
+          name: 'scoreBob',
+          run: true,
+          loop: false,
+          interruptable: true,
+        }}
+        key={textTag}
+        viroTag={textTag}
+        text={'+1'}
+        scale={[1, 1, 1]}
+        position={[pos[0], pos[1] + 1.5, pos[2] - 0.8]}
+        style={localStyles.scoreStyle}
+        extrusionDepth={2}
+        outerStroke={{ type: 'DropShadow', width: 2, color: '#444444' }}
+      />
     );
     const textObj = {
       show: false,
@@ -346,67 +349,60 @@ export default class CatScene extends Component {
       time: 0,
     };
     texts.push(textObj);
-    
+
     this.setState({
       texts: this.state.texts + 1,
     });
-  
+
     setTimeout(() => {
       this.removeText(textTag);
-    }, 1500)
+    }, 1500);
   }
-  
-  
+
   removeText(textTag) {
     let indexOfText = texts.findIndex(elt => {
       return elt.model.props.viroTag === textTag;
     });
-    
+
     texts.splice(indexOfText, 1);
-    
+
     this.setState({
       texts: this.state.texts - 1,
     });
-    
-    
-    
   }
-  
+
   _renderCats() {
     let catList = cats.map(item => {
       return item.model;
     });
     return catList;
   }
-  
+
   _renderTexts() {
     let textList = texts.map(item => {
       return item.model;
-    })
+    });
     return textList;
   }
-  
+
   handleGameStart() {
     if (!catSpawnIntervalId && this.state.startTime) {
       this.props.arSceneNavigator.viroAppProps.beginTimer();
-      catSpawnIntervalId = setInterval(this._createCats, 600);
+      catSpawnIntervalId = setInterval(this._createCats, 900);
     }
   }
-  
-  handleSplashSoundEnd() {
-    this.setState({
-      splashSoundPause: true
-    })
-  }
-  
+
+  // handleSplashSoundEnd() {
+  //   this.setState({
+  //     splashSoundPause: true
+  //   })
+  // }
+
   handleCatSoundEnd() {
     this.setState({
-      catMeowPause: true
-    })
+      catMeowPause: true,
+    });
   }
-  
-  
-  
 }
 
 var localStyles = StyleSheet.create({
@@ -523,8 +519,16 @@ ViroAnimations.registerAnimations({
     easing: 'EaseInEaseOut',
     duration: 1200,
   },
-  scoreUp: { properties: { positionY: '+=.2' }, duration: 300, easing: 'Bounce' },
-  scoreDown: { properties: { positionY: '-=.2' }, duration: 300, easing: 'Bounce' },
+  scoreUp: {
+    properties: { positionY: '+=.2' },
+    duration: 300,
+    easing: 'Bounce',
+  },
+  scoreDown: {
+    properties: { positionY: '-=.2' },
+    duration: 300,
+    easing: 'Bounce',
+  },
   scoreBob: [['scoreUp', 'scoreDown']],
   raftR: {
     properties: { positionX: '-=.3', rotateY: '+=45' },

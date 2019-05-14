@@ -234,7 +234,24 @@ export default class BallGameScene extends Component {
           physicsBody={{ type: 'Static', restitution: 1 }}
           materials={['red']}
         />
-
+        <ViroAnimatedImage
+          height={5}
+          width={5}
+          loop={true}
+          opacity={0.8}
+          rotation={[0, 0, 0]}
+          position={[0, 0, -8]}
+          source={require('../assets/Images/donutGlaze.gif')}
+        />
+        {/* <ViroAnimatedImage
+          height={4}
+          width={4}
+          loop={true}
+          opacity={.6}
+          rotation={[0, 0, 0]}
+          position={[-3, -1, -8]}
+          source={require('../assets/Images/donutSpin.gif')}
+        /> */}
         {/* <Viro3DObject
           animation={{ name: 'flip', run: true, loop: true }}
           source={require('../assets/3DModels/donut/Donut_FBX.vrx')}

@@ -11,6 +11,7 @@ import {
   ViroBox,
   ViroMaterials,
   ViroARImageMarker,
+  ViroAnimatedImage,
   Viro3DObject,
   ViroARCamera,
   ViroARPlaneSelector,
@@ -27,7 +28,6 @@ let hide = true;
 let bangSound = true;
 let bullets = [];
 let bulletCount = 0;
-
 
 export default class ShootScene extends Component {
   constructor() {
@@ -46,7 +46,6 @@ export default class ShootScene extends Component {
       heart4Color: ['teal'],
       heart5Color: ['teal'],
       bullets: [],
-      
     };
 
     // bind 'this' to functions
@@ -60,7 +59,7 @@ export default class ShootScene extends Component {
     this.updateCamera = this.updateCamera.bind(this);
     this.beginCameraUpdates = this.beginCameraUpdates.bind(this);
     this.handleShootSoundEnd = this.handleShootSoundEnd.bind(this);
-    this.shootSoundRef = React.createRef()
+    this.shootSoundRef = React.createRef();
     this.createBullets2 = this.createBullets2.bind(this);
   }
 
@@ -78,13 +77,24 @@ export default class ShootScene extends Component {
         physicsWorld={{ gravity: [0, -3, 0] }}
         ref={this.sceneRef}
       >
-        <ViroImage
+      <ViroARCamera>
+      <ViroAnimatedImage
+            height={1.5}
+            width={3}
+            loop={true}
+            opacity={0.6}
+            visible={hide}
+            position={[0, 0, -5]}
+            source={require('../assets/Images/findPlane.gif')}
+          />
+      </ViroARCamera>
+        {/* <ViroImage
           height={1}
           width={2.8}
           visible={hide}
           position={[0, 1, -4]}
           source={require('../assets/Images/planeFind.png')}
-        />
+        /> */}
         <ViroARPlaneSelector
           minHeight={0.01}
           minWidth={0.01}
@@ -95,6 +105,7 @@ export default class ShootScene extends Component {
           }}
           pauseUpdates={this.state.pauseUpdates}
         >
+          {/* MUSIC AND SOUND FX */}
           <ViroSound
             ref={this.shootSoundRef}
             paused={this.state.shootSoundPause}
@@ -104,6 +115,25 @@ export default class ShootScene extends Component {
             onFinish={this.handleShootSoundEnd}
             onError={this.onErrorSound}
           />
+          {/* DECORATIVE IMAGES */}
+          <ViroAnimatedImage
+            height={15}
+            width={15}
+            loop={true}
+            opacity={0.8}
+            rotation={[0, 45, 0]}
+            position={[-12, 1, -30]}
+            source={require('../assets/Images/petals.gif')}
+          />
+          <ViroImage
+            height={8}
+            width={20}
+            opacity={0.6}
+            rotation={[0, -30, 0]}
+            position={[12, 3, -30]}
+            source={require('../assets/Images/FBmemories.png')}
+          />
+          {/* HEARTS */}
           <Viro3DObject
             animation={{ name: 'swayA', run: true, loop: true }}
             source={require('../assets/3DModels/heart/Love.obj')}
@@ -114,12 +144,10 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart1Color}
             physicsBody={{ type: 'Static' }}
-            onCollision={
-              () => {
-                this.props.arSceneNavigator.viroAppProps.incrementScore();
-                this._changeColor('heart1Color')
-              }
-            }
+            onCollision={() => {
+              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this._changeColor('heart1Color');
+            }}
           />
           <Viro3DObject
             animation={{ name: 'swayB', run: true, loop: true }}
@@ -131,12 +159,10 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart2Color}
             physicsBody={{ type: 'Static' }}
-            onCollision={
-              () => {
-                this.props.arSceneNavigator.viroAppProps.incrementScore();
-                this._changeColor('heart2Color')
-              }
-            }
+            onCollision={() => {
+              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this._changeColor('heart2Color');
+            }}
           />
           <Viro3DObject
             animation={{ name: 'swayC', run: true, loop: true }}
@@ -148,12 +174,10 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart3Color}
             physicsBody={{ type: 'Static' }}
-            onCollision={
-              () => {
-                this.props.arSceneNavigator.viroAppProps.incrementScore();
-                this._changeColor('heart3Color')
-              }
-            }
+            onCollision={() => {
+              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this._changeColor('heart3Color');
+            }}
           />
           <Viro3DObject
             animation={{ name: 'swayC', run: true, loop: true }}
@@ -165,12 +189,10 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart4Color}
             physicsBody={{ type: 'Static' }}
-            onCollision={
-              () => {
-                this.props.arSceneNavigator.viroAppProps.incrementScore();
-                this._changeColor('heart4Color')
-              }
-            }
+            onCollision={() => {
+              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this._changeColor('heart4Color');
+            }}
           />
           <Viro3DObject
             animation={{ name: 'swayC', run: true, loop: true }}
@@ -182,12 +204,10 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart5Color}
             physicsBody={{ type: 'Static' }}
-            onCollision={
-              () => {
-                this.props.arSceneNavigator.viroAppProps.incrementScore();
-                this._changeColor('heart5Color')
-              }
-            }
+            onCollision={() => {
+              this.props.arSceneNavigator.viroAppProps.incrementScore();
+              this._changeColor('heart5Color');
+            }}
           />
           {/* <ViroText
             text={currentScore.toString()}
@@ -202,7 +222,7 @@ export default class ShootScene extends Component {
             resources={[require('../assets/3DModels/bomb/Bomb.mtl')]}
             opacity={1}
             position={[-2, 2, -18]}
-            scale={[9,9, 9]}
+            scale={[9, 9, 9]}
             type="OBJ"
             materials={['bomb']}
             physicsBody={{ type: 'Static' }}
@@ -211,9 +231,9 @@ export default class ShootScene extends Component {
             }
           />
           <ViroARCamera>
-            <ViroNode 
-            // onClick={this._addBullet}
-            onClick={this.createBullets2}
+            <ViroNode
+              // onClick={this._addBullet}
+              onClick={this.createBullets2}
             >
               <Viro3DObject
                 source={require('../assets/3DModels/zapper/zapper.obj')}
@@ -256,31 +276,30 @@ export default class ShootScene extends Component {
 
   handleShootSoundEnd() {
     this.setState({
-      shootSoundPause: true
-    })
-  }
-  
-  _changeColor(heartObj) {
-    if (this.state[heartObj][0] === 'teal'){
-      this.setState({[heartObj]: ['red']})
-      setTimeout(() => {
-        this.setState({[heartObj]: ['teal']})
-      }, 500)
-    }
-    if (this.state[heartObj][0] === 'blue'){
-      this.setState({[heartObj]: ['red']})
-      setTimeout(() => {
-        this.setState({[heartObj]: ['blue']})
-    }, 500)
-    }
-    if (this.state[heartObj][0] === 'pink') {
-      this.setState({[heartObj]: ['red']})
-      setTimeout(() => {
-        this.setState({[heartObj]: ['pink']})
-      }, 500)
-    }
+      shootSoundPause: true,
+    });
   }
 
+  _changeColor(heartObj) {
+    if (this.state[heartObj][0] === 'teal') {
+      this.setState({ [heartObj]: ['red'] });
+      setTimeout(() => {
+        this.setState({ [heartObj]: ['teal'] });
+      }, 500);
+    }
+    if (this.state[heartObj][0] === 'blue') {
+      this.setState({ [heartObj]: ['red'] });
+      setTimeout(() => {
+        this.setState({ [heartObj]: ['blue'] });
+      }, 500);
+    }
+    if (this.state[heartObj][0] === 'pink') {
+      this.setState({ [heartObj]: ['red'] });
+      setTimeout(() => {
+        this.setState({ [heartObj]: ['pink'] });
+      }, 500);
+    }
+  }
 
   _renderBullets() {
     if (!this.sceneRef.current) {
@@ -293,8 +312,6 @@ export default class ShootScene extends Component {
     //     console.log(myDirection) // [0] [1] [2]
     //   })
     // }
-
-
 
     var bang = [];
     for (var i = 0; i < this.state.totalBullets; i++) {
@@ -326,12 +343,12 @@ export default class ShootScene extends Component {
   }
 
   _addBullet() {
-    this.setState({ 
+    this.setState({
       totalBullets: this.state.totalBullets + 1,
-      shootSoundPause: false
+      shootSoundPause: false,
     });
-    this.shootSoundRef.current.seekToTime(0)
-    
+    this.shootSoundRef.current.seekToTime(0);
+
     // change this to slow down rapidfire and empty state
     if (this.state.totalBullets === 10) {
       this.setState({ totalBullets: 0 });
@@ -340,56 +357,52 @@ export default class ShootScene extends Component {
 
     // console.log('bullets', this.state.totalBullets);
   }
-  
+
   renderBullets2() {
     let bulletList = bullets.map(item => {
       return item.model;
-    })
+    });
     return bulletList;
   }
-  
+
   createBullets2() {
-    
     const bulletTag = `bullet-${bulletCount + 1}`;
-      bulletCount++;
+    bulletCount++;
 
     const x = (
       <ViroSphere
-          viroTag={bulletTag}
-          heightSegmentCount={5}
-          widthSegmentCount={5}
-          key={bulletTag}
-          radius={0.17}
-          position={[-0.05, -0.5, -4]}
-          materials={['red']}
-          opacity={1}
-          physicsBody={{
-            type: 'Dynamic',
-            mass: 1,
-            velocity: [
-              this.state.cameraAngle[0] * 130,
-              this.state.cameraAngle[1] * 130,
-              this.state.cameraAngle[2] * 130,
-            ],
-          }}
-        />
-      );
-      const bulletObj = {
-        show: false,
-        model: x,
-        num: bullets.length + 1,
-        time: 0,
-      };
-      bullets.push(bulletObj);
-    
-    
+        viroTag={bulletTag}
+        heightSegmentCount={5}
+        widthSegmentCount={5}
+        key={bulletTag}
+        radius={0.17}
+        position={[-0.05, -0.5, -4]}
+        materials={['red']}
+        opacity={1}
+        physicsBody={{
+          type: 'Dynamic',
+          mass: 1,
+          velocity: [
+            this.state.cameraAngle[0] * 130,
+            this.state.cameraAngle[1] * 130,
+            this.state.cameraAngle[2] * 130,
+          ],
+        }}
+      />
+    );
+    const bulletObj = {
+      show: false,
+      model: x,
+      num: bullets.length + 1,
+      time: 0,
+    };
+    bullets.push(bulletObj);
+
     this.setState({
       bullets: this.state.bullets + 1,
     });
-    
   }
-  
-  
+
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
     this.beginCameraUpdates();
@@ -408,11 +421,7 @@ export default class ShootScene extends Component {
       cameraAngle: myPos.forward,
     });
   }
-  
-  
-  
 }
-
 
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
@@ -562,12 +571,11 @@ ViroAnimations.registerAnimations({
       'moveRight',
       'moveUpL',
       'back',
-      'moveLeft', 
+      'moveLeft',
       // 'moveUp',
       'moveDown',
     ],
   ],
-  
 });
 
 module.exports = ShootScene;
