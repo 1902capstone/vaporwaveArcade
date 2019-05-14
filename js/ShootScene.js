@@ -25,6 +25,9 @@ import {
 let cameraCheckIntervalId;
 let hide = true;
 let bangSound = true;
+let bullets = [];
+let bulletCount = 0;
+
 
 export default class ShootScene extends Component {
   constructor() {
@@ -41,7 +44,9 @@ export default class ShootScene extends Component {
       heart2Color: ['blue'],
       heart3Color: ['teal'],
       heart4Color: ['teal'],
-      heart5Color: ['teal']
+      heart5Color: ['teal'],
+      bullets: [],
+      
     };
 
     // bind 'this' to functions
@@ -56,11 +61,13 @@ export default class ShootScene extends Component {
     this.beginCameraUpdates = this.beginCameraUpdates.bind(this);
     this.handleShootSoundEnd = this.handleShootSoundEnd.bind(this);
     this.shootSoundRef = React.createRef()
+    this.createBullets2 = this.createBullets2.bind(this);
   }
 
   componentWillUnmount() {
     clearInterval(cameraCheckIntervalId);
     hide = true;
+    bullets = [];
   }
 
   render() {
@@ -204,7 +211,10 @@ export default class ShootScene extends Component {
             }
           />
           <ViroARCamera>
-            <ViroNode onClick={this._addBullet}>
+            <ViroNode 
+            // onClick={this._addBullet}
+            onClick={this.createBullets2}
+            >
               <Viro3DObject
                 source={require('../assets/3DModels/zapper/zapper.obj')}
                 resources={[require('../assets/3DModels/zapper/zapper.mtl')]}
@@ -215,7 +225,8 @@ export default class ShootScene extends Component {
                 materials={['gun']}
                 type="OBJ"
               />
-              {this._renderBullets()}
+              {/* {this._renderBullets()} */}
+              {this.renderBullets2()}
             </ViroNode>
           </ViroARCamera>
         </ViroARPlaneSelector>
@@ -329,6 +340,56 @@ export default class ShootScene extends Component {
 
     // console.log('bullets', this.state.totalBullets);
   }
+  
+  renderBullets2() {
+    let bulletList = bullets.map(item => {
+      return item.model;
+    })
+    return bulletList;
+  }
+  
+  createBullets2() {
+    
+    const bulletTag = `bullet-${bulletCount + 1}`;
+      bulletCount++;
+
+    const x = (
+      <ViroSphere
+          viroTag={bulletTag}
+          heightSegmentCount={5}
+          widthSegmentCount={5}
+          key={bulletTag}
+          radius={0.17}
+          position={[-0.05, -0.5, -4]}
+          materials={['red']}
+          opacity={1}
+          physicsBody={{
+            type: 'Dynamic',
+            mass: 1,
+            velocity: [
+              this.state.cameraAngle[0] * 130,
+              this.state.cameraAngle[1] * 130,
+              this.state.cameraAngle[2] * 130,
+            ],
+          }}
+        />
+      );
+      const bulletObj = {
+        show: false,
+        model: x,
+        num: bullets.length + 1,
+        time: 0,
+      };
+      bullets.push(bulletObj);
+    
+    
+    this.setState({
+      bullets: this.state.bullets + 1,
+    });
+    
+  }
+  
+  
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
     this.beginCameraUpdates();
