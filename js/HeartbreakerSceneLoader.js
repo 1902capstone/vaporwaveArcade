@@ -6,8 +6,9 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
-  Vibration,
+  // Vibration,
   Image,
+  ImageBackground
 } from 'react-native';
 
 import { ViroARSceneNavigator } from 'react-viro';
@@ -16,6 +17,7 @@ import PostGame2 from './PostGame2';
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const ShootScene = require('./ShootScene');
+const backgroundImage = require('../assets/Images/moving_palm_trees.gif')
 
 const GAME_STATES = {
   INTRODUCTION: 'INTRODUCTION',
@@ -24,14 +26,15 @@ const GAME_STATES = {
 };
 let timerIntervalId;
 
-const DURATION = 500;
+// const DURATION = 500;
 
 const PATTERN = [1000, 2000, 3000, 4000];
 
-const options = {
-  enableVibrateFallback: true,
-  ignoreAndroidSystemSettings: false,
-};
+// const options = {
+//   enableVibrateFallback: true,
+//   ignoreAndroidSystemSettings: false,
+// };
+
 export default class HeartbreakerSceneLoader extends Component {
   _isMounted = false;  
   constructor() {
@@ -145,18 +148,22 @@ export default class HeartbreakerSceneLoader extends Component {
 
   renderPostGame() {
     return (
-      <PostGame2
-        returnToMenu={this.props.propObj.returnToMenu}
-        goToLeaderBoard={this.props.propObj.goToLeaderBoard2}
-        score={this.state.score}
-        resetGame={this.resetGame}
-        showLeaderboard={this.state.showLeaderboard}
-      />
+      <View>
+        <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
+          <PostGame2
+            returnToMenu={this.props.propObj.returnToMenu}
+            goToLeaderBoard={this.props.propObj.goToLeaderBoard2}
+            score={this.state.score}
+            resetGame={this.resetGame}
+            showLeaderboard={this.state.showLeaderboard}
+          />
+        </ImageBackground>
+      </View>
     );
   }
 
   startGame() {
-    Vibration.vibrate(DURATION)
+    // Vibration.vibrate(DURATION)
 
     this.setState({
       gameState: GAME_STATES.RENDER_GAME,
@@ -172,7 +179,7 @@ export default class HeartbreakerSceneLoader extends Component {
       this.setState({
         showLeaderboard: true,
       });
-    }, 3000);
+    }, 2550);
   }
   resetGame() {
     this.setState({
@@ -185,7 +192,7 @@ export default class HeartbreakerSceneLoader extends Component {
   }
 
   incrementScore() {
-    Vibration.vibrate(DURATION);
+    // Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });

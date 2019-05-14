@@ -61,9 +61,9 @@ export default class LeaderBoardEntryScreen extends Component {
           underlayColor={"#68a0ff"}
           onPress={this.props.returnToMenu}
         >
-          <Text style={styles.buttonText}>BACK</Text>
+          <Text style={styles.buttonText}>BACK TO MENU</Text>
         </TouchableHighlight>
-      </View>
+        </View>
     );
   }
 }
@@ -73,13 +73,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 30,
     flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "#6565fc"
+    justifyContent: "center"
   },
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: "center"
+    textAlign: "center",
+    color: "white"
   },
   itemInput: {
     height: 50,
@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: "#111",
-    alignSelf: "center"
+    alignSelf: "center",
+    color: "black"
   },
   button: {
     height: 45,

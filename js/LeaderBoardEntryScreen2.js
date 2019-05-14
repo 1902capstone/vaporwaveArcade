@@ -76,12 +76,12 @@ export default class LeaderBoardEntryScreen2 extends Component {
       padding: 30,
       flexDirection: "column",
       justifyContent: "center",
-      backgroundColor: "#6565fc"
     },
     title: {
       marginBottom: 20,
       fontSize: 25,
-      textAlign: "center"
+      textAlign: "center",
+      color: "white"
     },
     itemInput: {
       height: 50,
