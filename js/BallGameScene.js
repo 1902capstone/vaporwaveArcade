@@ -256,14 +256,14 @@ export default class BallGameScene extends Component {
           position={[0, 0, -8]}
           source={require('../assets/Images/donutGlaze.gif')}
         />
-        <ViroImage
+        {/* <ViroImage
             height={18}
             width={8}
             opacity={0.6}
             rotation={[0, 0, 0]}
             position={[-10, 0, -15]}
             source={require('../assets/Images/squiggles.png')}
-          />
+          /> */}
         {/* MUSIC AND SOUND FX */}
         <ViroSound
             paused={false}
@@ -335,16 +335,16 @@ export default class BallGameScene extends Component {
 
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
-    fontFamily: 'Cochin',
+    fontFamily: 'Ariel',
     fontSize: 20,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
   instructions: {
-    fontFamily: 'Cochin',
+    fontFamily: 'Ariel',
     fontSize: 8,
-    color: 'hotpink',
+    color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },

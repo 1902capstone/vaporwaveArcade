@@ -427,8 +427,8 @@ var localStyles = StyleSheet.create({
   },
   instructions: {
     fontFamily: 'Arial',
-    fontSize: 8,
-    color: 'hotpink',
+    fontSize: 10,
+    color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },

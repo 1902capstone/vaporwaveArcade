@@ -149,10 +149,10 @@ export default class ShootScene extends Component {
           <ViroImage
             height={8}
             width={20}
-            opacity={0.6}
+            opacity={1}
             rotation={[0, -30, 0]}
-            position={[12, 3, -30]}
-            source={require('../assets/Images/FBmemories.png')}
+            position={[16, 3, -30]}
+            source={require('../assets/Images/feels.png')}
           />
           {/* HEARTS */}
           <Viro3DObject
@@ -160,7 +160,7 @@ export default class ShootScene extends Component {
             source={require('../assets/3DModels/heart/Love.obj')}
             resources={[require('../assets/3DModels/heart/Love.mtl')]}
             opacity={1}
-            position={[-1, -2, -20]}
+            position={[-1, -2, -22]}
             scale={[0.08, 0.08, 0.08]}
             type="OBJ"
             materials={this.state.heart1Color}
@@ -175,7 +175,7 @@ export default class ShootScene extends Component {
             source={require('../assets/3DModels/heart/Love.obj')}
             resources={[require('../assets/3DModels/heart/Love.mtl')]}
             opacity={1}
-            position={[1, -3, -20]}
+            position={[1, -3, -22]}
             scale={[0.05, 0.05, 0.05]}
             type="OBJ"
             materials={this.state.heart2Color}
@@ -183,6 +183,21 @@ export default class ShootScene extends Component {
             onCollision={() => {
               this.handleScore();
               this._changeColor('heart2Color');
+            }}
+          />
+          <Viro3DObject
+            animation={{ name: 'swayF', run: true, loop: true }}
+            source={require('../assets/3DModels/heart/Love.obj')}
+            resources={[require('../assets/3DModels/heart/Love.mtl')]}
+            opacity={1}
+            position={[-5, -2.7, -20]}
+            scale={[0.02, 0.02, 0.02]}
+            type="OBJ"
+            materials={this.state.heart3Color}
+            physicsBody={{ type: 'Kinematic' }}
+            onCollision={() => {
+              this.handleScore();
+              this._changeColor('heart3Color');
             }}
           />
           <Viro3DObject
@@ -230,6 +245,7 @@ export default class ShootScene extends Component {
               this._changeColor('heart5Color');
             }}
           />
+          
           {/* <ViroText
             text={currentScore.toString()}
             scale={[0.5, 0.5, 0.5]}
@@ -500,7 +516,7 @@ var localStyles = StyleSheet.create({
   instructions: {
     fontFamily: 'Arial',
     fontSize: 8,
-    color: 'hotpink',
+    color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
@@ -648,7 +664,6 @@ ViroAnimations.registerAnimations({
       'moveUpL',
       'back',
       'moveLeft',
-      // 'moveUp',
       'moveDown',
     ],
   ],
@@ -659,13 +674,29 @@ ViroAnimations.registerAnimations({
       'moveDown',
       'moveRight',
       'forward',
-      'moveUp',
       'moveDown',
       'moveRight',
       'moveUpL',
       'moveDown',
       'back',
     ],
+  ],
+    swayF: [
+      [
+        'moveLeft',
+        'moveDown',
+        'moveRight',
+        'forward',
+        'moveDown',
+        'moveUp',
+        'moveDown',
+        'forward',
+        'moveRight',
+        'moveUp',
+        'moveUpL',
+        'moveDown',
+        'back',
+      ],
   ],
 });
 
