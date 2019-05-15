@@ -17,7 +17,7 @@ import PostGame2 from './PostGame2';
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const ShootScene = require('./ShootScene');
-const backgroundImage = require('../assets/Images/moving_palm_trees.gif')
+const backgroundImage = require('../assets/Images/moving_palm_trees2.gif')
 
 const GAME_STATES = {
   INTRODUCTION: 'INTRODUCTION',
