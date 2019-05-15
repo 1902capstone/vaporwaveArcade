@@ -62,6 +62,7 @@ export default class ShootScene extends Component {
     this.shootSoundRef = React.createRef();
     this.createBullets2 = this.createBullets2.bind(this);
     this.handleScore = this.handleScore.bind(this);
+    this.despawnBullet = this.despawnBullet.bind(this);
   }
 
   componentWillUnmount() {
@@ -435,21 +436,37 @@ export default class ShootScene extends Component {
     this.setState({
       bullets: this.state.bullets + 1,
     });
+    
+    setTimeout(() => {
+      this.despawnBullet(bulletTag)
+    }, 4000)
+    
   }
 
+  
+  // test if getting 
   handleScore(colliderTag) {
-    // console.log(bullets.length);
     let indexOfBullet = bullets.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
     });
     bullets.splice(indexOfBullet, 1);
-    // console.log(bullets.length);
     this.setState({
       bullets: this.state.bullets - 1,
     });
     this.props.arSceneNavigator.viroAppProps.incrementScore();
   }
   
+  despawnBullet(tag) {
+    let indexOfBullet = bullets.findIndex(elt => {
+      return elt.model.props.viroTag === tag;
+    });
+    if (indexOfBullet > -1) {
+      bullets.splice(indexOfBullet, 1);
+      this.setState({
+        bullets: this.state.bullets - 1,
+      });
+    }
+  }
   
   handleGameStart() {
     this.props.arSceneNavigator.viroAppProps.beginTimer();
@@ -457,9 +474,7 @@ export default class ShootScene extends Component {
   }
   
   beginCameraUpdates() {
-    console.log(cameraCheckIntervalId);
     if (!cameraCheckIntervalId) {
-      console.log('begincamupdates2')
       cameraCheckIntervalId = setInterval(() => {
         this.updateCamera();
       }, 100);
