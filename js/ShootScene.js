@@ -125,7 +125,7 @@ export default class ShootScene extends Component {
             paused={this.state.shootSoundPause}
             source={require('../assets/SoundFX/bang.mp3')}
             loop={false}
-            volume={1.0}
+            volume={0.3}
             onFinish={this.handleShootSoundEnd}
             onError={this.onErrorSound}
           />
@@ -452,7 +452,9 @@ export default class ShootScene extends Component {
 
     this.setState({
       bullets: this.state.bullets + 1,
+      shootSoundPause: false
     });
+    this.shootSoundRef.current.seekToTime(0);
     
     setTimeout(() => {
       this.despawnBullet(bulletTag)
