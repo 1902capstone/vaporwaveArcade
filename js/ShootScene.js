@@ -125,7 +125,7 @@ export default class ShootScene extends Component {
             paused={this.state.shootSoundPause}
             source={require('../assets/SoundFX/bang.mp3')}
             loop={false}
-            volume={0.3}
+            volume={0.06}
             onFinish={this.handleShootSoundEnd}
             onError={this.onErrorSound}
           />
@@ -133,7 +133,7 @@ export default class ShootScene extends Component {
             paused={false}
             source={require('../assets/Music/heartMusic.mp3')}
             loop={true}
-            volume={0.1}
+            volume={0.2}
             onFinish={this.onFinishSound}
             onError={this.onErrorSound}
           />

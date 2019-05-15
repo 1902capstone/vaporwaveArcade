@@ -3,10 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-  Animated,
-  ImageBackground,
+  Image,
 } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
@@ -51,6 +48,10 @@ export default class AllLeaderboards extends Component {
           </Animated.View>
         </TouchableWithoutFeedback>
       */}
+      <Image
+          style={{ justifyContent: 'center', alignItems: 'center' }}
+          source={require('../assets/Images/highScores.png')}
+        />
         <AwesomeButtonRick
           // style={styles.buttonNew}
           // underlayColor={"#68a0ff"}
@@ -59,7 +60,7 @@ export default class AllLeaderboards extends Component {
           type="secondary"
           onPress={() => this.props.propObj.goToLeaderBoard()}
         >
-          <Text style={styles.buttonText}>Donut Drop High Scores</Text>
+          <Text style={styles.buttonText}>Donut Drop</Text>
         </AwesomeButtonRick>
         <AwesomeButtonRick
           // style={styles.button}
@@ -71,7 +72,7 @@ export default class AllLeaderboards extends Component {
           type="secondary"
           onPress={() => this.props.propObj.goToLeaderBoard2()}
         >
-          <Text style={styles.buttonText}>Heartbreaker High Scores</Text>
+          <Text style={styles.buttonText}>Heartbreaker</Text>
         </AwesomeButtonRick>
         <AwesomeButtonRick
           // style={styles.button}
@@ -81,7 +82,7 @@ export default class AllLeaderboards extends Component {
           type="secondary"
           onPress={() => this.props.propObj.goToLeaderBoard3()}
         >
-          <Text style={styles.buttonText}>Kitty Pool High Scores</Text>
+          <Text style={styles.buttonText}>Kitty Pool</Text>
         </AwesomeButtonRick>
         <AwesomeButtonRick
           // style={styles.button}
