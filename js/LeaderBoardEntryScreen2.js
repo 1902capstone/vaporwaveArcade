@@ -82,7 +82,7 @@ export default class LeaderBoardEntryScreen2 extends Component {
       fontSize: 22,
       textAlign: "center",
       color: "white",
-      fontFamily: "Cochin",
+      fontFamily: "Futura",
       fontWeight:"bold"
     },
     itemInput: {

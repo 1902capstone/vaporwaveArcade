@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import AwesomeButton from 'react-native-really-awesome-button';
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 // import LinearGradient from "react-native-linear-gradient";
@@ -48,14 +43,24 @@ export default class AllLeaderboards extends Component {
           </Animated.View>
         </TouchableWithoutFeedback>
       */}
-      <Image
-          style={{ justifyContent: 'center', alignItems: 'center' }}
+        <Image
+          style={{
+            flex: 1,
+            width: 330,
+            height: 330,
+            resizeMode: 'contain',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginLeft: '-5%',
+            marginBottom: '-20%',
+            marginTop: '-30%'
+          }}
           source={require('../assets/Images/highScores.png')}
         />
         <AwesomeButtonRick
           // style={styles.buttonNew}
           // underlayColor={"#68a0ff"}
-          style={{ marginBottom: 10 }}
+          style={{ marginBottom: 40 }}
           width={315}
           type="secondary"
           onPress={() => this.props.propObj.goToLeaderBoard()}
@@ -65,7 +70,7 @@ export default class AllLeaderboards extends Component {
         <AwesomeButtonRick
           // style={styles.button}
           // underlayColor={"#68a0ff"}
-          style={{ marginBottom: 10 }}
+          style={{ marginBottom: 40 }}
           // marginBottom={100}
           // marginTop={100}
           width={315}
@@ -77,7 +82,7 @@ export default class AllLeaderboards extends Component {
         <AwesomeButtonRick
           // style={styles.button}
           // underlayColor={"#68a0ff"}
-          style={{ marginBottom: 10 }}
+          style={{ marginBottom: 40 }}
           width={315}
           type="secondary"
           onPress={() => this.props.propObj.goToLeaderBoard3()}

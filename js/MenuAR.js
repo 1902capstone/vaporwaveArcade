@@ -159,6 +159,7 @@ export default class HelloWorldSceneAR extends Component {
             scale={[0.012, 0.012, 0.012]}
             materials={['venus']}
             type="OBJ"
+            renderingOrder={-1}
           />
         {/* </ViroNode> */}
         <ViroImage

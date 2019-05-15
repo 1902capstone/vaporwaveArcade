@@ -155,6 +155,7 @@ export default class CatScene extends Component {
             rotation={[-90, 0, 0]}
             position={[0, -3, -4]}
             source={require('../assets/Images/poolcircle3.gif')}
+            renderingOrder={-1}
           />
           <ViroAnimatedImage
             height={7}
@@ -164,6 +165,7 @@ export default class CatScene extends Component {
             rotation={[0, 25, 0]}
             position={[-1, -1.4, -9]}
             source={require('../assets/Images/sun2.gif')}
+            renderingOrder={-1}
           />
           <ViroNode>
             {this._renderCats()}
