@@ -7,19 +7,17 @@ import {
   View,
   StyleSheet,
   TouchableHighlight,
-  // Vibration,
   Image,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 
 import PostGame1 from './PostGame1';
 import { ViroARSceneNavigator } from 'react-viro';
-// import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const BallGameScene = require('./BallGameScene');
-const backgroundImage = require('../assets/Images/moving_palm_trees.gif')
+const backgroundImage = require('../assets/Images/moving_palm_trees2.gif')
 
 
 const GAME_STATES = {
@@ -30,13 +28,7 @@ const GAME_STATES = {
 
 let timerIntervalId;
 
-// const DURATION = 500;
 
-const PATTERN = [1000, 2000, 3000, 4000];
-
-// const options = {
-//   enableVibrateFallback: true,
-// };
 
 export default class BallGameSceneLoader extends Component {
   constructor() {
@@ -85,7 +77,7 @@ export default class BallGameSceneLoader extends Component {
             cup. Avoid the avocado.
           </Text>
           <TouchableHighlight
-            style={localStyles.buttons}
+            style={localStyles.button2}
             onPress={this.startGame}
             underlayColor="#68a0ff"
           >
@@ -131,7 +123,6 @@ export default class BallGameSceneLoader extends Component {
             underlayColor="#68a0ff"
           >
             <Text style={localStyles.timerText}>
-              {' '}
               Score: {this.state.score}
             </Text>
           </TouchableHighlight>
@@ -189,7 +180,6 @@ export default class BallGameSceneLoader extends Component {
   }
 
   incrementScore(colliderTag) {
-    // Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });
@@ -281,6 +271,21 @@ var localStyles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontSize: 20,
+    fontWeight: "bold",
+    fontFamily:'Avenir'
+  },
+  button2: {
+    height: 60,
+    width: 90,
+    paddingTop: 10,
+    paddingBottom: 8,
+    margin: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    backgroundColor: 'rgba(123,123,231,.4)',
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'rgba(123,087,231,.4)',
   },
   buttons: {
     height: 80,

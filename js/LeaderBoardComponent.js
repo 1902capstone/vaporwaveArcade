@@ -26,7 +26,7 @@ export default class LeaderBoardComponent extends Component {
         }}
       >
         <Text style={{   fontFamily: "Cochin",
-    fontWeight: 'bold', fontSize: 25, color: "white" }}>Leaderboard</Text>
+    fontWeight: 'bold', fontSize: 25, color: "white" }}>Donut Drop Leaderboard</Text>
         <View
           style={{
             flexDirection: "row",
@@ -53,16 +53,7 @@ export default class LeaderBoardComponent extends Component {
       return b.score - a.score;
     });
     return (
-      // <View style={styles.namesList}>
-      //   {sorted.map((score, index) => {
-      //     return (
-      //       <View key={index}>
-      //             <Text style={styles.nametext}>{score.name} {score.score}</Text>
 
-      //       </View>
-      //     );
-      //   })}
-      // </View>
       <View style={{ flex: 1, backgroundColor: "white" }}>
         {this.renderHeader()}
         <Leaderboard data={this.props.score} sortBy="score" labelBy="name" />

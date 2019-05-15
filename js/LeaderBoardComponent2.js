@@ -29,7 +29,7 @@ export default class LeaderBoardComponent2 extends Component {
           }}
         >
           <Text style={{   fontFamily: "Cochin",
-    fontWeight: 'bold', fontSize: 25, color: "white" }}>Leaderboard</Text>
+    fontWeight: 'bold', fontSize: 25, color: "white" }}>Heartbreaker Leaderboard</Text>
           <View
             style={{
               flexDirection: "row",

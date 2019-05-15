@@ -15,7 +15,7 @@ import PostGame3 from './PostGame3';
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const CatScene = require('./CatScene');
-const backgroundImage = require('../assets/Images/moving_palm_trees.gif')
+const backgroundImage = require('../assets/Images/moving_palm_trees2.gif')
 // const JoshScene = require('./JoshScene');
 
 const GAME_STATES = {
@@ -133,7 +133,6 @@ export default class KittyPoolSceneLoader extends Component {
   }
 
   renderPostGame() {
-    console.log(this.state);
     return (
       <View>
         <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
@@ -196,7 +195,6 @@ export default class KittyPoolSceneLoader extends Component {
 
   checkTime() {
     const timeLeft = this.state.timeLeft;
-    console.log(timeLeft);
     if (timeLeft <= 0) {
       clearInterval(timerIntervalId);
       this.gameEnd();

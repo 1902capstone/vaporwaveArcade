@@ -16,7 +16,9 @@
     "react-native-haptic": "^1.0.1",
     "react-native-haptic-feedback": "^1.8.0",
     "react-native-leaderboard": "^1.0.5",
+    "react-native-linear-gradient": "^2.5.4",
     "react-native-loading-spinner-overlay": "^1.0.1",
+    "react-native-really-awesome-button": "^1.4.2",
     "react-timer-mixin": "^0.13.4",
     "react-viro": "2.14.0"
   },

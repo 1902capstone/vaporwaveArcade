@@ -10,10 +10,10 @@ import {
   ViroConstants,
   ViroARSceneNavigator,
 } from 'react-viro';
-// import console = require('console');
+
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
-console.log('helo2');
+
 export default class Game1 extends Component {
 
   constructor() {

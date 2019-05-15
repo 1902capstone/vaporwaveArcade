@@ -168,6 +168,7 @@ export default class CatScene extends Component {
           <ViroNode>
             {this._renderCats()}
             {this._renderTexts()}
+          
           </ViroNode>
           <Viro3DObject
             source={require('../assets/3DModels/plant/palmtree.obj')}
@@ -304,8 +305,6 @@ export default class CatScene extends Component {
         time: 0,
       };
       cats.push(CatObj);
-      // console.log('these are cats', cats);
-      // console.log('state cats', this.state.cats);
     }
     this.setState({
       cats: this.state.cats + catsToLoad.length,
