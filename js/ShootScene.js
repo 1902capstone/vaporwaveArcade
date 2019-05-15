@@ -520,7 +520,7 @@ var localStyles = StyleSheet.create({
   },
   instructions: {
     fontFamily: 'Arial',
-    fontSize: 8,
+    fontSize: 10,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',

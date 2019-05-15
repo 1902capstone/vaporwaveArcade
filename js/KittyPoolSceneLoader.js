@@ -1,11 +1,9 @@
 /* eslint-disable default-case */
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet,
-  PixelRatio,
   Image,
   ImageBackground,
   TouchableHighlight,

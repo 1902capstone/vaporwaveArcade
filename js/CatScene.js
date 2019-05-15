@@ -89,9 +89,9 @@ export default class CatScene extends Component {
         onTrackingUpdated={this._onInitialized}
         physicsWorld={{ gravity: [0, -3, 0] }}
       >
-       <ViroARCamera>
+        <ViroARCamera>
           <ViroAnimatedImage
-            height={.8}
+            height={0.8}
             width={2}
             loop={true}
             opacity={0.6}
@@ -100,7 +100,7 @@ export default class CatScene extends Component {
             source={require('../assets/Images/findPlane3.gif')}
           />
           <ViroText
-            text='slowly scan the area to highlight a flat surface, tap the surface to select it.'
+            text="slowly scan the area to highlight a flat surface, tap the surface to select it."
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
             visible={hide}
@@ -154,7 +154,7 @@ export default class CatScene extends Component {
             opacity={1}
             rotation={[-90, 0, 0]}
             position={[0, -3, -4]}
-            source={require('../assets/Images/poolcircle2.gif')}
+            source={require('../assets/Images/poolcircle3.gif')}
           />
           <ViroAnimatedImage
             height={7}
@@ -163,21 +163,11 @@ export default class CatScene extends Component {
             opacity={0.8}
             rotation={[0, 25, 0]}
             position={[-1, -1.4, -9]}
-            source={require('../assets/Images/sun.gif')}
+            source={require('../assets/Images/sun2.gif')}
           />
-          <ViroNode
-          // onClick={this._saveCat}
-          >
+          <ViroNode>
             {this._renderCats()}
             {this._renderTexts()}
-            {/* <ViroText
-              text={this.state.catText}
-              scale={[0.5, 0.5, 0.5]}
-              position={[0, -1, -1]}
-              style={localStyles.scoreStyle}
-              extrusionDepth={2}
-              outerStroke={{ type: 'DropShadow', width: 2, color: '#444444' }} */}
-            {/* /> */}
           </ViroNode>
           <Viro3DObject
             source={require('../assets/3DModels/plant/palmtree.obj')}
@@ -190,7 +180,7 @@ export default class CatScene extends Component {
             materials={['palm']}
             // physicsBody={{ type: 'Static' }}
           />
-          <Viro3DObject
+          {/* <Viro3DObject
             animation={{ name: 'birdPath', run: true, loop: true }}
             source={require('../assets/3DModels/birds/bird.obj')}
             opacity={1}
@@ -200,8 +190,8 @@ export default class CatScene extends Component {
             rotation={[0, 180, 0]}
             materials={['red']}
             // physicsBody={{ type: 'Static' }}
-          />
-          <Viro3DObject
+          /> */}
+          {/* <Viro3DObject
             animation={{ name: 'ballBob', run: true, loop: true }}
             source={require('../assets/3DModels/beachball/BeachBall.obj')}
             resources={[require('../assets/3DModels/beachball/BeachBall.mtl')]}
@@ -212,26 +202,16 @@ export default class CatScene extends Component {
             rotation={[-40, 0, 0]}
             materials={['beachball']}
             physicsBody={{ type: 'Static' }}
+          /> */}
+          <ViroSphere
+            animation={{ name: 'ballBob', run: true, loop: true }}
+            heightSegmentCount={10}
+            widthSegmentCount={10}
+            radius={0.4}
+            rotation={[-40, 0, 0]}
+            position={[-1, -3.05, -4.5]}
+            materials={['beachball']}
           />
-
-          {/* <Viro3DObject
-            animation={{ name: 'raft', run: true, loop: true }}
-            source={require('../assets/3DModels/raft/raft.obj')}
-            opacity={1}
-            position={[-0.9, -3.22, -4.5]}
-            scale={[0.005, 0.005, 0.005]}
-            type="OBJ"
-            rotation={[-90, 0, 0]}
-            materials={['redRaft']}
-            physicsBody={{ type: 'Static' }}
-          /> */}
-          {/* SCORE */}
-          {/* <ViroText
-            text={currentScore.toString()}
-            scale={[0.5, 0.5, 0.5]}
-            position={[0, 0, -1]}
-            style={localStyles.scoreStyle}
-          /> */}
         </ViroARPlaneSelector>
       </ViroARScene>
     );
