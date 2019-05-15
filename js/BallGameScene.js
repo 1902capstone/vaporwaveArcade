@@ -175,7 +175,6 @@ export default class BallGameScene extends Component {
   }
 
   handleScore(colliderTag) {
-    console.count(colliderTag);
     let indexOfSphere = spheres.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
     });
@@ -262,7 +261,7 @@ export default class BallGameScene extends Component {
             // highAccuracyEvents={true}
             // onCollision={this.props.arSceneNavigator.viroAppProps.incrementScore}
             onCollision={this.handleScore}
-            onClick={this.createSpheres}
+            // onClick={this.createSpheres}
           />
         </ViroARCamera>
       </ViroARPlaneSelector>
