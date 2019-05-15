@@ -259,7 +259,8 @@ export default class BallGameScene extends Component {
             position={[0, -1.6, -3]}
             scale={[0.13, 0.13, 0.13]}
             type="OBJ"
-            physicsBody={{ type: 'Static'}}
+            physicsBody={{ type: 'Kinematic'}}
+            // highAccuracyEvents={true}
             // onCollision={this.props.arSceneNavigator.viroAppProps.incrementScore}
             onCollision={this.handleScore}
             onClick={this.createSpheres}
