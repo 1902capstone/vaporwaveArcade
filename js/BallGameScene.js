@@ -127,10 +127,6 @@ export default class BallGameScene extends Component {
       const colors = ['pink', 'purple', 'teal', 'white'];
 
       const x = (
-<<<<<<< HEAD
-
-=======
->>>>>>> a982f19df057ba3f6bde208b91504d6cf30b9115
         <Viro3DObject
           animation={{ name: 'flip', run: true, loop: true }}
           source={require('../assets/3DModels/donut/Donut_OBJ.obj')}
