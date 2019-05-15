@@ -51,7 +51,6 @@ export default class AllLeaderboards extends Component {
             resizeMode: 'contain',
             justifyContent: 'center',
             alignItems: 'center',
-            // marginLeft: '%',
             marginBottom: '-20%',
             marginTop: '-30%'
           }}
