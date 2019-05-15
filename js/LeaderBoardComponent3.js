@@ -28,7 +28,7 @@ export default class LeaderBoardComponent3 extends Component {
             alignItems: "center"
           }}
         >
-          <Text style={{   fontFamily: "Cochin",
+          <Text style={{   fontFamily: "Futura",
     fontWeight: 'bold', fontSize: 25, color: "white" }}>Kitty Pool Leaderboard</Text>
           <View
             style={{

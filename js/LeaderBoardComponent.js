@@ -25,7 +25,7 @@ export default class LeaderBoardComponent extends Component {
           alignItems: "center"
         }}
       >
-        <Text style={{   fontFamily: "Cochin",
+        <Text style={{   fontFamily: "Futura",
     fontWeight: 'bold', fontSize: 25, color: "white" }}>Donut Drop Leaderboard</Text>
         <View
           style={{

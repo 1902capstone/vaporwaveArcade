@@ -28,7 +28,7 @@ export default class LeaderBoardComponent2 extends Component {
             alignItems: "center"
           }}
         >
-          <Text style={{   fontFamily: "Cochin",
+          <Text style={{   fontFamily: "Futura",
     fontWeight: 'bold', fontSize: 25, color: "white" }}>Heartbreaker Leaderboard</Text>
           <View
             style={{
