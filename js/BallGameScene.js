@@ -343,7 +343,7 @@ var localStyles = StyleSheet.create({
   },
   instructions: {
     fontFamily: 'Ariel',
-    fontSize: 8,
+    fontSize: 10,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
