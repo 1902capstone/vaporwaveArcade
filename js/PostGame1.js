@@ -98,63 +98,6 @@ export default class PostGame1 extends Component {
   }
 }
 
-
-
-
-
-{/* <View>
-<ImageBackground source={require('../assets/Images/moving_palm_trees.gif')} style={{width: '100%', height: '100%'}}>
-  {
-  (leaderBoardArray1.score < this.props.score ||
-  (this.state.leaderBoardArray.length < 10 &&
-  this.state.leaderBoardArray.length > 1)) ?         
-  (<View>
-  <ImageBackground source={require('../assets/Images/moving_palm_trees.gif')} style={{width: '100%', height: '100%'}}>
-    {this.props.showLeaderboard ? 
-     <LeaderBoardEntryScreen
-     returnToMenu={this.props.returnToMenu}
-     goToLeaderBoard={this.props.goToLeaderBoard}
-     score={this.props.score}
-    /> 
-    :
-    <GameLoading score={this.props.score} />
-  }
-  </ImageBackground>
-</View>)
- :
-this.props.showLeaderboard ? (
-  <View style={localStyles.main}>
-    <Text style={localStyles.title}>Score: {this.props.score}</Text>
-    <Text style={localStyles.title}>
-      Nice try, but you didn't earn a high score. Play again?
-    </Text>
-    <Image
-      source={require('../assets/Images/spin.gif')}
-      style={{ width: 250, height: 250 }}
-    />
-    <TouchableHighlight
-      style={localStyles.button}
-      underlayColor="#68a0ff"
-      onPress={this.props.returnToMenu}
-    >
-      <Text style={localStyles.buttonText}>BACK TO MENU</Text>
-    </TouchableHighlight>
-    <TouchableHighlight
-      style={localStyles.button}
-      underlayColor="#68a0ff"
-      onPress={() => this.props.resetGame()}
-    >
-      <Text style={localStyles.buttonText}>PLAY AGAIN!</Text>
-    </TouchableHighlight>
-  </View>
-) : (
-  <GameLoading score={this.props.score} />
-)}
-</ImageBackground>
-</View>
-)
-} */}
-
 var localStyles = StyleSheet.create({
   losingText: {
     color: '#ff0000',
@@ -182,8 +125,10 @@ var localStyles = StyleSheet.create({
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: 'center',
-    color: 'white'
+    textAlign: "center",
+    color: "white",
+    fontFamily: "Cochin",
+    fontWeight:"bold"
   },
   itemInput: {
     height: 50,

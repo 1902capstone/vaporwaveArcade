@@ -204,7 +204,6 @@ export default class BallGameSceneLoader extends Component {
 
   checkTime() {
     const timeLeft = this.state.timeLeft;
-    console.log(timeLeft);
     if (timeLeft <= 0) {
       clearInterval(timerIntervalId);
       this.gameEnd();

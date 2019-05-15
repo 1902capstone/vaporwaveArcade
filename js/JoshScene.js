@@ -22,8 +22,6 @@ import {
   ViroQuad,
   ViroNode,
 } from 'react-viro';
-// import console = require('console');
-// import console = require('console');
 
 export default class JoshScene extends Component {
   constructor() {
@@ -254,11 +252,6 @@ export default class JoshScene extends Component {
   }
   _addHole() {
     this.setState({ totalHoles: this.state.totalHoles + 1 });
-    // change this to slow down rapidfire and empty state
-    // if (this.state.totalBullets === 10) {
-    //   this.setState({ totalBullets: 0 });
-    // }
-    console.log('holes', this.state.totalholes);
   }
 }
 

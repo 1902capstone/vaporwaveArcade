@@ -46,20 +46,11 @@ export default class HelloWorldSceneAR extends Component {
   }
 
   render() {
-    console.log(this.props.arSceneNavigator.viroAppProps);
 
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         {/* CEILING */}
-        {/* <ViroAnimatedImage
-          height={12}
-          width={19}
-          loop={true}
-          opacity={.6}
-          rotation={[114, 180, 0]}
-          position={[0, 4, -8]}
-          source={require('../assets/Images/purplegrid.gif')}
-        /> */}
+
         {/* FLOOR */}
         <ViroAnimatedImage
           height={12}
@@ -204,7 +195,6 @@ export default class HelloWorldSceneAR extends Component {
     });
   }
   _onGazeMakeBalls() {
-    console.log('is this working?');
     sphereCount++;
     const sphere1 = (
       <ViroSphere
@@ -241,7 +231,6 @@ export default class HelloWorldSceneAR extends Component {
     );
     spheresToLoad.push(sphere1);
     spheresToLoad.push(sphere2);
-    console.log('spheres', sphereCount);
   }
 
   _renderGazeBall() {

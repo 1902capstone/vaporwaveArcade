@@ -28,7 +28,7 @@ import {
   ViroNode,
   ViroAnimatedImage,
 } from 'react-viro';
-// import console = require('console');
+
 
 let spheres = [];
 let sphereCount = 0;
@@ -137,21 +137,7 @@ export default class BallGameScene extends Component {
       const colors = ['pink', 'purple', 'red', 'white'];
 
       const x = (
-        // <ViroSphere
-        //   key={sphereTag}
-        //   viroTag={sphereTag}
-        //   heightSegmentCount={10}
-        //   widthSegmentCount={10}
-        //   radius={randomRad}
-        //   position={[randomXPos, randomYPos, -3]}
-        //   height={1}
-        //   materials={[colors[randomColor]]}
-        //   physicsBody={{
-        //     type: 'Dynamic',
-        //     mass: randomMass,
-        //     restitution: 0.999,
-        //   }}
-        // />
+
         <Viro3DObject
           // animation={{ name: 'flip', run: true, loop: true }}
           source={require('../assets/3DModels/donut/Donut_OBJ.obj')}
@@ -211,8 +197,6 @@ export default class BallGameScene extends Component {
   }
 
   renderARScene() {
-    // const currentScore = this.props.arSceneNavigator.viroAppProps.score;
-    // const timer = this.props.arSceneNavigator.viroAppProps.timer;
 
     return (
       <ViroARPlaneSelector
@@ -273,28 +257,7 @@ export default class BallGameScene extends Component {
             onFinish={this.onFinishSound}
             onError={this.onErrorSound}
           />
-        {/* <ViroAnimatedImage
-          height={4}
-          width={4}
-          loop={true}
-          opacity={.6}
-          rotation={[0, 0, 0]}
-          position={[-3, -1, -8]}
-          source={require('../assets/Images/donutSpin.gif')}
-        /> */}
-        {/* <Viro3DObject
-          animation={{ name: 'flip', run: true, loop: true }}
-          source={require('../assets/3DModels/donut/Donut_FBX.vrx')}
-          opacity={1}
-          // materials={['coke']}
-          position={[0, 0, -3]}
-          scale={[0.013, 0.013, 0.013]}
-          type="VRX"
-          rotation={[-90, 0, 0]}
-          physicsBody={{ type: 'Static' }}
-          onCollision={this.handleScore}
-          onClick={this.createSpheres}
-        /> */}
+        
         <ViroARCamera>
           <Viro3DObject
             // animation={{ name: 'rotate', run: true, loop: true }}
@@ -310,23 +273,6 @@ export default class BallGameScene extends Component {
             onCollision={this.handleScore}
             onClick={this.createSpheres}
           />
-          {/* <Viro3DObject
-            animation={{ name: 'rotate', run: true, loop: true }}
-            source={require('../assets/3DModels/skull/Skull.obj')}
-            opacity={0.2}
-            // resources={[
-            //   require('./res/emoji_smile/emoji_smile_diffuse.png'),
-            //   require('./res/emoji_smile/emoji_smile_normal.png'),
-            //   require('./res/emoji_smile/emoji_smile_specular.png'),
-            // ]}
-            position={[0, -.5, -1]}
-            scale={[0.0008, 0.0008, 0.0008]}
-            type="OBJ"
-            physicsBody={{ type: 'Static' }}
-            // onCollision={this.props.arSceneNavigator.viroAppProps.incrementScore}
-            onCollision={this.handleScore}
-            onClick={this.createSpheres}
-          /> */}
         </ViroARCamera>
       </ViroARPlaneSelector>
     );
@@ -335,14 +281,14 @@ export default class BallGameScene extends Component {
 
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
-    fontFamily: 'Cochin',
+    fontFamily: 'Arial',
     fontSize: 20,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
   instructions: {
-    fontFamily: 'Cochin',
+    fontFamily: 'Arial',
     fontSize: 8,
     color: 'hotpink',
     textAlignVertical: 'center',
@@ -412,7 +358,7 @@ ViroAnimations.registerAnimations({
     properties: {
       rotateX: '+=60',
     },
-    duration: 1000, //.
+    duration: 1000,
   },
 });
 

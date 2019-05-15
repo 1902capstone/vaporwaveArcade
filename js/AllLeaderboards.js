@@ -10,7 +10,7 @@ export default class AllLeaderboards extends Component {
           underlayColor={"#68a0ff"}
           onPress={() => this.props.propObj.goToLeaderBoard()}
         >
-          <Text style={styles.buttonText}>Ball Game High Scores</Text>
+          <Text style={styles.buttonText}>Donut Drop High Scores</Text>
         </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}

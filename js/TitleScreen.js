@@ -21,8 +21,6 @@ import {
   ViroSphere,
   ViroNode,
 } from 'react-viro';
-// import console = require('console');
-// import console = require('console');
 
 
 

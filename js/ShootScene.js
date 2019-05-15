@@ -339,14 +339,6 @@ export default class ShootScene extends Component {
     if (!this.sceneRef.current) {
       return;
     }
-    // let myDirection;
-    // if (this.sceneRef.current) {
-    // this.sceneRef.current.getCameraOrientationAsync().then((positions) => {
-    //     myDirection = positions.forward;
-    //     console.log(myDirection) // [0] [1] [2]
-    //   })
-    // }
-
     var bang = [];
     for (var i = 0; i < this.state.totalBullets; i++) {
       var bulletKey = 'BulletTag_' + i;
@@ -362,7 +354,6 @@ export default class ShootScene extends Component {
           physicsBody={{
             type: 'Dynamic',
             mass: 1,
-            // force: {value: [this.state.cameraAngle[0] * 50, this.state.cameraAngle[1] * 50, this.state.cameraAngle[2] * 50]}
             velocity: [
               this.state.cameraAngle[0] * 160,
               this.state.cameraAngle[1] * 160,
@@ -372,7 +363,6 @@ export default class ShootScene extends Component {
         />
       );
     }
-    // console.log('bandSound should be off', bangSound);
     return bang;
   }
 
@@ -388,8 +378,6 @@ export default class ShootScene extends Component {
       this.setState({ totalBullets: 0 });
     }
     // bangSound = true;
-
-    // console.log('bullets', this.state.totalBullets);
   }
 
   renderBullets2() {
@@ -438,12 +426,10 @@ export default class ShootScene extends Component {
   }
 
   handleScore(colliderTag) {
-    // console.log(bullets.length);
     let indexOfBullet = bullets.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
     });
     bullets.splice(indexOfBullet, 1);
-    // console.log(bullets.length);
     this.setState({
       bullets: this.state.bullets - 1,
     });
@@ -457,9 +443,7 @@ export default class ShootScene extends Component {
   }
   
   beginCameraUpdates() {
-    console.log(cameraCheckIntervalId);
     if (!cameraCheckIntervalId) {
-      console.log('begincamupdates2')
       cameraCheckIntervalId = setInterval(() => {
         this.updateCamera();
       }, 100);
@@ -467,7 +451,6 @@ export default class ShootScene extends Component {
   }
   async updateCamera() {
     let myPos = await this.sceneRef.current.getCameraOrientationAsync();
-    // console.log(myPos.forward);
     this.setState({
       cameraAngle: myPos.forward,
     });

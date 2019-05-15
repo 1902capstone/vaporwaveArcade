@@ -170,14 +170,7 @@ export default class CatScene extends Component {
           >
             {this._renderCats()}
             {this._renderTexts()}
-            {/* <ViroText
-              text={this.state.catText}
-              scale={[0.5, 0.5, 0.5]}
-              position={[0, -1, -1]}
-              style={localStyles.scoreStyle}
-              extrusionDepth={2}
-              outerStroke={{ type: 'DropShadow', width: 2, color: '#444444' }} */}
-            {/* /> */}
+          
           </ViroNode>
           <Viro3DObject
             source={require('../assets/3DModels/plant/palmtree.obj')}
@@ -324,8 +317,6 @@ export default class CatScene extends Component {
         time: 0,
       };
       cats.push(CatObj);
-      // console.log('these are cats', cats);
-      // console.log('state cats', this.state.cats);
     }
     this.setState({
       cats: this.state.cats + catsToLoad.length,
