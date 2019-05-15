@@ -29,7 +29,7 @@ export default class LeaderBoardComponent3 extends Component {
           }}
         >
           <Text style={{   fontFamily: "Cochin",
-    fontWeight: 'bold', fontSize: 25, color: "white" }}>Leaderboard</Text>
+    fontWeight: 'bold', fontSize: 25, color: "white" }}>Kitty Pool Leaderboard</Text>
           <View
             style={{
               flexDirection: "row",

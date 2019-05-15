@@ -18,7 +18,7 @@ import {
   ViroSound,
   ViroAnimatedImage,
 } from 'react-viro';
-// import console = require('console');
+
 
 let spheres = [];
 let sphereCount = 0;
@@ -186,8 +186,6 @@ export default class BallGameScene extends Component {
   }
 
   renderARScene() {
-    // const currentScore = this.props.arSceneNavigator.viroAppProps.score;
-    // const timer = this.props.arSceneNavigator.viroAppProps.timer;
 
     return (
       <ViroARPlaneSelector
@@ -248,6 +246,7 @@ export default class BallGameScene extends Component {
             onFinish={this.onFinishSound}
             onError={this.onErrorSound}
           />
+        
         <ViroARCamera>
           <Viro3DObject
             source={require('../assets/3DModels/cup/CokeCup.obj')}
@@ -270,14 +269,14 @@ export default class BallGameScene extends Component {
 
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
-    fontFamily: 'Ariel',
+    fontFamily: 'Arial',
     fontSize: 20,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
   instructions: {
-    fontFamily: 'Ariel',
+    fontFamily: 'Arial',
     fontSize: 10,
     color: '#ffffff',
     textAlignVertical: 'center',
@@ -347,7 +346,7 @@ ViroAnimations.registerAnimations({
     properties: {
       rotateX: '+=60',
     },
-    duration: 1000, //.
+    duration: 1000,
   },
 });
 

@@ -113,8 +113,10 @@ var localStyles = StyleSheet.create({
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: 'center',
-    color: 'white'
+    textAlign: "center",
+    color: "white",
+    fontFamily: "Cochin",
+    fontWeight:"bold"
   },
   itemInput: {
     height: 50,

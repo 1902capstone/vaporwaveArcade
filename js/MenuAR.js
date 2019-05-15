@@ -46,7 +46,6 @@ export default class HelloWorldSceneAR extends Component {
   }
 
   render() {
-    console.log(this.props.arSceneNavigator.viroAppProps);
 
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
@@ -202,7 +201,6 @@ export default class HelloWorldSceneAR extends Component {
     });
   }
   _onGazeMakeBalls() {
-    console.log('is this working?');
     sphereCount++;
     const sphere1 = (
       <ViroSphere
@@ -239,7 +237,6 @@ export default class HelloWorldSceneAR extends Component {
     );
     spheresToLoad.push(sphere1);
     spheresToLoad.push(sphere2);
-    console.log('spheres', sphereCount);
   }
 
   _renderGazeBall() {
