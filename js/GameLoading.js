@@ -6,7 +6,17 @@ export default class GameLoading extends Component {
     return (
       <View style={styles.main}>
         <Image
-          style={{ justifyContent: 'center', alignItems: 'center' }}
+          style={{
+            flex: 1,
+            width: 330,
+            height: 330,
+            resizeMode: 'contain',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginLeft: '-5%',
+            marginBottom: '-20%',
+            marginTop: '-30%'
+           }}
           source={require('../assets/Images/gameOver.png')}
         />
         {/* <Text style={styles.title}>Game Over</Text> */}
@@ -29,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
     color: "white",
-    fontFamily: "Cochin",
+    fontFamily: "Futura",
     fontWeight:"bold"
   },
   itemInput: {
