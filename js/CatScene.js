@@ -379,7 +379,7 @@ export default class CatScene extends Component {
   handleGameStart() {
     if (!catSpawnIntervalId && this.state.startTime) {
       this.props.arSceneNavigator.viroAppProps.beginTimer();
-      catSpawnIntervalId = setInterval(this._createCats, 1250);
+      catSpawnIntervalId = setInterval(this._createCats, 950);
     }
   }
 

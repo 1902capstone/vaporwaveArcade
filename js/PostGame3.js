@@ -115,7 +115,7 @@ var localStyles = StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
     color: "white",
-    fontFamily: "Cochin",
+    fontFamily: "Futura",
     fontWeight:"bold"
   },
   itemInput: {

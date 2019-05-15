@@ -163,7 +163,7 @@ export default class HelloWorldSceneAR extends Component {
         {/* </ViroNode> */}
         <ViroImage
             height={1}
-            width={2.7}
+            width={2.5}
             opacity={1}
             rotation={[0, 0, 0]}
             position={[0.1, -0.8, -2.4]}
