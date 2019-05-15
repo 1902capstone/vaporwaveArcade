@@ -80,7 +80,7 @@ export default class BallGameSceneLoader extends Component {
             style={{ width: 300, height: 300 }}
           />
           <Text style={localStyles.text}>
-            You have thirty seconds to catch as many donuts as you can in the
+            You have 30 seconds to catch as many donuts as you can in the
             cup. Move your device under the falling donuts to catch them in your
             cup. Avoid the avocado.
           </Text>
@@ -169,8 +169,8 @@ export default class BallGameSceneLoader extends Component {
   resetGame() {
     this.setState({
       score: 0,
-      timer: 25,
-      timeLeft: 25,
+      timer: 30,
+      timeLeft: 30,
       gameState: GAME_STATES.INTRODUCTION,
       showLeaderboard: false,
     });

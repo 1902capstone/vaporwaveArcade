@@ -335,16 +335,16 @@ export default class BallGameScene extends Component {
 
 var localStyles = StyleSheet.create({
   helloWorldTextStyle: {
-    fontFamily: 'Cochin',
+    fontFamily: 'Ariel',
     fontSize: 20,
     color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
   instructions: {
-    fontFamily: 'Cochin',
+    fontFamily: 'Ariel',
     fontSize: 8,
-    color: 'hotpink',
+    color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },

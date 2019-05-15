@@ -77,7 +77,6 @@ export default class HeartbreakerSceneLoader extends Component {
     }
   }
 
-  // You have twenty-five seconds to grab as many cats from the water as you can. Simply tap a cat to save it!
   renderIntro() {
     return (
       <View style={localStyles.outer}>
@@ -88,7 +87,7 @@ export default class HeartbreakerSceneLoader extends Component {
           />
           <Text
             style={localStyles.text}
-          >{`Shoot the hearts for points! Watch out for bombs! \n Aim by moving your device and tap the zapper to shoot.`}</Text>
+          >{`Shoot the hearts for points! Watch out for bombs! Aim by moving your device and tap the zapper to shoot.`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}

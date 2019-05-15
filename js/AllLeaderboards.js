@@ -60,16 +60,9 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     padding: 30,
-<<<<<<< HEAD
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#6565fc',
-=======
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "#6565fc",
-  
->>>>>>> 6b909e3452bd4164d62f2d6ef7fb0a2a31aa5fbe
   },
   title: {
     marginBottom: 20,
@@ -78,15 +71,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-<<<<<<< HEAD
-    color: '#111',
-    alignSelf: 'center',
-=======
     color: "#111",
     alignSelf: "center",
     fontFamily: "Cochin",
     fontWeight: 'bold'
->>>>>>> 6b909e3452bd4164d62f2d6ef7fb0a2a31aa5fbe
   },
   button: {
     height: 45,
