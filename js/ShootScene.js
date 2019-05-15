@@ -429,6 +429,8 @@ export default class ShootScene extends Component {
     
   }
 
+  
+  // test if getting 
   handleScore(colliderTag) {
     let indexOfBullet = bullets.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
@@ -444,7 +446,6 @@ export default class ShootScene extends Component {
     let indexOfBullet = bullets.findIndex(elt => {
       return elt.model.props.viroTag === tag;
     });
-    console.log(indexOfBullet);
     if (indexOfBullet > -1) {
       bullets.splice(indexOfBullet, 1);
       this.setState({
@@ -459,9 +460,7 @@ export default class ShootScene extends Component {
   }
   
   beginCameraUpdates() {
-    console.log(cameraCheckIntervalId);
     if (!cameraCheckIntervalId) {
-      console.log('begincamupdates2')
       cameraCheckIntervalId = setInterval(() => {
         this.updateCamera();
       }, 100);
