@@ -27,15 +27,10 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 20,
     fontSize: 25,
-<<<<<<< HEAD
-    textAlign: 'center',
-    color: 'white',
-=======
     textAlign: "center",
     color: "white",
     fontFamily: "Cochin",
     fontWeight:"bold"
->>>>>>> 3bcefe60e61071fc9d911a6bcd6ebafd1be108aa
   },
   itemInput: {
     height: 50,
