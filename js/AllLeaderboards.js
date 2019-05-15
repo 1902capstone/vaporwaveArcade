@@ -51,7 +51,7 @@ export default class AllLeaderboards extends Component {
             resizeMode: 'contain',
             justifyContent: 'center',
             alignItems: 'center',
-            marginLeft: '-5%',
+            // marginLeft: '%',
             marginBottom: '-20%',
             marginTop: '-30%'
           }}
@@ -60,7 +60,7 @@ export default class AllLeaderboards extends Component {
         <AwesomeButtonRick
           // style={styles.buttonNew}
           // underlayColor={"#68a0ff"}
-          style={{ marginBottom: 40 }}
+          style={{ marginBottom: 50 }}
           width={315}
           type="secondary"
           onPress={() => this.props.propObj.goToLeaderBoard()}
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   main: {
     flex: 1,
-    padding: 30,
+    padding: 20,
     flexDirection: 'column',
     justifyContent: 'center',
     backgroundColor: '#6565fc',
