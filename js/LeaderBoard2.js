@@ -28,19 +28,20 @@ export default class List2 extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Text style={styles.title}>Shooter Leaderboard</Text> */}
-        {this.state.score.length > 0 ? (
-          <LeaderBoardComponent2 score={this.state.score} />
-        ) : (
-          <Text>No user</Text>
-        )}
-
+        <LeaderBoardComponent2 score={this.state.score} />
+        <TouchableHighlight
+          style={styles.button}
+          underlayColor={"#68a0ff"}
+          onPress={this.props.propObj.goToAllLeaderboards}
+        >
+          <Text style={styles.buttonText}>View All Leaderboards</Text>
+        </TouchableHighlight>
         <TouchableHighlight
           style={styles.button}
           underlayColor={"#68a0ff"}
           onPress={this.props.propObj.returnToMenu}
         >
-          <Text style={styles.buttonText}>BACK</Text>
+          <Text style={styles.buttonText}>Back To Menu</Text>
         </TouchableHighlight>
       </View>
     );

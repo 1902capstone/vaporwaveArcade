@@ -17,7 +17,6 @@ import PostGame2 from './PostGame2';
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const ShootScene = require('./ShootScene');
-const backgroundImage = require('../assets/Images/moving_palm_trees.gif')
 
 const GAME_STATES = {
   INTRODUCTION: 'INTRODUCTION',
@@ -149,7 +148,7 @@ export default class HeartbreakerSceneLoader extends Component {
   renderPostGame() {
     return (
       <View>
-        <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
+        <ImageBackground source={require('../assets/Images/moving_palm_trees.png')} style={{width: '100%', height: '100%'}}>
           <PostGame2
             returnToMenu={this.props.propObj.returnToMenu}
             goToLeaderBoard={this.props.propObj.goToLeaderBoard2}

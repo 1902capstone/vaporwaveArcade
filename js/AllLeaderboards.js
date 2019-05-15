@@ -31,7 +31,7 @@ export default class AllLeaderboards extends Component {
           underlayColor={"#68a0ff"}
           onPress={this.props.propObj.returnToMenu}
         >
-          <Text style={styles.buttonText}>BACK</Text>
+          <Text style={styles.buttonText}>Back to Menu</Text>
         </TouchableHighlight>
       </View>
     );

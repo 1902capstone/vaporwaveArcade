@@ -105,6 +105,12 @@ export default class App extends Component {
       menuState: MENU_STATES.LEADERBOARD_3
     })
   }
+
+  goToAllLeaderboards = () => {
+    this.setState({
+      menuState: MENU_STATES.ALL_LEADERBOARDS
+    })
+  }
   
   render() {
     switch (this.state.menuState) {
@@ -230,7 +236,7 @@ export default class App extends Component {
         returnToMenu: this.returnToMenu,
         goToLeaderBoard: this.goToLeaderBoard,
         goToLeaderBoard2: this.goToLeaderBoard2,
-        goToLeaderBoard3: this.goToLeaderBoard3
+        goToLeaderBoard3: this.goToLeaderBoard3,
       }}
       />
     )
@@ -241,6 +247,7 @@ export default class App extends Component {
       <LeaderBoard 
       propObj = {{
         returnToMenu: this.returnToMenu,
+        goToAllLeaderboards: this.goToAllLeaderboards
       }}
       />
     )
@@ -250,6 +257,7 @@ export default class App extends Component {
       <LeaderBoard2 
       propObj = {{
         returnToMenu: this.returnToMenu,
+        goToAllLeaderboards: this.goToAllLeaderboards
       }}
       />
     )
@@ -260,6 +268,7 @@ export default class App extends Component {
       <LeaderBoard3 
       propObj = {{
         returnToMenu: this.returnToMenu,
+        goToAllLeaderboards: this.goToAllLeaderboards
       }}
       />
     )
