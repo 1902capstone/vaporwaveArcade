@@ -26,7 +26,7 @@ const GAME_STATES = {
 
 let timerIntervalId;
 
-const DURATION = 500;
+// const DURATION = 500;
 
 const PATTERN = [1000, 2000, 3000, 4000];
 export default class KittyPoolSceneLoader extends Component {
