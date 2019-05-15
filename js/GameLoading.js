@@ -6,11 +6,7 @@ export default class GameLoading extends Component {
     return (
       <View style={styles.main}>
         <Image
-<<<<<<< HEAD
-
-=======
           style={{ justifyContent: 'center', alignItems: 'center' }}
->>>>>>> bb87b2d58ec233f86eb92581b17d7167974fccba
           source={require('../assets/Images/gameOver.png')}
         />
         {/* <Text style={styles.title}>Game Over</Text> */}
