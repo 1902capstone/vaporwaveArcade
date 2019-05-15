@@ -50,16 +50,6 @@ export default class HelloWorldSceneAR extends Component {
 
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        {/* CEILING */}
-        {/* <ViroAnimatedImage
-          height={12}
-          width={19}
-          loop={true}
-          opacity={.6}
-          rotation={[114, 180, 0]}
-          position={[0, 4, -8]}
-          source={require('../assets/Images/purplegrid.gif')}
-        /> */}
         {/* FLOOR */}
         <ViroAnimatedImage
           height={12}
@@ -68,7 +58,7 @@ export default class HelloWorldSceneAR extends Component {
           opacity={0.6}
           rotation={[-65, 0, 0]}
           position={[0, -4, -8]}
-          source={require('../assets/Images/purplegrid.gif')}
+          source={require('../assets/Images/purplegrid2.gif')}
         />
         {/* LEADER BOARD */}
         <ViroButton
