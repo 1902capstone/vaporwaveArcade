@@ -190,10 +190,10 @@ export default class HeartbreakerSceneLoader extends Component {
     });
   }
 
-  incrementScore() {
+  incrementScore(num) {
     // Vibration.vibrate(DURATION);
     this.setState({
-      score: this.state.score + 1,
+      score: this.state.score + num,
     });
   }
   decrementScore() {
