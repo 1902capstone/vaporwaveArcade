@@ -73,7 +73,7 @@ export default class KittyPoolSceneLoader extends Component {
 
           >{`You have 30 seconds to catch as many cats as you can!  Tap the cats to rescue them!`}</Text>
           <TouchableHighlight
-            style={localStyles.buttons}
+            style={localStyles.button2}
             onPress={this.startGame}
             underlayColor={'#68a0ff'}
           >
@@ -326,6 +326,19 @@ var localStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  button2: {
+    height: 60,
+    width: 90,
+    paddingTop: 10,
+    paddingBottom: 8,
+    margin: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    backgroundColor: 'rgba(123,123,231,.4)',
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'rgba(123,087,231,.4)',
+  }
 });
 
 module.exports = KittyPoolSceneLoader;

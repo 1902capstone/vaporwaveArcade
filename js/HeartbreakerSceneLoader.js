@@ -89,7 +89,7 @@ export default class HeartbreakerSceneLoader extends Component {
             style={localStyles.text}
           >{`Shoot the hearts for points! Watch out for bombs! Aim by moving your device and tap the zapper to shoot.`}</Text>
           <TouchableHighlight
-            style={localStyles.buttons}
+            style={localStyles.button2}
             onPress={this.startGame}
             underlayColor="#68a0ff"
           >
@@ -324,6 +324,19 @@ var localStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
   },
+  button2: {
+    height: 60,
+    width: 90,
+    paddingTop: 10,
+    paddingBottom: 8,
+    margin: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    backgroundColor: 'rgba(123,123,231,.4)',
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'rgba(123,087,231,.4)',
+  }
 });
 
 module.exports = HeartbreakerSceneLoader;
