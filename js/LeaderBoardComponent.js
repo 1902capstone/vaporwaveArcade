@@ -26,7 +26,7 @@ export default class LeaderBoardComponent extends Component {
         }}
       >
         <Text style={{   fontFamily: "Cochin",
-    fontWeight: 'bold', fontSize: 25, color: "white" }}>Leaderboard</Text>
+    fontWeight: 'bold', fontSize: 25, color: "white" }}>Donut Drop Leaderboard</Text>
         <View
           style={{
             flexDirection: "row",
