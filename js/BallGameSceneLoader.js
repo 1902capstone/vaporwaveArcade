@@ -14,7 +14,7 @@ import {
 
 import PostGame1 from './PostGame1';
 import { ViroARSceneNavigator } from 'react-viro';
-import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
+// import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
@@ -204,7 +204,6 @@ export default class BallGameSceneLoader extends Component {
 
   checkTime() {
     const timeLeft = this.state.timeLeft;
-    console.log(timeLeft);
     if (timeLeft <= 0) {
       clearInterval(timerIntervalId);
       this.gameEnd();

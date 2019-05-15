@@ -142,8 +142,9 @@ export default class BallGameScene extends Component {
             type: 'Dynamic',
             mass: randomMass,
             restitution: 0.999,
+            shape:{type:'Sphere', params:[0.3]}
           }}
-          onCollision={this.handleScore}
+          // onCollision={this.handleScore}
           onClick={this.createSpheres}
         />
       );
@@ -174,6 +175,7 @@ export default class BallGameScene extends Component {
   }
 
   handleScore(colliderTag) {
+    console.count(colliderTag);
     let indexOfSphere = spheres.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
     });
@@ -257,7 +259,7 @@ export default class BallGameScene extends Component {
             position={[0, -1.6, -3]}
             scale={[0.13, 0.13, 0.13]}
             type="OBJ"
-            physicsBody={{ type: 'Static' }}
+            physicsBody={{ type: 'Static'}}
             // onCollision={this.props.arSceneNavigator.viroAppProps.incrementScore}
             onCollision={this.handleScore}
             onClick={this.createSpheres}
