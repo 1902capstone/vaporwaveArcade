@@ -133,7 +133,6 @@ export default class KittyPoolSceneLoader extends Component {
   }
 
   renderPostGame() {
-    console.log(this.state);
     return (
       <View>
         <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
@@ -196,7 +195,6 @@ export default class KittyPoolSceneLoader extends Component {
 
   checkTime() {
     const timeLeft = this.state.timeLeft;
-    console.log(timeLeft);
     if (timeLeft <= 0) {
       clearInterval(timerIntervalId);
       this.gameEnd();

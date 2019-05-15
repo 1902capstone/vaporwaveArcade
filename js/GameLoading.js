@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: "center",
     color: "white",
+    fontFamily: "Cochin",
+    fontWeight:"bold"
   },
   itemInput: {
     height: 50,
