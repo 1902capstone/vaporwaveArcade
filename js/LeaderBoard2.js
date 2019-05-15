@@ -30,7 +30,7 @@ export default class List2 extends Component {
       <View style={styles.container}>
         <LeaderBoardComponent2 score={this.state.score} />
         <TouchableHighlight
-          style={styles.button}
+          style={styles.button1}
           underlayColor={"#68a0ff"}
           onPress={this.props.propObj.goToAllLeaderboards}
         >
@@ -70,6 +70,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#111",
     alignSelf: "center"
+  },
+  button1: {
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderColor: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    marginTop: 10,
+    alignSelf: "stretch",
+    justifyContent: "center"
   },
   button: {
     height: 45,
