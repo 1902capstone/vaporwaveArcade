@@ -1,15 +1,13 @@
 /* eslint-disable default-case */
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet,
-  PixelRatio,
   Image,
   ImageBackground,
   TouchableHighlight,
-  Vibration
+  // Vibration
 } from 'react-native';
 import { ViroARSceneNavigator } from 'react-viro';
 import PostGame3 from './PostGame3';
@@ -17,6 +15,7 @@ import PostGame3 from './PostGame3';
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const CatScene = require('./CatScene');
+const backgroundImage = require('../assets/Images/moving_palm_trees2.gif')
 // const JoshScene = require('./JoshScene');
 
 const GAME_STATES = {
@@ -27,7 +26,7 @@ const GAME_STATES = {
 
 let timerIntervalId;
 
-const DURATION = 500;
+// const DURATION = 500;
 
 const PATTERN = [1000, 2000, 3000, 4000];
 export default class KittyPoolSceneLoader extends Component {
@@ -72,7 +71,7 @@ export default class KittyPoolSceneLoader extends Component {
             style={localStyles.text}
               // You have 30 seconds to grab as many cats from the water as you can. Simply tap a cat to save it!
 
-          >{`You have 30 seconds to catch as many cats as you can!  Tap the cats to rescue them from drowning.`}</Text>
+          >{`You have 30 seconds to catch as many cats as you can!  Tap the cats to rescue them!`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}
@@ -137,7 +136,7 @@ export default class KittyPoolSceneLoader extends Component {
     console.log(this.state);
     return (
       <View>
-        <ImageBackground source={require('../assets/Images/moving_palm_trees.png')} style={{width: '100%', height: '100%'}}>
+        <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
           <PostGame3
             returnToMenu={this.props.propObj.returnToMenu}
             goToLeaderBoard={this.props.propObj.goToLeaderBoard3}
@@ -182,7 +181,7 @@ export default class KittyPoolSceneLoader extends Component {
   }
   
   incrementScore(colliderTag) {
-    Vibration.vibrate(DURATION);
+    // Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });

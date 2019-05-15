@@ -17,6 +17,7 @@ import PostGame2 from './PostGame2';
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const ShootScene = require('./ShootScene');
+const backgroundImage = require('../assets/Images/moving_palm_trees2.gif')
 
 const GAME_STATES = {
   INTRODUCTION: 'INTRODUCTION',
@@ -76,7 +77,6 @@ export default class HeartbreakerSceneLoader extends Component {
     }
   }
 
-  // You have twenty-five seconds to grab as many cats from the water as you can. Simply tap a cat to save it!
   renderIntro() {
     return (
       <View style={localStyles.outer}>
@@ -87,7 +87,7 @@ export default class HeartbreakerSceneLoader extends Component {
           />
           <Text
             style={localStyles.text}
-          >{`Shoot the hearts for points! Watch out for bombs! \n Aim by moving your device and tap the zapper to shoot.`}</Text>
+          >{`Shoot the hearts for points! Watch out for bombs! Aim by moving your device and tap the zapper to shoot.`}</Text>
           <TouchableHighlight
             style={localStyles.buttons}
             onPress={this.startGame}
@@ -148,7 +148,7 @@ export default class HeartbreakerSceneLoader extends Component {
   renderPostGame() {
     return (
       <View>
-        <ImageBackground source={require('../assets/Images/moving_palm_trees.png')} style={{width: '100%', height: '100%'}}>
+        <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
           <PostGame2
             returnToMenu={this.props.propObj.returnToMenu}
             goToLeaderBoard={this.props.propObj.goToLeaderBoard2}
@@ -190,10 +190,10 @@ export default class HeartbreakerSceneLoader extends Component {
     });
   }
 
-  incrementScore() {
+  incrementScore(num) {
     // Vibration.vibrate(DURATION);
     this.setState({
-      score: this.state.score + 1,
+      score: this.state.score + num,
     });
   }
   decrementScore() {
