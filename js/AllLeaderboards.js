@@ -1,9 +1,16 @@
-import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableHighlight, TouchableWithoutFeedback,Animated,ImageBackground, } from "react-native";
-import AwesomeButton from 'react-native-really-awesome-button'
-import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick'
+import React, { Component } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Animated,
+  ImageBackground,
+} from 'react-native';
+import AwesomeButton from 'react-native-really-awesome-button';
+import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick';
 // import LinearGradient from "react-native-linear-gradient";
-
 
 export default class AllLeaderboards extends Component {
   // constructor(props) {
@@ -12,11 +19,11 @@ export default class AllLeaderboards extends Component {
   //   this.handlePressIn = this.handlePressIn.bind(this);
   //   this.handlePressOut = this.handlePressOut.bind(this);
   // }
-  
+
   // componentWillMount() {
   //   this.animatedValue = new Animated.Value(1);
   // }
-  
+
   // handlePressIn() {
   //   Animated.spring(this.animatedValue, {
   //     toValue: .5
@@ -35,7 +42,6 @@ export default class AllLeaderboards extends Component {
     // }
     return (
       <View style={styles.main}>
-       
         {/* <TouchableWithoutFeedback
           onPressIn={this.handlePressIn}
           // onPressOut={this.handlePressOut}
@@ -111,10 +117,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-    color: "#111",
-    alignSelf: "center",
-    fontFamily: "Cochin",
-    fontWeight: 'bold'
+    color: '#111',
+    alignSelf: 'center',
+    fontFamily: 'Futura',
+    fontWeight: 'bold',
   },
   button: {
     height: 45,
@@ -125,14 +131,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
     marginTop: 10,
-    alignSelf: "stretch",
-    justifyContent: "center"
+    alignSelf: 'stretch',
+    justifyContent: 'center',
   },
   buttonNew: {
     marginTop: 8,
-    marginBottom: 8
-
-  }
+    marginBottom: 8,
+  },
 });
 
 module.exports = AllLeaderboards;
