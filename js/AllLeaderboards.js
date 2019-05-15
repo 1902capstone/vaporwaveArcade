@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     padding: 30,
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#6565fc"
+    backgroundColor: "#6565fc",
+  
   },
   title: {
     marginBottom: 20,
@@ -59,7 +60,9 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: "#111",
-    alignSelf: "center"
+    alignSelf: "center",
+    fontFamily: "Cochin",
+    fontWeight: 'bold'
   },
   button: {
     height: 45,

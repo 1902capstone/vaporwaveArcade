@@ -22,13 +22,14 @@ export default class LeaderBoardComponent2 extends Component {
         <View
           colors={[, "#1da2c6", "#1695b7"]}
           style={{
-            backgroundColor: "#119abf",
+            backgroundColor: "#6565fc",
             padding: 15,
             paddingTop: 35,
             alignItems: "center"
           }}
         >
-          <Text style={{ fontSize: 25, color: "white" }}>Leaderboard</Text>
+          <Text style={{   fontFamily: "Cochin",
+    fontWeight: 'bold', fontSize: 25, color: "white" }}>Leaderboard</Text>
           <View
             style={{
               flexDirection: "row",

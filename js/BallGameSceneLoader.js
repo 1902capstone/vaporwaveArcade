@@ -9,6 +9,7 @@ import {
   TouchableHighlight,
   Vibration,
   Image,
+  ImageBackground
 } from 'react-native';
 
 import PostGame1 from './PostGame1';
@@ -18,6 +19,8 @@ import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const BallGameScene = require('./BallGameScene');
+const backgroundImage = require('../assets/Images/moving_palm_trees.gif')
+
 
 const GAME_STATES = {
   INTRODUCTION: 'INTRODUCTION',
@@ -52,6 +55,7 @@ export default class BallGameSceneLoader extends Component {
     this.checkTime = this.checkTime.bind(this);
     this.beginTimer = this.beginTimer.bind(this);
     this.decrementTime = this.decrementTime.bind(this);
+
   }
 
   render() {
@@ -139,14 +143,18 @@ export default class BallGameSceneLoader extends Component {
 
   renderPostGame() {
     return (
-      <PostGame1
-        returnToMenu={this.props.propObj.returnToMenu}
-        goToLeaderBoard={this.props.propObj.goToLeaderBoard}
-        score={this.state.score}
-        resetGame={this.resetGame}
-        gameName="BallGame"
-        showLeaderboard={this.state.showLeaderboard}
-      />
+      <View>
+        <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
+          <PostGame1
+            returnToMenu={this.props.propObj.returnToMenu}
+            goToLeaderBoard={this.props.propObj.goToLeaderBoard}
+            score={this.state.score}
+            resetGame={this.resetGame}
+            gameName="BallGame"
+            showLeaderboard={this.state.showLeaderboard}
+          />
+        </ImageBackground>
+      </View>
     );
   }
 
@@ -175,9 +183,9 @@ export default class BallGameSceneLoader extends Component {
     });
     setTimeout(() => {
       this.setState({
-        showLeaderboard: true,
-      });
-    }, 3000);
+        showLeaderboard: true
+      })
+    }, 2550)
   }
 
   incrementScore(colliderTag) {
