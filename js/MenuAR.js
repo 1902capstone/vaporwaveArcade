@@ -49,8 +49,6 @@ export default class HelloWorldSceneAR extends Component {
 
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        {/* CEILING */}
-
         {/* FLOOR */}
         <ViroAnimatedImage
           height={12}
@@ -59,7 +57,7 @@ export default class HelloWorldSceneAR extends Component {
           opacity={0.6}
           rotation={[-65, 0, 0]}
           position={[0, -4, -8]}
-          source={require('../assets/Images/purplegrid.gif')}
+          source={require('../assets/Images/purplegrid2.gif')}
         />
         {/* LEADER BOARD */}
         <ViroButton
@@ -130,14 +128,14 @@ export default class HelloWorldSceneAR extends Component {
           // onGaze={this._onGazeMakeBalls()}
         />
         {/* {this._renderGazeBall()} */}
-        <ViroText
+        {/* <ViroText
           // animation={{ name: 'zoom', run: true, loop: true }}
           text={this.state.text}
           scale={[0.5, 0.5, 0.5]}
           position={[0, -0.3, -1]}
           extrusionDepth={4}
           style={localStyles.helloWorldTextStyle}
-        />
+        /> */}
         <ViroAmbientLight color={'#aaaaaa'} />
         <ViroSpotLight
           innerAngle={5}
@@ -147,22 +145,30 @@ export default class HelloWorldSceneAR extends Component {
           color="#ffffff"
           castsShadow={true}
         />
-        <ViroNode
+        {/* <ViroNode
           position={[0, 0, -1]}
           dragType="FixedToWorld"
           onDrag={() => {}}
-        >
+        > */}
           <Viro3DObject
             animation={{ name: 'venusBob', run: true, loop: true }}
             source={require('../assets/3DModels/venus/venus.obj')}
             resources={[require('../assets/3DModels/venus/venus.mtl')]}
             rotation={[-90, -60, 0]}
-            position={[-0, -1.7, -2]}
+            position={[-0, -1.7, -4]}
             scale={[0.012, 0.012, 0.012]}
             materials={['venus']}
             type="OBJ"
           />
-        </ViroNode>
+        {/* </ViroNode> */}
+        <ViroImage
+            height={1}
+            width={2.7}
+            opacity={1}
+            rotation={[0, 0, 0]}
+            position={[0.1, -0.8, -2.4]}
+            source={require('../assets/Images/selectGame.png')}
+          />
         {/* MUSIC change paused to FALSE to turn on */}
         <ViroSound
           paused={false}

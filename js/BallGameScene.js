@@ -8,24 +8,14 @@ import {
   ViroARScene,
   ViroText,
   ViroConstants,
-  ViroBox,
   ViroMaterials,
-  ViroARImageMarker,
   Viro3DObject,
-  ViroAmbientLight,
-  ViroFlexView,
   ViroSpotLight,
-  ViroImage,
-  ViroQuad,
-  ViroButton,
-  ViroARPlane,
   ViroARCamera,
-  ViroSphere,
   ViroARPlaneSelector,
   ViroAnimations,
   ViroARTrackingTargets,
   ViroSound,
-  ViroNode,
   ViroAnimatedImage,
 } from 'react-viro';
 
@@ -134,12 +124,15 @@ export default class BallGameScene extends Component {
       // between 0.2 and 0.5
       const randomColor = Math.floor(Math.random() * 3);
       // 0, 1, 2, 3
-      const colors = ['pink', 'purple', 'red', 'white'];
+      const colors = ['pink', 'purple', 'teal', 'white'];
 
       const x = (
+<<<<<<< HEAD
 
+=======
+>>>>>>> a982f19df057ba3f6bde208b91504d6cf30b9115
         <Viro3DObject
-          // animation={{ name: 'flip', run: true, loop: true }}
+          animation={{ name: 'flip', run: true, loop: true }}
           source={require('../assets/3DModels/donut/Donut_OBJ.obj')}
           opacity={1}
           key={sphereTag}
@@ -222,7 +215,7 @@ export default class BallGameScene extends Component {
           outerAngle={20}
           castsShadow={true}
         />
-        <ViroQuad
+        {/* <ViroQuad
           position={[0, -2, -4]}
           height={7}
           width={4}
@@ -230,7 +223,7 @@ export default class BallGameScene extends Component {
           opacity={0}
           physicsBody={{ type: 'Static', restitution: 1 }}
           materials={['red']}
-        />
+        /> */}
         <ViroAnimatedImage
           height={5}
           width={5}
@@ -240,14 +233,14 @@ export default class BallGameScene extends Component {
           position={[0, 0, -8]}
           source={require('../assets/Images/donutGlaze.gif')}
         />
-        <ViroImage
+        {/* <ViroImage
             height={18}
             width={8}
             opacity={0.6}
             rotation={[0, 0, 0]}
             position={[-10, 0, -15]}
             source={require('../assets/Images/squiggles.png')}
-          />
+          /> */}
         {/* MUSIC AND SOUND FX */}
         <ViroSound
             paused={false}
@@ -260,7 +253,6 @@ export default class BallGameScene extends Component {
         
         <ViroARCamera>
           <Viro3DObject
-            // animation={{ name: 'rotate', run: true, loop: true }}
             source={require('../assets/3DModels/cup/CokeCup.obj')}
             resources={[require('../assets/3DModels/cup/CokeCup.mtl')]}
             opacity={1}
@@ -289,8 +281,8 @@ var localStyles = StyleSheet.create({
   },
   instructions: {
     fontFamily: 'Arial',
-    fontSize: 8,
-    color: 'hotpink',
+    fontSize: 10,
+    color: '#ffffff',
     textAlignVertical: 'center',
     textAlign: 'center',
   },

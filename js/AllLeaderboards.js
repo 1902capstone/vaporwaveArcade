@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableHighlight, TouchableWithoutFeedback,Animated } from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight, TouchableWithoutFeedback,Animated,ImageBackground, } from "react-native";
 import AwesomeButton from 'react-native-really-awesome-button'
 import AwesomeButtonRick from 'react-native-really-awesome-button/src/themes/rick'
 // import LinearGradient from "react-native-linear-gradient";
-
 
 
 export default class AllLeaderboards extends Component {
@@ -95,21 +94,20 @@ export default class AllLeaderboards extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    backgroundColor: "#ebebeb"
+    justifyContent: 'center',
+    backgroundColor: '#ebebeb',
   },
   main: {
     flex: 1,
     padding: 30,
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "#6565fc",
-  
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: '#6565fc',
   },
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: "center"
+    textAlign: 'center',
   },
   buttonText: {
     fontSize: 18,
@@ -120,9 +118,9 @@ const styles = StyleSheet.create({
   },
   button: {
     height: 45,
-    flexDirection: "row",
-    backgroundColor: "white",
-    borderColor: "white",
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,

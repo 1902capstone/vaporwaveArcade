@@ -61,7 +61,7 @@ export default class PostGame2 extends Component {
             Nice try, but you didn't earn a high score. Play again?
           </Text>
           <Image
-            source={require('../assets/Images/spin.gif')}
+            source={require('../assets/Images/spin2.gif')}
             style={{ width: 250, height: 250 }}
           />
           <TouchableHighlight
