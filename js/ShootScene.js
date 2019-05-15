@@ -23,6 +23,7 @@ import {
   ViroNode,
 } from 'react-viro';
 
+
 let cameraCheckIntervalId;
 let hide = true;
 let bangSound = true;
@@ -165,8 +166,8 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart1Color}
             physicsBody={{ type: 'Kinematic' }}
-            onCollision={() => {
-              this.handleScore();
+            onCollision={(colliderTag) => {
+              this.handleScore(colliderTag, 1);
               this._changeColor('heart1Color');
             }}
           />
@@ -180,8 +181,8 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart2Color}
             physicsBody={{ type: 'Kinematic' }}
-            onCollision={() => {
-              this.handleScore();
+            onCollision={(colliderTag) => {
+              this.handleScore(colliderTag, 1);
               this._changeColor('heart2Color');
             }}
           />
@@ -195,8 +196,8 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart3Color}
             physicsBody={{ type: 'Kinematic' }}
-            onCollision={() => {
-              this.handleScore();
+            onCollision={(colliderTag) => {
+              this.handleScore(colliderTag, 2);
               this._changeColor('heart3Color');
             }}
           />
@@ -210,8 +211,8 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart3Color}
             physicsBody={{ type: 'Kinematic' }}
-            onCollision={() => {
-              this.handleScore();
+            onCollision={(colliderTag) => {
+              this.handleScore(colliderTag, 2);
               this._changeColor('heart3Color');
             }}
           />
@@ -225,8 +226,8 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart4Color}
             physicsBody={{ type: 'Kinematic' }}
-            onCollision={() => {
-              this.handleScore();
+            onCollision={(colliderTag) => {
+              this.handleScore(colliderTag, 2);
               this._changeColor('heart4Color');
             }}
           />
@@ -240,8 +241,8 @@ export default class ShootScene extends Component {
             type="OBJ"
             materials={this.state.heart5Color}
             physicsBody={{ type: 'Kinematic' }}
-            onCollision={() => {
-              this.handleScore();
+            onCollision={(colliderTag) => {
+              this.handleScore(colliderTag, 2);
               this._changeColor('heart5Color');
             }}
           />
@@ -461,7 +462,8 @@ export default class ShootScene extends Component {
 
   
   // test if getting 
-  handleScore(colliderTag) {
+  handleScore(colliderTag, scoreAmount) {
+    console.log(colliderTag);
     let indexOfBullet = bullets.findIndex(elt => {
       return elt.model.props.viroTag === colliderTag;
     });
@@ -469,7 +471,8 @@ export default class ShootScene extends Component {
     this.setState({
       bullets: this.state.bullets - 1,
     });
-    this.props.arSceneNavigator.viroAppProps.incrementScore();
+    this.props.arSceneNavigator.viroAppProps.incrementScore(scoreAmount);
+
   }
   
   despawnBullet(tag) {
@@ -609,7 +612,10 @@ ViroAnimations.registerAnimations({
   moveDown: { properties: { positionY: '-=2' }, duration: 500 },
   forward: { properties: { positionZ: '+=7' }, duration: 200 },
   back: { properties: { positionZ: '-=7' }, duration: 200 },
-
+  moveLeftB: { properties: {positionX: '-=5'}, duration: 2000 },
+  moveRightB: { properties: {positionX: '+=5'}, duration: 2000 },
+  
+  
   swayA: [
     [
       'moveLeft',
