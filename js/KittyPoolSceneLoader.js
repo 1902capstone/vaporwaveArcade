@@ -1,15 +1,13 @@
 /* eslint-disable default-case */
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet,
-  PixelRatio,
   Image,
   ImageBackground,
   TouchableHighlight,
-  Vibration
+  // Vibration
 } from 'react-native';
 import { ViroARSceneNavigator } from 'react-viro';
 import PostGame3 from './PostGame3';
@@ -183,7 +181,7 @@ export default class KittyPoolSceneLoader extends Component {
   }
   
   incrementScore(colliderTag) {
-    Vibration.vibrate(DURATION);
+    // Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });
