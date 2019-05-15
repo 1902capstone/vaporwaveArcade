@@ -284,7 +284,7 @@ export default class CatScene extends Component {
   _createCats() {
     const catsToLoad = [];
     // const numOfCats = Math.floor(Math.random() * 2) + 3;
-    const numOfCats = 1;
+    const numOfCats = 2;
 
     for (let i = 0; i < numOfCats; i++) {
       const catTag = `cat-${catCount + 1}`;
@@ -400,7 +400,7 @@ export default class CatScene extends Component {
   handleGameStart() {
     if (!catSpawnIntervalId && this.state.startTime) {
       this.props.arSceneNavigator.viroAppProps.beginTimer();
-      catSpawnIntervalId = setInterval(this._createCats, 900);
+      catSpawnIntervalId = setInterval(this._createCats, 1250);
     }
   }
 
