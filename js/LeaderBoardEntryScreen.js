@@ -37,7 +37,7 @@ export default class LeaderBoardEntryScreen extends Component {
   handleSubmit = () => {
     addName({ name: this.state.name, score: this.props.score });
 
-    Alert.alert("Item saved successfully");
+    // Alert.alert("Item saved successfully");
     this.props.goToLeaderBoard()
   };
 
