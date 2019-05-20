@@ -151,8 +151,8 @@ export default class KittyPoolSceneLoader extends Component {
   resetGame() {
     this.setState({
       score: 0,
-      timer: 10,
-      timeLeft: 10,
+      timer: 30,
+      timeLeft: 30,
       gameState: GAME_STATES.INTRODUCTION,
       showLeaderboard: false,
     });
@@ -170,7 +170,7 @@ export default class KittyPoolSceneLoader extends Component {
   gameEnd() {
     this.setState({
       gameState: GAME_STATES.POST_GAME,
-      timeLeft: 10,
+      timeLeft: 30,
     });
     setTimeout(() => {
       this.setState({
