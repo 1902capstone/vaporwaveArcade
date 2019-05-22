@@ -44,9 +44,13 @@ Currently the only way to use the application is through ViroMedia's test bed ap
 * 1902Capstone
 
 Contributors:
+
 Thomas Pollick: [tpol45](https://github.com/tpol45)
+
 Armon Davani: [armondavani](https://github.com/armondavani)
+
 Josh Kirschenbaum: [JoshKbaum](https://github.com/JoshKbaum)
+
 Michael Chang: [mchang22](https://github.com/mchang22)
 
 
