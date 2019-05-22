@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: "center",
     color: "white",
-    fontFamily: "Cochin",
+    fontFamily: "Futura",
     fontWeight:"bold"
   },
   itemInput: {
