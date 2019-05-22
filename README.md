@@ -17,15 +17,25 @@ Currently the only way to use the application is through ViroMedia's test bed ap
 ### Dependencies
 
 "assert-plus": "^1.0.0",
+
 "firebase": "^6.0.1",
+
 "ngrok": "^3.1.1",
+
 "react": "16.8.3",
+
 "react-native": "^0.59.8",
+
 "react-native-leaderboard": "^1.0.5",
+
 "react-native-linear-gradient": "^2.5.4",
+
 "react-native-loading-spinner-overlay": "^1.0.1",
+
 "react-native-really-awesome-button": "^1.4.2",
+
 "react-timer-mixin": "^0.13.4",
+
 "react-viro": "2.14.0"
 
 
@@ -33,7 +43,6 @@ Currently the only way to use the application is through ViroMedia's test bed ap
 
 * 1902Capstone
 
-*Add a "contributors" section if you've incorporated pull requests.*
 Contributors:
 Thomas Pollick: [tpol45](https://github.com/tpol45)
 Armon Davani: [armondavani](https://github.com/armondavani)
