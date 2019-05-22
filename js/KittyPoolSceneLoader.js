@@ -7,16 +7,14 @@ import {
   Image,
   ImageBackground,
   TouchableHighlight,
-  // Vibration
 } from 'react-native';
 import { ViroARSceneNavigator } from 'react-viro';
 import PostGame3 from './PostGame3';
 
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
-const CatScene = require('./CatScene');
-const backgroundImage = require('../assets/Images/moving_palm_trees2.gif')
-// const JoshScene = require('./JoshScene');
+const KittyPoolScene = require('./KittyPoolScene');
+const backgroundImage = require('../assets/Images/moving_palm_trees2.gif');
 
 const GAME_STATES = {
   INTRODUCTION: 'INTRODUCTION',
@@ -69,8 +67,7 @@ export default class KittyPoolSceneLoader extends Component {
           />
           <Text
             style={localStyles.text}
-              // You have 30 seconds to grab as many cats from the water as you can. Simply tap a cat to save it!
-
+            // You have 30 seconds to grab as many cats from the water as you can. Simply tap a cat to save it!
           >{`You have 30 seconds to catch as many cats as you can!  Tap the cats to rescue them!`}</Text>
           <TouchableHighlight
             style={localStyles.button2}
@@ -92,7 +89,7 @@ export default class KittyPoolSceneLoader extends Component {
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
-          initialScene={{ scene: CatScene }}
+          initialScene={{ scene: KittyPoolScene }}
           viroAppProps={{
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
@@ -135,7 +132,10 @@ export default class KittyPoolSceneLoader extends Component {
   renderPostGame() {
     return (
       <View>
-        <ImageBackground source={backgroundImage} style={{width: '100%', height: '100%'}}>
+        <ImageBackground
+          source={backgroundImage}
+          style={{ width: '100%', height: '100%' }}
+        >
           <PostGame3
             returnToMenu={this.props.propObj.returnToMenu}
             goToLeaderBoard={this.props.propObj.goToLeaderBoard3}
@@ -166,7 +166,7 @@ export default class KittyPoolSceneLoader extends Component {
       gameState: GAME_STATES.IN_GAME,
     });
   }
-  
+
   gameEnd() {
     this.setState({
       gameState: GAME_STATES.POST_GAME,
@@ -178,14 +178,14 @@ export default class KittyPoolSceneLoader extends Component {
       });
     }, 2550);
   }
-  
+
   incrementScore(colliderTag) {
     // Vibration.vibrate(DURATION);
     this.setState({
       score: this.state.score + 1,
     });
   }
-  
+
   setTimer(timeDiff) {
     // calc new time
     this.setState({
@@ -338,7 +338,7 @@ var localStyles = StyleSheet.create({
     borderRadius: 30,
     borderWidth: 1,
     borderColor: 'rgba(123,087,231,.4)',
-  }
+  },
 });
 
 module.exports = KittyPoolSceneLoader;

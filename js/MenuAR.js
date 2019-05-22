@@ -275,9 +275,6 @@ var localStyles = StyleSheet.create({
 });
 
 ViroMaterials.createMaterials({
-  grid: {
-    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
-  },
   venus: {
     diffuseColor: 'pink',
     diffuseTexture: require('../assets/3DModels/venus/statue.jpg'),

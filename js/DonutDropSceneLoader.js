@@ -16,7 +16,7 @@ import { ViroARSceneNavigator } from 'react-viro';
 
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
-const BallGameScene = require('./BallGameScene');
+const DonutDropScene = require('./DonutDropScene');
 const backgroundImage = require('../assets/Images/moving_palm_trees2.gif')
 
 
@@ -30,7 +30,7 @@ let timerIntervalId;
 
 
 
-export default class BallGameSceneLoader extends Component {
+export default class DonutDropSceneLoader extends Component {
   constructor() {
     super();
     this.state = {
@@ -93,7 +93,7 @@ export default class BallGameSceneLoader extends Component {
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
-          initialScene={{ scene: BallGameScene }}
+          initialScene={{ scene: DonutDropScene }}
           viroAppProps={{
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
@@ -141,7 +141,7 @@ export default class BallGameSceneLoader extends Component {
             goToLeaderBoard={this.props.propObj.goToLeaderBoard}
             score={this.state.score}
             resetGame={this.resetGame}
-            gameName="BallGame"
+            gameName="DonutDrop"
             showLeaderboard={this.state.showLeaderboard}
           />
         </ImageBackground>
@@ -322,4 +322,4 @@ var localStyles = StyleSheet.create({
   },
 });
 
-module.exports = BallGameSceneLoader;
+module.exports = DonutDropSceneLoader;

@@ -22,93 +22,83 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
-import {
-  ViroVRSceneNavigator,
-  ViroARSceneNavigator
-} from 'react-viro';
+import { ViroVRSceneNavigator, ViroARSceneNavigator } from 'react-viro';
 import { bindExpression } from '@babel/types';
 
-
-
-const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
+const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
 const ARHelloWorld = require('./js/HelloWorldSceneAR');
 
-
-const SceneLoader1 = require('./js/SceneLoader1')
-const KittyPoolSceneLoader = require('./js/KittyPoolSceneLoader')
-const HeartbreakerSceneLoader = require('./js/HeartbreakerSceneLoader')
-const BallGameSceneLoader = require('./js/BallGameSceneLoader')
-const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen')
-const AllLeaderboards = require('./js/AllLeaderboards')
-const LeaderBoard = require('./js/LeaderBoard')
-const LeaderBoard2 = require('./js/LeaderBoard2')
-const LeaderBoard3 = require('./js/LeaderBoard3')
-const MenuSceneLoader = require('./js/MenuSceneLoader')
-const TitleScreenLoader = require('./js/TitleScreenLoader')
+const SceneLoader1 = require('./js/SceneLoader1');
+const KittyPoolSceneLoader = require('./js/KittyPoolSceneLoader');
+const HeartBreakerSceneLoader = require('./js/HeartBreakerSceneLoader');
+const DonutDropSceneLoader = require('./js/DonutDropSceneLoader');
+const LeaderBoardEntryScreen = require('./js/LeaderBoardEntryScreen');
+const AllLeaderboards = require('./js/AllLeaderboards');
+const LeaderBoard = require('./js/LeaderBoard');
+const LeaderBoard2 = require('./js/LeaderBoard2');
+const LeaderBoard3 = require('./js/LeaderBoard3');
+const MenuSceneLoader = require('./js/MenuSceneLoader');
+const TitleScreenLoader = require('./js/TitleScreenLoader');
 
 const MENU_STATES = {
-  DEFAULT: "DEFAULT",
-  GAME_1: "GAME_1",
-  GAME_2: "GAME_2",
-  GAME_3: "GAME_3",
-  GAME_4: "GAME_4",
-  DATABASE: "DATABASE",
-  ALL_LEADERBOARDS: "ALL_LEADERBOARDS",
-  LEADERBOARD: "LEADERBOARD",
-  LEADERBOARD_2:"LEADERBOARD_2",
-  LEADERBOARD_3: "LEADERBOARD_3",
-  LOADING: "LOADING",
-  INTRO: "INTRO"
-}
+  DEFAULT: 'DEFAULT',
+  GAME_1: 'GAME_1',
+  GAME_2: 'GAME_2',
+  GAME_3: 'GAME_3',
+  GAME_4: 'GAME_4',
+  DATABASE: 'DATABASE',
+  ALL_LEADERBOARDS: 'ALL_LEADERBOARDS',
+  LEADERBOARD: 'LEADERBOARD',
+  LEADERBOARD_2: 'LEADERBOARD_2',
+  LEADERBOARD_3: 'LEADERBOARD_3',
+  LOADING: 'LOADING',
+  INTRO: 'INTRO',
+};
 
 export default class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      menuState: MENU_STATES.INTRO
-    }
+      menuState: MENU_STATES.INTRO,
+    };
     this.returnToMenu = this.returnToMenu.bind(this);
-    this.goToLeaderBoard = this.goToLeaderBoard.bind(this); 
+    this.goToLeaderBoard = this.goToLeaderBoard.bind(this);
     this.selectGame = this.selectGame.bind(this);
-    this.goToLeaderBoard2 = this.goToLeaderBoard2.bind(this)
-    this.goToLeaderBoard3 = this.goToLeaderBoard3.bind(this)
+    this.goToLeaderBoard2 = this.goToLeaderBoard2.bind(this);
+    this.goToLeaderBoard3 = this.goToLeaderBoard3.bind(this);
     this.renderLoadScreen = this.renderLoadScreen.bind(this);
   }
 
-  
-  
-
-  
   returnToMenu = () => {
     this.setState({
-      menuState: MENU_STATES.LOADING
-    })
-  }
+      menuState: MENU_STATES.LOADING,
+    });
+  };
 
   goToLeaderBoard = () => {
     this.setState({
-      menuState: MENU_STATES.LEADERBOARD
-    })
-  }
+      menuState: MENU_STATES.LEADERBOARD,
+    });
+  };
   goToLeaderBoard2 = () => {
     this.setState({
-      menuState: MENU_STATES.LEADERBOARD_2
-    })
-  }
+      menuState: MENU_STATES.LEADERBOARD_2,
+    });
+  };
 
   goToLeaderBoard3 = () => {
     this.setState({
-      menuState: MENU_STATES.LEADERBOARD_3
-    })
-  }
+      menuState: MENU_STATES.LEADERBOARD_3,
+    });
+  };
 
   goToAllLeaderboards = () => {
     this.setState({
-      menuState: MENU_STATES.ALL_LEADERBOARDS
-    })
-  }
-  
+      menuState: MENU_STATES.ALL_LEADERBOARDS,
+    });
+  };
+
   render() {
     switch (this.state.menuState) {
       case MENU_STATES.DEFAULT:
@@ -137,161 +127,145 @@ export default class App extends Component {
         return this.renderIntro();
     }
   }
-  
-  
+
   renderIntro() {
     return (
-      <TitleScreenLoader 
-      propObj = {{
-        returnToMenu: this.returnToMenu
-      }}
+      <TitleScreenLoader
+        propObj={{
+          returnToMenu: this.returnToMenu,
+        }}
       />
-    )
-    
+    );
   }
-  
-  
+
   renderMenu() {
     return (
-      <MenuSceneLoader 
-      propObj = {{
-        selectGame: this.selectGame,
-        MENU_STATES: MENU_STATES
-      }}
+      <MenuSceneLoader
+        propObj={{
+          selectGame: this.selectGame,
+          MENU_STATES: MENU_STATES,
+        }}
       />
-    )
+    );
   }
-  
-  
-  
+
   selectGame(gameConstant) {
     this.setState({
-      menuState: gameConstant
-    })
+      menuState: gameConstant,
+    });
   }
-  
-  
+
   renderGame1() {
     return (
-      <SceneLoader1 
-      propObj = {{
-        returnToMenu: this.returnToMenu,
-      }}
+      <SceneLoader1
+        propObj={{
+          returnToMenu: this.returnToMenu,
+        }}
       />
-    )
+    );
   }
-  
-  
+
   renderGame2() {
     return (
-      <KittyPoolSceneLoader 
-      propObj = {{
-        returnToMenu: this.returnToMenu,
-        goToLeaderBoard3: this.goToLeaderBoard3 
-      }}
+      <KittyPoolSceneLoader
+        propObj={{
+          returnToMenu: this.returnToMenu,
+          goToLeaderBoard3: this.goToLeaderBoard3,
+        }}
       />
-    )
+    );
   }
-  
-  
+
   renderGame3() {
     return (
-      <HeartbreakerSceneLoader 
-      propObj = {{
+      <HeartBreakerSceneLoader
+        propObj={{
           returnToMenu: this.returnToMenu,
-          goToLeaderBoard2: this.goToLeaderBoard2        
-      }}
+          goToLeaderBoard2: this.goToLeaderBoard2,
+        }}
       />
-    )
+    );
   }
-  
-  
+
   renderGame4() {
     return (
-      <BallGameSceneLoader 
-      propObj = {{
-        returnToMenu: this.returnToMenu,
-        goToLeaderBoard: this.goToLeaderBoard
-      }}
+      <DonutDropSceneLoader
+        propObj={{
+          returnToMenu: this.returnToMenu,
+          goToLeaderBoard: this.goToLeaderBoard,
+        }}
       />
-    )
+    );
   }
   renderDatabase() {
     return (
-      <LeaderBoardEntryScreen 
-      propObj = {{
-        returnToMenu: this.returnToMenu,
-      }}
+      <LeaderBoardEntryScreen
+        propObj={{
+          returnToMenu: this.returnToMenu,
+        }}
       />
-    )
+    );
   }
 
   renderAllLeaderboards() {
     return (
-      <AllLeaderboards 
-      propObj = {{
-        returnToMenu: this.returnToMenu,
-        goToLeaderBoard: this.goToLeaderBoard,
-        goToLeaderBoard2: this.goToLeaderBoard2,
-        goToLeaderBoard3: this.goToLeaderBoard3,
-      }}
+      <AllLeaderboards
+        propObj={{
+          returnToMenu: this.returnToMenu,
+          goToLeaderBoard: this.goToLeaderBoard,
+          goToLeaderBoard2: this.goToLeaderBoard2,
+          goToLeaderBoard3: this.goToLeaderBoard3,
+        }}
       />
-    )
+    );
   }
 
   renderLeaderBoard() {
     return (
-      <LeaderBoard 
-      propObj = {{
-        returnToMenu: this.returnToMenu,
-        goToAllLeaderboards: this.goToAllLeaderboards
-      }}
+      <LeaderBoard
+        propObj={{
+          returnToMenu: this.returnToMenu,
+          goToAllLeaderboards: this.goToAllLeaderboards,
+        }}
       />
-    )
+    );
   }
   renderLeaderBoard2() {
     return (
-      <LeaderBoard2 
-      propObj = {{
-        returnToMenu: this.returnToMenu,
-        goToAllLeaderboards: this.goToAllLeaderboards
-      }}
+      <LeaderBoard2
+        propObj={{
+          returnToMenu: this.returnToMenu,
+          goToAllLeaderboards: this.goToAllLeaderboards,
+        }}
       />
-    )
+    );
   }
 
   renderLeaderBoard3() {
     return (
-      <LeaderBoard3 
-      propObj = {{
-        returnToMenu: this.returnToMenu,
-        goToAllLeaderboards: this.goToAllLeaderboards
-      }}
+      <LeaderBoard3
+        propObj={{
+          returnToMenu: this.returnToMenu,
+          goToAllLeaderboards: this.goToAllLeaderboards,
+        }}
       />
-    )
+    );
   }
-  
+
   renderLoadScreen() {
-    setTimeout(()=>{
+    setTimeout(() => {
       this.setState({
-        menuState: MENU_STATES.DEFAULT
-      })
-    }, 200)
-    return(
+        menuState: MENU_STATES.DEFAULT,
+      });
+    }, 200);
+    return (
       // can maybe put a cool quick "transition effect" here in place of a loading screen
       <View style={localStyles.black}>
-        <Text>
-          Loading...
-        </Text>
+        <Text>Loading...</Text>
       </View>
-    )
-    
+    );
   }
-  
-  
 }
-
-
 
 var localStyles = StyleSheet.create({
   logo: {
@@ -300,64 +274,60 @@ var localStyles = StyleSheet.create({
   },
   black: {
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'black',
   },
-  viroContainer :{
-    flex : 1,
-    backgroundColor: "black",
+  viroContainer: {
+    flex: 1,
+    backgroundColor: 'black',
   },
-  outer : {
-    flex : 1,
+  outer: {
+    flex: 1,
     flexDirection: 'row',
-    alignItems:'center',
-    backgroundColor: "black",
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   inner: {
-    flex : 1,
+    flex: 1,
     flexDirection: 'column',
-    alignItems:'center',
-    backgroundColor: "black",
+    alignItems: 'center',
+    backgroundColor: 'black',
   },
   titleText: {
     paddingTop: 30,
     paddingBottom: 20,
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 25
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 25,
   },
   buttonText: {
-    color:'#fff',
-    textAlign:'center',
-    fontSize : 20
+    color: '#fff',
+    textAlign: 'center',
+    fontSize: 20,
   },
-  buttons : {
+  buttons: {
     height: 80,
     width: 150,
-    paddingTop:20,
-    paddingBottom:20,
+    paddingTop: 20,
+    paddingBottom: 20,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor:'#68a0cf',
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff',
   },
-  exitButton : {
+  exitButton: {
     height: 50,
     width: 100,
-    paddingTop:10,
-    paddingBottom:10,
+    paddingTop: 10,
+    paddingBottom: 10,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor:'#68a0cf',
+    backgroundColor: '#68a0cf',
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff',
-  }
+  },
 });
 
-
-
-
 module.exports = App;
-
