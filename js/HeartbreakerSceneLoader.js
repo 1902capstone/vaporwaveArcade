@@ -16,7 +16,7 @@ import PostGame2 from './PostGame2';
 
 const API_KEY = '4B132E39-801E-47A0-8F11-E44215B1CE84';
 
-const ShootScene = require('./ShootScene');
+const HeartBreakerScene = require('./HeartBreakerScene');
 const backgroundImage = require('../assets/Images/moving_palm_trees2.gif')
 
 const GAME_STATES = {
@@ -35,7 +35,7 @@ const PATTERN = [1000, 2000, 3000, 4000];
 //   ignoreAndroidSystemSettings: false,
 // };
 
-export default class HeartbreakerSceneLoader extends Component {
+export default class HeartBreakerSceneLoader extends Component {
   _isMounted = false;  
   constructor() {
     super();
@@ -105,7 +105,7 @@ export default class HeartbreakerSceneLoader extends Component {
       <View style={localStyles.flex}>
         <ViroARSceneNavigator
           apiKey={API_KEY}
-          initialScene={{ scene: ShootScene }}
+          initialScene={{ scene: HeartBreakerScene }}
           viroAppProps={{
             gameEnd: this.gameEnd,
             incrementScore: this.incrementScore,
@@ -339,4 +339,4 @@ var localStyles = StyleSheet.create({
   }
 });
 
-module.exports = HeartbreakerSceneLoader;
+module.exports = HeartBreakerSceneLoader;

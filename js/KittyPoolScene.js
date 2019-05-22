@@ -35,7 +35,7 @@ let texts = [];
 let textCount = 0;
 let hide = true;
 
-export default class CatScene extends Component {
+export default class KittyPoolScene extends Component {
   constructor() {
     super();
 
@@ -440,30 +440,15 @@ var localStyles = StyleSheet.create({
 });
 
 ViroMaterials.createMaterials({
-  grid: {
-    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
-  },
   red: {
     diffuseColor: 'red',
-  },
-  blueRaft: {
-    diffuseColor: 'lightblue',
-    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   purple: {
     diffuseColor: 'lavender',
   },
-  redRaft: {
-    diffuseColor: 'red',
-    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
-  },
   cat: {
     diffuseColor: 'pink',
     diffuseTexture: require('../assets/3DModels/cat/cat.png'),
-  },
-  coke: {
-    diffuseColor: 'pink',
-    diffuseTexture: require('../assets/3DModels/coke/colaOpacity.jpg'),
   },
   pink: {
     diffuseColor: 'lightpink',
@@ -555,4 +540,4 @@ ViroAnimations.registerAnimations({
   birdPath: [['bird1', 'bird2', 'bird3', 'bird4']],
 });
 
-module.exports = CatScene;
+module.exports = KittyPoolScene;

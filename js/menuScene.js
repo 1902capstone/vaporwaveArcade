@@ -139,12 +139,6 @@ export default class HelloWorldSceneAR extends Component {
           position={[0, 0, -1]}
           style={localStyles.helloWorldTextStyle}
         />
-        <ViroBox
-          position={[0, -0.5, -1]}
-          scale={[0.3, 0.3, 0.1]}
-          materials={['grid']}
-          animation={{ name: 'rotate', run: true, loop: true }}
-        />
         <ViroAmbientLight color={'#aaaaaa'} />
         <ViroSpotLight
           innerAngle={5}
@@ -225,9 +219,7 @@ var localStyles = StyleSheet.create({
 });
 
 ViroMaterials.createMaterials({
-  grid: {
-    diffuseTexture: require('./res/grid_bg.jpg'),
-  },
+  
 });
 
 ViroAnimations.registerAnimations({

@@ -30,7 +30,7 @@ let bangSound = true;
 let bullets = [];
 let bulletCount = 0;
 
-export default class ShootScene extends Component {
+export default class HeartBreakerScene extends Component {
   constructor() {
     super();
 
@@ -535,9 +535,6 @@ var localStyles = StyleSheet.create({
 });
 
 ViroMaterials.createMaterials({
-  grid: {
-    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
-  },
   red: {
     diffuseColor: 'red',
   },
@@ -546,10 +543,6 @@ ViroMaterials.createMaterials({
   },
   purple: {
     diffuseColor: 'lavender',
-  },
-  testSkull: {
-    diffuseColor: 'red',
-    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
   },
   bomb: {
     diffuseColor: 'red',
@@ -695,4 +688,4 @@ ViroAnimations.registerAnimations({
   ],
 });
 
-module.exports = ShootScene;
+module.exports = HeartBreakerScene;

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import { StyleSheet, TouchableHighlight, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import {
   ViroARScene,
@@ -22,13 +22,12 @@ import {
 
 let spheres = [];
 let sphereCount = 0;
-let timerStarted = false;
 let timerIntervalId;
 let ballSpawnIntervalId;
 let gameStarted = false;
 let hide = true;
 
-export default class BallGameScene extends Component {
+export default class DonutDropScene extends Component {
   _isMounted = false;
   constructor() {
     super();
@@ -304,9 +303,6 @@ var localStyles = StyleSheet.create({
 });
 
 ViroMaterials.createMaterials({
-  grid: {
-    diffuseTexture: require('../assets/Images/grid_bg.jpg'),
-  },
   coke: {
     diffuseTexture: require('../assets/3DModels/cup/JazzTexture.jpg'),
   },
@@ -352,4 +348,4 @@ ViroAnimations.registerAnimations({
   },
 });
 
-module.exports = BallGameScene;
+module.exports = DonutDropScene;

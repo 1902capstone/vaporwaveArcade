@@ -17,8 +17,7 @@ import {
 
 const API_KEY = "4B132E39-801E-47A0-8F11-E44215B1CE84";
 
-// const ARHelloWorld = require('./Game1Scene.js');
-// const Game1 = require('./Game1')
+
 const TitleScreen = require('./TitleScreen.js');
 
 
