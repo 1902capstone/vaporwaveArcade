@@ -1,61 +1,59 @@
+# Vaporwave Arcade
 
-1902 Augmented Reality Capstone
-==========================
+Vaporwave Arcade is a mobile app that features augmented reality technology in create three mini-games with leaderboards. These games feature a Vaporwave theme and offer an immersive and engaging experience for the player.
 
+Primary technologies used: ReactNative, ViroReact, Firebase
 
-AR examples:
+## Setup 
+Currently the only way to use the application is through ViroMedia's test bed app for quickly testing apps that use their AR framework. Follow the following steps to setup and run the games on your own phone:
 
-https://blog.viromedia.com/building-casual-ar-games-with-react-native-70797c80c20d
+1. Clone the github repo
+2. Download the Viro Media application from the Apple Store on iOS or the Google Play store on Android (it's free)
+3. Type 'npm install' in the terminal while in the repo's directory
+4. Type 'npm run start' in the terminal while in the repo's directory
+5. After a few seconds the terminal will display an ngrok link, enter this in the Viro Media app. Alternatively you may enter your ip address in the app.
+6. You're ready to play!
 
-https://docs.viromedia.com/docs/quick-start
+### Dependencies
 
-https://arvrjourney.com/augmented-reality-with-react-native-15219f36e3f2
+"assert-plus": "^1.0.0",
 
-https://marmelab.com/blog/2019/04/25/react-native-augmented-reality.html
+"firebase": "^6.0.1",
 
+"ngrok": "^3.1.1",
 
-Ted talk AR made Simple:
+"react": "16.8.3",
 
-https://www.youtube.com/watch?v=csgMNguUjDU
+"react-native": "^0.59.8",
 
+"react-native-leaderboard": "^1.0.5",
 
-React Native:
+"react-native-linear-gradient": "^2.5.4",
 
-https://medium.com/@randerson112358/setup-react-native-environment-for-ios-97bf7faadf77
+"react-native-loading-spinner-overlay": "^1.0.1",
 
-https://facebook.github.io/react-native/docs/getting-started
+"react-native-really-awesome-button": "^1.4.2",
 
-https://alligator.io/react/react-native-navigation/
+"react-timer-mixin": "^0.13.4",
 
-https://facebook.github.io/react-native/docs/running-on-device
-
-https://blog.cloudboost.io/getting-started-with-react-native-and-redux-6cd4addeb29
-
-
-3D Model:
-
-https://www.blender.org/
-
-
-AR:
-
-https://developer.apple.com/documentation/arkit/swiftshot_creating_a_game_for_augmented_reality
-
-https://docs.viromedia.com/
-
-https://developer.apple.com/swift/#great
-
-https://medium.com/lightbase/augmented-reality-react-native-6385b6c2fad2
-
-https://www.6d.ai/
-
-https://developers.google.com/ar/develop/c/augmented-images/arcoreimg
+"react-viro": "2.14.0"
 
 
-Firebase:
+## Team
 
-https://firebase.google.com/
+* 1902Capstone
+
+Contributors:
+
+Thomas Pollick: [tpol45](https://github.com/tpol45)
+
+Armon Davani: [armondavani](https://github.com/armondavani)
+
+Josh Kirschenbaum: [JoshKbaum](https://github.com/JoshKbaum)
+
+Michael Chang: [mchang22](https://github.com/mchang22)
 
 
+## Copyright and attribution
 
-
+Copyright (c) 2016 DataMade. Released under the MIT License.
