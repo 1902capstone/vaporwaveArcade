@@ -38,6 +38,12 @@ Currently the only way to use the application is through ViroMedia's test bed ap
 
 "react-viro": "2.14.0"
 
+## Presentation Video
+
+Note: The presentation is currently being re-edited by the video editing team at Fullstack Academy so that the audio levels are fixed. Currently this presentation is mostly useful as a visual of the application.
+
+https://www.youtube.com/watch?v=VWZarYtrQfE&list=PLx0iOsdUOUmk9wbCJIHGsqBWYV29-3c0I&index=26
+
 
 ## Team
 
