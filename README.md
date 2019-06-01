@@ -16,34 +16,21 @@ Currently the only way to use the application is through ViroMedia's test bed ap
 
 ### Dependencies
 
-"assert-plus": "^1.0.0",
-
-"firebase": "^6.0.1",
-
-"ngrok": "^3.1.1",
-
-"react": "16.8.3",
-
-"react-native": "^0.59.8",
-
-"react-native-leaderboard": "^1.0.5",
-
-"react-native-linear-gradient": "^2.5.4",
-
-"react-native-loading-spinner-overlay": "^1.0.1",
-
-"react-native-really-awesome-button": "^1.4.2",
-
-"react-timer-mixin": "^0.13.4",
-
-"react-viro": "2.14.0"
+"assert-plus": "^1.0.0",  
+"firebase": "^6.0.1",  
+"ngrok": "^3.1.1",  
+"react": "16.8.3",  
+"react-native": "^0.59.8",  
+"react-native-leaderboard": "^1.0.5",  
+"react-native-linear-gradient": "^2.5.4",  
+"react-native-loading-spinner-overlay": "^1.0.1",  
+"react-native-really-awesome-button": "^1.4.2",  
+"react-timer-mixin": "^0.13.4",  
+"react-viro": "2.14.0"  
 
 ## Presentation Video
 
-Note: The presentation is currently being re-edited by the video editing team at Fullstack Academy so that the audio levels are fixed. Currently this presentation is mostly useful as a visual of the application.
-
-https://www.youtube.com/watch?v=VWZarYtrQfE&list=PLx0iOsdUOUmk9wbCJIHGsqBWYV29-3c0I&index=26
-
+https://www.youtube.com/watch?v=VgmwTsbKUtw  
 
 ## Team
 
