@@ -1,3 +1,6 @@
+<p align="center">
+<img src="assets/Images/logo_new.gif" width="400"></p>
+
 # Vaporwave Arcade
 
 Vaporwave Arcade is a mobile app that features augmented reality technology in create three mini-games with leaderboards. These games feature a Vaporwave theme and offer an immersive and engaging experience for the player.
