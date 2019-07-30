@@ -42,8 +42,6 @@ const MenuSceneLoader = require('./js/MenuSceneLoader');
 const TitleScreenLoader = require('./js/TitleScreenLoader');
 
 
-
-
 const MENU_STATES = {
   DEFAULT: 'DEFAULT',
   GAME_1: 'GAME_1',
