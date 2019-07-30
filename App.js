@@ -41,8 +41,7 @@ const LeaderBoard3 = require('./js/LeaderBoard3');
 const MenuSceneLoader = require('./js/MenuSceneLoader');
 const TitleScreenLoader = require('./js/TitleScreenLoader');
 
-//to disable yellow error boxes
-console.disableYellowBox = true;
+
 
 
 const MENU_STATES = {
