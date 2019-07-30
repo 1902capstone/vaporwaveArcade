@@ -45,7 +45,7 @@ Thomas Pollick: [tpol45](https://github.com/tpol45)
 
 Armon Davani: [armondavani](https://github.com/armondavani)
 
-Josh Kirschenbaum: [JoshKbaum](https://github.com/JoshKbaum)
+Loren Vanderbilt (fka Josh): [LorenVanderbilt](https://github.com/LorenVanderbilt)
 
 Michael Chang: [mchang22](https://github.com/mchang22)
 
