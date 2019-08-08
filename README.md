@@ -3,7 +3,7 @@
 
 # Vaporwave Arcade
 
-Vaporwave Arcade is a mobile app that features augmented reality technology in create three mini-games with leaderboards. These games feature a Vaporwave theme and offer an immersive and engaging experience for the player.
+Vaporwave Arcade is a mobile app that features augmented reality technology to create three mini-games with leaderboards. These games feature a Vaporwave theme and offer an immersive and engaging experience for the player.
 
 Primary technologies used: ReactNative, ViroReact, Firebase
 
@@ -16,6 +16,14 @@ Currently the only way to use the application is through ViroMedia's test bed ap
 4. Type 'npm run start' in the terminal while in the repo's directory
 5. After a few seconds the terminal will display an ngrok link, enter this in the Viro Media app. Alternatively you may enter your ip address in the app.
 6. You're ready to play!
+
+## Demo GIFs
+
+<p align="center">
+<img src="assets/readme/kittyEx.gif" width="320">
+<img src="assets/readme/donutEx.gif" width="320">
+<img src="assets/readme/heartEx.gif" width="320">
+</p>
 
 ### Dependencies
 
