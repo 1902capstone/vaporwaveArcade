@@ -25,8 +25,6 @@ Currently the only way to use the application is through ViroMedia's test bed ap
 <img src="assets/readme/heartEx.gif" width="320">
 </p>
 
-
-
 ### Dependencies
 
 "assert-plus": "^1.0.0",  
