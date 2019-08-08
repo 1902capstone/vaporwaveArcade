@@ -20,9 +20,9 @@ Currently the only way to use the application is through ViroMedia's test bed ap
 ## Demo GIFs
 
 <p align="center">
-<img src="assets/readme/kittyEx.gif" width="320">
-<img src="assets/readme/donutEx.gif" width="320">
-<img src="assets/readme/heartEx.gif" width="320">
+<img src="assets/readme/kittyEx.gif" width="300">
+<img src="assets/readme/donutEx.gif" width="300">
+<img src="assets/readme/heartEx.gif" width="300">
 </p>
 
 ### Dependencies
