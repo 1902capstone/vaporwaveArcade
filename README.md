@@ -49,7 +49,7 @@ https://www.youtube.com/watch?v=VgmwTsbKUtw
 
 Contributors:
 
-Thomas Pollick: [tpol45](https://github.com/tpol45)
+Thomas Pollick: [tpol47](https://github.com/tpol47)
 
 Armon Davani: [armondavani](https://github.com/armondavani)
 
